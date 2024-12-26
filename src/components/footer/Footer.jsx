@@ -22,6 +22,7 @@ const Footer = () => {
           >
             BIO
             <Typography
+              variant="h5"
               component="span"
               sx={{ color: "#353434", fontWeight: "bold" }}
             >

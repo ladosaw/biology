@@ -10,6 +10,7 @@ import {
   Box,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { menuItems } from "./constant";
@@ -56,13 +57,28 @@ const Navbar = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <Typography
+          {/* <Typography
             color="black"
             variant="h6"
             component="div"
             sx={{ flexGrow: 1 }}
           >
             Biology
+          </Typography> */}
+
+          <Typography
+            variant="h5"
+            component="h2"
+            sx={{ color: "#88C273", fontWeight: "bold" }}
+          >
+            BIO
+            <Typography
+              variant="h5"
+              component="span"
+              sx={{ color: "#353434", fontWeight: "bold" }}
+            >
+              Verse
+            </Typography>
           </Typography>
         </motion.div>
 
@@ -81,6 +97,7 @@ const Navbar = () => {
                   onClick={(e) => handleSubmenuOpen(e, item)}
                 >
                   {item.label}
+                  <KeyboardArrowDownIcon />
                 </Button>
               ) : (
                 <Button
