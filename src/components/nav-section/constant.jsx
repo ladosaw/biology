@@ -1,0 +1,14 @@
+export const menuItems = [
+  { id: "home", label: "Home", path: "/" },
+  {
+    id: "lessons",
+    label: "Lessons",
+    submenu: [
+      { label: "Meiosis", path: "/lessons/meiosis" },
+      { label: "Digestive System 1", path: "/lessons/digestive-system-1" },
+      { label: "Mendelian Genetics", path: "/lessons/mendelian-genetics" },
+      { label: "Stages of Mitosis", path: "/lessons/stages-of-mitosis" },
+    ],
+  },
+  { id: "about", label: "About", path: "/about" },
+];
