@@ -10,13 +10,17 @@ import Footer from "./components/footer/Footer";
 const App = () => {
   return (
     <BrowserRouter future={{ v7_relativeSplatPath: true }}>
-      <Container maxWidth="xl">
+      <Box
+        sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+      >
         <Navbar />
-        <Box className="my-4">
-          <Router />
-        </Box>
-      </Container>
-      <Footer />
+        <Container maxWidth="xl" sx={{ flex: 1 }}>
+          <Box className="my-4">
+            <Router />
+          </Box>
+        </Container>
+        <Footer />
+      </Box>
     </BrowserRouter>
   );
 };

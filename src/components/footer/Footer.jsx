@@ -8,7 +8,7 @@ const Footer = () => {
       component="footer"
       sx={{
         backgroundColor: "#E0E6F7", // Light blue background
-        p: 4,
+        p: 3,
         mt: "auto", // Pushes footer to the bottom
       }}
     >
@@ -22,6 +22,7 @@ const Footer = () => {
           >
             BIO
             <Typography
+              variant="h5"
               component="span"
               sx={{ color: "#353434", fontWeight: "bold" }}
             >
