@@ -12,5 +12,5 @@ const Loadable = (Component) => (props) => {
 };
 
 export const Home = Loadable(lazy(() => import("../pages/Home/Home")));
-export const About = Loadable(lazy(() => import("../pages/About")));
+export const About = Loadable(lazy(() => import("../pages/about/About")));
 export const Lessons = Loadable(lazy(() => import("../pages/lessons/Lessons")));
