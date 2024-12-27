@@ -3,7 +3,7 @@ import Card from "../../components/card/Card.jsx";
 import digestiveData from "../../components/constant/digestiveCard.jsx";
 import mandelianData from "../../components/constant/mandelianCard.jsx";
 import meiosisData from "../../components/constant/meiosisCard.jsx";
-import mitosisData from "../../components/constant/mitosisCard.jsx";
+
 
 const PopularLessons = () => {
   const [selectedLesson, setSelectedLesson] = useState("Digestive");
@@ -45,16 +45,6 @@ const PopularLessons = () => {
     />
   ));
 
-  const mitosisCards = mitosisData.map((digData, index) => (
-    <Card
-      key={index}
-      lesson={digData.lessonTitle}
-      gradeLevel={digData.gradeLevel}
-      image={digData.digImage}
-      btnText="Read More"
-    />
-  ));
-
   return (
     <div className="flex items-center justify-center min-h-screen flex-col w-full px-4">
       {/* Header Section */}
@@ -87,6 +77,7 @@ const PopularLessons = () => {
         </div>
       </section>
 
+
       {/* Cards Section */}
       <section className="mt-6 w-full">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -117,6 +108,11 @@ const PopularLessons = () => {
           <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded transform hover:scale-105 transition-transform duration-300">
             Study Today!
           </button>
+
+      <section className="mt-6 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {selectedLesson === "Digestive" && digestiveCards}
+
         </div>
       </section>
     </div>
