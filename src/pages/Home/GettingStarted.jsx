@@ -1,5 +1,5 @@
 import React from "react";
-import bioImage from "../../assets/images/biology.png";
+import Homes from "../../assets/images/home.png";
 import Btn from "../../components/buttons/buttons.jsx";
 
 const GettingStarted = () => {
@@ -26,7 +26,7 @@ const GettingStarted = () => {
       {/* Right Section - Image */}
       <section className="w-full lg:w-1/2 flex justify-center mt-8 md:mt-0">
         <img
-          src={bioImage}
+          src={Homes}
           alt="Biology illustration"
           className="max-w-full h-auto object-cover transform transition duration-500 hover:scale-105"
         />
