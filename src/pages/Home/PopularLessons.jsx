@@ -4,7 +4,6 @@ import digestiveData from "../../components/constant/digestiveCard.jsx";
 import mandelianData from "../../components/constant/mandelianCard.jsx";
 import meiosisData from "../../components/constant/meiosisCard.jsx";
 
-
 const PopularLessons = () => {
   const [selectedLesson, setSelectedLesson] = useState("Digestive");
 
@@ -77,7 +76,6 @@ const PopularLessons = () => {
         </div>
       </section>
 
-
       {/* Cards Section */}
       <section className="mt-6 w-full">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -108,11 +106,6 @@ const PopularLessons = () => {
           <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded transform hover:scale-105 transition-transform duration-300">
             Study Today!
           </button>
-
-      <section className="mt-6 w-full">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {selectedLesson === "Digestive" && digestiveCards}
-
         </div>
       </section>
     </div>
