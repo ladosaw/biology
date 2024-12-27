@@ -3,6 +3,7 @@ export const menuItems = [
   {
     id: "lessons",
     label: "Lessons",
+    path: "/lessons",
     submenu: [
       { label: "Meiosis", path: "/lessons/meiosis" },
       { label: "Digestive System 1", path: "/lessons/digestive-system-1" },
