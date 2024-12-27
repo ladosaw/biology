@@ -1,5 +1,6 @@
 import React from "react";
-import { CircularProgress, Box } from "@mui/material";
+import { Box } from "@mui/material";
+import { Atom } from "react-loading-indicators";
 
 const LoadingScreen = () => {
   return (
@@ -19,7 +20,12 @@ const LoadingScreen = () => {
       }}
       aria-live="assertive"
     >
-      <CircularProgress size={60} />
+      <Atom
+        color="#209b20"
+        size="medium"
+        text="Loading..."
+        textColor="#434040"
+      />
     </Box>
   );
 };

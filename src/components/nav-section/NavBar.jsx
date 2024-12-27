@@ -12,14 +12,15 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate, useLocation } from "react-router-dom"; // Import useLocation
 import { menuItems } from "./constant";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [submenuAnchorEl, setSubmenuAnchorEl] = React.useState(null);
-  const [currentSubmenu, setCurrentSubmenu] = React.useState(null); // To track which submenu is open
-  const navigate = useNavigate(); // Use the navigate hook
+  const [currentSubmenu, setCurrentSubmenu] = React.useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -27,13 +28,13 @@ const Navbar = () => {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
-    setSubmenuAnchorEl(null); // Close submenu as well
-    setCurrentSubmenu(null); // Reset the current submenu
+    setSubmenuAnchorEl(null);
+    setCurrentSubmenu(null);
   };
 
   const handleSubmenuOpen = (event, item) => {
     setSubmenuAnchorEl(event.currentTarget);
-    setCurrentSubmenu(item); // Set the current submenu to open
+    setCurrentSubmenu(item);
   };
 
   const handleSubmenuClose = () => {
@@ -41,8 +42,17 @@ const Navbar = () => {
   };
 
   const handleNavigation = (path) => {
-    navigate(path); // Navigate to the given path
-    handleMenuClose(); // Close the menu after navigation
+    if (path) {
+      navigate(path);
+    }
+    handleMenuClose();
+  };
+
+  const isActive = (path) => location.pathname === path;
+
+  const isLessonActive = () => {
+    const lessonItem = menuItems.find((item) => item.id === "lessons");
+    return lessonItem?.submenu?.some((subItem) => isActive(subItem.path));
   };
 
   return (
@@ -57,15 +67,6 @@ const Navbar = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          {/* <Typography
-            color="black"
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1 }}
-          >
-            Biology
-          </Typography> */}
-
           <Typography
             variant="h5"
             component="h2"
@@ -93,7 +94,13 @@ const Navbar = () => {
             >
               {item.submenu ? (
                 <Button
-                  sx={{ mx: 1, color: "black" }}
+                  sx={{
+                    mx: 1,
+                    color:
+                      isLessonActive() || isActive(item.path)
+                        ? "#88C273"
+                        : "black",
+                  }}
                   onClick={(e) => handleSubmenuOpen(e, item)}
                 >
                   {item.label}
@@ -101,7 +108,10 @@ const Navbar = () => {
                 </Button>
               ) : (
                 <Button
-                  sx={{ mx: 1, color: "black" }}
+                  sx={{
+                    mx: 1,
+                    color: isActive(item.path) ? "#88C273" : "black",
+                  }}
                   onClick={() => handleNavigation(item.path)}
                 >
                   {item.label}
@@ -121,8 +131,14 @@ const Navbar = () => {
             <MenuItem
               key={index}
               onClick={() => {
-                handleNavigation(subItem.path); // Navigate when submenu item is clicked
-                handleSubmenuClose(); // Close the submenu after navigation
+                if (subItem.path) {
+                  handleNavigation(subItem.path);
+                }
+                handleSubmenuClose();
+              }}
+              disabled={!subItem.path}
+              sx={{
+                color: isActive(subItem.path) ? "#88C273" : "black",
               }}
             >
               {subItem.label}
@@ -153,11 +169,25 @@ const Navbar = () => {
                   {menuItems.map((item) => (
                     <React.Fragment key={item.id}>
                       {item.submenu ? (
-                        <MenuItem onClick={(e) => handleSubmenuOpen(e, item)}>
+                        <MenuItem
+                          onClick={(e) => handleSubmenuOpen(e, item)}
+                          sx={{
+                            color:
+                              isLessonActive() || isActive(item.path)
+                                ? "#88C273"
+                                : "black",
+                          }}
+                        >
                           {item.label}
+                          <KeyboardArrowDownIcon />
                         </MenuItem>
                       ) : (
-                        <MenuItem onClick={() => handleNavigation(item.path)}>
+                        <MenuItem
+                          onClick={() => handleNavigation(item.path)}
+                          sx={{
+                            color: isActive(item.path) ? "#88C273" : "black",
+                          }}
+                        >
                           {item.label}
                         </MenuItem>
                       )}
