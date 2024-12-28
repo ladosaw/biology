@@ -5,19 +5,7 @@ const Router = () =>
   useRoutes([
     { path: "/", element: <Home /> },
     { path: "/about", element: <About /> },
-    { path: "/lessons/meiosis", element: <Lessons topic="Meiosis" /> },
-    {
-      path: "/lessons/digestive-system-1",
-      element: <Lessons topic="Digestive System 1" />,
-    },
-    {
-      path: "/lessons/mendelian-genetics",
-      element: <Lessons topic="Mendelian Genetics" />,
-    },
-    {
-      path: "/lessons/stages-of-mitosis",
-      element: <Lessons topic="Stages of Mitosis" />,
-    },
+    { path: "/lessons", element: <Lessons /> },
     { path: "*", element: <Navigate to="/" /> },
   ]);
 

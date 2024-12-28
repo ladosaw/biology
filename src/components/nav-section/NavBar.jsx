@@ -92,59 +92,18 @@ const Navbar = () => {
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.2 }}
             >
-              {item.submenu ? (
-                <Button
-                  sx={{
-                    mx: 1,
-                    color:
-                      isLessonActive() || isActive(item.path)
-                        ? "#88C273"
-                        : "black",
-                  }}
-                  onClick={(e) => handleSubmenuOpen(e, item)}
-                >
-                  {item.label}
-                  <KeyboardArrowDownIcon />
-                </Button>
-              ) : (
-                <Button
-                  sx={{
-                    mx: 1,
-                    color: isActive(item.path) ? "#88C273" : "black",
-                  }}
-                  onClick={() => handleNavigation(item.path)}
-                >
-                  {item.label}
-                </Button>
-              )}
+              <Button
+                sx={{
+                  mx: 1,
+                  color: isActive(item.path) ? "#88C273" : "black",
+                }}
+                onClick={() => handleNavigation(item.path)}
+              >
+                {item.label}
+              </Button>
             </motion.div>
           ))}
         </Box>
-
-        {/* Submenu for Lessons */}
-        <Menu
-          anchorEl={submenuAnchorEl}
-          open={Boolean(submenuAnchorEl)}
-          onClose={handleSubmenuClose}
-        >
-          {currentSubmenu?.submenu?.map((subItem, index) => (
-            <MenuItem
-              key={index}
-              onClick={() => {
-                if (subItem.path) {
-                  handleNavigation(subItem.path);
-                }
-                handleSubmenuClose();
-              }}
-              disabled={!subItem.path}
-              sx={{
-                color: isActive(subItem.path) ? "#88C273" : "black",
-              }}
-            >
-              {subItem.label}
-            </MenuItem>
-          ))}
-        </Menu>
 
         {/* Mobile Menu */}
         <Box sx={{ display: { xs: "flex", lg: "none" }, ml: "auto" }}>
@@ -166,33 +125,14 @@ const Navbar = () => {
                   open={Boolean(anchorEl)}
                   onClose={handleMenuClose}
                 >
-                  {menuItems.map((item) => (
-                    <React.Fragment key={item.id}>
-                      {item.submenu ? (
-                        <MenuItem
-                          onClick={(e) => handleSubmenuOpen(e, item)}
-                          sx={{
-                            color:
-                              isLessonActive() || isActive(item.path)
-                                ? "#88C273"
-                                : "black",
-                          }}
-                        >
-                          {item.label}
-                          <KeyboardArrowDownIcon />
-                        </MenuItem>
-                      ) : (
-                        <MenuItem
-                          onClick={() => handleNavigation(item.path)}
-                          sx={{
-                            color: isActive(item.path) ? "#88C273" : "black",
-                          }}
-                        >
-                          {item.label}
-                        </MenuItem>
-                      )}
-                    </React.Fragment>
-                  ))}
+                  <MenuItem
+                    onClick={() => handleNavigation(item.path)}
+                    sx={{
+                      color: isActive(item.path) ? "#88C273" : "black",
+                    }}
+                  >
+                    {item.label}
+                  </MenuItem>
                 </Menu>
               </motion.div>
             )}
