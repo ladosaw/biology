@@ -3,6 +3,7 @@ import Card from "../../components/card/Card.jsx";
 import digestiveData from "../../components/constant/digestiveCard.jsx";
 import mandelianData from "../../components/constant/mandelianCard.jsx";
 import meiosisData from "../../components/constant/meiosisCard.jsx";
+import mitosisData from "../../components/constant/mitosisCard.jsx";
 
 const PopularLessons = () => {
   const [selectedLesson, setSelectedLesson] = useState("Digestive");
@@ -35,6 +36,16 @@ const PopularLessons = () => {
   ));
 
   const meiosisCards = meiosisData.map((digData, index) => (
+    <Card
+      key={index}
+      lesson={digData.lessonTitle}
+      gradeLevel={digData.gradeLevel}
+      image={digData.digImage}
+      btnText="Read More"
+    />
+  ));
+
+  const mitosisCards = mitosisData.map((digData, index) => (
     <Card
       key={index}
       lesson={digData.lessonTitle}
