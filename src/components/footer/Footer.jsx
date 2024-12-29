@@ -9,6 +9,7 @@ const Footer = () => {
       sx={{
         backgroundColor: "#E0E6F7", // Light blue background
         p: 3,
+        paddingX: { lg: 23 },
         mt: "auto", // Pushes footer to the bottom
       }}
     >

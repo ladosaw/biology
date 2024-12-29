@@ -10,15 +10,13 @@ import {
   Box,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom"; // Import useLocation
 import { menuItems } from "./constant";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [submenuAnchorEl, setSubmenuAnchorEl] = React.useState(null);
-  const [currentSubmenu, setCurrentSubmenu] = React.useState(null);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -32,15 +30,6 @@ const Navbar = () => {
     setCurrentSubmenu(null);
   };
 
-  const handleSubmenuOpen = (event, item) => {
-    setSubmenuAnchorEl(event.currentTarget);
-    setCurrentSubmenu(item);
-  };
-
-  const handleSubmenuClose = () => {
-    setSubmenuAnchorEl(null);
-  };
-
   const handleNavigation = (path) => {
     if (path) {
       navigate(path);
@@ -50,15 +39,10 @@ const Navbar = () => {
 
   const isActive = (path) => location.pathname === path;
 
-  const isLessonActive = () => {
-    const lessonItem = menuItems.find((item) => item.id === "lessons");
-    return lessonItem?.submenu?.some((subItem) => isActive(subItem.path));
-  };
-
   return (
     <AppBar
       position="sticky"
-      sx={{ backgroundColor: "transparent" }}
+      sx={{ paddingX: { lg: 23 }, backgroundColor: "transparent" }}
       elevation={0}
     >
       <Toolbar>
@@ -125,14 +109,16 @@ const Navbar = () => {
                   open={Boolean(anchorEl)}
                   onClose={handleMenuClose}
                 >
-                  <MenuItem
-                    onClick={() => handleNavigation(item.path)}
-                    sx={{
-                      color: isActive(item.path) ? "#88C273" : "black",
-                    }}
-                  >
-                    {item.label}
-                  </MenuItem>
+                  {menuItems.map((item) => (
+                    <MenuItem
+                      onClick={() => handleNavigation(item.path)}
+                      sx={{
+                        color: isActive(item.path) ? "#88C273" : "black",
+                      }}
+                    >
+                      {item.label}
+                    </MenuItem>
+                  ))}
                 </Menu>
               </motion.div>
             )}

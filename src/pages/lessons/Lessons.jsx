@@ -1,77 +1,44 @@
-import React, { useState, useEffect } from "react";
-import SideNav from "../../components/sideNav/sideNav";
-import Lesson1 from "./DigestiveSystem/Lesson1";
+import React from "react";
+import biologyImg from "../../assets/images/biology.png";
+import Btn from "../../components/buttons/buttons.jsx";
 
 const Lessons = () => {
-  const [selectedLesson, setSelectedLesson] = useState({
-    topic: "Digestive System",
-    lesson: "Lesson 1",
-  });
-
-  const handleLessonSelect = (selected) => {
-    setSelectedLesson(selected);
-    console.log("Selected Lesson:", selected);
-  };
-
-  useEffect(() => {
-    handleLessonSelect({
-      topic: "Digestive System",
-      lesson: "Lesson 1",
-    });
-  }, []);
-
-  const renderLessonContent = () => {
-    switch (selectedLesson.topic) {
-      case "Digestive System":
-        switch (selectedLesson.lesson) {
-          case "Lesson 1":
-            return <Lesson1 />;
-          case "Lesson 2":
-            return <div>Digestive System - Lesson 2 content here</div>;
-          case "Lesson 3":
-            return <div>Digestive System - Lesson 3 content here</div>;
-          default:
-            return <div>Lesson content not available</div>;
-        }
-      case "Meiosis":
-        switch (selectedLesson.lesson) {
-          case "Lesson 1":
-            return <div>Meiosis - Lesson 1 content here</div>;
-          case "Lesson 2":
-            return <div>Meiosis - Lesson 2 content here</div>;
-          case "Lesson 3":
-            return <div>Meiosis - Lesson 3 content here</div>;
-          default:
-            return <div>Lesson content not available</div>;
-        }
-      case "Stages of Mitosis":
-        switch (selectedLesson.lesson) {
-          case "Lesson 1":
-            return <div>Stages of Mitosis - Lesson 1 content here</div>;
-          case "Lesson 2":
-            return <div>Stages of Mitosis - Lesson 2 content here</div>;
-          case "Lesson 3":
-            return <div>Stages of Mitosis - Lesson 3 content here</div>;
-          default:
-            return <div>Lesson content not available</div>;
-        }
-      default:
-        return <div>Topic content not available</div>;
-    }
-  };
-
   return (
-    <div className="flex flex-col sm:flex-row sm:space-x-6 p-4">
-      {/* Side Navigation */}
-      <div className="w-full sm:w-1/4">
-        <SideNav onLessonSelect={handleLessonSelect} />
-      </div>
+    <section>
+      <div className="flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-16 justify-between items-center md:h-screen ">
+        {/* title Section */}
+        <div className="flex flex-col gap-4 justify-center text-center md:text-left">
+          <h1 className="font-semibold text-3xl md:text-4xl lg:text-5xl">
+            <span className="text-primary font-bold">Lesson 1:</span> Digestive
+            System
+          </h1>
+          <p className="text-lg md:text-xl lg:text-2xl">
+            Module 1: What is the importance of Liver?
+          </p>
+          <p className="text-sm md:text-base lg:text-lg">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta,
+            repellat.
+          </p>
+          <div>
+            <Btn text="Getting Started" />
+          </div>
+          <div className="flex flex-wrap gap-4 md:gap-8 font-bold text-lg md:text-xl lg:text-2xl mt-8 items-start justify-center md:justify-start">
+            <p>MITOSIS</p>
+            <p>DIGESTIVE</p>
+            <p>ORGANISM</p>
+          </div>
+        </div>
 
-      {/* Selected Lesson Content */}
-      <div className="w-full sm:w-3/4 mt-4 sm:mt-0 flex-grow">
-        <div className="mt-4">{renderLessonContent()}</div>
+        {/* Image Section */}
+        <div className="w-full md:w-1/2 lg:w-1/2">
+          <img
+            src={biologyImg}
+            alt="Biology Illustration"
+            className="w-full h-auto"
+          />
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

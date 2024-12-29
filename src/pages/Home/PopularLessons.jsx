@@ -56,7 +56,7 @@ const PopularLessons = () => {
   ));
 
   return (
-    <div className="flex items-center justify-center min-h-screen flex-col w-full px-4">
+    <div className="flex items-center justify-center min-h-screen flex-col w-full">
       {/* Header Section */}
       <section className="text-center mb-6">
         <h1 className="font-semibold text-3xl sm:text-4xl lg:text-5xl mb-4">
