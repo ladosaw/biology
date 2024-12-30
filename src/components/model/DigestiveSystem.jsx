@@ -36,20 +36,9 @@ const DigestiveSystem = (props) => {
   const handlePointerOut = () => {
     setHovered(null); // Reset hover when the pointer leaves
   };
-
-  // Adjust scale and position based on screen size
-  let scale = 0.03; // Increased scale
-  let position = [7, 1, 0]; // Centered position
-
-  if (width < 768 || width < 1024) {
-    // Mobile
-    scale = 0.018; // Increased scale
-    position = [5, 0.8, 0]; // Centered position
-  }
-
   return (
-    <group {...props} dispose={null} position={position}>
-      <group scale={scale}>
+    <group {...props} dispose={null} position={[5, 0.8, 0]}>
+      <group scale={0.018}>
         <group position={[43.879, -85.302, 0]} scale={100}>
           {/* Display TextLabel based on hover */}
           {hovered && (
