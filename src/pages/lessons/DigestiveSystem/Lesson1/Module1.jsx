@@ -1,7 +1,8 @@
 import React from "react";
 import FloatingButton from "../../../../components/floatingButton/floatingButton";
 import Indigestion from "../../../../assets/images/indigestion.svg";
-import Digestion from "../../../../assets/images/digestion.svg";
+import Render3d from "../../../../components/renderer/render3d";
+import DigestiveSystem from "../../../../components/model/DigestiveSystem";
 
 const Module1 = () => {
   return (
@@ -46,7 +47,11 @@ const Module1 = () => {
         <h1 className="text-primary text-xl sm:text-2xl md:text-3xl font-semibold">
           Digestive System
         </h1>
-        <div className="bg-gray-400 w-full h-64 sm:h-80 md:h-96 rounded-lg"></div>
+        <div className="bg-gray-400 w-full h-64 sm:h-80 md:h-96 rounded-lg">
+          <Render3d>
+            <DigestiveSystem />
+          </Render3d>
+        </div>
         <p className="text-sm sm:text-base md:text-lg text-center">
           These are processes namely:
           <span className="font-semibold block mt-2">

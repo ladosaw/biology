@@ -1,11 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import TextLabel from "./TextLabel";
 import ConstantDS from "./ConstantDS";
 
+const useScreenSize = () => {
+  const [screenSize, setScreenSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return screenSize;
+};
+
 const DigestiveSystem = (props) => {
   const { nodes, materials } = useGLTF("/models/human_digestive_system.glb");
   const [hovered, setHovered] = useState(null); // State to track hover
+  const { width } = useScreenSize();
 
   const handlePointerOver = (meshName, description) => {
     setHovered({ name: meshName, description }); // Set the hovered mesh name and description
@@ -15,9 +37,19 @@ const DigestiveSystem = (props) => {
     setHovered(null); // Reset hover when the pointer leaves
   };
 
+  // Adjust scale and position based on screen size
+  let scale = 0.03; // Increased scale
+  let position = [7, 1, 0]; // Centered position
+
+  if (width < 768 || width < 1024) {
+    // Mobile
+    scale = 0.018; // Increased scale
+    position = [5, 0.8, 0]; // Centered position
+  }
+
   return (
-    <group {...props} dispose={null} position={[2.8, 1.3, 0]}>
-      <group scale={0.01}>
+    <group {...props} dispose={null} position={position}>
+      <group scale={scale}>
         <group position={[43.879, -85.302, 0]} scale={100}>
           {/* Display TextLabel based on hover */}
           {hovered && (
