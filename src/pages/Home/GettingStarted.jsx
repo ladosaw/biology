@@ -4,7 +4,7 @@ import Btn from "../../components/buttons/buttons.jsx";
 
 const GettingStarted = () => {
   return (
-    <div className="flex flex-col lg:flex-row items-center justify-center gap-16 min-h-screen p-6 ">
+    <div className="flex flex-col lg:flex-row items-center justify-center gap-16 min-h-screen ">
       {/* Left Section - Text */}
       <section className="text-center lg:text-left lg:w-1/2 space-y-8">
         <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-6xl text-gray-800 leading-tight">

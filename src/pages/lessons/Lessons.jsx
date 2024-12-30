@@ -1,16 +1,79 @@
-import * as React from "react";
-import { CssBaseline, Container } from "@mui/material";
-import Render3D from "../../components/renderer/Render3d";
-import DigestiveSystem from "../../components/model/DigestiveSystem";
-import MitosisStages from "../../components/mitosis-stages/MitosisStages";
+import React, { useState } from "react";
+import LeftNavigationLesson from "../../components/leftNav/LeftNavigationLesson.jsx";
+import Module1 from "./DigestiveSystem/Lesson1/Module1.jsx";
+
+const Module2 = () => <div>Content for Module 2</div>;
+const Module3 = () => <div>Content for Module 3</div>;
+const Sample = () => <div>Content for Sample Module 1</div>;
+const Sample1 = () => <div>Content for Sample Module 2</div>;
+const Sample2 = () => <div>Content for Sample Module 3</div>;
 
 const Lessons = () => {
+  const [selectedModule, setSelectedModule] = useState({
+    sectionTitle: "Digestive System",
+    subsubtitle: "Lesson 1",
+    item: "Module 1",
+  });
+
+  // Debugging: log selectedModule to see what section, lesson, and item are selected
+  console.log("Selected Module:", selectedModule);
+
+  const renderModule = () => {
+    const { sectionTitle, subsubtitle, item } = selectedModule;
+
+    switch (sectionTitle) {
+      case "Digestive System":
+        return renderDigestiveSystem(subsubtitle, item);
+      case "Mendelian Genetics":
+        return renderMandelianGenetics(subsubtitle, item);
+      default:
+        return <div>Select a valid section.</div>;
+    }
+  };
+
+  const renderDigestiveSystem = (subsubtitle, item) => {
+    switch (subsubtitle) {
+      case "Lesson 1":
+        switch (item) {
+          case "Module 1":
+            return <Module1 />;
+          case "Module 2":
+            return <Module2 />;
+          case "Module 3":
+            return <Module3 />;
+          default:
+            return <div>Select a valid module.</div>;
+        }
+      default:
+        return <div>Select a valid lesson.</div>;
+    }
+  };
+
+  const renderMandelianGenetics = (subsubtitle, item) => {
+    switch (subsubtitle) {
+      case "Lesson 1":
+        switch (item) {
+          case "Module 1":
+            return <Sample />;
+          case "Module 2":
+            return <Sample1 />;
+          case "Module 3":
+            return <Sample2 />;
+          default:
+            return <div>Select a valid module.</div>;
+        }
+      default:
+        return <div>Select a valid lesson.</div>;
+    }
+  };
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between relative">
-      <div className="flex items-center justify-center h-screen">
-        <h1 className="text-4xl font-bold text-gray-500">Lessons Page</h1>
+    <div className="flex flex-col lg:flex-row">
+      <div className="w-full lg:w-1/4 p-4">
+        <LeftNavigationLesson onModuleClick={setSelectedModule} />
       </div>
-    </main>
+      <div className="w-full lg:w-3/4 p-4">{renderModule()}</div>
+    </div>
   );
 };
 
