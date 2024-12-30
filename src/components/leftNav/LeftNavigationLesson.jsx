@@ -76,85 +76,83 @@ const LeftNavigationLesson = ({ onModuleClick }) => {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 md:mt-24 max-w-md mx-auto bg-white rounded-lg shadow-md border">
       {sections.map((section) => (
-        <div key={section.title} className="mb-6">
+        <div key={section.title} className="mb-4">
           <button
-            className="flex items-center justify-between w-full text-lg font-bold mb-2"
+            className="block w-full text-left text-lg font-medium text-gray-700 py-2 px-4 hover:bg-gray-100 rounded transition"
             onClick={() => toggleSection(section.title)}
           >
             {section.title}
           </button>
-          {openSections[section.title] && (
+          <div
+            className={`overflow-hidden transition-all duration-300 ${
+              openSections[section.title] ? "max-h-screen" : "max-h-0"
+            }`}
+          >
             <div className="ml-4">
               {section.subtitle.map((sub) => (
-                <div key={sub.subsubtitle} className="mb-4">
+                <div key={sub.subsubtitle} className="mb-3">
                   <button
-                    className="flex items-center justify-between w-full text-md font-semibold mb-2"
+                    className="block w-full text-left text-md text-gray-600 py-2 px-3 hover:bg-gray-50 rounded transition"
                     onClick={() =>
                       toggleSubtitle(section.title, sub.subsubtitle)
                     }
                   >
                     {sub.subsubtitle}
                   </button>
-                  {openSubtitles[`${section.title}-${sub.subsubtitle}`] && (
-                    <div className="flex items-start gap-3">
-                      {/* Progress indicator */}
-                      <div className="flex flex-col items-center">
-                        {sub.items.map((item, index) => {
-                          const key = `${section.title}-${sub.subsubtitle}-${item}`;
-                          return (
-                            <React.Fragment key={key}>
-                              <button
-                                className={`h-3 w-3 rounded-full focus:outline-none ${
-                                  activeIndicator[key]
-                                    ? "bg-green-500"
-                                    : "bg-gray-300"
-                                }`}
-                                onClick={() =>
-                                  handleNavigation(
-                                    section.title,
-                                    sub.subsubtitle,
-                                    item
-                                  )
-                                }
-                              ></button>
-                              {index < sub.items.length - 1 && (
-                                <div className="h-6 w-[3px] bg-gray-300"></div>
-                              )}
-                            </React.Fragment>
-                          );
-                        })}
-                      </div>
-
-                      {/* Lesson and module titles */}
-                      <ul className="space-y-2">
-                        {sub.items.map((item) => {
-                          const key = `${section.title}-${sub.subsubtitle}-${item}`;
-                          return (
-                            <li key={key}>
-                              <button
-                                className="text-left text-blue-500 hover:underline"
-                                onClick={() =>
-                                  handleNavigation(
-                                    section.title,
-                                    sub.subsubtitle,
-                                    item
-                                  )
-                                }
-                              >
-                                {item}
-                              </button>
-                            </li>
-                          );
-                        })}
-                      </ul>
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ${
+                      openSubtitles[`${section.title}-${sub.subsubtitle}`]
+                        ? "max-h-screen"
+                        : "max-h-0"
+                    }`}
+                  >
+                    <div className="py-2">
+                      {sub.items.map((item) => {
+                        const key = `${section.title}-${sub.subsubtitle}-${item}`;
+                        return (
+                          <div
+                            key={key}
+                            className="flex items-center gap-2 py-1"
+                          >
+                            {/* Progress indicator */}
+                            <button
+                              className={`h-3 w-3 rounded-full focus:outline-none transition-colors ${
+                                activeIndicator[key]
+                                  ? "bg-blue-500"
+                                  : "bg-gray-300"
+                              }`}
+                              onClick={() =>
+                                handleNavigation(
+                                  section.title,
+                                  sub.subsubtitle,
+                                  item
+                                )
+                              }
+                            ></button>
+                            {/* Module title */}
+                            <button
+                              className="text-left text-gray-600 hover:text-blue-500 transition"
+                              onClick={() =>
+                                handleNavigation(
+                                  section.title,
+                                  sub.subsubtitle,
+                                  item
+                                )
+                              }
+                            >
+                              {item}
+                            </button>
+                          </div>
+                        );
+                      })}
                     </div>
-                  )}
+                  </div>
                 </div>
               ))}
             </div>
-          )}
+          </div>
         </div>
       ))}
     </div>
