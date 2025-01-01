@@ -1,23 +1,13 @@
 import * as React from "react";
 import { Container, Box } from "@mui/material";
-import { BrowserRouter, useLocation } from "react-router-dom";
-import ReactGA from "react-ga4";
+import { BrowserRouter } from "react-router-dom";
+
 import Router from "./routes/index";
 import Navbar from "./components/nav-section/NavBar";
 import Footer from "./components/footer/Footer";
-import { useEffect } from "react";
-
+import Analytics from "./analytics/Analytics";
 const App = () => {
-  useEffect(() => {
-    ReactGA.initialize("G-GM6CHRVCPH");
-  }, []);
-
-  // Send pageview with a custom path
-  ReactGA.send({
-    hitType: "pageview",
-    page: window.location.pathname,
-    title: "Home",
-  });
+  Analytics(window.location.pathname, "App.jsx");
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>

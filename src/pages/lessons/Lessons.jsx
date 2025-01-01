@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import LeftNavigationLesson from "../../components/leftNav/LeftNavigationLesson";
 import Module1 from "./DigestiveSystem/Lesson1/Module1";
 import MitosisAndMiosis from "./MitosisAndMiosis/MitosisAndMiosis";
+import Analytics from "../../analytics/Analytics";
 
 const Module3 = () => <div>Content for Module 3</div>;
 const Module2 = () => <div>Content for Module 3</div>;
@@ -9,6 +10,8 @@ const Sample1 = () => <div>Content for Sample Module 2</div>;
 const Sample2 = () => <div>Content for Sample Module 3</div>;
 
 const Lessons = () => {
+  Analytics(window.location.pathname, "Lessons.jsx");
+
   const [selectedModule, setSelectedModule] = useState({
     sectionTitle: "Digestive System",
     subsubtitle: "Lesson 1",
