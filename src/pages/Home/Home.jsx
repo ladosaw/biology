@@ -1,5 +1,12 @@
 import React from "react";
-import { Box, Typography, Card, CardMedia } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Card,
+  CardMedia,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import Render3d from "../../components/renderer/Render3d";
 import Humancell from "../../components/model/HumanCell";
 import Slider from "react-slick";
@@ -8,6 +15,10 @@ import "slick-carousel/slick/slick-theme.css";
 
 const Home = () => {
   const [selectedCard, setSelectedCard] = React.useState(0); // Default selected card is the third one
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+
   const cards = [
     {
       id: 0,
@@ -40,7 +51,7 @@ const Home = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: isMobile ? 1 : isTablet ? 2 : 3,
     slidesToScroll: 1,
     centerMode: true,
     focusOnSelect: true,
@@ -89,7 +100,10 @@ const Home = () => {
             <Humancell />
           </Render3d>
         </Box>
-        <Typography variant="body1" sx={{ mt: 4, width: "60%", mx: "auto" }}>
+        <Typography
+          variant="body1"
+          sx={{ mt: 4, width: { xs: "90%", sm: "80%", md: "60%" }, mx: "auto" }}
+        >
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum ex
           quasi vitae cupiditate assumenda dolores illo, reprehenderit cum
           voluptate soluta?
@@ -113,33 +127,33 @@ const Home = () => {
             <Box
               key={card.id}
               onClick={() => handleCardClick(index)}
-              style={{
+              sx={{
                 transform:
                   selectedCard === index ? "scale(1.1)" : "scale(0.85)",
                 transition:
                   "transform 0.3s ease-in-out, margin 0.3s ease-in-out",
                 cursor: "pointer",
+                borderRadius: "8px",
                 opacity: selectedCard === index ? 1 : 0.6,
-                margin: "0 60px", // Add margin to create gap between cards
+                margin: isMobile ? "0 10px" : isTablet ? "0 30px" : "0 60px", // Adjust margin based on screen size
               }}
             >
               <Card
-                style={{
+                sx={{
                   boxShadow:
                     selectedCard === index
                       ? "0px 4px 20px rgba(0,0,0,0.2)"
                       : "0px 2px 10px rgba(0,0,0,0.1)",
-
                   backgroundColor:
                     selectedCard === index ? "#E8F5E9" : "#FFFFFF",
                   borderRadius: "16px", // Rounded corners
-                  overflow: "hidden",
-                  height: "500px", // Uniform height
-                  margin: "0 30px", // Add margin to create gap between cards
+                  // overflow: "hidden",
+                  height: "400px", // Adjust height for tablet mode
+                  margin: isMobile ? "0 10px" : "0 30px", // Adjust margin based on screen size
                 }}
               >
                 <Box
-                  style={{
+                  sx={{
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
@@ -151,9 +165,9 @@ const Home = () => {
                     component="img"
                     image={card.image}
                     alt={card.title}
-                    style={{
+                    sx={{
                       maxWidth: "80%",
-                      maxHeight: "70%",
+                      maxHeight: "90%",
                       borderRadius: "8px",
                       border: "2px solid #ddd",
                       objectFit: "cover",
@@ -171,7 +185,10 @@ const Home = () => {
         <Typography variant="h4" sx={{ mb: 2 }}>
           About
         </Typography>
-        <Typography variant="body1" sx={{ mx: "auto", width: "60%" }}>
+        <Typography
+          variant="body1"
+          sx={{ mx: "auto", width: { xs: "90%", sm: "80%", md: "60%" } }}
+        >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </Typography>
