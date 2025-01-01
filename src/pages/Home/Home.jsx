@@ -48,13 +48,13 @@ const Home = () => {
     customPaging: (i) => (
       <div
         style={{
-          marginTop: "40px",
           width: "16px",
           height: "16px",
           borderRadius: "50%",
           backgroundColor: selectedCard === i ? "#4CAF50" : "#CCC",
           margin: "0 4px",
           transition: "background-color 0.3s ease",
+          marginTop: "20px",
         }}
       ></div>
     ),
