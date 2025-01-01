@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Typography, Card, CardMedia } from "@mui/material";
-import Render3d from "../../components/renderer/Render3d";
+import Render3d from "../../components/renderer/render3d";
 import Humancell from "../../components/model/HumanCell";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -9,11 +9,27 @@ import "slick-carousel/slick/slick-theme.css";
 const Home = () => {
   const [selectedCard, setSelectedCard] = React.useState(0); // Default selected card is the third one
   const cards = [
-    { id: 0, title: "Card 1", image: "https://via.placeholder.com/300" },
-    { id: 1, title: "Card 2", image: "https://via.placeholder.com/300" },
-    { id: 2, title: "Card 3", image: "https://via.placeholder.com/300" },
-    { id: 3, title: "Card 4", image: "https://via.placeholder.com/300" },
-    { id: 4, title: "Card 5", image: "https://via.placeholder.com/300" },
+    {
+      id: 0,
+      title: "Digestive System",
+      image: "/images/digestive.png",
+    },
+    {
+      id: 1,
+      title: "Stages of Mitosis",
+      image: "/images/Stages of Mitosis.png",
+    },
+    { id: 2, title: "Meiosis", image: "/images/meiosis_1.png" },
+    {
+      id: 3,
+      title: "Mendelian Genetics",
+      image: "/images/Mendelian Genetics.png",
+    },
+    {
+      id: 4,
+      title: "Trophic Level - Role of Organism",
+      image: "/images/Role of organism.png",
+    },
   ];
 
   const handleCardClick = (index) => {
@@ -21,30 +37,45 @@ const Home = () => {
   };
 
   const settings = {
-    centerMode: true, // Enable center mode
+    dots: true,
     infinite: true,
     speed: 500,
-    centerPadding: "60px",
-    slidesToShow: 3, // Show 3 items at a time
+    slidesToShow: 3,
     slidesToScroll: 1,
-    focusOnSelect: true, // Allow clicking to select a card
-    dots: true, // Display navigation dots
-    beforeChange: (_current, next) => setSelectedCard(next), // Update selected card before change
-    responsive: [
-      {
-        breakpoint: 768, // Adjust for smaller screens (like tablets and mobile)
-        settings: {
-          slidesToShow: 1, // Show 1 item on small screens
-          centerMode: true, // Keep centered mode on smaller screens
-        },
-      },
-    ],
+    centerMode: true,
+    focusOnSelect: true,
+    beforeChange: (_current, next) => setSelectedCard(next),
+    customPaging: (i) => (
+      <div
+        style={{
+          marginTop: "30px",
+          width: "16px",
+          height: "16px",
+          borderRadius: "50%",
+          backgroundColor: selectedCard === i ? "#4CAF50" : "#CCC",
+          margin: "0 4px",
+          transition: "background-color 0.3s ease",
+        }}
+      ></div>
+    ),
+    appendDots: (dots) => (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "20px",
+        }}
+      >
+        {dots}
+      </div>
+    ),
   };
 
   const styles = {
     headerBox: {
       width: { lg: "80%", sm: "100%" },
-      height: 500,
+      height: 400,
       mx: "auto",
     },
   };
@@ -72,7 +103,7 @@ const Home = () => {
         </Typography>
 
         {/* Dynamically update the related topic based on the selected card */}
-        <Typography variant="h6" sx={{ mb: 3 }}>
+        <Typography variant="h6" sx={{ textAlign: "center", mb: 3 }}>
           {cards[selectedCard].title} {/* Display selected card title */}
         </Typography>
 
@@ -81,28 +112,51 @@ const Home = () => {
           {cards.map((card, index) => (
             <Box
               key={card.id}
-              onClick={() => handleCardClick(index)} // Handle card click
-              sx={{
+              onClick={() => handleCardClick(index)}
+              style={{
                 transform: selectedCard === index ? "scale(1.1)" : "scale(0.9)",
-                transition: "transform 0.3s ease-in-out",
+                transition:
+                  "transform 0.3s ease-in-out, margin 0.3s ease-in-out",
                 cursor: "pointer",
                 opacity: selectedCard === index ? 1 : 0.6,
+                // padding: "0 8px",
               }}
             >
               <Card
-                sx={{
-                  boxShadow: selectedCard === index ? 6 : 1,
-                  bgcolor:
-                    selectedCard === index ? "#88C273" : "background.paper",
+                style={{
+                  boxShadow:
+                    selectedCard === index
+                      ? "0px 4px 20px rgba(0,0,0,0.2)"
+                      : "0px 2px 10px rgba(0,0,0,0.1)",
+                  backgroundColor:
+                    selectedCard === index ? "#E8F5E9" : "#FFFFFF",
+                  borderRadius: "16px", // Rounded corners
+                  overflow: "hidden",
+                  height: "500px", // Uniform height
                 }}
               >
-                <CardMedia
-                  component="img"
-                  height="300"
-                  image={card.image} // Replace with your image URL
-                  alt={card.title}
-                  sx={{ p: 2 }}
-                />
+                <Box
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100%",
+                  }}
+                >
+                  <CardMedia
+                    component="img"
+                    image={card.image}
+                    alt={card.title}
+                    style={{
+                      maxWidth: "80%",
+                      maxHeight: "70%",
+                      borderRadius: "8px",
+                      border: "2px solid #ddd",
+                      objectFit: "cover",
+                    }}
+                  />
+                </Box>
               </Card>
             </Box>
           ))}

@@ -42,7 +42,11 @@ const Navbar = () => {
   return (
     <AppBar
       position="sticky"
-      sx={{ paddingX: { lg: 23 }, backgroundColor: "transparent" }}
+      sx={{
+        paddingX: { lg: 23 },
+        backgroundColor: "#f5f5f5",
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+      }}
       elevation={0}
     >
       <Toolbar>
