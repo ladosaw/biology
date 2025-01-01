@@ -4,7 +4,10 @@ import { BrowserRouter } from "react-router-dom";
 import Router from "./routes/index";
 import Navbar from "./components/nav-section/NavBar";
 import Footer from "./components/footer/Footer";
-import { initializeAnalytics, trackPageView } from "./analytics/Analytics";
+import {
+  initializeAnalytics,
+  trackPageView,
+} from "./components/analytics/Analytics";
 
 const App = () => {
   React.useEffect(() => {

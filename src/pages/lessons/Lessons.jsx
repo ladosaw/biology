@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import LeftNavigationLesson from "../../components/leftNav/LeftNavigationLesson";
 import Module1 from "./DigestiveSystem/Lesson1/Module1";
 import MitosisAndMiosis from "./MitosisAndMiosis/MitosisAndMiosis";
-import { initializeAnalytics, trackPageView } from "../../analytics/Analytics";
+import {
+  initializeAnalytics,
+  trackPageView,
+} from "../../components/analytics/Analytics";
 
 const Module3 = () => <div>Content for Module 3</div>;
 const Module2 = () => <div>Content for Module 3</div>;
