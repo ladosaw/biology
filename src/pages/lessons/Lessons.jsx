@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import LeftNavigationLesson from "../../components/leftNav/LeftNavigationLesson.jsx";
 import Module1 from "./DigestiveSystem/Lesson1/Module1.jsx";
 import MitosisAndMiosis from "./MitosisAndMiosis/MitosisAndMiosis.jsx";
+import Sampleasd from "./Sample.jsx";
+import CellDivision from "./CellDivision/Lessons/CellDivision.jsx";
 
 const Module3 = () => <div>Content for Module 3</div>;
 const Module2 = () => <div>Content for Module 3</div>;
-const Sample1 = () => <div>Content for Sample Module 2</div>;
+// const Sample1 = () => <div>Content for Sample Module 2</div>;
 const Sample2 = () => <div>Content for Sample Module 3</div>;
 
 const Lessons = () => {
@@ -26,6 +28,8 @@ const Lessons = () => {
         return renderDigestiveSystem(subsubtitle, item);
       case "Meiosis":
         return renderMandelianGenetics(subsubtitle, item);
+      case "Mendelian Genetics":
+        return renderMand(subsubtitle, item);
       default:
         return <div>Select a valid section.</div>;
     }
@@ -56,7 +60,25 @@ const Lessons = () => {
           case "Module 1":
             return <MitosisAndMiosis />;
           case "Module 2":
-            return <Sample1 />;
+            return <Sampleasd />;
+          case "Module 3":
+            return <Sample2 />;
+          default:
+            return <div>Select a valid module.</div>;
+        }
+      default:
+        return <div>Select a valid lesson.</div>;
+    }
+  };
+
+  const renderMand = (subsubtitle, item) => {
+    switch (subsubtitle) {
+      case "Lesson 1":
+        switch (item) {
+          case "Module 1":
+            return <CellDivision />;
+          case "Module 2":
+            return <Sampleasd />;
           case "Module 3":
             return <Sample2 />;
           default:
