@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import LeftNavigationLesson from "../../components/leftNav/LeftNavigationLesson.jsx";
-import Module1 from "./DigestiveSystem/Lesson1/Module1.jsx";
-import MitosisAndMiosis from "./MitosisAndMiosis/MitosisAndMiosis.jsx";
+import LeftNavigationLesson from "../../components/leftNav/LeftNavigationLesson";
+import Module1 from "./DigestiveSystem/Lesson1/Module1";
+import MitosisAndMiosis from "./MitosisAndMiosis/MitosisAndMiosis";
 
 const Module3 = () => <div>Content for Module 3</div>;
 const Module2 = () => <div>Content for Module 3</div>;
@@ -14,9 +14,6 @@ const Lessons = () => {
     subsubtitle: "Lesson 1",
     item: "Module 1",
   });
-
-  // Debugging: log selectedModule to see what section, lesson, and item are selected
-  console.log("Selected Module:", selectedModule);
 
   const renderModule = () => {
     const { sectionTitle, subsubtitle, item } = selectedModule;

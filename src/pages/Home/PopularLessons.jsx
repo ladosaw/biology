@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Card from "../../components/card/Card.jsx";
-import digestiveData from "../../components/constant/digestiveCard.jsx";
-import mandelianData from "../../components/constant/mandelianCard.jsx";
-import meiosisData from "../../components/constant/meiosisCard.jsx";
-import mitosisData from "../../components/constant/mitosisCard.jsx";
+import Card from "../../components/card/Card";
+import digestiveData from "../../components/constant/digestiveCard";
+import mandelianData from "../../components/constant/mandelianCard";
+import meiosisData from "../../components/constant/meiosisCard";
+import mitosisData from "../../components/constant/mitosisCard";
 
 const PopularLessons = () => {
   const [selectedLesson, setSelectedLesson] = useState("Digestive");
