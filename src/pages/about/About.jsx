@@ -29,9 +29,8 @@ const About = () => {
           variant="body1"
           sx={{ maxWidth: "600px", mx: "auto", mb: 4 }}
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis libero
-          dignissimos molestias ratione perspiciatis, ipsam nihil ducimus
-          cupiditate nulla dicta!
+          Scan and Learn: A Supplementary Materials in Quarter 4 For Grade 8
+          Linked on Internet Using QR Codes
         </Typography>
         <Box>
           <Button
@@ -72,10 +71,16 @@ const About = () => {
           variant="body1"
           sx={{ textAlign: "center", maxWidth: "800px", mx: "auto", mb: 4 }}
         >
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis
-          repellendus minima accusamus qui, eum fugiat sapiente asperiores
-          excepturi mollitia expedita, unde assumenda aliquam modi deserunt
-          magnam inventore! Doloremque, explicabo! Ad.
+          <Typography variant="h6" component="span" sx={{ color: "#88C273" }}>
+            BIO
+            <Typography variant="h6" component="span" sx={{ color: "#353434" }}>
+              Verse
+            </Typography>
+          </Typography>{" "}
+          is your go-to platform for Grade 8 biology resources, study guides,
+          and interactive learning tools. We aim to simplify biology concepts
+          and foster a vibrant community for students and educators to connect,
+          learn, and grow together.
         </Typography>
       </Box>
     </Box>
