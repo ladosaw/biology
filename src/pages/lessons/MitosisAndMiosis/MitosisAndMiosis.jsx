@@ -2,7 +2,7 @@ import React from "react";
 import { FaArrowRight } from "react-icons/fa";
 import crossingOver from "../../../assets/images/crossingOver.png";
 import pdfDgestive from "../../../assets/pdf/meiosis.pdf";
-import FloatingButton from "../../../components/floatingButton/FloatingButton";
+import FloatingButton from "../../../components/FloatingButton/FloatingButton";
 import karyotype from "../../../assets/images/karyotype.png";
 import sexChromosomes from "../../../assets/images/sexChromosomes.png";
 

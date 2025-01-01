@@ -1,6 +1,6 @@
 import React from "react";
 import { FaArrowRight } from "react-icons/fa";
-import FloatingButton from "../../../../components/floatingButton/FloatingButton";
+import FloatingButton from "../../../../components/FloatingButton/FloatingButton";
 import Indigestion from "../../../../assets/images/indigestion.svg";
 import Digestion from "../../../../assets/images/digestion.svg";
 import Absorption from "../../../../assets/images/absorption.jpg";
