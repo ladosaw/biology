@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import LeftNavigationLesson from "../../components/leftNav/LeftNavigationLesson.jsx";
 import Module1 from "./DigestiveSystem/Lesson1/Module1.jsx";
+import MitosisAndMiosis from "./MitosisAndMiosis/MitosisAndMiosis.jsx";
 
-const Module2 = () => <div>Content for Module 2</div>;
 const Module3 = () => <div>Content for Module 3</div>;
-const Sample = () => <div>Content for Sample Module 1</div>;
+const Module2 = () => <div>Content for Module 3</div>;
 const Sample1 = () => <div>Content for Sample Module 2</div>;
 const Sample2 = () => <div>Content for Sample Module 3</div>;
 
@@ -24,7 +24,7 @@ const Lessons = () => {
     switch (sectionTitle) {
       case "Digestive System":
         return renderDigestiveSystem(subsubtitle, item);
-      case "Mendelian Genetics":
+      case "Meiosis":
         return renderMandelianGenetics(subsubtitle, item);
       default:
         return <div>Select a valid section.</div>;
@@ -54,7 +54,7 @@ const Lessons = () => {
       case "Lesson 1":
         switch (item) {
           case "Module 1":
-            return <Sample />;
+            return <MitosisAndMiosis />;
           case "Module 2":
             return <Sample1 />;
           case "Module 3":
@@ -68,7 +68,7 @@ const Lessons = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row">
+    <div className="flex flex-col lg:flex-row items">
       <div className="w-full lg:w-1/4 p-4">
         <LeftNavigationLesson onModuleClick={setSelectedModule} />
       </div>

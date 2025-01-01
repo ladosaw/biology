@@ -11,7 +11,7 @@ const sections = [
     ],
   },
   {
-    title: "Mendelian Genetics",
+    title: "Meiosis",
     subtitle: [
       {
         subsubtitle: "Lesson 1",
@@ -20,7 +20,7 @@ const sections = [
     ],
   },
   {
-    title: "Meiosis",
+    title: "Mendelian Genetics",
     subtitle: [
       {
         subsubtitle: "Lesson 1",
