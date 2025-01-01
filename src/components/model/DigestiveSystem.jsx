@@ -37,8 +37,8 @@ const DigestiveSystem = (props) => {
     setHovered(null); // Reset hover when the pointer leaves
   };
   return (
-    <group {...props} dispose={null} position={[5, 0.8, 0]}>
-      <group scale={0.018}>
+    <group {...props} dispose={null} position={[4, 1, 0]}>
+      <group scale={0.015}>
         <group position={[43.879, -85.302, 0]} scale={100}>
           {/* Display TextLabel based on hover */}
           {hovered && (

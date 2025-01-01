@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { FiArrowUp } from "react-icons/fi"; // Using react-icons for a professional arrow icon
+import { FiArrowUp, FiPrinter } from "react-icons/fi";
 
-const FloatingButton = () => {
+const FloatingButton = ({ onPrint }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [showAdditionalButtons, setShowAdditionalButtons] = useState(false);
 
   // Show or hide the button based on scroll position
   useEffect(() => {
@@ -11,6 +12,7 @@ const FloatingButton = () => {
         setIsVisible(true);
       } else {
         setIsVisible(false);
+        setShowAdditionalButtons(false); // Hide additional buttons when scrolling up
       }
     };
 
@@ -29,15 +31,40 @@ const FloatingButton = () => {
   };
 
   return (
-    isVisible && (
-      <button
-        onClick={scrollToTop}
-        className="fixed bottom-6 right-6 flex items-center justify-center w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none"
-        aria-label="Scroll to top"
-      >
-        <FiArrowUp size={24} />
-      </button>
-    )
+    <>
+      {isVisible && (
+        <div className="fixed bottom-6 right-6 flex flex-col items-center gap-4">
+          {/* Additional Buttons */}
+          {showAdditionalButtons && (
+            <>
+              <button
+                onClick={onPrint}
+                className="flex items-center justify-center w-10 h-10 bg-gray-800 text-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none"
+                aria-label="Print Page"
+              >
+                <FiPrinter size={20} />
+              </button>
+              <button
+                onClick={scrollToTop}
+                className="flex items-center justify-center w-10 h-10 bg-gray-800 text-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none"
+                aria-label="Scroll to Top (Secondary)"
+              >
+                <FiArrowUp size={20} />
+              </button>
+            </>
+          )}
+
+          {/* Main Button */}
+          <button
+            onClick={() => setShowAdditionalButtons(!showAdditionalButtons)}
+            className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none"
+            aria-label="Scroll to top"
+          >
+            <FiArrowUp size={24} />
+          </button>
+        </div>
+      )}
+    </>
   );
 };
 
