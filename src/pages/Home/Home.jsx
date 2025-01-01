@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Typography, Card, CardMedia } from "@mui/material";
-import Render3d from "../../components/renderer/render3d";
+import Render3d from "../../components/renderer/Render3d";
 import Humancell from "../../components/model/HumanCell";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";

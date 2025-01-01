@@ -58,7 +58,8 @@ const Navbar = () => {
           <Typography
             variant="h5"
             component="h2"
-            sx={{ color: "#88C273", fontWeight: "bold" }}
+            sx={{ color: "#88C273", fontWeight: "bold", cursor: "pointer" }}
+            onClick={() => handleNavigation("/")}
           >
             BIO
             <Typography
@@ -115,6 +116,7 @@ const Navbar = () => {
                 >
                   {menuItems.map((item) => (
                     <MenuItem
+                      key={item.id}
                       onClick={() => handleNavigation(item.path)}
                       sx={{
                         color: isActive(item.path) ? "#88C273" : "black",
