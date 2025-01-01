@@ -1,5 +1,5 @@
 import React from "react";
-import FloatingButton from "../../../../components/floatingButton/floatingButton";
+import FloatingButton from "../../../../components/floatingButton/FloatingButton";
 import Indigestion from "../../../../assets/images/indigestion.svg";
 import Digestion from "../../../../assets/images/digestion.svg";
 import Absorption from "../../../../assets/images/absorption.jpg";
