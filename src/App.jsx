@@ -1,13 +1,16 @@
 import * as React from "react";
 import { Container, Box } from "@mui/material";
 import { BrowserRouter } from "react-router-dom";
-
 import Router from "./routes/index";
 import Navbar from "./components/nav-section/NavBar";
 import Footer from "./components/footer/Footer";
-import Analytics from "./analytics/Analytics";
+import { initializeAnalytics, trackPageView } from "./analytics/Analytics";
+
 const App = () => {
-  Analytics(window.location.pathname, "App.jsx");
+  React.useEffect(() => {
+    initializeAnalytics();
+    trackPageView(window.location.pathname, "App.jsx");
+  }, []);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>

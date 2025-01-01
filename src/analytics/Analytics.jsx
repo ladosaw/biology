@@ -1,17 +1,18 @@
-import { useEffect } from "react";
 import ReactGA from "react-ga4";
 
-const Analytics = ({ page, title }) => {
-  useEffect(() => {
-    ReactGA.initialize("G-GM6CHRVCPH");
-  }, []);
+const initializeAnalytics = () => {
+  ReactGA.initialize("G-GM6CHRVCPH");
+};
 
-  // Send pageview with a custom path
+const trackPageView = (
+  path = window.location.pathname,
+  title = "Page View"
+) => {
   ReactGA.send({
     hitType: "pageview",
-    page,
+    page: path,
     title,
   });
 };
 
-export default Analytics;
+export { initializeAnalytics, trackPageView };
