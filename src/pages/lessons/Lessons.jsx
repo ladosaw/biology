@@ -10,16 +10,16 @@ const Sample1 = () => <div>Content for Sample Module 2</div>;
 const Sample2 = () => <div>Content for Sample Module 3</div>;
 
 const Lessons = () => {
-  useEffect(() => {
-    initializeAnalytics();
-    trackPageView(window.location.pathname, "Lessons.jsx");
-  }, []);
-
   const [selectedModule, setSelectedModule] = useState({
     sectionTitle: "Digestive System",
     subsubtitle: "Lesson 1",
     item: "Module 1",
   });
+
+  useEffect(() => {
+    initializeAnalytics();
+    trackPageView(window.location.pathname, "Lessons.jsx");
+  }, []);
 
   const renderModule = () => {
     const { sectionTitle, subsubtitle, item } = selectedModule;
