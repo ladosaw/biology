@@ -147,7 +147,7 @@ const Home = () => {
                   backgroundColor:
                     selectedCard === index ? "#E8F5E9" : "#FFFFFF",
                   borderRadius: "16px", // Rounded corners
-                  // overflow: "hidden",
+                  overflow: "hidden",
                   height: "400px", // Adjust height for tablet mode
                   margin: isMobile ? "0 10px" : "0 30px", // Adjust margin based on screen size
                 }}
