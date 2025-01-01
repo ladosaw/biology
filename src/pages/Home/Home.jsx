@@ -48,7 +48,7 @@ const Home = () => {
     customPaging: (i) => (
       <div
         style={{
-          marginTop: "30px",
+          marginTop: "40px",
           width: "16px",
           height: "16px",
           borderRadius: "50%",
@@ -114,12 +114,13 @@ const Home = () => {
               key={card.id}
               onClick={() => handleCardClick(index)}
               style={{
-                transform: selectedCard === index ? "scale(1.1)" : "scale(0.9)",
+                transform:
+                  selectedCard === index ? "scale(1.1)" : "scale(0.85)",
                 transition:
                   "transform 0.3s ease-in-out, margin 0.3s ease-in-out",
                 cursor: "pointer",
                 opacity: selectedCard === index ? 1 : 0.6,
-                // padding: "0 8px",
+                margin: "0 60px", // Add margin to create gap between cards
               }}
             >
               <Card
@@ -128,11 +129,13 @@ const Home = () => {
                     selectedCard === index
                       ? "0px 4px 20px rgba(0,0,0,0.2)"
                       : "0px 2px 10px rgba(0,0,0,0.1)",
+
                   backgroundColor:
                     selectedCard === index ? "#E8F5E9" : "#FFFFFF",
                   borderRadius: "16px", // Rounded corners
                   overflow: "hidden",
                   height: "500px", // Uniform height
+                  margin: "0 30px", // Add margin to create gap between cards
                 }}
               >
                 <Box
