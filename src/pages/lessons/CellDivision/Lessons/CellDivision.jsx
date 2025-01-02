@@ -1,11 +1,6 @@
 import React, { useRef } from "react";
-import FloatingButton from "../../../../components/floatingButton/FloatingButton.jsx";
-import Indigestion from "../../../../assets/images/indigestion.svg";
-import Digestion from "../../../../assets/images/digestion.svg";
-import Absorption from "../../../../assets/images/absorption.jpg";
+import FloatingButton from "../../../../components/FloatingButton/FloatingButton.jsx";
 import { FaArrowRight } from "react-icons/fa";
-import DigestiveSystem from "../../../../components/model/DigestiveSystem";
-import pdfDgestive from "../../../../assets/pdf/digestiveSystem.pdf";
 import { useReactToPrint } from "react-to-print";
 import cellCycle from "../../../../assets/images/cellCycle.png";
 
