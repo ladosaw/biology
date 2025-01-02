@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const buttons = ({
+const Buttons = ({
   text = "Click Me",
   className = "",
   onClick,
@@ -25,4 +25,4 @@ buttons.propTypes = {
   type: PropTypes.oneOf(["button", "submit", "reset"]),
 };
 
-export default buttons;
+export default Buttons;

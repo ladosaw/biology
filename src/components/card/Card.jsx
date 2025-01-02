@@ -1,5 +1,5 @@
 import React from "react";
-import Btn from "../buttons/buttons";
+import Btn from "./buttons/Buttons";
 
 const Card = (props) => {
   return (
