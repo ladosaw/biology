@@ -28,6 +28,7 @@ const Lessons = () => {
     trackPageView(window.location.pathname, "Lessons.jsx");
 
     const hash = window.location.hash.slice(1).toLowerCase();
+    console.log(hash);
     if (hash) {
       switch (hash) {
         case "digestive":
@@ -43,6 +44,7 @@ const Lessons = () => {
             subsubtitle: "Lesson 1",
             item: "Module 1",
           });
+          break;
         case "meiosis":
           setSelectedModule({
             sectionTitle: "Meiosis",
@@ -60,6 +62,7 @@ const Lessons = () => {
 
   const renderModule = () => {
     const { sectionTitle, subsubtitle, item } = selectedModule;
+    console.log(selectedModule);
 
     switch (sectionTitle) {
       case "Digestive System":
