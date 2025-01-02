@@ -205,7 +205,7 @@ const Module1 = () => {
             <div className="grid grid-cols-2 border-t border-gray-300 p-2">
               <div className="flex flex-col items-center">
                 <img
-                  src="/path-to-prophase-image.png"
+                  src="/images/Prophase.jpg"
                   alt="Prophase of Mitosis"
                   className="mb-2 w-32 h-32 object-contain"
                 />
@@ -236,7 +236,7 @@ const Module1 = () => {
             <div className="grid grid-cols-2 border-t border-gray-300 p-2">
               <div className="flex flex-col items-center">
                 <img
-                  src="/path-to-metaphase-image.png"
+                  src="/images/Metaphase.jpg"
                   alt="Metaphase of Mitosis"
                   className="mb-2 w-32 h-32 object-contain"
                 />
@@ -257,20 +257,26 @@ const Module1 = () => {
             <div className="grid grid-cols-2 border-t border-gray-300 p-2">
               <div className="flex flex-col items-center">
                 <img
-                  src="/path-to-metaphase-image.png"
-                  alt="Metaphase of Mitosis"
+                  src="/images/Anaphase.jpg"
+                  alt="Anaphase of Mitosis"
                   className="mb-2 w-32 h-32 object-contain"
                 />
-                <p className="font-bold">Metaphase of Mitosis</p>
+                <p className="font-bold">Anaphase of Mitosis</p>
               </div>
               <ul className="list-disc list-inside">
                 <li>
-                  The centrioles are now at the opposite poles of the cell.
+                  Spindle fibers begin to contract and become shorter. Continued
+                  contraction causes the separation of the genetically identical
+                  sister chromatids.
                 </li>
-                <li>Chromosomes align at the equatorial plane.</li>
+                <li>Centromeres divide.</li>
+                <li>The single chromatids move towards the opposite poles</li>
                 <li>
-                  Each spindle fiber from both centrosomes connects to each
-                  chromosome through its kinetochore.
+                  Each chromatid is now considered an individual chromosome.
+                </li>
+                <li>
+                  At the end of anaphase, the two poles of the cell have an
+                  equal set of chromosomes.
                 </li>
               </ul>
             </div>
@@ -278,20 +284,25 @@ const Module1 = () => {
             <div className="grid grid-cols-2 border-t border-gray-300 p-2">
               <div className="flex flex-col items-center">
                 <img
-                  src="/path-to-metaphase-image.png"
-                  alt="Metaphase of Mitosis"
+                  src="/images/telophase.jpg"
+                  alt="Telophase of Mitosis"
                   className="mb-2 w-32 h-32 object-contain"
                 />
-                <p className="font-bold">Metaphase of Mitosis</p>
+                <p className="font-bold">Telophase of Mitosis</p>
               </div>
               <ul className="list-disc list-inside">
                 <li>
-                  The centrioles are now at the opposite poles of the cell.
+                  The chromosomes are now at the opposing poles of the spindle.
                 </li>
-                <li>Chromosomes align at the equatorial plane.</li>
+                <li>The microtubules disappear. </li>
                 <li>
-                  Each spindle fiber from both centrosomes connects to each
-                  chromosome through its kinetochore.
+                  Two sets of chromosomes are surrounded by new nuclear
+                  membranes, completing the nuclear division process known as{" "}
+                  <b>karyokinesis</b>.
+                </li>
+                <li>
+                  Cytoplasmic division called <b>cytokinesis</b> occurs
+                  concurrently, splitting the cell into two.
                 </li>
               </ul>
             </div>
