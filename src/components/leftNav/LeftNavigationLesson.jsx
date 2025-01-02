@@ -65,6 +65,13 @@ const LeftNavigationLesson = ({ onModuleClick }) => {
             item: "Module 1",
           };
           break;
+        case "mitosis":
+          module = {
+            sectionTitle: "Mitosis",
+            subsubtitle: "Lesson 1",
+            item: "Module 1",
+          };
+          break;
         case "meiosis":
           module = {
             sectionTitle: "Meiosis",
