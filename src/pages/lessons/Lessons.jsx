@@ -39,13 +39,13 @@ const Lessons = () => {
           break;
         case "mitosis":
           setSelectedModule({
-            sectionTitle: "Stages of Mitosis",
-            subsubtitle: "Lesson 3",
+            sectionTitle: "Meiosis",
+            subsubtitle: "Lesson 1",
             item: "Module 1",
           });
         case "meiosis":
           setSelectedModule({
-            sectionTitle: "Meiosis",
+            sectionTitle: "Mitosis",
             subsubtitle: "Lesson 1",
             item: "Module 1",
           });
