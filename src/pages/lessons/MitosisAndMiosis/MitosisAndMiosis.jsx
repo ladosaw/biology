@@ -8,31 +8,41 @@ import sexChromosomes from "../../../assets/images/sexChromosomes.png";
 import meiosisDivisions from "../../../assets/images/meiosisDivision.png";
 import prophaseStage from "../../../assets/images/prophaseStage.png";
 import roleMeiosis from "../../../assets/images/roleMeiosis.png";
+import meiosisPdf from "../../../assets/pdf/meiosisPdf.pdf";
+import { Link } from "react-router-dom";
 
 const MiosisAndMitosis = () => {
-  const handleNextClick = () => {};
+  const handleDownload = () => {
+    const pdfUrl = meiosisPdf;
 
-  // const handlePrintHandout = () => {
-  //   const pdfUrl = pdfDgestive;
+    const link = document.createElement("a");
+    link.href = pdfUrl;
+    link.download = "LESSON 1: Cell Cycle: COMPARING MITOSIS AND MEIOSIS";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
-  //   const link = document.createElement("a");
-  //   link.href = pdfUrl;
-  //   link.download = "Meiosis";
-  //   document.body.appendChild(link);
-  //   link.click();
-  //   document.body.removeChild(link);
-  // };
+  const handlePrintHandout = () => {
+    const pdfUrl = meiosisPdf;
 
-  const contentRef = useRef(null);
-  const handlePrintHandout = useReactToPrint({
-    contentRef,
-    documentTitle: "Digestive System",
-  });
+    const printWindow = window.open(pdfUrl, "_blank");
+
+    if (printWindow) {
+      printWindow.addEventListener("load", () => {
+        printWindow.print();
+      });
+    } else {
+      alert(
+        "Failed to open the PDF. Please check your pop-up blocker settings."
+      );
+    }
+  };
 
   return (
     <div className="px-4 lg:px-4">
       {/* Header Section */}
-      <div ref={contentRef}>
+      <div>
         <div className="flex flex-col gap-8">
           <h1 className="font-semibold text-2xl sm:text-3xl md:text-4xl leading-snug">
             <span className="font-bold">LESSON 1:</span> Cell Cycle: COMPARING
@@ -509,19 +519,22 @@ const MiosisAndMitosis = () => {
       </div>
       <div className="flex flex-col items-end mt-10 space-y-4">
         <div className="bg-gray-200 w-full h-[1px]"></div>
-        <button
-          className="flex items-center gap-2 bg-primary text-white py-2 px-4 rounded shadow hover:bg-primary-dark transition"
-          onClick={handleNextClick}
-        >
-          <p className="font-semibold text-lg">Lesson 3: Meiosis</p>
-          <FaArrowRight />
-        </button>
+        <Link to="lessons#mendelian-genetics">
+          <button className="flex items-center gap-2 bg-primary text-white py-2 px-4 rounded shadow hover:bg-primary-dark transition">
+            <p className="font-semibold text-lg">Lesson 3: Meiosis</p>
+            <FaArrowRight />
+          </button>
+        </Link>
+
         <div className="bg-gray-200 w-full h-[1px]"></div>
       </div>
 
       {/* Floating Button */}
       <div className="floatingbtns">
-        <FloatingButton onPrint={handlePrintHandout} />
+        <FloatingButton
+          onPrint={handlePrintHandout}
+          onDownload={handleDownload}
+        />
       </div>
     </div>
   );

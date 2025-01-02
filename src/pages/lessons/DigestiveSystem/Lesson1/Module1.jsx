@@ -9,6 +9,7 @@ import Egestion from "../../../../assets/images/egestion.jpg";
 import Render3d from "../../../../components/renderer/Render3d";
 import DigestiveSystem from "../../../../components/model/DigestiveSystem";
 import pdfDgestive from "../../../../assets/pdf/humanDigestiveSystem.pdf";
+import { Link } from "react-router-dom";
 
 const Module1 = () => {
   const handleNextClick = () => {};
@@ -18,7 +19,8 @@ const Module1 = () => {
 
     const link = document.createElement("a");
     link.href = pdfUrl;
-    link.download = "Digestive System";
+    link.download =
+      "LESSON 1: STRUCTURES AND FUNCTIONS IN HUMAN FOCUS ON THE DIGESTIVE SYSTEM";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -296,13 +298,17 @@ const Module1 = () => {
       {/* Footer */}
       <div className="flex flex-col items-end mt-10 space-y-4">
         <div className="bg-gray-200 w-full h-[1px]"></div>
-        <button
-          className="flex items-center gap-2 bg-primary text-white py-2 px-4 rounded shadow hover:bg-primary-dark transition"
-          onClick={handleNextClick}
-        >
-          <p className="font-semibold text-lg">Lesson 2: Meiosis</p>
-          <FaArrowRight />
-        </button>
+
+        <Link to="#meiosis">
+          <button
+            className="flex items-center gap-2 bg-primary text-white py-2 px-4 rounded shadow hover:bg-primary-dark transition"
+            onClick={handleNextClick}
+          >
+            <p className="font-semibold text-lg">Lesson 2: Meiosis</p>
+            <FaArrowRight />
+          </button>
+        </Link>
+
         <div className="bg-gray-200 w-full h-[1px]"></div>
       </div>
 
