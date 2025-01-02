@@ -1,5 +1,5 @@
 import React from "react";
-import FloatingButton from "../../../../components/floatingButton/FloatingButton.jsx";
+import FloatingButton from "../../../../components/FloatingButton/FloatingButton.jsx";
 import { FaArrowRight } from "react-icons/fa";
 import Indigestion from "../../../../assets/images/indigestion.svg";
 import Digestion from "../../../../assets/images/digestion.svg";
