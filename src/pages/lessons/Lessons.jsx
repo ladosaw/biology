@@ -1,9 +1,13 @@
-import React, { useState } from "react";
 import LeftNavigationLesson from "../../components/leftNav/LeftNavigationLesson.jsx";
 import Module1 from "./DigestiveSystem/Lesson1/Module1.jsx";
 import MitosisAndMiosis from "./MitosisAndMiosis/MitosisAndMiosis.jsx";
 import Sampleasd from "./Sample.jsx";
 import CellDivision from "./CellDivision/Lessons/CellDivision.jsx";
+import React, { useState, useEffect } from "react";
+import {
+  initializeAnalytics,
+  trackPageView,
+} from "../../components/analytics/Analytics";
 
 const Module3 = () => <div>Content for Module 3</div>;
 const Module2 = () => <div>Content for Module 3</div>;
@@ -17,8 +21,10 @@ const Lessons = () => {
     item: "Module 1",
   });
 
-  // Debugging: log selectedModule to see what section, lesson, and item are selected
-  console.log("Selected Module:", selectedModule);
+  useEffect(() => {
+    initializeAnalytics();
+    trackPageView(window.location.pathname, "Lessons.jsx");
+  }, []);
 
   const renderModule = () => {
     const { sectionTitle, subsubtitle, item } = selectedModule;

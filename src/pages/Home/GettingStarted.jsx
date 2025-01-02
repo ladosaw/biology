@@ -1,6 +1,6 @@
 import React from "react";
 import Homes from "../../assets/images/home.png";
-import Btn from "../../components/buttons/buttons.jsx";
+import Btn from "../../components/buttons/buttons";
 
 const GettingStarted = () => {
   return (

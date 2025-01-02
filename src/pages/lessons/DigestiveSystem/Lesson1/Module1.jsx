@@ -1,17 +1,28 @@
-import React, { useRef } from "react";
+import React from "react";
 import FloatingButton from "../../../../components/floatingButton/FloatingButton.jsx";
+import { FaArrowRight } from "react-icons/fa";
 import Indigestion from "../../../../assets/images/indigestion.svg";
 import Digestion from "../../../../assets/images/digestion.svg";
 import Absorption from "../../../../assets/images/absorption.jpg";
 import Assimilation from "../../../../assets/images/assimilation.png";
 import Egestion from "../../../../assets/images/egestion.jpg";
-import { FaArrowRight } from "react-icons/fa";
-import Render3d from "../../../../components/renderer/render3d";
+import Render3d from "../../../../components/renderer/Render3d";
 import DigestiveSystem from "../../../../components/model/DigestiveSystem";
 import pdfDgestive from "../../../../assets/pdf/humanDigestiveSystem.pdf";
 
 const Module1 = () => {
   const handleNextClick = () => {};
+
+  const handleDownload = () => {
+    const pdfUrl = pdfDgestive;
+
+    const link = document.createElement("a");
+    link.href = pdfUrl;
+    link.download = "Digestive System";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   const handlePrintHandout = () => {
     const pdfUrl = pdfDgestive;
@@ -296,7 +307,10 @@ const Module1 = () => {
       </div>
 
       {/* Floating Button */}
-      <FloatingButton onPrint={handlePrintHandout} />
+      <FloatingButton
+        onPrint={handlePrintHandout}
+        onDownload={handleDownload}
+      />
     </div>
   );
 };

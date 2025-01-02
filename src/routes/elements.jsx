@@ -3,7 +3,6 @@ import { Suspense, lazy } from "react";
 import LoadingScreen from "../components/loading-screen/LoadingScreen";
 
 const Loadable = (Component) => (props) => {
-  console.log("Lazy loading component...");
   return (
     <Suspense fallback={<LoadingScreen />}>
       <Component {...props} />
