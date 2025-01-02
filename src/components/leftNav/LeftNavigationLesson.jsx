@@ -32,7 +32,7 @@ const sections = [
     title: "Stages of Mitosis",
     subtitle: [
       {
-        subsubtitle: "Lesson 1",
+        subsubtitle: "Lesson 3",
         items: ["Module 1", "Module 2", "Module 3"],
       },
     ],
