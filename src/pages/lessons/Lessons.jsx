@@ -10,8 +10,7 @@ import {
 } from "../../components/analytics/Analytics";
 
 const Module3 = () => <div>Content for Module 3</div>;
-const Module2 = () => <div>Content for Module 3</div>;
-// const Sample1 = () => <div>Content for Sample Module 2</div>;
+const Module2 = () => <div>Content for Module 2</div>;
 const Sample2 = () => <div>Content for Sample Module 3</div>;
 
 const Lessons = () => {
@@ -24,6 +23,35 @@ const Lessons = () => {
   useEffect(() => {
     initializeAnalytics();
     trackPageView(window.location.pathname, "Lessons.jsx");
+
+    const hash = window.location.hash.slice(1).toLowerCase();
+    if (hash) {
+      switch (hash) {
+        case "digestive":
+          setSelectedModule({
+            sectionTitle: "Digestive System",
+            subsubtitle: "Lesson 1",
+            item: "Module 1",
+          });
+          break;
+        case "meiosis":
+          setSelectedModule({
+            sectionTitle: "Meiosis",
+            subsubtitle: "Lesson 1",
+            item: "Module 1",
+          });
+          break;
+        case "mendelian-genetics":
+          setSelectedModule({
+            sectionTitle: "Mendelian Genetics",
+            subsubtitle: "Lesson 1",
+            item: "Module 1",
+          });
+          break;
+        default:
+          console.warn("Invalid hash provided in URL.");
+      }
+    }
   }, []);
 
   const renderModule = () => {
