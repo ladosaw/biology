@@ -28,6 +28,7 @@ const Lessons = () => {
     trackPageView(window.location.pathname, "Lessons.jsx");
 
     const hash = window.location.hash.slice(1).toLowerCase();
+
     if (hash) {
       switch (hash) {
         case "digestive":
@@ -37,19 +38,21 @@ const Lessons = () => {
             item: "Module 1",
           });
           break;
-        case "meiosis":
+        case "mitosis":
           setSelectedModule({
             sectionTitle: "Mitosis",
             subsubtitle: "Lesson 1",
             item: "Module 1",
           });
           break;
-        case "mendelian-genetics":
+        case "meiosis":
           setSelectedModule({
             sectionTitle: "Meiosis",
             subsubtitle: "Lesson 1",
             item: "Module 1",
           });
+          break;
+
           break;
         default:
           console.warn("Invalid hash provided in URL.");
@@ -63,9 +66,9 @@ const Lessons = () => {
     switch (sectionTitle) {
       case "Digestive System":
         return renderDigestiveSystem(subsubtitle, item);
-      case "Mitosis":
-        return renderMandelianGenetics(subsubtitle, item);
       case "Meiosis":
+        return renderMandelianGenetics(subsubtitle, item);
+      case "Mitosis":
         return renderMand(subsubtitle, item);
       default:
         return <UnderMaintenance />;
