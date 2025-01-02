@@ -40,7 +40,7 @@ const Lessons = () => {
         case "mitosis":
           setSelectedModule({
             sectionTitle: "Mitosis",
-            subsubtitle: "Lesson 3",
+            subsubtitle: "Lesson 1",
             item: "Module 1",
           });
         case "meiosis":
@@ -50,12 +50,7 @@ const Lessons = () => {
             item: "Module 1",
           });
           break;
-        case "mendelian-genetics":
-          setSelectedModule({
-            sectionTitle: "Meiosis",
-            subsubtitle: "Lesson 1",
-            item: "Module 1",
-          });
+
           break;
         default:
           console.warn("Invalid hash provided in URL.");

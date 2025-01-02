@@ -79,13 +79,6 @@ const LeftNavigationLesson = ({ onModuleClick }) => {
             item: "Module 1",
           };
           break;
-        case "mendelian-genetics":
-          module = {
-            sectionTitle: "Mendelian Genetics",
-            subsubtitle: "Lesson 1",
-            item: "Module 1",
-          };
-          break;
         default:
           console.warn("Invalid hash provided in URL.");
       }
