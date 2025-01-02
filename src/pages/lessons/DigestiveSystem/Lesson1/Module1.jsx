@@ -249,18 +249,11 @@ const Module1 = () => {
               />
               <div className="space-y-4 text-gray-700">
                 <p className="text-base sm:text-lg leading-relaxed">
-                  <strong className="text-primary">D. Egestion</strong> occurs
-                  mostly in the small intestine where several digestive juices,
-                  pancreatic juice, and bile aid in the chemical digestion of
-                  food.
-                </p>
-                <p>
-                  Absorption is the process of passing the soluble food
-                  molecules in the wall of the small intestine through the villi
-                  – tiny finger-like projections. Each villus contains blood
-                  capillaries that absorb water, glucose, amino acids, vitamins,
-                  minerals, and fatty acids, increasing the surface area
-                  available for nutrient absorption.
+                  <strong className="text-primary">D. Egestion</strong> is the
+                  last process that occurs in the digestive system. It is the
+                  release of undigested food collected in the rectum called
+                  feces and pushed out of the body through the anus by
+                  defecation
                 </p>
               </div>
             </div>

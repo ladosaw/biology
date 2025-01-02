@@ -339,22 +339,22 @@ const Module1 = () => {
         <ul className="list-disc pl-6 text-lg text-gray-700 flex flex-col gap-5">
           <li className="hover:text-blue-600">
             <a href="#" className="text-blue-600 hover:underline">
-              Lesson 1: Digestive System
+              Lesson 1: Stages of Mitosis
             </a>
           </li>
           <li className="hover:text-blue-600">
             <a href="#" className="text-blue-600 hover:underline">
-              Lesson 1: Digestive System
+              Lesson 1: Stages of Mitosis
             </a>
           </li>
           <li className="hover:text-blue-600">
             <a href="#" className="text-blue-600 hover:underline">
-              Lesson 1: Digestive System
+              Lesson 1: Stages of Mitosis
             </a>
           </li>
           <li className="hover:text-blue-600">
             <a href="#" className="text-blue-600 hover:underline">
-              Lesson 1: Digestive System
+              Lesson 1: Stages of Mitosis
             </a>
           </li>
         </ul>
