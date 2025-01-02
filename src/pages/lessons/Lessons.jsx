@@ -8,10 +8,13 @@ import {
   initializeAnalytics,
   trackPageView,
 } from "../../components/analytics/Analytics";
+import undermaintenance from "../../assets/images/undermaintenance.png";
 
-const Module3 = () => <div>Content for Module 3</div>;
-const Module2 = () => <div>Content for Module 2</div>;
-const Sample2 = () => <div>Content for Sample Module 3</div>;
+const UnderMaintenance = () => (
+  <div>
+    <img src={undermaintenance} alt="" />
+  </div>
+);
 
 const Lessons = () => {
   const [selectedModule, setSelectedModule] = useState({
@@ -65,7 +68,7 @@ const Lessons = () => {
       case "Mendelian Genetics":
         return renderMand(subsubtitle, item);
       default:
-        return <div>Select a valid section.</div>;
+        return <UnderMaintenance />;
     }
   };
 
@@ -76,9 +79,9 @@ const Lessons = () => {
           case "Module 1":
             return <Module1 />;
           case "Module 2":
-            return <Module2 />;
+            return <UnderMaintenance />;
           case "Module 3":
-            return <Module3 />;
+            return <UnderMaintenance />;
           default:
             return <div>Select a valid module.</div>;
         }
@@ -94,9 +97,9 @@ const Lessons = () => {
           case "Module 1":
             return <MitosisAndMiosis />;
           case "Module 2":
-            return <Sampleasd />;
+            return <UnderMaintenance />;
           case "Module 3":
-            return <Sample2 />;
+            return <UnderMaintenance />;
           default:
             return <div>Select a valid module.</div>;
         }
@@ -112,9 +115,9 @@ const Lessons = () => {
           case "Module 1":
             return <CellDivision />;
           case "Module 2":
-            return <Sampleasd />;
+            return <UnderMaintenance />;
           case "Module 3":
-            return <Sample2 />;
+            return <UnderMaintenance />;
           default:
             return <div>Select a valid module.</div>;
         }

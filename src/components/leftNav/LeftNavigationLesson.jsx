@@ -32,7 +32,16 @@ const sections = [
     title: "Stages of Mitosis",
     subtitle: [
       {
-        subsubtitle: "Lesson 3",
+        subsubtitle: "Lesson 1",
+        items: ["Module 1", "Module 2", "Module 3"],
+      },
+    ],
+  },
+  {
+    title: "Organism",
+    subtitle: [
+      {
+        subsubtitle: "Lesson 1",
         items: ["Module 1", "Module 2", "Module 3"],
       },
     ],

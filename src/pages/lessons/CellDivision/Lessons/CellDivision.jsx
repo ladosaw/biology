@@ -1,31 +1,43 @@
 import React, { useRef } from "react";
 import FloatingButton from "../../../../components/FloatingButton/FloatingButton.jsx";
 import { FaArrowRight } from "react-icons/fa";
-import { useReactToPrint } from "react-to-print";
 import cellCycle from "../../../../assets/images/cellCycle.png";
+import stagesOfMitosis from "../../../../assets/pdf/stagesOfMitosis.pdf";
 
 const Module1 = () => {
   const handleNextClick = () => {};
 
-  const contentRef = useRef(null);
-  const handlePrintHandout = useReactToPrint({
-    contentRef,
-    documentTitle: "Digestive System - Module 1",
-    pageStyle: `
-      .title: {
-        font-size: 24px;
-        font-weight: bold;
-        display: flex;
-        items-align: center;
-        justify-content: center;
-      }
-    `,
-  });
+  const handleDownload = () => {
+    const pdfUrl = stagesOfMitosis;
+
+    const link = document.createElement("a");
+    link.href = pdfUrl;
+    link.download = "Digestive System";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handlePrintHandout = () => {
+    const pdfUrl = stagesOfMitosis;
+
+    const printWindow = window.open(pdfUrl, "_blank");
+
+    if (printWindow) {
+      printWindow.addEventListener("load", () => {
+        printWindow.print();
+      });
+    } else {
+      alert(
+        "Failed to open the PDF. Please check your pop-up blocker settings."
+      );
+    }
+  };
 
   return (
     <div className="px-4 lg:px-4 ">
       {/* Header Section */}
-      <div ref={contentRef}>
+      <div>
         <div className="flex flex-col gap-8 title">
           <h1 className="font-semibold text-2xl sm:text-3xl md:text-4xl leading-snug ">
             <span className="font-bold">LESSON 3:</span> CELL CYCLE: Interphase
@@ -361,7 +373,10 @@ const Module1 = () => {
       </div>
 
       {/* Floating Button */}
-      <FloatingButton onPrint={handlePrintHandout} />
+      <FloatingButton
+        onPrint={handlePrintHandout}
+        onDownload={handleDownload}
+      />
     </div>
   );
 };
