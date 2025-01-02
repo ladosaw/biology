@@ -64,9 +64,9 @@ const Lessons = () => {
     switch (sectionTitle) {
       case "Digestive System":
         return renderDigestiveSystem(subsubtitle, item);
-      case "Mitosis":
-        return renderMandelianGenetics(subsubtitle, item);
       case "Meiosis":
+        return renderMandelianGenetics(subsubtitle, item);
+      case "Mitosis":
         return renderMand(subsubtitle, item);
       default:
         return <UnderMaintenance />;

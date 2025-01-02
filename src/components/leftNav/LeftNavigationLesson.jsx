@@ -67,7 +67,7 @@ const LeftNavigationLesson = ({ onModuleClick }) => {
           break;
         case "mitosis":
           module = {
-            sectionTitle: "",
+            sectionTitle: "Mitosis",
             subsubtitle: "Lesson 1",
             item: "Module 1",
           };
@@ -79,6 +79,7 @@ const LeftNavigationLesson = ({ onModuleClick }) => {
             item: "Module 1",
           };
           break;
+
         default:
           console.warn("Invalid hash provided in URL.");
       }
