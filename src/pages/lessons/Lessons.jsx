@@ -39,14 +39,14 @@ const Lessons = () => {
           break;
         case "meiosis":
           setSelectedModule({
-            sectionTitle: "Meiosis",
+            sectionTitle: "Mitosis",
             subsubtitle: "Lesson 1",
             item: "Module 1",
           });
           break;
         case "mendelian-genetics":
           setSelectedModule({
-            sectionTitle: "Mendelian Genetics",
+            sectionTitle: "Meiosis",
             subsubtitle: "Lesson 1",
             item: "Module 1",
           });
@@ -63,9 +63,9 @@ const Lessons = () => {
     switch (sectionTitle) {
       case "Digestive System":
         return renderDigestiveSystem(subsubtitle, item);
-      case "Meiosis":
+      case "Mitosis":
         return renderMandelianGenetics(subsubtitle, item);
-      case "Mendelian Genetics":
+      case "Meiosis":
         return renderMand(subsubtitle, item);
       default:
         return <UnderMaintenance />;

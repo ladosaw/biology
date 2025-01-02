@@ -8,23 +8,23 @@ import sexChromosomes from "../../../assets/images/sexChromosomes.png";
 import meiosisDivisions from "../../../assets/images/meiosisDivision.png";
 import prophaseStage from "../../../assets/images/prophaseStage.png";
 import roleMeiosis from "../../../assets/images/roleMeiosis.png";
-import stagesOfMitosis from "../../../assets/pdf/stagesOfMitosis.pdf";
+import meiosisPdf from "../../../assets/pdf/meiosisPdf.pdf";
 import { Link } from "react-router-dom";
 
 const MiosisAndMitosis = () => {
   const handleDownload = () => {
-    const pdfUrl = stagesOfMitosis;
+    const pdfUrl = meiosisPdf;
 
     const link = document.createElement("a");
     link.href = pdfUrl;
-    link.download = "Digestive System";
+    link.download = "LESSON 1: Cell Cycle: COMPARING MITOSIS AND MEIOSIS";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
   const handlePrintHandout = () => {
-    const pdfUrl = stagesOfMitosis;
+    const pdfUrl = meiosisPdf;
 
     const printWindow = window.open(pdfUrl, "_blank");
 

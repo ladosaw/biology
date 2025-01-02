@@ -12,7 +12,7 @@ const Module1 = () => {
 
     const link = document.createElement("a");
     link.href = pdfUrl;
-    link.download = "Digestive System";
+    link.download = "LESSON 3: CELL CYCLE: Interphase and cell Division";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

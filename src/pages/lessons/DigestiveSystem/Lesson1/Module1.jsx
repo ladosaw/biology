@@ -19,7 +19,8 @@ const Module1 = () => {
 
     const link = document.createElement("a");
     link.href = pdfUrl;
-    link.download = "Digestive System";
+    link.download =
+      "LESSON 1: STRUCTURES AND FUNCTIONS IN HUMAN FOCUS ON THE DIGESTIVE SYSTEM";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
