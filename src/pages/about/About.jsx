@@ -33,7 +33,7 @@ const About = () => {
           Linked on Internet Using QR Codes
         </Typography>
         <Box>
-          <Button
+          {/* <Button
             variant="contained"
             sx={{
               backgroundColor: "white",
@@ -55,7 +55,7 @@ const About = () => {
             }}
           >
             Contact Us
-          </Button>
+          </Button> */}
         </Box>
       </Paper>
 

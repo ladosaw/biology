@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const sections = [
   {
@@ -32,7 +32,7 @@ const sections = [
     title: "Stages of Mitosis",
     subtitle: [
       {
-        subsubtitle: "Lesson 1",
+        subsubtitle: "Lesson 3",
         items: ["Module 1", "Module 2", "Module 3"],
       },
     ],
@@ -40,28 +40,55 @@ const sections = [
 ];
 
 const LeftNavigationLesson = ({ onModuleClick }) => {
-  const [activeIndicator, setActiveIndicator] = useState({
-    "Digestive System-Lesson 1-Module 1": true,
-  });
+  const [activeIndicator, setActiveIndicator] = useState({});
+  const [expandedSections, setExpandedSections] = useState({});
+  const [selectedModule, setSelectedModule] = useState(null);
 
-  const [openSections, setOpenSections] = useState({
-    "Digestive System": true,
-  });
+  useEffect(() => {
+    const hash = window.location.hash.slice(1).toLowerCase();
+    if (hash) {
+      let module = null;
+      switch (hash) {
+        case "digestive":
+          module = {
+            sectionTitle: "Digestive System",
+            subsubtitle: "Lesson 1",
+            item: "Module 1",
+          };
+          break;
+        case "meiosis":
+          module = {
+            sectionTitle: "Meiosis",
+            subsubtitle: "Lesson 1",
+            item: "Module 1",
+          };
+          break;
+        case "mendelian-genetics":
+          module = {
+            sectionTitle: "Mendelian Genetics",
+            subsubtitle: "Lesson 1",
+            item: "Module 1",
+          };
+          break;
+        default:
+          console.warn("Invalid hash provided in URL.");
+      }
 
-  const [openSubtitles, setOpenSubtitles] = useState({
-    "Digestive System-Lesson 1": true,
-  });
+      if (module) {
+        setSelectedModule(module);
+        setActiveIndicator({
+          [`${module.sectionTitle}-${module.subsubtitle}-${module.item}`]: true,
+        });
+        setExpandedSections({
+          [module.sectionTitle]: true,
+          [`${module.sectionTitle}-${module.subsubtitle}`]: true,
+        });
+      }
+    }
+  }, []);
 
-  const toggleSection = (title) => {
-    setOpenSections((prev) => ({
-      ...prev,
-      [title]: !prev[title],
-    }));
-  };
-
-  const toggleSubtitle = (sectionTitle, subsubtitle) => {
-    const key = `${sectionTitle}-${subsubtitle}`;
-    setOpenSubtitles((prev) => ({
+  const toggleExpand = (key) => {
+    setExpandedSections((prev) => ({
       ...prev,
       [key]: !prev[key],
     }));
@@ -70,6 +97,8 @@ const LeftNavigationLesson = ({ onModuleClick }) => {
   const handleNavigation = (sectionTitle, subsubtitle, item) => {
     const key = `${sectionTitle}-${subsubtitle}-${item}`;
     setActiveIndicator({ [key]: true });
+
+    window.location.hash = sectionTitle.toLowerCase().replace(/ /g, "-");
     if (onModuleClick) {
       onModuleClick({ sectionTitle, subsubtitle, item });
     }
@@ -81,33 +110,27 @@ const LeftNavigationLesson = ({ onModuleClick }) => {
         <div key={section.title} className="mb-4">
           <button
             className="block w-full text-left text-lg font-medium text-gray-700 py-2 px-4 hover:bg-gray-100 rounded transition"
-            onClick={() => toggleSection(section.title)}
+            aria-expanded={expandedSections[section.title]}
+            onClick={() => toggleExpand(section.title)}
           >
             {section.title}
           </button>
-          <div
-            className={`overflow-hidden transition-all duration-300 ${
-              openSections[section.title] ? "max-h-screen" : "max-h-0"
-            }`}
-          >
+          {expandedSections[section.title] && (
             <div className="ml-4">
               {section.subtitle.map((sub) => (
                 <div key={sub.subsubtitle} className="mb-3">
                   <button
                     className="block w-full text-left text-md text-gray-600 py-2 px-3 hover:bg-gray-50 rounded transition"
+                    aria-expanded={
+                      expandedSections[`${section.title}-${sub.subsubtitle}`]
+                    }
                     onClick={() =>
-                      toggleSubtitle(section.title, sub.subsubtitle)
+                      toggleExpand(`${section.title}-${sub.subsubtitle}`)
                     }
                   >
                     {sub.subsubtitle}
                   </button>
-                  <div
-                    className={`overflow-hidden transition-all duration-300 ${
-                      openSubtitles[`${section.title}-${sub.subsubtitle}`]
-                        ? "max-h-screen"
-                        : "max-h-0"
-                    }`}
-                  >
+                  {expandedSections[`${section.title}-${sub.subsubtitle}`] && (
                     <div className="py-2">
                       {sub.items.map((item) => {
                         const key = `${section.title}-${sub.subsubtitle}-${item}`;
@@ -116,7 +139,6 @@ const LeftNavigationLesson = ({ onModuleClick }) => {
                             key={key}
                             className="flex items-center gap-2 py-1"
                           >
-                            {/* Progress indicator */}
                             <button
                               className={`h-3 w-3 rounded-full focus:outline-none transition-colors ${
                                 activeIndicator[key]
@@ -131,7 +153,6 @@ const LeftNavigationLesson = ({ onModuleClick }) => {
                                 )
                               }
                             ></button>
-                            {/* Module title */}
                             <button
                               className="text-left text-gray-600 hover:text-blue-500 transition"
                               onClick={() =>
@@ -148,11 +169,11 @@ const LeftNavigationLesson = ({ onModuleClick }) => {
                         );
                       })}
                     </div>
-                  </div>
+                  )}
                 </div>
               ))}
             </div>
-          </div>
+          )}
         </div>
       ))}
     </div>

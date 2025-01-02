@@ -104,9 +104,8 @@ const Home = () => {
           variant="body1"
           sx={{ mt: 4, width: { xs: "90%", sm: "80%", md: "60%" }, mx: "auto" }}
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum ex
-          quasi vitae cupiditate assumenda dolores illo, reprehenderit cum
-          voluptate soluta?
+          Scan and Learn: A Supplementary Materials in Quarter 4 For Grade 8
+          Linked on Internet Using QR Codes
         </Typography>
       </Box>
 
@@ -189,8 +188,10 @@ const Home = () => {
           variant="body1"
           sx={{ mx: "auto", width: { xs: "90%", sm: "80%", md: "60%" } }}
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Bioverse is your go-to platform for Grade 8 biology resources, study
+          guides, and interactive learning tools. We aim to simplify biology
+          concepts and foster a vibrant community for students and educators to
+          connect, learn, and grow together.
         </Typography>
       </Box>
     </Box>
