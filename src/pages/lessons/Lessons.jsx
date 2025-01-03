@@ -52,8 +52,6 @@ const Lessons = () => {
             item: "Module 1",
           });
           break;
-
-          break;
         default:
           console.warn("Invalid hash provided in URL.");
       }
