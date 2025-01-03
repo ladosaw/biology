@@ -95,12 +95,13 @@ const LeftNavigationLesson = ({ onModuleClick }) => {
         });
         break;
       default:
-        setActiveIndicator({ "Overall-Overall": true });
+        setActiveIndicator({ "Overall-Overall-Overall": true });
     }
   }, []);
 
   const handleNavigation = (sectionTitle, subsubtitle, item) => {
     const key = `${sectionTitle}-${subsubtitle}-${item}`;
+    console.log(key);
     setActiveIndicator({ [key]: true });
 
     window.location.hash = sectionTitle.toLowerCase().replace(/ /g, "-");
@@ -117,7 +118,7 @@ const LeftNavigationLesson = ({ onModuleClick }) => {
             <div className="flex items-center gap-2">
               <button
                 className={`h-3 w-3 rounded-full focus:outline-none transition-colors ${
-                  activeIndicator["Overall-Overall"]
+                  activeIndicator["Overall-Overall-Overall"]
                     ? "bg-blue-500"
                     : "bg-gray-300"
                 }`}
