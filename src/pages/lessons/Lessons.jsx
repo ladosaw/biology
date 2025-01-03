@@ -1,7 +1,6 @@
 import LeftNavigationLesson from "../../components/leftNav/LeftNavigationLesson.jsx";
 import Module1 from "./DigestiveSystem/Lesson1/Module1.jsx";
 import MitosisAndMiosis from "./MitosisAndMiosis/MitosisAndMiosis.jsx";
-import Sampleasd from "./Sample.jsx";
 import CellDivision from "./CellDivision/Lessons/CellDivision.jsx";
 import React, { useState, useEffect } from "react";
 import {
@@ -9,6 +8,7 @@ import {
   trackPageView,
 } from "../../components/analytics/Analytics";
 import undermaintenance from "../../assets/images/undermaintenance.png";
+import Overall from "./Overall/Overall.jsx";
 
 const UnderMaintenance = () => (
   <div>
@@ -18,9 +18,9 @@ const UnderMaintenance = () => (
 
 const Lessons = () => {
   const [selectedModule, setSelectedModule] = useState({
-    sectionTitle: "Digestive System",
-    subsubtitle: "Lesson 1",
-    item: "Module 1",
+    sectionTitle: "Overall",
+    subsubtitle: "overall lessons",
+    item: "overall",
   });
 
   useEffect(() => {
@@ -70,6 +70,8 @@ const Lessons = () => {
         return renderMandelianGenetics(subsubtitle, item);
       case "Mitosis":
         return renderMand(subsubtitle, item);
+      case "Overall":
+        return renderOverall(subsubtitle, item);
       default:
         return <UnderMaintenance />;
     }
@@ -126,6 +128,24 @@ const Lessons = () => {
         }
       default:
         return <div>Select a valid lesson.</div>;
+    }
+  };
+
+  const renderOverall = (subsubtitle, item) => {
+    switch (subsubtitle) {
+      case "overall lessons":
+        switch (item) {
+          case "overall":
+            return <Overall />;
+          case "Module 2":
+            return <UnderMaintenance />;
+          case "Module 3":
+            return <UnderMaintenance />;
+          default:
+            return <UnderMaintenance />;
+        }
+      default:
+        return <UnderMaintenance />;
     }
   };
 

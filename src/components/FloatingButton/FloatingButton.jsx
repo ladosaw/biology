@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import { FiArrowUp, FiPrinter } from "react-icons/fi";
 import { FaDownload } from "react-icons/fa6";
 
-const FloatingButton = ({ onPrint, onDownload }) => {
+const FloatingButton = ({
+  onPrint,
+  onDownload,
+  hasPrinter = true,
+  hasDownload = true,
+}) => {
   const [isVisible, setIsVisible] = useState(false);
   const [showAdditionalButtons, setShowAdditionalButtons] = useState(false);
 
@@ -38,20 +43,24 @@ const FloatingButton = ({ onPrint, onDownload }) => {
           {/* Additional Buttons */}
           {showAdditionalButtons && (
             <>
-              <button
-                onClick={onDownload}
-                className="flex items-center justify-center w-10 h-10 bg-gray-800 text-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none"
-                aria-label="Print Page"
-              >
-                <FaDownload size={20} />
-              </button>
-              <button
-                onClick={onPrint}
-                className="flex items-center justify-center w-10 h-10 bg-gray-800 text-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none"
-                aria-label="Print Page"
-              >
-                <FiPrinter size={20} />
-              </button>
+              {hasDownload && (
+                <button
+                  onClick={onDownload}
+                  className="flex items-center justify-center w-10 h-10 bg-gray-800 text-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none"
+                  aria-label="Download Page"
+                >
+                  <FaDownload size={20} />
+                </button>
+              )}
+              {hasPrinter && (
+                <button
+                  onClick={onPrint}
+                  className="flex items-center justify-center w-10 h-10 bg-gray-800 text-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none"
+                  aria-label="Print Page"
+                >
+                  <FiPrinter size={20} />
+                </button>
+              )}
               <button
                 onClick={scrollToTop}
                 className="flex items-center justify-center w-10 h-10 bg-gray-800 text-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none"
@@ -66,7 +75,7 @@ const FloatingButton = ({ onPrint, onDownload }) => {
           <button
             onClick={() => setShowAdditionalButtons(!showAdditionalButtons)}
             className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none"
-            aria-label="Scroll to top"
+            aria-label="Toggle Additional Buttons"
           >
             <FiArrowUp size={24} />
           </button>

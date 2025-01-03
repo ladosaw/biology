@@ -4,7 +4,7 @@ import { FaArrowRight } from "react-icons/fa";
 import cellCycle from "../../../../assets/images/cellCycle.png";
 import stagesOfMitosis from "../../../../assets/pdf/stagesOfMitosis.pdf";
 
-const Module1 = () => {
+const Module1 = ({ hideFloating }) => {
   const handleNextClick = () => {};
 
   const handleDownload = () => {
@@ -362,21 +362,25 @@ const Module1 = () => {
       {/* Footer */}
       <div className="flex flex-col items-end mt-10 space-y-4">
         <div className="bg-gray-200 w-full h-[1px]"></div>
-        <button
+        {/* <button
           className="flex items-center gap-2 bg-primary text-white py-2 px-4 rounded shadow hover:bg-primary-dark transition"
           onClick={handleNextClick}
         >
           <p className="font-semibold text-lg">Lesson 2: Mendelian Genetics</p>
           <FaArrowRight />
-        </button>
+        </button> */}
         <div className="bg-gray-200 w-full h-[1px]"></div>
       </div>
 
       {/* Floating Button */}
-      <FloatingButton
-        onPrint={handlePrintHandout}
-        onDownload={handleDownload}
-      />
+      <div className={`fixed bottom-4 right-4 ${hideFloating ? "hidden" : ""}`}>
+        {!hideFloating && (
+          <FloatingButton
+            onPrint={handlePrintHandout}
+            onDownload={handleDownload}
+          />
+        )}
+      </div>
     </div>
   );
 };

@@ -2,6 +2,15 @@ import React, { useState, useEffect } from "react";
 
 const sections = [
   {
+    title: "Overall",
+    subtitle: [
+      {
+        subsubtitle: "overall lessons",
+        items: ["overall"],
+      },
+    ],
+  },
+  {
     title: "Digestive System",
     subtitle: [
       {
@@ -49,9 +58,18 @@ const sections = [
 ];
 
 const LeftNavigationLesson = ({ onModuleClick }) => {
-  const [activeIndicator, setActiveIndicator] = useState({});
-  const [expandedSections, setExpandedSections] = useState({});
-  const [selectedModule, setSelectedModule] = useState(null);
+  const [activeIndicator, setActiveIndicator] = useState({
+    "Overall-overall lessons-overall": true, // Default active indicator for "Overall"
+  });
+  const [expandedSections, setExpandedSections] = useState({
+    Overall: true, // Expand the "Overall" section by default
+    "Overall-overall lessons": true, // Expand the "overall lessons" subsection by default
+  });
+  const [selectedModule, setSelectedModule] = useState({
+    sectionTitle: "Overall",
+    subsubtitle: "overall lessons",
+    item: "overall",
+  });
 
   useEffect(() => {
     const hash = window.location.hash.slice(1).toLowerCase();

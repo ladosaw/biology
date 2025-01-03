@@ -11,7 +11,7 @@ import roleMeiosis from "../../../assets/images/roleMeiosis.png";
 import meiosisPdf from "../../../assets/pdf/meiosisPdf.pdf";
 import { Link } from "react-router-dom";
 
-const MiosisAndMitosis = () => {
+const MiosisAndMitosis = ({ hideFloating }) => {
   const handleDownload = () => {
     const pdfUrl = meiosisPdf;
 
@@ -519,22 +519,24 @@ const MiosisAndMitosis = () => {
       </div>
       <div className="flex flex-col items-end mt-10 space-y-4">
         <div className="bg-gray-200 w-full h-[1px]"></div>
-        <Link to="lessons#mendelian-genetics">
+        {/* <Link to="lessons#mendelian-genetics">
           <button className="flex items-center gap-2 bg-primary text-white py-2 px-4 rounded shadow hover:bg-primary-dark transition">
             <p className="font-semibold text-lg">Lesson 3: Meiosis</p>
             <FaArrowRight />
           </button>
-        </Link>
+        </Link> */}
 
         <div className="bg-gray-200 w-full h-[1px]"></div>
       </div>
 
       {/* Floating Button */}
-      <div className="floatingbtns">
-        <FloatingButton
-          onPrint={handlePrintHandout}
-          onDownload={handleDownload}
-        />
+      <div className={`fixed bottom-4 right-4 ${hideFloating ? "hidden" : ""}`}>
+        {!hideFloating && (
+          <FloatingButton
+            onPrint={handlePrintHandout}
+            onDownload={handleDownload}
+          />
+        )}
       </div>
     </div>
   );
