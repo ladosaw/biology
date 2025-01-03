@@ -18,9 +18,9 @@ const UnderMaintenance = () => (
 
 const Lessons = () => {
   const [selectedModule, setSelectedModule] = useState({
-    sectionTitle: "Overall",
-    subsubtitle: "overall lessons",
-    item: "overall",
+    sectionTitle: null,
+    subsubtitle: null,
+    item: null,
   });
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const Lessons = () => {
 
     if (hash) {
       switch (hash) {
-        case "digestive":
+        case "digestive-system":
           setSelectedModule({
             sectionTitle: "Digestive System",
             subsubtitle: "Lesson 1",
@@ -53,7 +53,11 @@ const Lessons = () => {
           });
           break;
         default:
-          console.warn("Invalid hash provided in URL.");
+          setSelectedModule({
+            sectionTitle: "Overall",
+            subsubtitle: "Overall",
+            item: "Overall",
+          });
       }
     }
   }, []);
@@ -69,7 +73,7 @@ const Lessons = () => {
       case "Mitosis":
         return renderMand(subsubtitle, item);
       case "Overall":
-        return renderOverall(subsubtitle, item);
+        return renderOverall(sectionTitle, item);
       default:
         return <UnderMaintenance />;
     }
@@ -129,11 +133,11 @@ const Lessons = () => {
     }
   };
 
-  const renderOverall = (subsubtitle, item) => {
-    switch (subsubtitle) {
-      case "overall lessons":
+  const renderOverall = (sectionTitle, item) => {
+    switch (sectionTitle) {
+      case "Overall":
         switch (item) {
-          case "overall":
+          case "Overall":
             return <Overall />;
           case "Module 2":
             return <UnderMaintenance />;

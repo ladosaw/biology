@@ -5,8 +5,8 @@ const sections = [
     title: "Overall",
     subtitle: [
       {
-        subsubtitle: "overall lessons",
-        items: ["overall"],
+        subsubtitle: "Overall",
+        items: ["Overall"],
       },
     ],
   },
@@ -59,68 +59,45 @@ const sections = [
 
 const LeftNavigationLesson = ({ onModuleClick }) => {
   const [activeIndicator, setActiveIndicator] = useState({
-    "Overall-overall lessons-overall": true, // Default active indicator for "Overall"
+    "Overall-Overall": true,
   });
-  const [expandedSections, setExpandedSections] = useState({
-    Overall: true, // Expand the "Overall" section by default
-    "Overall-overall lessons": true, // Expand the "overall lessons" subsection by default
-  });
-  const [selectedModule, setSelectedModule] = useState({
-    sectionTitle: "Overall",
-    subsubtitle: "overall lessons",
-    item: "overall",
-  });
+  const [expandedSections, setExpandedSections] = useState({});
 
   useEffect(() => {
     const hash = window.location.hash.slice(1).toLowerCase();
-    if (hash) {
-      let module = null;
-      switch (hash) {
-        case "digestive":
-          module = {
-            sectionTitle: "Digestive System",
-            subsubtitle: "Lesson 1",
-            item: "Module 1",
-          };
-          break;
-        case "mitosis":
-          module = {
-            sectionTitle: "Mitosis",
-            subsubtitle: "Lesson 1",
-            item: "Module 1",
-          };
-          break;
-        case "meiosis":
-          module = {
-            sectionTitle: "Meiosis",
-            subsubtitle: "Lesson 1",
-            item: "Module 1",
-          };
-          break;
 
-        default:
-          console.warn("Invalid hash provided in URL.");
-      }
-
-      if (module) {
-        setSelectedModule(module);
+    switch (hash) {
+      case "digestive-system":
         setActiveIndicator({
-          [`${module.sectionTitle}-${module.subsubtitle}-${module.item}`]: true,
+          "Digestive System-Lesson 1-Module 1": true,
         });
         setExpandedSections({
-          [module.sectionTitle]: true,
-          [`${module.sectionTitle}-${module.subsubtitle}`]: true,
+          "Digestive System": true,
+          "Digestive System-Lesson 1": true,
         });
-      }
+        break;
+      case "mitosis":
+        setActiveIndicator({
+          "Mitosis-Lesson 1-Module 1": true,
+        });
+        setExpandedSections({
+          Mitosis: true,
+          "Mitosis-Lesson 1": true,
+        });
+        break;
+      case "meiosis":
+        setActiveIndicator({
+          "Meiosis-Lesson 1-Module 1": true,
+        });
+        setExpandedSections({
+          Meiosis: true,
+          "Meiosis-Lesson 1": true,
+        });
+        break;
+      default:
+        setActiveIndicator({ "Overall-Overall": true });
     }
   }, []);
-
-  const toggleExpand = (key) => {
-    setExpandedSections((prev) => ({
-      ...prev,
-      [key]: !prev[key],
-    }));
-  };
 
   const handleNavigation = (sectionTitle, subsubtitle, item) => {
     const key = `${sectionTitle}-${subsubtitle}-${item}`;
@@ -136,32 +113,64 @@ const LeftNavigationLesson = ({ onModuleClick }) => {
     <div className="p-4 md:mt-24 max-w-md mx-auto bg-white rounded-lg shadow-md border">
       {sections.map((section) => (
         <div key={section.title} className="mb-4">
-          <button
-            className="block w-full text-left text-lg font-medium text-gray-700 py-2 px-4 hover:bg-gray-100 rounded transition"
-            aria-expanded={expandedSections[section.title]}
-            onClick={() => toggleExpand(section.title)}
-          >
-            {section.title}
-          </button>
-          {expandedSections[section.title] && (
-            <div className="ml-4">
-              {section.subtitle.map((sub) => (
-                <div key={sub.subsubtitle} className="mb-3">
-                  <button
-                    className="block w-full text-left text-md text-gray-600 py-2 px-3 hover:bg-gray-50 rounded transition"
-                    aria-expanded={
-                      expandedSections[`${section.title}-${sub.subsubtitle}`]
-                    }
-                    onClick={() =>
-                      toggleExpand(`${section.title}-${sub.subsubtitle}`)
-                    }
-                  >
-                    {sub.subsubtitle}
-                  </button>
-                  {expandedSections[`${section.title}-${sub.subsubtitle}`] && (
-                    <div className="py-2">
-                      {sub.items.map((item) => {
+          {section.title === "Overall" ? (
+            <div className="flex items-center gap-2">
+              <button
+                className={`h-3 w-3 rounded-full focus:outline-none transition-colors ${
+                  activeIndicator["Overall-Overall"]
+                    ? "bg-blue-500"
+                    : "bg-gray-300"
+                }`}
+                onClick={() =>
+                  handleNavigation("Overall", "Overall", "Overall")
+                }
+              ></button>
+              <button
+                className="text-left text-gray-600 hover:text-blue-500 transition"
+                onClick={() =>
+                  handleNavigation("Overall", "Overall", "Overall")
+                }
+              >
+                Overall
+              </button>
+            </div>
+          ) : (
+            <div>
+              <button
+                className="block w-full text-left text-lg font-medium text-gray-700 py-2 px-4 hover:bg-gray-100 rounded transition"
+                aria-expanded={expandedSections[section.title]}
+                onClick={() =>
+                  setExpandedSections((prev) => ({
+                    ...prev,
+                    [section.title]: !prev[section.title],
+                  }))
+                }
+              >
+                {section.title}
+              </button>
+              {section.subtitle &&
+                expandedSections[section.title] &&
+                section.subtitle.map((sub) => (
+                  <div key={sub.subsubtitle} className="ml-4 mb-3">
+                    <button
+                      className="block w-full text-left text-md text-gray-600 py-2 px-3 hover:bg-gray-50 rounded transition"
+                      aria-expanded={
+                        expandedSections[`${section.title}-${sub.subsubtitle}`]
+                      }
+                      onClick={() =>
+                        setExpandedSections((prev) => ({
+                          ...prev,
+                          [`${section.title}-${sub.subsubtitle}`]:
+                            !prev[`${section.title}-${sub.subsubtitle}`],
+                        }))
+                      }
+                    >
+                      {sub.subsubtitle}
+                    </button>
+                    {expandedSections[`${section.title}-${sub.subsubtitle}`] &&
+                      sub.items.map((item) => {
                         const key = `${section.title}-${sub.subsubtitle}-${item}`;
+
                         return (
                           <div
                             key={key}
@@ -196,10 +205,8 @@ const LeftNavigationLesson = ({ onModuleClick }) => {
                           </div>
                         );
                       })}
-                    </div>
-                  )}
-                </div>
-              ))}
+                  </div>
+                ))}
             </div>
           )}
         </div>
