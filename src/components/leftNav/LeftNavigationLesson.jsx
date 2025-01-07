@@ -94,6 +94,24 @@ const LeftNavigationLesson = ({ onModuleClick }) => {
           "Meiosis-Lesson 1": true,
         });
         break;
+      case "mendelian-genetics":
+        setExpandedSections({
+          "Mendelian Genetics": true,
+          "Mendelian Genetics-Lesson 1": true,
+        });
+        setActiveIndicator({
+          "Mendelian Genetics-Lesson 1-Module 1": true,
+        });
+        break;
+      case "organism":
+        setExpandedSections({
+          Organism: true,
+          "Organism-Lesson 1": true,
+        });
+        setActiveIndicator({
+          "Organism-Lesson 1-Module 1": true,
+        });
+        break;
       default:
         setActiveIndicator({ "Overall-Overall-Overall": true });
     }
@@ -101,7 +119,6 @@ const LeftNavigationLesson = ({ onModuleClick }) => {
 
   const handleNavigation = (sectionTitle, subsubtitle, item) => {
     const key = `${sectionTitle}-${subsubtitle}-${item}`;
-    console.log(key);
     setActiveIndicator({ [key]: true });
 
     window.location.hash = sectionTitle.toLowerCase().replace(/ /g, "-");

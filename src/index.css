@@ -6,3 +6,13 @@
 * {
   font-family: "Poppins", serif;
 }
+/* slick-carousel default styles */
+.slick-dots {
+  bottom: -25px;
+}
+.slick-dots li button:before {
+  color: #888;
+}
+.slick-dots li.slick-active button:before {
+  color: #4caf50;
+}

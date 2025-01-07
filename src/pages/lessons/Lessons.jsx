@@ -52,6 +52,20 @@ const Lessons = () => {
             item: "Module 1",
           });
           break;
+        case "mendelian-genetics":
+          setSelectedModule({
+            sectionTitle: null,
+            subsubtitle: null,
+            item: null,
+          });
+          break;
+        case "organism":
+          setSelectedModule({
+            sectionTitle: null,
+            subsubtitle: null,
+            item: null,
+          });
+          break;
         default:
           setSelectedModule({
             sectionTitle: "Overall",

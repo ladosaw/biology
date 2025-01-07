@@ -6,6 +6,7 @@ import {
   CardMedia,
   useMediaQuery,
   useTheme,
+  Link,
 } from "@mui/material";
 import Render3d from "../../components/renderer/Render3d";
 import Humancell from "../../components/model/HumanCell";
@@ -24,22 +25,31 @@ const Home = () => {
       id: 0,
       title: "Digestive System",
       image: "/images/digestive.png",
+      link: "/lessons#digestive-system",
     },
     {
       id: 1,
       title: "Stages of Mitosis",
       image: "/images/Stages of Mitosis.png",
+      link: "/lessons#mitosis",
     },
-    { id: 2, title: "Meiosis", image: "/images/meiosis_1.png" },
+    {
+      id: 2,
+      title: "Meiosis",
+      image: "/images/meiosis_1.png",
+      link: "/lessons#meiosis",
+    },
     {
       id: 3,
       title: "Mendelian Genetics",
       image: "/images/Mendelian Genetics.png",
+      link: "/lessons#mendelian-genetics",
     },
     {
       id: 4,
       title: "Trophic Level - Role of Organism",
       image: "/images/Role of organism.png",
+      link: "/lessons#organism",
     },
   ];
 
@@ -55,6 +65,16 @@ const Home = () => {
     slidesToScroll: 1,
     centerMode: true,
     focusOnSelect: true,
+    responsive: [
+      {
+        breakpoint: 960, // For tablets
+        settings: { slidesToShow: 2 },
+      },
+      {
+        breakpoint: 600, // For mobile
+        settings: { slidesToShow: 1 },
+      },
+    ],
     beforeChange: (_current, next) => setSelectedCard(next),
     customPaging: (i) => (
       <div
@@ -120,60 +140,67 @@ const Home = () => {
           {cards[selectedCard].title} {/* Display selected card title */}
         </Typography>
 
-        {/* Carousel Layout */}
+        {/* Carousel */}
         <Slider {...settings}>
           {cards.map((card, index) => (
             <Box
               key={card.id}
               onClick={() => handleCardClick(index)}
               sx={{
-                transform:
-                  selectedCard === index ? "scale(1.1)" : "scale(0.85)",
-                transition:
-                  "transform 0.3s ease-in-out, margin 0.3s ease-in-out",
+                transform: selectedCard === index ? "scale(1.1)" : "scale(0.9)",
+                transition: "transform 0.3s ease-in-out",
                 cursor: "pointer",
-                borderRadius: "8px",
                 opacity: selectedCard === index ? 1 : 0.6,
-                margin: isMobile ? "0 10px" : isTablet ? "0 30px" : "0 60px", // Adjust margin based on screen size
+                px: isMobile ? 1 : 2,
               }}
             >
-              <Card
-                sx={{
-                  boxShadow:
-                    selectedCard === index
-                      ? "0px 4px 20px rgba(0,0,0,0.2)"
-                      : "0px 2px 10px rgba(0,0,0,0.1)",
-                  backgroundColor:
-                    selectedCard === index ? "#E8F5E9" : "#FFFFFF",
-                  borderRadius: "16px", // Rounded corners
-                  overflow: "hidden",
-                  height: "400px", // Adjust height for tablet mode
-                  margin: isMobile ? "0 10px" : "0 30px", // Adjust margin based on screen size
+              <Link
+                href={selectedCard === index ? card.link : undefined}
+                underline="none"
+                onClick={(e) => {
+                  if (selectedCard !== index) e.preventDefault();
                 }}
               >
-                <Box
+                <Card
                   sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "100%",
+                    boxShadow:
+                      selectedCard === index
+                        ? "0px 4px 20px rgba(0,0,0,0.3)"
+                        : "0px 2px 10px rgba(0,0,0,0.1)",
+                    backgroundColor:
+                      selectedCard === index ? "#E8F5E9" : "#FFFFFF",
+                    borderRadius: "16px",
+                    overflow: "hidden",
+                    height: "400px",
+                    transition: "box-shadow 0.3s ease",
+                    padding: { md: 1 },
                   }}
                 >
-                  <CardMedia
-                    component="img"
-                    image={card.image}
-                    alt={card.title}
+                  {/* Card Media */}
+                  <Box
                     sx={{
-                      maxWidth: "80%",
-                      maxHeight: "90%",
-                      borderRadius: "8px",
-                      border: "2px solid #ddd",
-                      objectFit: "cover",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "100%",
                     }}
-                  />
-                </Box>
-              </Card>
+                  >
+                    <CardMedia
+                      component="img"
+                      image={card.image}
+                      alt={card.title}
+                      sx={{
+                        maxWidth: "80%",
+                        maxHeight: "90%",
+                        borderRadius: "8px",
+                        border: "2px solid #ddd",
+                        objectFit: "cover",
+                      }}
+                    />
+                  </Box>
+                </Card>
+              </Link>
             </Box>
           ))}
         </Slider>
