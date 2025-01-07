@@ -26,8 +26,6 @@ const Navbar = () => {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
-    setSubmenuAnchorEl(null);
-    setCurrentSubmenu(null);
   };
 
   const handleNavigation = (path) => {

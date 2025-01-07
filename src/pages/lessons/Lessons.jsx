@@ -18,9 +18,9 @@ const UnderMaintenance = () => (
 
 const Lessons = () => {
   const [selectedModule, setSelectedModule] = useState({
-    sectionTitle: null,
-    subsubtitle: null,
-    item: null,
+    sectionTitle: "Overall",
+    subsubtitle: "Overall",
+    item: "Overall",
   });
 
   useEffect(() => {
