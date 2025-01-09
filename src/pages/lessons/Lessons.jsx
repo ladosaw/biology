@@ -9,6 +9,7 @@ import {
 } from "../../components/analytics/Analytics";
 import undermaintenance from "../../assets/images/undermaintenance.png";
 import Overall from "./Overall/Overall.jsx";
+import MendelianGenetics from "./MendelianGenetics/MendelianGenetics.jsx";
 
 const UnderMaintenance = () => (
   <div className="min-h-screen flex items-center justify-center px-4">
@@ -80,9 +81,9 @@ const Lessons = () => {
           break;
         case "mendelian-genetics":
           setSelectedModule({
-            sectionTitle: null,
-            subsubtitle: null,
-            item: null,
+            sectionTitle: "Mendelian Genetics",
+            subsubtitle: "Lesson 1",
+            item: "Module 1",
           });
           break;
         case "organism":
@@ -112,6 +113,8 @@ const Lessons = () => {
         return renderMandelianGenetics(subsubtitle, item);
       case "Mitosis":
         return renderMand(subsubtitle, item);
+      case "Mendelian Genetics":
+        return renderMendelianGenetics(subsubtitle, item);
       case "Overall":
         return renderOverall(sectionTitle, item);
       default:
@@ -179,6 +182,24 @@ const Lessons = () => {
         switch (item) {
           case "Overall":
             return <Overall />;
+          case "Module 2":
+            return <UnderMaintenance />;
+          case "Module 3":
+            return <UnderMaintenance />;
+          default:
+            return <UnderMaintenance />;
+        }
+      default:
+        return <UnderMaintenance />;
+    }
+  };
+
+  const renderMendelianGenetics = (subsubtitle, item) => {
+    switch (subsubtitle) {
+      case "Lesson 1":
+        switch (item) {
+          case "Module 1":
+            return <MendelianGenetics />;
           case "Module 2":
             return <UnderMaintenance />;
           case "Module 3":
