@@ -1,6 +1,6 @@
 import React from "react";
 import FloatingButton from "../../../components/FloatingButton/FloatingButton";
-import stagesOfMitosis from "../../../assets/pdf/stagesOfMitosis.pdf";
+import MendelianGeneticsPdf from "../../../assets/pdf/MendelianGenetics.pdf";
 import {
   mendelResults,
   mendelResults2,
@@ -17,18 +17,18 @@ import DihybridCrossExample from "../../../assets/images/DihybridCrossExample.jp
 
 const MendelianGenetics = ({ hideFloating }) => {
   const handleDownload = () => {
-    const pdfUrl = stagesOfMitosis;
+    const pdfUrl = MendelianGeneticsPdf;
 
     const link = document.createElement("a");
     link.href = pdfUrl;
-    link.download = "LESSON 1: CELL CYCLE: Interphase and cell Division";
+    link.download = "LESSON 4: PATTERNS OF MENDELIAN GENETICS";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
   const handlePrintHandout = () => {
-    const pdfUrl = stagesOfMitosis;
+    const pdfUrl = MendelianGeneticsPdf;
 
     const printWindow = window.open(pdfUrl, "_blank");
 
