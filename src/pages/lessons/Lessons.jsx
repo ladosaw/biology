@@ -11,8 +11,34 @@ import undermaintenance from "../../assets/images/undermaintenance.png";
 import Overall from "./Overall/Overall.jsx";
 
 const UnderMaintenance = () => (
-  <div>
-    <img src={undermaintenance} alt="" />
+  <div className="min-h-screen flex items-center justify-center px-4">
+    <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center">
+      {/* Left Section - Text */}
+      <div className="lg:w-1/2 text-center lg:text-left mt-10 lg:mt-0">
+        <h1 className="text-4xl font-extrabold text-primary mb-4">
+          Oops! <span className="text-secondary">Under Construction</span>
+        </h1>
+        <p className="text-textPrimary text-lg mb-6">
+          We're currently improving this page to serve you better. Please check
+          back later!
+        </p>
+        <button
+          className="px-6 py-3 bg-primary text-backgroundWhite font-bold rounded-md shadow hover:bg-secondary hover:text-white"
+          onClick={() => (window.location.href = "/")}
+        >
+          Go Back Home
+        </button>
+      </div>
+
+      {/* Right Section - Image */}
+      <div className="lg:w-1/2 flex justify-center items-center">
+        <img
+          src={undermaintenance}
+          alt="Under Construction"
+          className="w-full max-w-lg lg:max-w-xl"
+        />
+      </div>
+    </div>
   </div>
 );
 
