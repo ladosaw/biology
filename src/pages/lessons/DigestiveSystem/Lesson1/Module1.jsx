@@ -267,6 +267,15 @@ const Module1 = ({ hideFloating }) => {
         </h1>
         <ul className="list-disc pl-6 text-lg text-gray-700 flex flex-col gap-5">
           <li className="hover:text-blue-600">
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSesk_Bl20A3xDQHsL1TOt2UeIZZj3vYfdFY_V8ddm8JePaiyw/viewform"
+              target="_blank"
+              className="text-blue-600 hover:underline"
+            >
+              Lesson 1: Digestive System
+            </a>
+          </li>
+          {/* <li className="hover:text-blue-600">
             <a href="#" className="text-blue-600 hover:underline">
               Lesson 1: Digestive System
             </a>
@@ -280,12 +289,7 @@ const Module1 = ({ hideFloating }) => {
             <a href="#" className="text-blue-600 hover:underline">
               Lesson 1: Digestive System
             </a>
-          </li>
-          <li className="hover:text-blue-600">
-            <a href="#" className="text-blue-600 hover:underline">
-              Lesson 1: Digestive System
-            </a>
-          </li>
+          </li> */}
         </ul>
       </div>
       {/* Footer */}
