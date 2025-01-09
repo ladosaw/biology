@@ -104,38 +104,45 @@ const MendelianGenetics = ({ hideFloating }) => {
           </p>
         </div>
 
-        <div className="bg-white py-8 px-8 rounded-lg shadow-lg space-y-6">
+        <div className="md:py-8 md:px-8 rounded-lg space-y-6">
           <div>
             <h2 className="text-lg font-bold text-center mb-4">
               Table 1: The Results of Mendel<span>&#39;</span>s crosses between
               pure-breeding pea plants
             </h2>
-            <table className="w-full border-collapse border border-gray-300">
-              <thead>
-                <tr className="bg-green-100">
-                  <th className="border border-gray-300 p-2">Traits</th>
-                  <th className="border border-gray-300 p-2">Parent 1 (P1)</th>
-                  <th className="border border-gray-300 p-2">
-                    First Filial Generation (F1)
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {mendelResults.map((result, index) => (
-                  <tr key={index}>
-                    <td className="border border-gray-300 p-2">
-                      {result.trait}
-                    </td>
-                    <td className="border border-gray-300 p-2">
-                      {result.parents}
-                    </td>
-                    <td className="border border-gray-300 p-2">
-                      {result.firstFilialGeneration}
-                    </td>
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse border border-gray-300 text-sm sm:text-base">
+                <thead>
+                  <tr className="bg-green-100">
+                    <th className="border border-gray-300 p-2">Traits</th>
+                    <th className="border border-gray-300 p-2">
+                      Parent 1 (P1)
+                    </th>
+                    <th className="border border-gray-300 p-2">
+                      First Filial Generation (F1)
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {mendelResults.map((result, index) => (
+                    <tr
+                      key={index}
+                      className="even:bg-gray-50 odd:bg-white hover:bg-gray-100"
+                    >
+                      <td className="border border-gray-300 p-2">
+                        {result.trait}
+                      </td>
+                      <td className="border border-gray-300 p-2">
+                        {result.parents}
+                      </td>
+                      <td className="border border-gray-300 p-2">
+                        {result.firstFilialGeneration}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 
@@ -170,50 +177,53 @@ const MendelianGenetics = ({ hideFloating }) => {
           </span>
         </div>
 
-        <div className="bg-white py-8 px-8 rounded-lg shadow-lg space-y-6">
+        <div className="md:py-8 md:px-8 rounded-lg space-y-6">
           <div>
             <h2 className="text-lg font-bold text-center mb-4">
               Table 2: Results of Mendel<span>&#39;</span>s crosses between
               hybrid plants
             </h2>
-            <table className="w-full border-collapse border border-gray-300">
-              <thead>
-                <tr className="bg-green-100">
-                  <th className="border border-gray-300 p-2">TRAITS</th>
-                  <th className="border border-gray-300 p-2">F1/Hybrid</th>
-                  <th className="border border-gray-300 p-2" colSpan={2}>
-                    F2 Generation Produced by Self-Pollinating F1 Hybrids
-                  </th>
-                  <th className="border border-gray-300 p-2">Observe Ratio</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {mendelResults2.map((result, index) => (
-                  <tr key={index}>
-                    <td className="border border-gray-300 p-2">
-                      {result.trait}
-                    </td>
-
-                    <td className="border border-gray-300 p-2">
-                      {result.f1Hybrid}
-                    </td>
-
-                    {result.f2Generation.map((entry, i) => (
-                      <td key={i} className="border border-gray-300 p-2">
-                        {entry.type.charAt(0).toUpperCase() +
-                          entry.type.slice(1)}{" "}
-                        ({entry.count})
-                      </td>
-                    ))}
-
-                    <td className="border border-gray-300 p-2">
-                      {result.observeRatio}
-                    </td>
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse border border-gray-300 text-sm sm:text-base">
+                <thead>
+                  <tr className="bg-green-100">
+                    <th className="border border-gray-300 p-2">TRAITS</th>
+                    <th className="border border-gray-300 p-2">F1/Hybrid</th>
+                    <th className="border border-gray-300 p-2" colSpan={2}>
+                      F2 Generation Produced by Self-Pollinating F1 Hybrids
+                    </th>
+                    <th className="border border-gray-300 p-2">
+                      Observe Ratio
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {mendelResults2.map((result, index) => (
+                    <tr
+                      key={index}
+                      className="even:bg-gray-50 odd:bg-white hover:bg-gray-100"
+                    >
+                      <td className="border border-gray-300 p-2">
+                        {result.trait}
+                      </td>
+                      <td className="border border-gray-300 p-2">
+                        {result.f1Hybrid}
+                      </td>
+                      {result.f2Generation.map((entry, i) => (
+                        <td key={i} className="border border-gray-300 p-2">
+                          {entry.type.charAt(0).toUpperCase() +
+                            entry.type.slice(1)}{" "}
+                          ({entry.count})
+                        </td>
+                      ))}
+                      <td className="border border-gray-300 p-2">
+                        {result.observeRatio}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 
@@ -310,37 +320,43 @@ const MendelianGenetics = ({ hideFloating }) => {
         </span>
       </p>
 
-      <div className="bg-white py-8 px-8 rounded-lg shadow-lg space-y-6">
+      <div className="md:py-8 md:px-8 rounded-lg space-y-6">
         <div>
           <h2 className="text-lg font-bold text-center mb-4">
-            Table 3. Dominant and Recessive traits in Pisum sativum (Garden Pea)
+            Table 3: Dominant and Recessive traits in <i>Pisum sativum</i>{" "}
+            (Garden Pea)
           </h2>
-          <table className="w-full border-collapse border border-gray-300">
-            <thead>
-              <tr className="bg-green-100">
-                <th className="border border-gray-300 p-2">
-                  Character Studied
-                </th>
-                <th className="border border-gray-300 p-2">Dominant</th>
-                <th className="border border-gray-300 p-2">Recessive</th>
-              </tr>
-            </thead>
-            <tbody>
-              {DominantRecessiveTraits.map((result, index) => (
-                <tr key={index}>
-                  <td className="border border-gray-300 p-2">
-                    {result.characterStudied}
-                  </td>
-                  <td className="border border-gray-300 p-2">
-                    {result.dominant}
-                  </td>
-                  <td className="border border-gray-300 p-2">
-                    {result.recessive}
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse border border-gray-300 text-sm sm:text-base">
+              <thead>
+                <tr className="bg-green-100">
+                  <th className="border border-gray-300 p-2">
+                    Character Studied
+                  </th>
+                  <th className="border border-gray-300 p-2">Dominant</th>
+                  <th className="border border-gray-300 p-2">Recessive</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {DominantRecessiveTraits.map((result, index) => (
+                  <tr
+                    key={index}
+                    className="even:bg-gray-50 odd:bg-white hover:bg-gray-100"
+                  >
+                    <td className="border border-gray-300 p-2">
+                      {result.characterStudied}
+                    </td>
+                    <td className="border border-gray-300 p-2">
+                      {result.dominant}
+                    </td>
+                    <td className="border border-gray-300 p-2">
+                      {result.recessive}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -373,37 +389,42 @@ const MendelianGenetics = ({ hideFloating }) => {
         an organism based on the genotype (See Table 4).
       </p>
 
-      <div className="bg-white py-8 px-8 rounded-lg shadow-lg space-y-6">
+      <div className="md:py-8 md:px-8 rounded-lg space-y-6">
         <div>
           <h2 className="text-lg font-bold text-center mb-4">
             Table 4: Genotype and Phenotype of Pea Plant
           </h2>
-          <table className="w-full border-collapse border border-gray-300">
-            <thead>
-              <tr className="bg-green-100">
-                <th className="border border-gray-300 p-2">Genotype</th>
-                <th className="border border-gray-300 p-2">
-                  Description of the Alleles of Genes
-                </th>
-                <th className="border border-gray-300 p-2">Phenotype</th>
-              </tr>
-            </thead>
-            <tbody>
-              {GenotypePhenotype.map((result, index) => (
-                <tr key={index}>
-                  <td className="border border-gray-300 p-2">
-                    {result.genotype}
-                  </td>
-                  <td className="border border-gray-300 p-2">
-                    {result.description}
-                  </td>
-                  <td className="border border-gray-300 p-2">
-                    {result.phenotype}
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse border border-gray-300 text-sm sm:text-base">
+              <thead>
+                <tr className="bg-green-100">
+                  <th className="border border-gray-300 p-2">Genotype</th>
+                  <th className="border border-gray-300 p-2">
+                    Description of the Alleles of Genes
+                  </th>
+                  <th className="border border-gray-300 p-2">Phenotype</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {GenotypePhenotype.map((result, index) => (
+                  <tr
+                    key={index}
+                    className="even:bg-gray-50 odd:bg-white hover:bg-gray-100"
+                  >
+                    <td className="border border-gray-300 p-2">
+                      {result.genotype}
+                    </td>
+                    <td className="border border-gray-300 p-2">
+                      {result.description}
+                    </td>
+                    <td className="border border-gray-300 p-2">
+                      {result.phenotype}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
