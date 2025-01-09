@@ -1,6 +1,4 @@
-import { React, useRef } from "react";
-import { useReactToPrint } from "react-to-print";
-import { FaArrowRight } from "react-icons/fa";
+import { React } from "react";
 import crossingOver from "../../../assets/images/crossingOver.png";
 import FloatingButton from "../../../components/FloatingButton/FloatingButton.jsx";
 import karyotype from "../../../assets/images/karyotype.png";
@@ -9,7 +7,6 @@ import meiosisDivisions from "../../../assets/images/meiosisDivision.png";
 import prophaseStage from "../../../assets/images/prophaseStage.png";
 import roleMeiosis from "../../../assets/images/roleMeiosis.png";
 import meiosisPdf from "../../../assets/pdf/meiosisPdf.pdf";
-import { Link } from "react-router-dom";
 
 const MiosisAndMitosis = ({ hideFloating }) => {
   const handleDownload = () => {

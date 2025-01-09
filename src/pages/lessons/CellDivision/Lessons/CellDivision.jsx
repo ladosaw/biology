@@ -12,7 +12,7 @@ const Module1 = ({ hideFloating }) => {
 
     const link = document.createElement("a");
     link.href = pdfUrl;
-    link.download = "LESSON 3: CELL CYCLE: Interphase and cell Division";
+    link.download = "LESSON 1: CELL CYCLE: Interphase and cell Division";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -40,7 +40,7 @@ const Module1 = ({ hideFloating }) => {
       <div>
         <div className="flex flex-col gap-8 title">
           <h1 className="font-semibold text-2xl sm:text-3xl md:text-4xl leading-snug ">
-            <span className="font-bold">LESSON 3:</span> CELL CYCLE: Interphase
+            <span className="font-bold">LESSON 1:</span> CELL CYCLE: Interphase
             and cell Division
           </h1>
           <p className="text-sm sm:text-base md:text-lg leading-relaxed">
