@@ -10,6 +10,7 @@ import Render3d from "../../../../components/renderer/Render3d";
 import DigestiveSystem from "../../../../components/model/DigestiveSystem";
 import pdfDgestive from "../../../../assets/pdf/humanDigestiveSystem.pdf";
 import { Link } from "react-router-dom";
+import { DigestiveWorksheetsLink } from "./ConstantDigestive.jsx";
 
 const Module1 = ({ hideFloating }) => {
   const handleNextClick = () => {};
@@ -268,28 +269,31 @@ const Module1 = ({ hideFloating }) => {
         <ul className="list-disc pl-6 text-lg text-gray-700 flex flex-col gap-5">
           <li className="hover:text-blue-600">
             <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSesk_Bl20A3xDQHsL1TOt2UeIZZj3vYfdFY_V8ddm8JePaiyw/viewform"
+              href={DigestiveWorksheetsLink.worksheet1.link}
               target="_blank"
               className="text-blue-600 hover:underline"
             >
-              Lesson 1: Digestive System
-            </a>
-          </li>
-          {/* <li className="hover:text-blue-600">
-            <a href="#" className="text-blue-600 hover:underline">
-              Lesson 1: Digestive System
+              {DigestiveWorksheetsLink.worksheet1.title}
             </a>
           </li>
           <li className="hover:text-blue-600">
-            <a href="#" className="text-blue-600 hover:underline">
-              Lesson 1: Digestive System
+            <a
+              href={DigestiveWorksheetsLink.worksheet2.link}
+              target="_blank"
+              className="text-blue-600 hover:underline"
+            >
+              {DigestiveWorksheetsLink.worksheet2.title}
             </a>
           </li>
           <li className="hover:text-blue-600">
-            <a href="#" className="text-blue-600 hover:underline">
-              Lesson 1: Digestive System
+            <a
+              href={DigestiveWorksheetsLink.worksheet3.link}
+              target="_blank"
+              className="text-blue-600 hover:underline"
+            >
+              {DigestiveWorksheetsLink.worksheet3.title}
             </a>
-          </li> */}
+          </li>
         </ul>
       </div>
       {/* Footer */}
