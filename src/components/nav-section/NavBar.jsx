@@ -93,7 +93,13 @@ const Navbar = () => {
         </Box>
 
         {/* Mobile Menu */}
-        <Box sx={{ display: { xs: "flex", lg: "none" }, ml: "auto" }}>
+        <Box
+          sx={{
+            display: { xs: "flex", lg: "none" },
+            ml: "auto",
+            position: "relative",
+          }}
+        >
           <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
             <IconButton edge="end" aria-label="menu" onClick={handleMenuOpen}>
               <MenuIcon />
@@ -106,11 +112,24 @@ const Navbar = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
+                style={{
+                  position: "absolute",
+                  top: "100%",
+                  right: 0,
+                  minWidth: "200px",
+                }}
               >
                 <Menu
                   anchorEl={anchorEl}
                   open={Boolean(anchorEl)}
                   onClose={handleMenuClose}
+                  PaperProps={{
+                    sx: {
+                      padding: { xs: "12px", sm: "16px" },
+                      minWidth: { xs: "200px", sm: "250px" },
+                      borderRadius: "8px",
+                    },
+                  }}
                 >
                   {menuItems.map((item) => (
                     <MenuItem
