@@ -79,8 +79,8 @@ const Home = () => {
     customPaging: (i) => (
       <div
         style={{
-          width: "16px",
-          height: "16px",
+          width: isMobile ? "10px" : "14px",
+          height: isMobile ? "10px" : "14px",
           borderRadius: "50%",
           backgroundColor: selectedCard === i ? "#4CAF50" : "#CCC",
           margin: "0 4px",
