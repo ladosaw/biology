@@ -105,7 +105,7 @@ const Home = () => {
 
   const styles = {
     headerBox: {
-      width: { lg: "80%", sm: "100%" },
+      width: { sm: "100%", md: "80%" },
       height: 400,
       mx: "auto",
     },
@@ -114,7 +114,7 @@ const Home = () => {
   return (
     <Box sx={{ overflowX: "hidden" }}>
       {/* Header Section */}
-      <Box sx={{ textAlign: "center", my: 4 }}>
+      <Box sx={{ textAlign: "center", my: 4, width: "100%" }}>
         <Box sx={styles.headerBox}>
           <Render3d>
             <Humancell />

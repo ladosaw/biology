@@ -5,40 +5,39 @@ import { useGLTF } from "@react-three/drei";
 const HumanCell = (props) => {
   const group = useRef();
   const { nodes, materials } = useGLTF("/models/human_cell.glb");
-  const [scale, setScale] = useState(3.3);
+  const [scale, setScale] = useState(7);
   const [position, setPosition] = useState([0, 0, 0]);
 
-  // Update rotation using useFrame
   useFrame(() => {
     if (group.current) {
-      group.current.rotation.y += 0.01; // Adjust rotation speed as needed
+      group.current.rotation.y += 0.01;
     }
   });
 
-  // Update scale and position based on screen size
-  useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      if (width < 600) {
-        // Mobile
-        setScale(1.5);
-        setPosition([0, -1, 0]);
-      } else if (width < 1024) {
-        // Tablet
-        setScale(2.5);
-        setPosition([0, -0.5, 0]);
-      } else {
-        // Desktop
-        setScale(3.3);
-        setPosition([0, 0, 0]);
-      }
-    };
+  // // Update scale and position based on screen size
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     const width = window.innerWidth;
+  //     if (width < 600) {
+  //       // Mobile
+  //       setScale(1.5);
+  //       setPosition([0, -1, 0]);
+  //     } else if (width < 1024) {
+  //       // Tablet
+  //       setScale(2.5);
+  //       setPosition([0, -0.5, 0]);
+  //     } else {
+  //       // Desktop
+  //       setScale(3.3);
+  //       setPosition([0, 0, 0]);
+  //     }
+  //   };
 
-    window.addEventListener("resize", handleResize);
-    handleResize(); // Call once to set initial values
+  //   window.addEventListener("resize", handleResize);
+  //   handleResize();
 
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  //   return () => window.removeEventListener("resize", handleResize);
+  // }, []);
 
   return (
     <group
@@ -47,7 +46,7 @@ const HumanCell = (props) => {
       dispose={null}
       scale={scale}
       position={position}
-      rotation={[Math.PI / 2, 0, 0]}
+      rotation={[-5.6, 0, 0]}
     >
       <group
         position={[-0.295, -0.022, 0.078]}
