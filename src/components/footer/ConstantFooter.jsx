@@ -21,7 +21,7 @@ export const ConstantFooter = [
   },
   {
     id: 4,
-    title: "Trophic Level - Role of Organism",
+    title: "Role of Organism",
     link: "/lessons#organism",
   },
 ];
