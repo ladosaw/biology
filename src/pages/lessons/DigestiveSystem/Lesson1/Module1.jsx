@@ -82,9 +82,7 @@ const Module1 = ({ hideFloating }) => {
         </div>
 
         {/* Digestive System Section */}
-        {/* Digestive System Section */}
         <div className="flex flex-col justify-center items-center mt-8 gap-8">
-          {/* Embedded YouTube Video */}
           <div className="w-full sm:w-3/4 md:w-2/3 lg:w-3/4 xl:w-2/3 aspect-video rounded-lg overflow-hidden shadow-lg">
             <iframe
               width="100%"
