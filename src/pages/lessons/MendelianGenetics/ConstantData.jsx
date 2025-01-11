@@ -105,51 +105,51 @@ export const mendelResults2 = [
 export const vocabulary = [
   {
     title: "Genetics",
-    desc: "a branch of science dealing with the study of heredity and variation.",
+    desc: "A branch of science dealing with the study of heredity and variation.",
   },
   {
     title: "Heredity",
-    desc: "is the transmission of traits from one generation to the next generation.",
+    desc: "Is the transmission of traits from one generation to the next generation.",
   },
   {
     title: "Genes",
-    desc: "is the basic physical and functional unit of heredity. Genes are made up of DNA.",
+    desc: "Is the basic physical and functional unit of heredity. Genes are made up of DNA.",
   },
   {
     title: "Alleles",
-    desc: "is two contrasting traits. If the two alleles are the same, the individual is homozygous for that allele. If the alleles are different, the individual is heterozygous.",
+    desc: "Is two contrasting traits. If the two alleles are the same, the individual is homozygous for that allele. If the alleles are different, the individual is heterozygous.",
   },
   {
     title: "Hybrids/Heterozygous",
-    desc: "a combination of two contrasting traits with a symbol of the capital and small letter (Xx, Yy, Rr). Homozygous - pure breeding traits and is the symbol with a capital letter (XX, YY, RR).",
+    desc: "A combination of two contrasting traits with a symbol of the capital and small letter (Xx, Yy, Rr). Homozygous - pure breeding traits and is the symbol with a capital letter (XX, YY, RR).",
   },
   {
     title: "Dominant traits",
-    desc: "traits that are masked/hidden and will not appear in the F1 generation during the cross.",
+    desc: "Traits that are masked/hidden and will not appear in the F1 generation during the cross.",
   },
   {
     title: "Recessive traits",
-    desc: "is the transmission of traits from one generation to the next generation.",
+    desc: "Is the transmission of traits from one generation to the next generation.",
   },
   {
     title: "Phenotype",
-    desc: "a physical expression of the traits.",
+    desc: "A physical expression of the traits.",
   },
   {
     title: "Genotype",
-    desc: "a genotypic expression of the traits.",
+    desc: "A genotypic expression of the traits.",
   },
   {
     title: "F1 generation",
-    desc: "first parental generation.",
+    desc: "First parental generation.",
   },
   {
     title: "F2 generation",
-    desc: "second parental generation.",
+    desc: "Second parental generation.",
   },
   {
     title: "Punnet Square",
-    desc: "a tool discovered by Reginald Punnet that was used to determine the possible combination of genes.",
+    desc: "A tool discovered by Reginald Punnet that was used to determine the possible combination of genes.",
   },
 ];
 

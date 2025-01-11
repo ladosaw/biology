@@ -44,7 +44,7 @@ const MendelianGenetics = ({ hideFloating }) => {
   };
 
   return (
-    <div className="px-4 lg:px-4 text-justify">
+    <div className="px-4 lg:px-4 text-justify text-sm sm:text-base md:text-lg">
       {/* Header Section */}
       <div>
         <div className="flex flex-col gap-8">
@@ -52,18 +52,26 @@ const MendelianGenetics = ({ hideFloating }) => {
             <span className="font-bold">LESSON 4:</span> PATTERNS OF MENDELIAN
             GENETICS
           </h1>
-          <p className="font-semibold text-sm sm:text-base md:text-lg">
-            Vocabulary Words:
-          </p>
-          {vocabulary.map((vocab, index) => (
-            <p
-              key={index}
-              className="text-sm sm:text-base md:text-lg leading-relaxed"
-            >
-              <span className="font-semibold">{vocab.title} </span> -{" "}
-              {vocab.desc}
-            </p>
-          ))}
+          <div className="space-y-6">
+            <h2 className="font-semibold text-lg text-center sm:text-xl md:text-2xl">
+              Vocabulary Words
+            </h2>
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {vocabulary.map((vocab, index) => (
+                <div
+                  key={index}
+                  className="p-4 border border-gray-300 rounded-lg shadow-sm bg-white hover:shadow-md transition-shadow"
+                >
+                  <h3 className="font-bold text-base sm:text-lg md:text-xl text-black">
+                    {vocab.title}
+                  </h3>
+                  <p className="text-sm sm:text-base text-gray-600 mt-1">
+                    {vocab.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         <h2 className="text-xl font-bold mt-8">
@@ -96,7 +104,7 @@ const MendelianGenetics = ({ hideFloating }) => {
           <h3 className="text-xl font-semibold text-orange-600 mb-4">
             First: Production of pure-breeding strains of pea plants
           </h3>
-          <p className="text-gray-800 indent-8">
+          <p className="text-gray-800 indent-8 text-sm sm:text-base md:text-lg">
             Mendel allowed his pea plants for many generations until he gathered
             all the offspring that had the same features as the parents,
             generation after generation. The result of the cross is shown in
@@ -104,7 +112,7 @@ const MendelianGenetics = ({ hideFloating }) => {
           </p>
         </div>
 
-        <div className="md:py-8 md:px-8 rounded-lg space-y-6">
+        <div className="md:py-8 md:px-8 rounded-lg space-y-6 my-4">
           <div>
             <h2 className="text-lg font-bold text-center mb-4">
               Table 1: The Results of Mendel<span>&#39;</span>s crosses between
@@ -177,7 +185,7 @@ const MendelianGenetics = ({ hideFloating }) => {
           </span>
         </div>
 
-        <div className="md:py-8 md:px-8 rounded-lg space-y-6">
+        <div className="md:py-8 md:px-8 rounded-lg space-y-6 my-4">
           <div>
             <h2 className="text-lg font-bold text-center mb-4">
               Table 2: Results of Mendel<span>&#39;</span>s crosses between
@@ -320,7 +328,7 @@ const MendelianGenetics = ({ hideFloating }) => {
         </span>
       </p>
 
-      <div className="md:py-8 md:px-8 rounded-lg space-y-6">
+      <div className="md:py-8 md:px-8 rounded-lg space-y-6 my-4">
         <div>
           <h2 className="text-lg font-bold text-center mb-4">
             Table 3: Dominant and Recessive traits in <i>Pisum sativum</i>{" "}
