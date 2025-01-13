@@ -38,12 +38,12 @@ const MiosisAndMitosis = ({ hideFloating }) => {
   };
 
   return (
-    <div className="px-4 lg:px-4">
+    <div className="px-4 lg:px-4 text-justify text-sm sm:text-base md:text-lg">
       {/* Header Section */}
       <div>
         <div className="flex flex-col gap-8">
           <h1 className="font-semibold text-2xl sm:text-3xl md:text-4xl leading-snug">
-            <span className="font-bold">LESSON 1:</span> Cell Cycle: COMPARING
+            <span className="font-bold">LESSON 3:</span> Cell Cycle: COMPARING
             MITOSIS AND MEIOSIS
           </h1>
           <div className="space-y-6">

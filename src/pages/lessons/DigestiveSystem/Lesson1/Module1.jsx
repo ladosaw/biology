@@ -44,7 +44,7 @@ const Module1 = ({ hideFloating }) => {
   };
 
   return (
-    <div className="px-4 lg:px-4 ">
+    <div className="px-4 lg:px-4 text-justify text-sm sm:text-base md:text-lg">
       {/* Header Section */}
       <div>
         <div className="flex flex-col gap-8 title">

@@ -44,10 +44,9 @@ const UnderMaintenance = () => (
 );
 
 const Lessons = () => {
-  const [selectedModule, setSelectedModule] = useState({
+  const [selectedLesson, setSelectedLesson] = useState({
     sectionTitle: "Overall",
     subsubtitle: "Overall",
-    item: "Overall",
   });
 
   useEffect(() => {
@@ -59,165 +58,69 @@ const Lessons = () => {
     if (hash) {
       switch (hash) {
         case "digestive-system":
-          setSelectedModule({
+          setSelectedLesson({
             sectionTitle: "Digestive System",
             subsubtitle: "Lesson 1",
-            item: "Module 1",
           });
           break;
         case "mitosis":
-          setSelectedModule({
+          setSelectedLesson({
             sectionTitle: "Mitosis",
-            subsubtitle: "Lesson 1",
-            item: "Module 1",
+            subsubtitle: "Lesson 2",
           });
           break;
         case "meiosis":
-          setSelectedModule({
+          setSelectedLesson({
             sectionTitle: "Meiosis",
-            subsubtitle: "Lesson 1",
-            item: "Module 1",
+            subsubtitle: "Lesson 3",
           });
           break;
         case "mendelian-genetics":
-          setSelectedModule({
+          setSelectedLesson({
             sectionTitle: "Mendelian Genetics",
-            subsubtitle: "Lesson 1",
-            item: "Module 1",
+            subsubtitle: "Lesson 4",
           });
           break;
         case "organism":
-          setSelectedModule({
-            sectionTitle: null,
-            subsubtitle: null,
-            item: null,
+          setSelectedLesson({
+            sectionTitle: "Mendelian Genetics",
+            subsubtitle: "Lesson 5",
           });
           break;
         default:
-          setSelectedModule({
+          setSelectedLesson({
             sectionTitle: "Overall",
             subsubtitle: "Overall",
-            item: "Overall",
           });
       }
     }
   }, []);
 
-  const renderModule = () => {
-    const { sectionTitle, subsubtitle, item } = selectedModule;
+  const renderLesson = () => {
+    const { sectionTitle, subsubtitle } = selectedLesson;
 
     switch (sectionTitle) {
       case "Digestive System":
-        return renderDigestiveSystem(subsubtitle, item);
-      case "Meiosis":
-        return renderMandelianGenetics(subsubtitle, item);
+        return <Module1 />;
       case "Mitosis":
-        return renderMand(subsubtitle, item);
+        return <CellDivision />;
+      case "Meiosis":
+        return <MitosisAndMiosis />;
       case "Mendelian Genetics":
-        return renderMendelianGenetics(subsubtitle, item);
-      case "Overall":
-        return renderOverall(sectionTitle, item);
-      default:
+        return <MendelianGenetics />;
+      case "Organism":
         return <UnderMaintenance />;
-    }
-  };
-
-  const renderDigestiveSystem = (subsubtitle, item) => {
-    switch (subsubtitle) {
-      case "Lesson 1":
-        switch (item) {
-          case "Module 1":
-            return <Module1 />;
-          case "Module 2":
-            return <UnderMaintenance />;
-          case "Module 3":
-            return <UnderMaintenance />;
-          default:
-            return <div>Select a valid module.</div>;
-        }
       default:
-        return <div>Select a valid lesson.</div>;
-    }
-  };
-
-  const renderMandelianGenetics = (subsubtitle, item) => {
-    switch (subsubtitle) {
-      case "Lesson 1":
-        switch (item) {
-          case "Module 1":
-            return <MitosisAndMiosis />;
-          case "Module 2":
-            return <UnderMaintenance />;
-          case "Module 3":
-            return <UnderMaintenance />;
-          default:
-            return <div>Select a valid module.</div>;
-        }
-      default:
-        return <div>Select a valid lesson.</div>;
-    }
-  };
-
-  const renderMand = (subsubtitle, item) => {
-    switch (subsubtitle) {
-      case "Lesson 1":
-        switch (item) {
-          case "Module 1":
-            return <CellDivision />;
-          case "Module 2":
-            return <UnderMaintenance />;
-          case "Module 3":
-            return <UnderMaintenance />;
-          default:
-            return <div>Select a valid module.</div>;
-        }
-      default:
-        return <div>Select a valid lesson.</div>;
-    }
-  };
-
-  const renderOverall = (sectionTitle, item) => {
-    switch (sectionTitle) {
-      case "Overall":
-        switch (item) {
-          case "Overall":
-            return <Overall />;
-          case "Module 2":
-            return <UnderMaintenance />;
-          case "Module 3":
-            return <UnderMaintenance />;
-          default:
-            return <UnderMaintenance />;
-        }
-      default:
-        return <UnderMaintenance />;
-    }
-  };
-
-  const renderMendelianGenetics = (subsubtitle, item) => {
-    switch (subsubtitle) {
-      case "Lesson 1":
-        switch (item) {
-          case "Module 1":
-            return <MendelianGenetics />;
-          case "Module 2":
-            return <UnderMaintenance />;
-          case "Module 3":
-            return <UnderMaintenance />;
-          default:
-            return <UnderMaintenance />;
-        }
-      default:
-        return <UnderMaintenance />;
+        return <Overall />;
     }
   };
 
   return (
     <div className="flex flex-col lg:flex-row items">
       <div className="w-full lg:w-1/4 p-4">
-        <LeftNavigationLesson onModuleClick={setSelectedModule} />
+        <LeftNavigationLesson onModuleClick={setSelectedLesson} />
       </div>
-      <div className="w-full lg:w-3/4 p-4">{renderModule()}</div>
+      <div className="w-full lg:w-3/4 p-4">{renderLesson()}</div>
     </div>
   );
 };

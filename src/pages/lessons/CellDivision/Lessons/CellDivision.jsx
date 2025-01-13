@@ -35,12 +35,12 @@ const Module1 = ({ hideFloating }) => {
   };
 
   return (
-    <div className="px-4 lg:px-4 ">
+    <div className="px-4 lg:px-4 text-justify text-sm sm:text-base md:text-lg">
       {/* Header Section */}
       <div>
         <div className="flex flex-col gap-8 title">
           <h1 className="font-semibold text-2xl sm:text-3xl md:text-4xl leading-snug ">
-            <span className="font-bold">LESSON 1:</span> CELL CYCLE: Interphase
+            <span className="font-bold">LESSON 2:</span> CELL CYCLE: Interphase
             and cell Division
           </h1>
           <p className="text-sm sm:text-base md:text-lg leading-relaxed">
