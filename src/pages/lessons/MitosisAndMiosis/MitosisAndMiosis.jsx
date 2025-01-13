@@ -7,6 +7,7 @@ import meiosisDivisions from "../../../assets/images/meiosisDivision.png";
 import prophaseStage from "../../../assets/images/prophaseStage.png";
 import roleMeiosis from "../../../assets/images/roleMeiosis.png";
 import meiosisPdf from "../../../assets/pdf/meiosisPdf.pdf";
+import { vocab } from "./ConstantData.jsx";
 
 const MiosisAndMitosis = ({ hideFloating }) => {
   const handleDownload = () => {
@@ -45,31 +46,26 @@ const MiosisAndMitosis = ({ hideFloating }) => {
             <span className="font-bold">LESSON 1:</span> Cell Cycle: COMPARING
             MITOSIS AND MEIOSIS
           </h1>
-          <p className="text-sm sm:text-base md:text-lg leading-relaxed">
-            VOCABULARY WORDS:
-          </p>
-          <p className="text-sm sm:text-base md:text-lg leading-relaxed">
-            <span className="font-semibold">Diploid Cell (2N)</span> - means the
-            nucleus of our body contains two sets of homologous chromosomes that
-            we inherited half from our father (n=23) and half from our mother
-            (n=23)
-          </p>
-          <p className="text-sm sm:text-base md:text-lg leading-relaxed">
-            <span className="font-semibold">Haploid cells (n)</span> - a gamete
-            (either sperm or egg) containing a half set of chromosomes
-          </p>
-          <p className="text-sm sm:text-base md:text-lg leading-relaxed">
-            <span className="font-semibold">Crossing over</span> - the exchange
-            of genetic materials that produce a combination of genes along
-            chromosomes. It brings variation to organisms that no one is exactly
-            alike.
-          </p>
-          <p className="text-sm sm:text-base md:text-lg leading-relaxed">
-            <span className="font-semibold">XY Chromosomes</span>
-          </p>
-          <p className="text-sm sm:text-base md:text-lg leading-relaxed">
-            <span className="font-semibold">XX Chromosomes</span>
-          </p>
+          <div className="space-y-6">
+            <h2 className="font-semibold text-lg text-center sm:text-xl md:text-2xl">
+              Vocabulary Words
+            </h2>
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {vocab.map((vocab, index) => (
+                <div
+                  key={index}
+                  className="p-4 border border-gray-300 rounded-lg shadow-sm bg-white hover:shadow-md transition-shadow"
+                >
+                  <h3 className="font-bold text-base sm:text-lg md:text-xl text-black">
+                    {vocab.title}
+                  </h3>
+                  <p className="text-sm sm:text-base text-gray-600 mt-1">
+                    {vocab.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Digestive System Section */}
