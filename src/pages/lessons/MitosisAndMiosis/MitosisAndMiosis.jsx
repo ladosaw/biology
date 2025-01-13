@@ -123,29 +123,32 @@ const MiosisAndMitosis = ({ hideFloating }) => {
             <div className="flex flex-wrap md:flex-nowrap gap-6">
               <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
                 There are two main types of cells possessed by multicellular
-                eukaryotic organisms: somatic, or body cells, and gametes, or
-                sex cells. The majority of the cells are called somatic or body
-                cells. These consist of two complete sets of chromosomes, making
-                them diploid in number (2N).
+                eukaryotic organisms:{" "}
+                <b>somatic, or body cells, and gametes, or sex cells</b>. The
+                majority of the cells are called somatic or body cells. These
+                consist of two complete sets of chromosomes, making them diploid
+                in number (2N).
               </p>
             </div>
             <div className="flex flex-wrap md:flex-nowrap gap-6">
               <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
-                Humans have 46 chromosomes. This is our diploid number (2N).
-                Diploid means the nucleus of the nucleus of our body contains
-                two sets of homologous chromosomes. We inherited half of these
-                chromosomes from our father and half from our mother 2(23).
-                Homologous chromosomes mean that they both carry the genes
-                controlling the same traits. The exception is our reproductive
-                cells – the egg and the sperm, collectively known as gametes.
+                Humans have 46 chromosomes. This is our <b>diploid number</b>{" "}
+                (2N). Diploid means the nucleus of the nucleus of our body
+                contains two sets of homologous chromosomes. We inherited half
+                of these chromosomes from our father and half from our mother
+                2(23). <b>Homologous chromosomes</b> mean that they both carry
+                the genes controlling the same traits. The exception is our
+                reproductive cells – the <b>egg and the sperm</b>, collectively
+                known as <b>gametes</b>.
               </p>
             </div>
             <div className="flex flex-wrap md:flex-nowrap gap-6">
               <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
                 Each egg or sperm has a single set of chromosomes composed of 22
-                autosomes and one pair of sex chromosomes, which either be X or
-                Y. Therefore, our gametes are haploid cells (N) since they carry
-                a single set of chromosomes.
+                autosomes and one pair of sex chromosomes, which either be{" "}
+                <b>X</b> or <b>Y</b>. Therefore, our gametes are{" "}
+                <b>haploid cells (N)</b> since they carry a single set of
+                chromosomes.
               </p>
             </div>
             <div className="flex flex-wrap md:flex-nowrap gap-6">
@@ -153,13 +156,14 @@ const MiosisAndMitosis = ({ hideFloating }) => {
                 The number of chromosomes normally remains the same within the
                 species. It does not double or triple for every generation. This
                 suggests that different kinds of cell division must take place
-                in an individual. This kind of cell division is called meiosis,
-                from the Greek word that means “to make smaller”, Meiosis
-                reduces the chromosomes number in half. It is a form of sexual
-                reproduction that takes place in the ovaries (egg cell) and
-                testes (sperm cell)  of animals during the formation of
-                gametogenesis (spermatogenesis and oogenesis). Meiosis is a
-                special type of cell division where the cell undergoes two
+                in an individual. This kind of cell division is called{" "}
+                <b>meiosis</b>, from the Greek word that means{" "}
+                <b>“to make smaller”</b>, Meiosis reduces the chromosomes number
+                in half. It is a form of sexual reproduction that takes place in
+                the <b>ovaries</b> (egg cell) <b>and testes</b> (sperm cell)  of
+                animals during the formation of{" "}
+                <b>gametogenesis (spermatogenesis and oogenesis)</b>. Meiosis is
+                a special type of cell division where the cell undergoes two
                 cellular divisions: Meiosis 1 and Meiosis II.
               </p>
             </div>
@@ -172,10 +176,10 @@ const MiosisAndMitosis = ({ hideFloating }) => {
 
             <div className="flex flex-wrap md:flex-nowrap gap-6">
               <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
-                The first meiotic division, also known as Meiosis I, is a
-                reduction division phase (diploid - haploid). There are two
-                daughter cells produced after Meiosis 1, each daughter cell is
-                carrying haploid number of chromosomes. This consists of four
+                The first meiotic division, also known as Meiosis I, is a{" "}
+                <b>reduction division phase (diploid - haploid)</b>. There are
+                two daughter cells produced after Meiosis 1, each daughter cell
+                is carrying haploid number of chromosomes. This consists of four
                 stages, namely, prophase I, metaphase I, anaphase I, and
                 telophase I. Another important event is{" "}
                 <span className="font-semibold"> crossing-over</span> where the
@@ -204,21 +208,21 @@ const MiosisAndMitosis = ({ hideFloating }) => {
             <div className="flex flex-wrap md:flex-nowrap gap-6">
               <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
                 <span className="font-semibold">Zygotene</span> - The
-                chromosomes begin to pair off. Pairs of chromosomes are called
-                homologous chromosomes, and this pairing process is exact
+                chromosomes begin to pair off. Pairs of chromosomes are called{" "}
+                <b>homologous</b> chromosomes, and this pairing process is exact
               </p>
             </div>
             <div className="flex flex-wrap md:flex-nowrap gap-6">
               <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
                 <span className="font-semibold">Pachytene</span> - The
-                chromosomes contract due to repeated coiling. Crossing-over
-                takes place where a segment of the sister chromatid of one of
-                the chromosomes is exchanged with the same segment of the sister
-                chromatid of the homologous chromosomes through the formation of
-                a cross-linked of the segments called chiasma. After crossing
-                over, the sister chromatids of each chromosome may no longer be
-                identical to each other based on the genetic material they
-                contain
+                chromosomes contract due to repeated coiling.{" "}
+                <b>Crossing-over</b> takes place where a segment of the sister
+                chromatid of one of the chromosomes is exchanged with the same
+                segment of the sister chromatid of the homologous chromosomes
+                through the formation of a cross-linked of the segments called{" "}
+                <b>chiasma</b>. After crossing over, the sister chromatids of
+                each chromosome may no longer be identical to each other based
+                on the genetic material they contain
               </p>
             </div>
             <p className="text-gray-700 text-base sm:text-lg">
@@ -261,13 +265,14 @@ const MiosisAndMitosis = ({ hideFloating }) => {
             <div className="flex flex-wrap md:flex-nowrap gap-6">
               <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
                 <span className="font-semibold">Telophase 1</span> - In this
-                stage the chromosomes reach their respective poles. Cytokinesis
+                stage the chromosomes reach their respective poles.{" "}
+                <b>Cytokinesis</b>
                 follows and two daughter cells are formed. Each cell now has
                 half the chromosome number because only one chromosome from each
-                other pair goes to the daughter cell. This is called the haploid
-                condition. In difference to the diploid condition at the
-                beginning of the meiosis I where each chromosome pair is intact.
-                Telophase comes after by interphase II.
+                other pair goes to the daughter cell. This is called the{" "}
+                <b>haploid condition</b>. In difference to the diploid condition
+                at the beginning of the meiosis I where each chromosome pair is
+                intact. Telophase comes after by interphase II.
               </p>
             </div>
             <div className="flex flex-wrap md:flex-nowrap gap-6">
@@ -279,13 +284,14 @@ const MiosisAndMitosis = ({ hideFloating }) => {
             </div>
             <div className="flex flex-wrap md:flex-nowrap gap-6">
               <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
-                The second meiotic, also known as meiosis II, it contains the
-                following stages: prophase II, metaphase II, anaphase II, and
-                Telophase II; these stages are identical to mitotic stages. The
-                outcome is four cells, two from each daughter cell from meiosis
-                I, with one-half the diploid chromosome number and wait only one
-                sister chromatid for each chromosome. Figure 10 shows the stages
-                of Meiosis I and Meiosis II. In meiosis I, the two homologous
+                The second meiotic, also known as <b>meiosis II</b>, it contains
+                the following stages:{" "}
+                <b>prophase II, metaphase II, anaphase II, and Telophase II</b>;
+                these stages are identical to mitotic stages. The outcome is
+                four cells, two from each daughter cell from meiosis I, with
+                one-half the diploid chromosome number and wait only one sister
+                chromatid for each chromosome. Figure 10 shows the stages of
+                Meiosis I and Meiosis II. In meiosis I, the two homologous
                 chromosomes separate which results in two haploid (n) daughter
                 cells with chromosomes with two chromatids each. In meiosis II,
                 four haploid (n) daughter cells are formed. Each cell is

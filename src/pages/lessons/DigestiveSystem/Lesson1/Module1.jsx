@@ -53,12 +53,16 @@ const Module1 = ({ hideFloating }) => {
             FUNCTIONS IN HUMAN FOCUS ON THE DIGESTIVE SYSTEM
           </h1>
           <p className="text-sm sm:text-base md:text-lg leading-relaxed">
-            The food that we eat plays a central role in the survival of
+            The <b>food</b> that we eat plays a central role in the survival of
             species. It provides energy that enables us to carry out many
             activities that we do each day such as breathing, walking, studying,
             and cooking. Food must be broken down into a form that these
             microscopic cells can use. The body changes food into usable form
-            using a group of organs referred to as the digestive system.
+            using a group of organs referred to as{" "}
+            <span className="text-red-600">
+              <b>the digestive system</b>
+            </span>
+            .
           </p>
           <p className="text-sm sm:text-base md:text-lg leading-relaxed">
             Food must be broken down into a form that these microscopic cells
@@ -68,11 +72,12 @@ const Module1 = ({ hideFloating }) => {
           <p className="text-sm sm:text-base md:text-lg leading-relaxed">
             In humans, the digestive system is composed of the gastrointestinal
             tract (GI), also known as the alimentary canal and the accessory
-            organs for digestion. The gastrointestinal tract starts at the
-            mouth, continues to the esophagus, stomach, small intestines, large
-            intestine (colon), and rectum, and ends at the anus. Accessory
-            organs that play very important roles in the digestive process are
-            the liver, gallbladder, and pancreas.
+            organs for digestion. The gastrointestinal tract starts at the{" "}
+            <b>mouth</b>, continues to the{" "}
+            <b>esophagus, stomach, small intestines, large intestine (colon)</b>
+            , and <b>rectum</b>, and ends at the anus. Accessory organs that
+            play very important roles in the digestive process are{" "}
+            <b>the liver, gallbladder, and pancreas</b>.
           </p>
           <p className="text-sm sm:text-base md:text-lg leading-relaxed">
             The chief function of the digestive system is digestion, the
@@ -154,8 +159,9 @@ const Module1 = ({ hideFloating }) => {
               <strong className="text-primary">B. Digestion</strong> is the
               second process involved in the digestive system. It involves the
               breakdown of large food molecules into smaller molecules for easy
-              absorption by the cells. Both chemical and mechanical digestion
-              begin immediately in the mouth.
+              absorption by the cells.{" "}
+              <b>Both chemical and mechanical digestion</b>
+              begin immediately in the <b>mouth</b>.
             </p>
             <ul className="list-disc pl-6">
               <li>
@@ -204,16 +210,22 @@ const Module1 = ({ hideFloating }) => {
           <div className="space-y-4 text-gray-700">
             <p className="text-base sm:text-lg leading-relaxed">
               <strong className="text-primary">C. Absorption</strong> occurs
-              mostly in the small intestine where several digestive juices,
-              pancreatic juice, and bile aid in the chemical digestion of food.
+              mostly in the <b>small intestine</b> where several digestive
+              juices, pancreatic juice, and bile aid in the chemical digestion
+              of food.
             </p>
             <p>
-              Absorption is the process of passing the soluble food molecules in
-              the wall of the small intestine through the villi – tiny
-              finger-like projections. Each villus contains blood capillaries
-              that absorb water, glucose, amino acids, vitamins, minerals, and
-              fatty acids, increasing the surface area available for nutrient
-              absorption.
+              <b>
+                {" "}
+                Absorption is the process of passing the soluble food molecules
+                in the wall of the small intestine through the villi – the tiny,
+                finger-like projections from the epithelial lining of the
+                intestinal wall
+              </b>
+              . Each villus contains blood capillaries that absorb water,
+              glucose, amino acids, vitamins, minerals, and fatty acids. It also
+              increases the amount of surface area available for the absorption
+              of nutrients.
             </p>
           </div>
         </div>
@@ -232,17 +244,16 @@ const Module1 = ({ hideFloating }) => {
           />
           <div className="space-y-4 text-gray-700">
             <p className="text-base sm:text-lg leading-relaxed">
-              <strong className="text-primary">D. Assimilation</strong> occurs
-              mostly in the small intestine where several digestive juices,
-              pancreatic juice, and bile aid in the chemical digestion of food.
+              <strong className="text-primary">D. Assimilation</strong> is the
+              fourth process that occurs in the digestive system.
             </p>
             <p>
-              Absorption is the process of passing the soluble food molecules in
-              the wall of the small intestine through the villi – tiny
-              finger-like projections. Each villus contains blood capillaries
-              that absorb water, glucose, amino acids, vitamins, minerals, and
-              fatty acids, increasing the surface area available for nutrient
-              absorption.
+              It is the movement of digested food nutrients into the blood
+              vessels of the small intestine through diffusion and the use of
+              nutrients into the body cells through the{" "}
+              <b>microvilli – microscopic cellular membrane projections</b> that
+              serve to expand the surface area for diffusion and to lessen any
+              increase in volume.
             </p>
           </div>
         </div>
@@ -263,8 +274,8 @@ const Module1 = ({ hideFloating }) => {
             <p className="text-base sm:text-lg leading-relaxed">
               <strong className="text-primary">D. Egestion</strong> is the last
               process that occurs in the digestive system. It is the release of
-              undigested food collected in the rectum called feces and pushed
-              out of the body through the anus by defecation
+              undigested food collected in the <b>rectum</b> called feces and
+              pushed out of the body through the anus by defecation
             </p>
           </div>
         </div>

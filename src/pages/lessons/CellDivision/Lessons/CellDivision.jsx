@@ -51,13 +51,16 @@ const Module1 = ({ hideFloating }) => {
             activities. It grows., prepares to divide, then undergoes division
             to form two daughter cells. Each daughter cell contains the same
             genetic materials as the parent cell. Soon, the daughter cell will
-            also undergo the same cycle of growth and division. The series of
-            activities is called Cell Cycle.         
+            also undergo the same cycle of <b>growth and division</b>. The
+            series of activities is called <b>Cell Cycle.</b>         
           </p>
           <p className="text-sm sm:text-base md:text-lg leading-relaxed">
-            The two main stages in the cell cycle are Interphase- Period of
-            Growth and Cell division (Mitosis and Meiosis). In Figure 1 is
-            illustration of the stages of the cell cycle.
+            The two main stages in the cell cycle are{" "}
+            <b>
+              Interphase- Period of Growth and Cell division (Mitosis and
+              Meiosis)
+            </b>
+            . In Figure 1 is illustration of the stages of the cell cycle.
           </p>
           <p className="text-sm sm:text-base md:text-lg leading-relaxed">
             New cells are formed through cell division. This is one important
@@ -177,11 +180,11 @@ const Module1 = ({ hideFloating }) => {
         </h2>
         <p className="text-sm sm:text-base md:text-lg mb-4">
           <span className="font-semibold"> I. MITOSIS</span> - a type of cell
-          division that occurs in the nonreproductive (somatic) cells such as
-          the skin, bones, nails, and hair. It is responsible for the increase
-          in weight and height of the baby as she grows and develops into a
-          teenager. Also responsible for the healing of the wounded when a part
-          of a body is accidentally cut or scratched.
+          division that occurs in the <b>nonreproductive (somatic) cells</b>{" "}
+          such as the skin, bones, nails, and hair. It is responsible for the
+          increase in weight and height of the baby as she grows and develops
+          into a teenager. Also responsible for the healing of the wounded when
+          a part of a body is accidentally cut or scratched.
         </p>
         <p className="text-sm sm:text-base md:text-lg mb-4">
           The role of mitosis in the cell cycle is to replicate the genetic
