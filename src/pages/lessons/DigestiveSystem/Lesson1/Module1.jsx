@@ -113,6 +113,163 @@ const Module1 = ({ hideFloating }) => {
         </div>
       </div>
 
+      {/* Indigestion Section */}
+      <div className="bg-white py-8 px-8 rounded-lg shadow-lg space-y-6">
+        <h1 className="text-primary text-3xl sm:text-4xl font-extrabold border-b-4 border-primary pb-3 mb-6">
+          INDIGESTION
+        </h1>
+
+        <div className="flex flex-wrap md:flex-nowrap gap-6">
+          <img
+            src={Indigestion}
+            alt="Digestion illustration"
+            className="w-full md:w-1/2 lg:w-1/3 h-auto object-contain rounded-lg shadow-md"
+          />
+          <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
+            <strong className="text-primary">A. Indigestion</strong> marks the
+            beginning of the digestive process. It involves the intake of food
+            or substances into the body through the mouth. This step is
+            essential as it sets the stage for the breakdown and absorption of
+            nutrients. The process starts with chewing, where food is
+            mechanically broken down into smaller pieces, making it easier for
+            the digestive system to process.
+          </p>
+        </div>
+      </div>
+
+      {/* Digestion Section */}
+      <div className="bg-white py-8 px-8 rounded-lg shadow-lg space-y-6">
+        <h1 className="text-primary text-3xl sm:text-4xl font-extrabold border-b-4 border-primary pb-3 mb-6">
+          DIGESTION
+        </h1>
+
+        <div className="flex flex-wrap md:flex-nowrap gap-6">
+          <img
+            src={Digestion}
+            alt="Digestion illustration"
+            className="w-full md:w-1/2 lg:w-1/3 h-auto object-contain rounded-lg shadow-md"
+          />
+          <div className="space-y-4 text-gray-700">
+            <p className="text-base sm:text-lg leading-relaxed">
+              <strong className="text-primary">B. Digestion</strong> is the
+              second process involved in the digestive system. It involves the
+              breakdown of large food molecules into smaller molecules for easy
+              absorption by the cells. Both chemical and mechanical digestion
+              begin immediately in the mouth.
+            </p>
+            <ul className="list-disc pl-6">
+              <li>
+                The liver produces bile, a green fluid that emulsifies large fat
+                droplets into smaller ones, stored in the gall bladder for later
+                use.
+              </li>
+              <li>
+                The pancreas releases enzymes through the pancreatic duct to aid
+                in digestion:
+                <ul className="list-[circle] pl-6">
+                  <li>
+                    <strong>Amylase:</strong> Breaks down carbohydrates into
+                    sugars.
+                  </li>
+                  <li>
+                    <strong>Peptidase:</strong> Breaks down proteins into amino
+                    acids.
+                  </li>
+                  <li>
+                    <strong>Lipase:</strong> Breaks down fats into fatty acids.
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <p>
+              After about four hours, the stomach pushes partially digested food
+              into the small intestine for further breakdown and absorption.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Absorption Section */}
+      <div className="bg-white py-8 px-8 rounded-lg shadow-lg space-y-6">
+        <h1 className="text-primary text-3xl sm:text-4xl font-extrabold border-b-4 border-primary pb-3 mb-6">
+          ABSORPTION
+        </h1>
+
+        <div className="flex flex-wrap md:flex-nowrap gap-6">
+          <img
+            src={Absorption}
+            alt="Absorption illustration"
+            className="w-full md:w-1/2 lg:w-1/3 h-auto object-contain rounded-lg shadow-md"
+          />
+          <div className="space-y-4 text-gray-700">
+            <p className="text-base sm:text-lg leading-relaxed">
+              <strong className="text-primary">C. Absorption</strong> occurs
+              mostly in the small intestine where several digestive juices,
+              pancreatic juice, and bile aid in the chemical digestion of food.
+            </p>
+            <p>
+              Absorption is the process of passing the soluble food molecules in
+              the wall of the small intestine through the villi – tiny
+              finger-like projections. Each villus contains blood capillaries
+              that absorb water, glucose, amino acids, vitamins, minerals, and
+              fatty acids, increasing the surface area available for nutrient
+              absorption.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white py-8 px-8 rounded-lg shadow-lg space-y-6">
+        <h1 className="text-primary text-3xl sm:text-4xl font-extrabold border-b-4 border-primary pb-3 mb-6">
+          ASSIMILATION
+        </h1>
+
+        <div className="flex flex-wrap md:flex-nowrap gap-6">
+          <img
+            src={Assimilation}
+            alt="Absorption illustration"
+            className="w-full md:w-1/2 lg:w-1/3 h-auto object-contain rounded-lg shadow-md"
+          />
+          <div className="space-y-4 text-gray-700">
+            <p className="text-base sm:text-lg leading-relaxed">
+              <strong className="text-primary">D. Assimilation</strong> occurs
+              mostly in the small intestine where several digestive juices,
+              pancreatic juice, and bile aid in the chemical digestion of food.
+            </p>
+            <p>
+              Absorption is the process of passing the soluble food molecules in
+              the wall of the small intestine through the villi – tiny
+              finger-like projections. Each villus contains blood capillaries
+              that absorb water, glucose, amino acids, vitamins, minerals, and
+              fatty acids, increasing the surface area available for nutrient
+              absorption.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white py-8 px-8 rounded-lg shadow-lg space-y-6">
+        <h1 className="text-primary text-3xl sm:text-4xl font-extrabold border-b-4 border-primary pb-3 mb-6">
+          EGESTION
+        </h1>
+
+        <div className="flex flex-wrap md:flex-nowrap gap-6">
+          <img
+            src={Egestion}
+            alt="Absorption illustration"
+            className="w-full md:w-1/2 lg:w-1/3 h-auto object-contain rounded-lg shadow-md"
+          />
+          <div className="space-y-4 text-gray-700">
+            <p className="text-base sm:text-lg leading-relaxed">
+              <strong className="text-primary">D. Egestion</strong> is the last
+              process that occurs in the digestive system. It is the release of
+              undigested food collected in the rectum called feces and pushed
+              out of the body through the anus by defecation
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div className="w-full flex flex-col items-start gap-6 p-4">
         <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl leading-snug text-gray-800">
           WORKSHEET
