@@ -139,7 +139,7 @@ const Organism = ({ hideFloating }) => {
         </div>
 
         {/* Carnivores Section (Even) */}
-        <div className="pl-6 border-l-4 border-primary space-y-4">
+        <div className="pr-6 border-r-4 border-primary space-y-4">
           <h2 className="text-gray-800 text-xl sm:text-2xl font-semibold">
             2. Carnivores <span className="font-normal">(Meat Eaters)</span>
           </h2>
@@ -188,7 +188,7 @@ const Organism = ({ hideFloating }) => {
         </div>
 
         {/* Decomposers Section (Even) */}
-        <div className="pl-6 border-l-4 border-primary space-y-4">
+        <div className="pr-6 border-r-4 border-primary space-y-4">
           <h2 className="text-gray-800 text-xl sm:text-2xl font-semibold">
             4. Decomposers{" "}
             <span className="font-normal">(Nutrient Recyclers)</span>
