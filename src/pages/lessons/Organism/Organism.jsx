@@ -1,6 +1,6 @@
 import React from "react";
 import FloatingButton from "../../../components/FloatingButton/FloatingButton";
-import MendelianGeneticsPdf from "../../../assets/pdf/MendelianGenetics.pdf";
+import OrganismPdf from "../../../assets/pdf/Organism.pdf";
 
 import GrassImage from "../../../assets/images/grass.png";
 import HeterotrophsImage from "../../../assets/images/HeterotrophsImage.png";
@@ -14,18 +14,18 @@ import BiomassImage from "../../../assets/images/BiomassImage.jpg";
 
 const Organism = ({ hideFloating }) => {
   const handleDownload = () => {
-    const pdfUrl = MendelianGeneticsPdf;
+    const pdfUrl = OrganismPdf;
 
     const link = document.createElement("a");
     link.href = pdfUrl;
-    link.download = "LESSON 4: PATTERNS OF MENDELIAN GENETICS";
+    link.download = "LESSON 5: TRANSFER OF ENERGY IN THE TROPHIC LEVEL";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
   const handlePrintHandout = () => {
-    const pdfUrl = MendelianGeneticsPdf;
+    const pdfUrl = OrganismPdf;
 
     const printWindow = window.open(pdfUrl, "_blank");
 
@@ -41,7 +41,7 @@ const Organism = ({ hideFloating }) => {
   };
 
   return (
-    <div className="px-4 lg:px-4 text-justify text-sm sm:text-base md:text-lg">
+    <div className="md:px-4 lg:px-4 text-justify text-sm sm:text-base md:text-lg">
       {/* Header Section */}
 
       <div className="flex flex-col gap-8">
@@ -51,7 +51,7 @@ const Organism = ({ hideFloating }) => {
         </h1>
       </div>
 
-      <div className="bg-white py-8 px-8 rounded-lg shadow-lg space-y-6  lg:mt-8">
+      <div className=" py-8 px-8  space-y-6  lg:mt-8">
         <h1 className="text-primary text-3xl sm:text-4xl font-extrabold border-b-4 border-primary pb-3 mb-6">
           INTRODUCTION
         </h1>
@@ -69,7 +69,7 @@ const Organism = ({ hideFloating }) => {
         </p>
       </div>
 
-      <div className="bg-white py-8 px-8 rounded-lg shadow-lg space-y-6">
+      <div className=" py-8 px-8  space-y-6">
         <h1 className="text-primary text-3xl sm:text-4xl font-extrabold border-b-4 border-primary pb-3 mb-6">
           A. Autotrophs or producers
         </h1>
@@ -78,7 +78,7 @@ const Organism = ({ hideFloating }) => {
           <img
             src={GrassImage}
             alt="Grass Image"
-            className="w-full md:w-1/2 lg:w-1/3 h-auto object-contain rounded-lg shadow-md"
+            className="w-full md:w-1/2 lg:w-1/3 h-auto object-contain   "
           />
           <div className="space-y-4 text-gray-700">
             <p className="text-base sm:text-lg leading-relaxed">
@@ -92,7 +92,7 @@ const Organism = ({ hideFloating }) => {
         </div>
       </div>
 
-      <div className="bg-white p-6 rounded-lg shadow space-y-6 md:mt-5 lg:mt-8">
+      <div className=" p-6   space-y-6 md:mt-5 lg:mt-8">
         {/* Title Section */}
         <h1 className="text-primary text-2xl sm:text-3xl font-bold border-b-2 border-primary pb-2">
           B. Heterotrophs or consumers
@@ -104,7 +104,7 @@ const Organism = ({ hideFloating }) => {
           <img
             src={HeterotrophsImage}
             alt="Heterotrophs illustration"
-            className="w-full md:w-1/3 h-auto rounded-lg shadow"
+            className="w-full md:w-1/3 h-auto  "
           />
           {/* Heterotrophs Description */}
           <div className="text-gray-700 space-y-4">
@@ -133,7 +133,7 @@ const Organism = ({ hideFloating }) => {
             <img
               src={HerbivoresImage}
               alt="Herbivores illustration"
-              className="w-full md:w-1/3 h-auto rounded-lg shadow"
+              className="w-full md:w-1/3 h-auto  "
             />
           </div>
         </div>
@@ -157,7 +157,7 @@ const Organism = ({ hideFloating }) => {
                 CarnivoresImage
               } /* Replace with the actual image variable for Carnivores */
               alt="Carnivores illustration"
-              className="w-full md:w-1/3 h-auto rounded-lg shadow"
+              className="w-full md:w-1/3 h-auto  "
             />
           </div>
         </div>
@@ -182,7 +182,7 @@ const Organism = ({ hideFloating }) => {
                 OmnivoresImage
               } /* Replace with the actual image variable for Omnivores */
               alt="Omnivores illustration"
-              className="w-full md:w-1/3 h-auto rounded-lg shadow"
+              className="w-full md:w-1/3 h-auto  "
             />
           </div>
         </div>
@@ -208,7 +208,7 @@ const Organism = ({ hideFloating }) => {
                 DecomposersImage
               } /* Replace with the actual image variable for Decomposers */
               alt="Decomposers illustration"
-              className="w-full md:w-1/3 h-auto rounded-lg shadow"
+              className="w-full md:w-1/3 h-auto  "
             />
           </div>
         </div>
@@ -221,7 +221,7 @@ const Organism = ({ hideFloating }) => {
         </p>
       </div>
 
-      <div className="bg-white py-8 px-8 rounded-lg shadow-lg space-y-6 lg:mt-8">
+      <div className=" py-8 px-8  space-y-6 lg:mt-8">
         <h1 className="text-primary text-3xl sm:text-4xl font-extrabold border-b-4 border-primary pb-3 mb-6">
           Food Chain
         </h1>
@@ -230,7 +230,7 @@ const Organism = ({ hideFloating }) => {
           <img
             src={FoodChainImage}
             alt=" Food Chain Image"
-            className="w-full md:w-1/2 lg:w-1/3 h-auto object-contain rounded-lg shadow-md"
+            className="w-full md:w-1/2 lg:w-1/3 h-auto object-contain  "
           />
           <div className="space-y-4 text-gray-700">
             <p className="text-base sm:text-lg leading-relaxed">
@@ -245,7 +245,7 @@ const Organism = ({ hideFloating }) => {
         </div>
       </div>
 
-      <div className="bg-white py-8 px-8 rounded-lg shadow-lg space-y-6  lg:mt-8">
+      <div className=" py-8 px-8  space-y-6  lg:mt-8">
         <h1 className="text-primary text-3xl sm:text-4xl font-extrabold border-b-4 border-primary pb-3 mb-6">
           Food Web
         </h1>
@@ -254,7 +254,7 @@ const Organism = ({ hideFloating }) => {
           <img
             src={FoodWebImage}
             alt="Food Web Image"
-            className="w-full md:w-1/2 lg:w-1/3 h-auto object-contain rounded-lg shadow-md"
+            className="w-full md:w-1/2 lg:w-1/3 h-auto object-contain "
           />
           <div className="space-y-4 text-gray-700">
             <p className="text-base sm:text-lg leading-relaxed">
@@ -267,7 +267,7 @@ const Organism = ({ hideFloating }) => {
         </div>
       </div>
 
-      <div className="bg-white py-8 px-8 rounded-lg shadow-lg space-y-6  lg:mt-8">
+      <div className=" py-8 px-8  space-y-6  lg:mt-8">
         <h1 className="text-primary text-3xl sm:text-4xl font-extrabold border-b-4 border-primary pb-3 mb-6">
           Food Pyramid
         </h1>
@@ -282,7 +282,7 @@ const Organism = ({ hideFloating }) => {
         </p>
       </div>
 
-      <div className="bg-white py-8 px-8 rounded-lg shadow-lg space-y-6  lg:mt-8">
+      <div className=" py-8 px-8  space-y-6  lg:mt-8">
         <h1 className="text-primary text-3xl sm:text-4xl font-extrabold border-b-4 border-primary pb-3 mb-6">
           Biomass
         </h1>
@@ -291,7 +291,7 @@ const Organism = ({ hideFloating }) => {
           <img
             src={BiomassImage}
             alt="Biomass Image"
-            className="w-full md:w-1/2 lg:w-1/3 h-auto object-contain rounded-lg shadow-md"
+            className="w-full md:w-1/2 lg:w-1/3 h-auto object-contain  "
           />
           <div className="space-y-4 text-gray-700">
             <p className="text-base sm:text-lg leading-relaxed">
