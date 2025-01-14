@@ -313,6 +313,15 @@ const Module1 = ({ hideFloating }) => {
               {DigestiveWorksheetsLink.worksheet3.title}
             </a>
           </li>
+          <li className="hover:text-blue-600">
+            <a
+              href={DigestiveWorksheetsLink.evaluation.link}
+              target="_blank"
+              className="text-blue-600 hover:underline"
+            >
+              {DigestiveWorksheetsLink.evaluation.title}
+            </a>
+          </li>
         </ul>
       </div>
       {/* Footer */}

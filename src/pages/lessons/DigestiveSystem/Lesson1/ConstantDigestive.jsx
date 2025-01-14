@@ -11,4 +11,9 @@ export const DigestiveWorksheetsLink = {
     title: "Digestive Worksheets 3",
     link: "https://forms.gle/XW2pwXk9WVQnC69Y7",
   },
+
+  evaluation: {
+    title: "Evaluation Forms",
+    link: "https://forms.gle/tXQsfPtV7gQnjvz66",
+  },
 };
