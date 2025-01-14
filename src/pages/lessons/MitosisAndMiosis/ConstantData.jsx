@@ -9,14 +9,14 @@ export const vocab = [
   },
   {
     title: "Crossing over",
-    desc: "the exchange of genetic materials that produce a combination of genes along chromosomes. It brings variation to organisms that no one is exactly alike.",
+    desc: "The exchange of genetic materials that produce a combination of genes along chromosomes. It brings variation to organisms that no one is exactly alike.",
   },
   {
     title: "XY Chromosomes",
-    desc: "",
+    desc: "Represents males. Males have one X and Y chromosomes.",
   },
   {
     title: "XX Chromosomes",
-    desc: "",
+    desc: "Represents female. female have two X chromosomes.",
   },
 ];
