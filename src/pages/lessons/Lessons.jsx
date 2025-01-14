@@ -10,6 +10,7 @@ import {
 import undermaintenance from "../../assets/images/undermaintenance.png";
 import Overall from "./Overall/Overall.jsx";
 import MendelianGenetics from "./MendelianGenetics/MendelianGenetics.jsx";
+import Organism from "./Organism/Organism.jsx";
 
 const UnderMaintenance = () => (
   <div className="min-h-screen flex items-center justify-center px-4">
@@ -83,7 +84,7 @@ const Lessons = () => {
           break;
         case "organism":
           setSelectedLesson({
-            sectionTitle: "Mendelian Genetics",
+            sectionTitle: "Organism",
             subsubtitle: "Lesson 5",
           });
           break;
@@ -109,7 +110,7 @@ const Lessons = () => {
       case "Mendelian Genetics":
         return <MendelianGenetics />;
       case "Organism":
-        return <UnderMaintenance />;
+        return <Organism />;
       default:
         return <Overall />;
     }
