@@ -13,7 +13,7 @@ export const DigestiveWorksheetsLink = {
   },
 
   evaluation: {
-    title: "Evaluation Forms",
+    title: "Written Evaluation Form",
     link: "https://forms.gle/tXQsfPtV7gQnjvz66",
   },
 };
