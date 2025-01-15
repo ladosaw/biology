@@ -213,6 +213,7 @@ const Module1 = ({ hideFloating }) => {
           </span>{" "}
           Figure 2 above and 3 below: show the four Stages of Mitosis (IPMAT)
         </p>
+
         <div className="p-4 bg-gray-50">
           <h2 className="text-2xl font-bold mb-4">
             Table 2: Stages of Mitosis with Each Activity
@@ -231,9 +232,9 @@ const Module1 = ({ hideFloating }) => {
                 <img
                   src="/images/Prophase.jpg"
                   alt="Prophase of Mitosis"
-                  className="mb-2 w-32 h-32 object-contain"
+                  className="mb-2 w-full max-w-xs h-auto object-contain"
                 />
-                <p className="font-bold">Prophase of Mitosis</p>
+                <p className="font-bold text-center">Prophase of Mitosis</p>
               </div>
               <ul className="list-disc list-inside">
                 <li>
@@ -262,9 +263,9 @@ const Module1 = ({ hideFloating }) => {
                 <img
                   src="/images/Metaphase.jpg"
                   alt="Metaphase of Mitosis"
-                  className="mb-2 w-32 h-32 object-contain"
+                  className="mb-2 w-full max-w-xs h-auto object-contain"
                 />
-                <p className="font-bold">Metaphase of Mitosis</p>
+                <p className="font-bold text-center">Metaphase of Mitosis</p>
               </div>
               <ul className="list-disc list-inside">
                 <li>
@@ -283,9 +284,9 @@ const Module1 = ({ hideFloating }) => {
                 <img
                   src="/images/Anaphase.jpg"
                   alt="Anaphase of Mitosis"
-                  className="mb-2 w-32 h-32 object-contain"
+                  className="mb-2 w-full max-w-xs h-auto object-contain"
                 />
-                <p className="font-bold">Anaphase of Mitosis</p>
+                <p className="font-bold text-center">Anaphase of Mitosis</p>
               </div>
               <ul className="list-disc list-inside">
                 <li>
@@ -310,15 +311,15 @@ const Module1 = ({ hideFloating }) => {
                 <img
                   src="/images/telophase.jpg"
                   alt="Telophase of Mitosis"
-                  className="mb-2 w-32 h-32 object-contain"
+                  className="mb-2 w-full max-w-xs h-auto object-contain"
                 />
-                <p className="font-bold">Telophase of Mitosis</p>
+                <p className="font-bold text-center">Telophase of Mitosis</p>
               </div>
               <ul className="list-disc list-inside">
                 <li>
                   The chromosomes are now at the opposing poles of the spindle.
                 </li>
-                <li>The microtubules disappear. </li>
+                <li>The microtubules disappear.</li>
                 <li>
                   Two sets of chromosomes are surrounded by new nuclear
                   membranes, completing the nuclear division process known as{" "}
@@ -332,6 +333,7 @@ const Module1 = ({ hideFloating }) => {
             </div>
           </div>
         </div>
+
         <h2 className="text-xl font-bold mb-4">Remember</h2>
         <h2 className="text-sm sm:text-base md:text-lg mb-4">
           Two things happen in mitosis: First, the nucleus divides (called
