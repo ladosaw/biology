@@ -1,8 +1,8 @@
 import { React } from "react";
-import crossingOver from "../../../assets/images/crossingOver.png";
+import crossingOver from "../../../assets/images/crossingOver.jpg";
 import FloatingButton from "../../../components/FloatingButton/FloatingButton.jsx";
-import karyotype from "../../../assets/images/karyotype.png";
-import sexChromosomes from "../../../assets/images/sexChromosomes.png";
+import karyotype from "../../../assets/images/karyotype.jpg";
+import sexChromosomes from "../../../assets/images/sexChromosomes.jpg";
 import meiosisDivisions from "../../../assets/images/meiosisDivision.png";
 import prophaseStage from "../../../assets/images/prophaseStage.png";
 import roleMeiosis from "../../../assets/images/roleMeiosis.png";

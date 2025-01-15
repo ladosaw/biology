@@ -9,7 +9,7 @@ import CarnivoresImage from "../../../assets/images/CarnivoresImage.png";
 import OmnivoresImage from "../../../assets/images/OmnivoresImage.jpg";
 import DecomposersImage from "../../../assets/images/DecomposersImage.jpg";
 import FoodChainImage from "../../../assets/images/FoodChainImage.jpg";
-import FoodWebImage from "../../../assets/images/FoodWebImage.png";
+import FoodWebImage from "../../../assets/images/FoodWebImage.jpg";
 import BiomassImage from "../../../assets/images/BiomassImage.jpg";
 import { OrganismWorksheetsLink } from "./ConstantData";
 import Worksheets from "../../../components/Worksheets/Worksheets";

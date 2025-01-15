@@ -24,7 +24,7 @@ export const vocab = [
 export const MiosisWorksheetsLink = {
   worksheet1: {
     title: "Miosis Worksheets 1",
-    link: "#",
+    link: "https://forms.gle/Nce5fbLuZfBVPTij7",
   },
   worksheet2: {
     title: "Miosis Worksheets 2",
@@ -37,6 +37,6 @@ export const MiosisWorksheetsLink = {
 
   evaluation: {
     title: "Written Evaluation Form",
-    link: "#",
+    link: "https://forms.gle/g983B6tKtmvWaUkJ7",
   },
 };

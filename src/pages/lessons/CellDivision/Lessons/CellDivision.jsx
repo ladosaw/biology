@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import FloatingButton from "../../../../components/FloatingButton/FloatingButton.jsx";
 import { FaArrowRight } from "react-icons/fa";
-import cellCycle from "../../../../assets/images/cellCycle.png";
+import cellCycle from "../../../../assets/images/NewCellCycle.jpg";
 import stagesOfMitosis from "../../../../assets/pdf/stagesOfMitosis.pdf";
 import { MitosisWorksheetsLink } from "../ConstantMitosis.jsx";
 import Worksheets from "../../../../components/Worksheets/Worksheets.jsx";
@@ -86,7 +86,7 @@ const Module1 = ({ hideFloating }) => {
           <img
             src={cellCycle}
             alt="Digestion illustration"
-            className="w-full md:w-1/2 lg:w-1/3 h-auto object-contain rounded-lg shadow-md"
+            className="w-full md:w-1/2 lg:w-2/3 h-auto object-contain rounded-lg shadow-md"
           />
           <p className="text-sm sm:text-base md:text-lg text-center">
             <span className="font-semibold block mt-2">
