@@ -203,3 +203,23 @@ export const GenotypePhenotype = [
     phenotype: "Round seed",
   },
 ];
+
+export const MendelianGeneticsWorksheetsLink = {
+  worksheet1: {
+    title: "Mendelian Genetics Worksheets 1",
+    link: "#",
+  },
+  worksheet2: {
+    title: "Mendelian Genetics Worksheets 2",
+    link: "#",
+  },
+  worksheet3: {
+    title: "Mendelian Genetics Worksheets 3",
+    link: "#",
+  },
+
+  evaluation: {
+    title: "Written Evaluation Form",
+    link: "#",
+  },
+};

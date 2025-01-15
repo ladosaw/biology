@@ -7,7 +7,7 @@ import meiosisDivisions from "../../../assets/images/meiosisDivision.png";
 import prophaseStage from "../../../assets/images/prophaseStage.png";
 import roleMeiosis from "../../../assets/images/roleMeiosis.png";
 import meiosisPdf from "../../../assets/pdf/meiosisPdf.pdf";
-import { vocab } from "./ConstantData.jsx";
+import { vocab, MiosisWorksheetsLink } from "./ConstantData.jsx";
 
 const MiosisAndMitosis = ({ hideFloating }) => {
   const handleDownload = () => {
@@ -495,23 +495,39 @@ const MiosisAndMitosis = ({ hideFloating }) => {
         </h1>
         <ul className="list-disc pl-6 text-lg text-gray-700 flex flex-col gap-5">
           <li className="hover:text-blue-600">
-            <a href="#" className="text-blue-600 hover:underline">
-              Lesson 1: Mitosis and Meosis
+            <a
+              href={MiosisWorksheetsLink.worksheet1.link}
+              target="_blank"
+              className="text-blue-600 hover:underline"
+            >
+              {MiosisWorksheetsLink.worksheet1.title}
             </a>
           </li>
           <li className="hover:text-blue-600">
-            <a href="#" className="text-blue-600 hover:underline">
-              Lesson 1: Mitosis and Meosis
+            <a
+              href={MiosisWorksheetsLink.worksheet2.link}
+              target="_blank"
+              className="text-blue-600 hover:underline"
+            >
+              {MiosisWorksheetsLink.worksheet2.title}
             </a>
           </li>
           <li className="hover:text-blue-600">
-            <a href="#" className="text-blue-600 hover:underline">
-              Lesson 1: Mitosis and Meosis
+            <a
+              href={MiosisWorksheetsLink.worksheet3.link}
+              target="_blank"
+              className="text-blue-600 hover:underline"
+            >
+              {MiosisWorksheetsLink.worksheet3.title}
             </a>
           </li>
           <li className="hover:text-blue-600">
-            <a href="#" className="text-blue-600 hover:underline">
-              Lesson 1: Mitosis and Meosis
+            <a
+              href={MiosisWorksheetsLink.evaluation.link}
+              target="_blank"
+              className="text-blue-600 hover:underline"
+            >
+              {MiosisWorksheetsLink.evaluation.title}
             </a>
           </li>
         </ul>

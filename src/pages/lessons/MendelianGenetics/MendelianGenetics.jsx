@@ -7,6 +7,7 @@ import {
   vocabulary,
   DominantRecessiveTraits,
   GenotypePhenotype,
+  MendelianGeneticsWorksheetsLink,
 } from "./ConstantData";
 import FlowerParentalCross from "../../../assets/images/FlowerParentalCross.svg";
 import FlowerParentalCross2 from "../../../assets/images/FlowerParentalCross2.svg";
@@ -627,23 +628,39 @@ const MendelianGenetics = ({ hideFloating }) => {
         </h1>
         <ul className="list-disc pl-6 text-lg text-gray-700 flex flex-col gap-5">
           <li className="hover:text-blue-600">
-            <a href="#" className="text-blue-600 hover:underline">
-              Lesson 1: Mendelian Genetics
+            <a
+              href={MendelianGeneticsWorksheetsLink.worksheet1.link}
+              target="_blank"
+              className="text-blue-600 hover:underline"
+            >
+              {MendelianGeneticsWorksheetsLink.worksheet1.title}
             </a>
           </li>
           <li className="hover:text-blue-600">
-            <a href="#" className="text-blue-600 hover:underline">
-              Lesson 1: Mendelian Genetics
+            <a
+              href={MendelianGeneticsWorksheetsLink.worksheet2.link}
+              target="_blank"
+              className="text-blue-600 hover:underline"
+            >
+              {MendelianGeneticsWorksheetsLink.worksheet2.title}
             </a>
           </li>
           <li className="hover:text-blue-600">
-            <a href="#" className="text-blue-600 hover:underline">
-              Lesson 1: Mendelian Genetics
+            <a
+              href={MendelianGeneticsWorksheetsLink.worksheet3.link}
+              target="_blank"
+              className="text-blue-600 hover:underline"
+            >
+              {MendelianGeneticsWorksheetsLink.worksheet3.title}
             </a>
           </li>
           <li className="hover:text-blue-600">
-            <a href="#" className="text-blue-600 hover:underline">
-              Lesson 1: Mendelian Genetics
+            <a
+              href={MendelianGeneticsWorksheetsLink.evaluation.link}
+              target="_blank"
+              className="text-blue-600 hover:underline"
+            >
+              {MendelianGeneticsWorksheetsLink.evaluation.title}
             </a>
           </li>
         </ul>

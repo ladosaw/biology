@@ -20,3 +20,23 @@ export const vocab = [
     desc: "Represents female. female have two X chromosomes.",
   },
 ];
+
+export const MiosisWorksheetsLink = {
+  worksheet1: {
+    title: "Miosis Worksheets 1",
+    link: "#",
+  },
+  worksheet2: {
+    title: "Miosis Worksheets 2",
+    link: "#",
+  },
+  worksheet3: {
+    title: "Miosis Worksheets 3",
+    link: "#",
+  },
+
+  evaluation: {
+    title: "Written Evaluation Form",
+    link: "#",
+  },
+};

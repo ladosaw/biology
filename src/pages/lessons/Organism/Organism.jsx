@@ -12,6 +12,8 @@ import FoodChainImage from "../../../assets/images/FoodChainImage.jpg";
 import FoodWebImage from "../../../assets/images/FoodWebImage.png";
 import BiomassImage from "../../../assets/images/BiomassImage.jpg";
 
+import { OrganismWorksheetsLink } from "./ConstantData";
+
 const Organism = ({ hideFloating }) => {
   const handleDownload = () => {
     const pdfUrl = OrganismPdf;
@@ -321,23 +323,39 @@ const Organism = ({ hideFloating }) => {
         </h1>
         <ul className="list-disc pl-6 text-lg text-gray-700 flex flex-col gap-5">
           <li className="hover:text-blue-600">
-            <a href="#" className="text-blue-600 hover:underline">
-              Lesson 1: Mendelian Genetics
+            <a
+              href={OrganismWorksheetsLink.worksheet1.link}
+              target="_blank"
+              className="text-blue-600 hover:underline"
+            >
+              {OrganismWorksheetsLink.worksheet1.title}
             </a>
           </li>
           <li className="hover:text-blue-600">
-            <a href="#" className="text-blue-600 hover:underline">
-              Lesson 1: Mendelian Genetics
+            <a
+              href={OrganismWorksheetsLink.worksheet2.link}
+              target="_blank"
+              className="text-blue-600 hover:underline"
+            >
+              {OrganismWorksheetsLink.worksheet2.title}
             </a>
           </li>
           <li className="hover:text-blue-600">
-            <a href="#" className="text-blue-600 hover:underline">
-              Lesson 1: Mendelian Genetics
+            <a
+              href={OrganismWorksheetsLink.worksheet3.link}
+              target="_blank"
+              className="text-blue-600 hover:underline"
+            >
+              {OrganismWorksheetsLink.worksheet3.title}
             </a>
           </li>
           <li className="hover:text-blue-600">
-            <a href="#" className="text-blue-600 hover:underline">
-              Lesson 1: Mendelian Genetics
+            <a
+              href={OrganismWorksheetsLink.evaluation.link}
+              target="_blank"
+              className="text-blue-600 hover:underline"
+            >
+              {OrganismWorksheetsLink.evaluation.title}
             </a>
           </li>
         </ul>
