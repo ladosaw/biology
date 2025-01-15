@@ -336,7 +336,7 @@ const MiosisAndMitosis = ({ hideFloating }) => {
               </h2>
               <table className="w-full border-collapse border border-gray-300">
                 <thead>
-                  <tr className="bg-gray-100">
+                  <tr className="bg-green-100">
                     <th className="border border-gray-300 p-2">
                       Characteristics
                     </th>
@@ -409,7 +409,7 @@ const MiosisAndMitosis = ({ hideFloating }) => {
 
               <table className="w-full border-collapse border border-gray-300 tables">
                 <thead>
-                  <tr className="bg-gray-100">
+                  <tr className="bg-green-100">
                     <th className="border border-gray-300 p-2">Mitosis</th>
                     <th className="border border-gray-300 p-2">Meiosis</th>
                   </tr>

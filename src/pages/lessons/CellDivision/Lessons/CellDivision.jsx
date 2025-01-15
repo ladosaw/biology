@@ -102,7 +102,7 @@ const Module1 = ({ hideFloating }) => {
               Table 1: Event of Interphase stage
             </caption>
             <thead>
-              <tr className="bg-gray-200">
+              <tr className="bg-green-100">
                 <th className="border border-gray-300 px-4 py-2">
                   SUMMARY EVENTS DURING THE INTERPHASE STAGE
                 </th>
@@ -220,7 +220,7 @@ const Module1 = ({ hideFloating }) => {
 
           <div className="border border-gray-300 rounded-lg overflow-hidden">
             {/* Header */}
-            <div className="grid grid-cols-2 bg-gray-100 font-bold p-2">
+            <div className="grid grid-cols-2 bg-green-100 font-bold p-2">
               <div>Stages of Mitosis - PMAT</div>
               <div>Activities within the Cell</div>
             </div>
