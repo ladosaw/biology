@@ -11,10 +11,9 @@ import DigestiveSystem from "../../../../components/model/DigestiveSystem";
 import pdfDgestive from "../../../../assets/pdf/humanDigestiveSystem.pdf";
 import { Link } from "react-router-dom";
 import { DigestiveWorksheetsLink } from "./ConstantDigestive.jsx";
+import Worksheets from "../../../../components/Worksheets/Worksheets.jsx";
 
 const Module1 = ({ hideFloating }) => {
-  const handleNextClick = () => {};
-
   const handleDownload = () => {
     const pdfUrl = pdfDgestive;
 
@@ -94,10 +93,7 @@ const Module1 = ({ hideFloating }) => {
               height="100%"
               src="https://www.youtube.com/embed/X3TAROotFfM?si=6_iy2e-FyJVBG_JK&amp;start=3"
               title="Human digestive system - How it works! "
-              frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
             ></iframe>
           </div>
 
@@ -281,49 +277,8 @@ const Module1 = ({ hideFloating }) => {
         </div>
       </div>
 
-      <div className="w-full flex flex-col items-start gap-6 p-4">
-        <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl leading-snug text-gray-800">
-          WORKSHEET
-        </h1>
-        <ul className="list-disc pl-6 text-lg text-gray-700 flex flex-col gap-5">
-          <li className="hover:text-blue-600">
-            <a
-              href={DigestiveWorksheetsLink.worksheet1.link}
-              target="_blank"
-              className="text-blue-600 hover:underline"
-            >
-              {DigestiveWorksheetsLink.worksheet1.title}
-            </a>
-          </li>
-          <li className="hover:text-blue-600">
-            <a
-              href={DigestiveWorksheetsLink.worksheet2.link}
-              target="_blank"
-              className="text-blue-600 hover:underline"
-            >
-              {DigestiveWorksheetsLink.worksheet2.title}
-            </a>
-          </li>
-          <li className="hover:text-blue-600">
-            <a
-              href={DigestiveWorksheetsLink.worksheet3.link}
-              target="_blank"
-              className="text-blue-600 hover:underline"
-            >
-              {DigestiveWorksheetsLink.worksheet3.title}
-            </a>
-          </li>
-          <li className="hover:text-blue-600">
-            <a
-              href={DigestiveWorksheetsLink.evaluation.link}
-              target="_blank"
-              className="text-blue-600 hover:underline"
-            >
-              {DigestiveWorksheetsLink.evaluation.title}
-            </a>
-          </li>
-        </ul>
-      </div>
+      <Worksheets WorksheetData={DigestiveWorksheetsLink} />
+
       {/* Footer */}
       <div className="flex flex-col items-end mt-10 space-y-4">
         <div className="bg-gray-200 w-full h-[1px]"></div>

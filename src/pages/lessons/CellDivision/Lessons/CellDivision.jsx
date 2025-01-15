@@ -4,6 +4,7 @@ import { FaArrowRight } from "react-icons/fa";
 import cellCycle from "../../../../assets/images/cellCycle.png";
 import stagesOfMitosis from "../../../../assets/pdf/stagesOfMitosis.pdf";
 import { MitosisWorksheetsLink } from "../ConstantMitosis.jsx";
+import Worksheets from "../../../../components/Worksheets/Worksheets.jsx";
 
 const Module1 = ({ hideFloating }) => {
   const handleNextClick = () => {};
@@ -73,8 +74,15 @@ const Module1 = ({ hideFloating }) => {
           </p>
         </div>
 
-        {/* Digestive System Section */}
         <div className="flex flex-col justify-center items-center mt-8z gap-8">
+          <div className="w-full sm:w-3/4 md:w-2/3 lg:w-3/4 xl:w-2/3 aspect-video rounded-lg overflow-hidden shadow-lg">
+            <iframe
+              className="w-full h-full"
+              src="https://www.youtube.com/embed/f-ldPgEfAHI?si=mdFsWp5wOdf5Jb2m&amp;start=6"
+              title="Mitosis"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            ></iframe>
+          </div>
           <img
             src={cellCycle}
             alt="Digestion illustration"
@@ -336,49 +344,7 @@ const Module1 = ({ hideFloating }) => {
         </h2>
       </div>
 
-      <div className="w-full flex flex-col items-start gap-6 p-4">
-        <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl leading-snug text-gray-800">
-          WORKSHEET
-        </h1>
-        <ul className="list-disc pl-6 text-lg text-gray-700 flex flex-col gap-5">
-          <li className="hover:text-blue-600">
-            <a
-              href={MitosisWorksheetsLink.worksheet1.link}
-              target="_blank"
-              className="text-blue-600 hover:underline"
-            >
-              {MitosisWorksheetsLink.worksheet1.title}
-            </a>
-          </li>
-          <li className="hover:text-blue-600">
-            <a
-              href={MitosisWorksheetsLink.worksheet2.link}
-              target="_blank"
-              className="text-blue-600 hover:underline"
-            >
-              {MitosisWorksheetsLink.worksheet2.title}
-            </a>
-          </li>
-          <li className="hover:text-blue-600">
-            <a
-              href={MitosisWorksheetsLink.worksheet3.link}
-              target="_blank"
-              className="text-blue-600 hover:underline"
-            >
-              {MitosisWorksheetsLink.worksheet3.title}
-            </a>
-          </li>
-          <li className="hover:text-blue-600">
-            <a
-              href={MitosisWorksheetsLink.evaluation.link}
-              target="_blank"
-              className="text-blue-600 hover:underline"
-            >
-              {MitosisWorksheetsLink.evaluation.title}
-            </a>
-          </li>
-        </ul>
-      </div>
+      <Worksheets WorksheetData={MitosisWorksheetsLink} />
       {/* Footer */}
       <div className="flex flex-col items-end mt-10 space-y-4">
         <div className="bg-gray-200 w-full h-[1px]"></div>

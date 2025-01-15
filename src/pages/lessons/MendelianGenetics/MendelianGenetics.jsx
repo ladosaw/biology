@@ -15,6 +15,7 @@ import Figure3 from "../../../assets/images/Figure3.png";
 import Figure4 from "../../../assets/images/Figure4.png";
 import PunnettSquare from "../../../assets/images/PunnettSquares.jpg";
 import DihybridCrossExample from "../../../assets/images/DihybridCrossExample.jpg";
+import Worksheets from "../../../components/Worksheets/Worksheets";
 
 const MendelianGenetics = ({ hideFloating }) => {
   const handleDownload = () => {
@@ -92,7 +93,7 @@ const MendelianGenetics = ({ hideFloating }) => {
         <h2 className="text-xl font-bold my-4">
           MENDEL<span>&#39;</span>S EXPERIMENT
         </h2>
-        <p className="indent-8 text-sm sm:text-base md:text-lg mb-4 ">
+        <p className="indent-8 text-sm sm:text-base md:text-lg mb-8 ">
           Gregor Mendel did study the changes in traits of pea plants. He
           developed the fundamental laws of heredity. He used to study genetics
           in garden peas (Pisum sativum) as they are easily planted, and their
@@ -101,7 +102,16 @@ const MendelianGenetics = ({ hideFloating }) => {
           self-pollination. He is known as the father of Genetics.
         </p>
 
-        <div className="rounded-md">
+        <div className="w-full sm:w-3/4 md:w-2/3 aspect-video rounded-lg overflow-hidden shadow-lg mx-auto">
+          <iframe
+            className="w-full h-full"
+            src="https://www.youtube.com/embed/Mehz7tCxjSE?si=xKfgPmBoDiPMmbqC&amp;start=12"
+            title="Mendelian Genetics"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          ></iframe>
+        </div>
+
+        <div className="rounded-md mt-8">
           <h3 className="text-xl font-semibold text-orange-600 mb-4">
             First: Production of pure-breeding strains of pea plants
           </h3>
@@ -622,49 +632,7 @@ const MendelianGenetics = ({ hideFloating }) => {
         <span className="font-semibold"> 9:3:3:1</span>
       </p>
 
-      <div className="w-full flex flex-col items-start gap-6 mt-12">
-        <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl leading-snug text-gray-800">
-          WORKSHEET
-        </h1>
-        <ul className="list-disc pl-6 text-lg text-gray-700 flex flex-col gap-5">
-          <li className="hover:text-blue-600">
-            <a
-              href={MendelianGeneticsWorksheetsLink.worksheet1.link}
-              target="_blank"
-              className="text-blue-600 hover:underline"
-            >
-              {MendelianGeneticsWorksheetsLink.worksheet1.title}
-            </a>
-          </li>
-          <li className="hover:text-blue-600">
-            <a
-              href={MendelianGeneticsWorksheetsLink.worksheet2.link}
-              target="_blank"
-              className="text-blue-600 hover:underline"
-            >
-              {MendelianGeneticsWorksheetsLink.worksheet2.title}
-            </a>
-          </li>
-          <li className="hover:text-blue-600">
-            <a
-              href={MendelianGeneticsWorksheetsLink.worksheet3.link}
-              target="_blank"
-              className="text-blue-600 hover:underline"
-            >
-              {MendelianGeneticsWorksheetsLink.worksheet3.title}
-            </a>
-          </li>
-          <li className="hover:text-blue-600">
-            <a
-              href={MendelianGeneticsWorksheetsLink.evaluation.link}
-              target="_blank"
-              className="text-blue-600 hover:underline"
-            >
-              {MendelianGeneticsWorksheetsLink.evaluation.title}
-            </a>
-          </li>
-        </ul>
-      </div>
+      <Worksheets WorksheetData={MendelianGeneticsWorksheetsLink} />
       {/* Footer */}
       <div className="flex flex-col items-end mt-10 space-y-4">
         <div className="bg-gray-200 w-full h-[1px]"></div>

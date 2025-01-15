@@ -8,6 +8,7 @@ import prophaseStage from "../../../assets/images/prophaseStage.png";
 import roleMeiosis from "../../../assets/images/roleMeiosis.png";
 import meiosisPdf from "../../../assets/pdf/meiosisPdf.pdf";
 import { vocab, MiosisWorksheetsLink } from "./ConstantData.jsx";
+import Worksheets from "../../../components/Worksheets/Worksheets.jsx";
 
 const MiosisAndMitosis = ({ hideFloating }) => {
   const handleDownload = () => {
@@ -94,8 +95,8 @@ const MiosisAndMitosis = ({ hideFloating }) => {
           <div className="chromosomesContainer">
             <p className="text-sm sm:text-base md:text-lg text-center mt-4">
               <span className="block">
-                <span className="font-semibold">Figure 2</span>:  Figure 2 :
-                Human Sex Chromosomes (XY, XX)               
+                <span className="font-semibold">Figure 2</span>: Human Sex
+                Chromosomes (XY, XX)
               </span>
             </p>
 
@@ -108,17 +109,25 @@ const MiosisAndMitosis = ({ hideFloating }) => {
             </div>
             <p className="text-sm sm:text-base md:text-lg text-center mt-4">
               <span className="block">
-                <span className="font-semibold">Figure 3</span>: Figure 3; Human
-                Karyotype with 46 diploid and 23 haploid
+                <span className="font-semibold">Figure 3</span>: Human Karyotype
+                with 46 diploid and 23 haploid
               </span>
             </p>
           </div>
 
-          {/* Indigestion Section */}
           <div className="bg-white py-8 px-8 rounded-lg shadow-lg space-y-6">
             <h1 className="text-primary text-3xl sm:text-4xl font-extrabold border-b-4 border-primary pb-3 mb-6">
               MEIOSIS: DIPLOID AND HAPLOID CHROMOSOMES
             </h1>
+
+            <div className="w-full sm:w-3/4 md:w-2/3 aspect-video rounded-lg overflow-hidden shadow-lg mx-auto">
+              <iframe
+                className="w-full h-full"
+                src="https://www.youtube.com/embed/VzDMG7ke69g?si=CnmX7tQZfp_Ms__q&amp;start=5"
+                title="MEIOSIS"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              ></iframe>
+            </div>
 
             <div className="flex flex-wrap md:flex-nowrap gap-6">
               <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
@@ -489,49 +498,7 @@ const MiosisAndMitosis = ({ hideFloating }) => {
         </div>
       </div>
 
-      <div className="w-full flex flex-col items-start gap-6 p-4">
-        <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl leading-snug text-gray-800">
-          WORKSHEET
-        </h1>
-        <ul className="list-disc pl-6 text-lg text-gray-700 flex flex-col gap-5">
-          <li className="hover:text-blue-600">
-            <a
-              href={MiosisWorksheetsLink.worksheet1.link}
-              target="_blank"
-              className="text-blue-600 hover:underline"
-            >
-              {MiosisWorksheetsLink.worksheet1.title}
-            </a>
-          </li>
-          <li className="hover:text-blue-600">
-            <a
-              href={MiosisWorksheetsLink.worksheet2.link}
-              target="_blank"
-              className="text-blue-600 hover:underline"
-            >
-              {MiosisWorksheetsLink.worksheet2.title}
-            </a>
-          </li>
-          <li className="hover:text-blue-600">
-            <a
-              href={MiosisWorksheetsLink.worksheet3.link}
-              target="_blank"
-              className="text-blue-600 hover:underline"
-            >
-              {MiosisWorksheetsLink.worksheet3.title}
-            </a>
-          </li>
-          <li className="hover:text-blue-600">
-            <a
-              href={MiosisWorksheetsLink.evaluation.link}
-              target="_blank"
-              className="text-blue-600 hover:underline"
-            >
-              {MiosisWorksheetsLink.evaluation.title}
-            </a>
-          </li>
-        </ul>
-      </div>
+      <Worksheets WorksheetData={MiosisWorksheetsLink} />
       <div className="flex flex-col items-end mt-10 space-y-4">
         <div className="bg-gray-200 w-full h-[1px]"></div>
         {/* <Link to="lessons#mendelian-genetics">

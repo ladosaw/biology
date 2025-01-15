@@ -11,8 +11,8 @@ import DecomposersImage from "../../../assets/images/DecomposersImage.jpg";
 import FoodChainImage from "../../../assets/images/FoodChainImage.jpg";
 import FoodWebImage from "../../../assets/images/FoodWebImage.png";
 import BiomassImage from "../../../assets/images/BiomassImage.jpg";
-
 import { OrganismWorksheetsLink } from "./ConstantData";
+import Worksheets from "../../../components/Worksheets/Worksheets";
 
 const Organism = ({ hideFloating }) => {
   const handleDownload = () => {
@@ -57,6 +57,16 @@ const Organism = ({ hideFloating }) => {
         <h1 className="text-primary text-3xl sm:text-4xl font-extrabold border-b-4 border-primary pb-3 mb-6">
           INTRODUCTION
         </h1>
+
+        <div className="w-full sm:w-3/4 md:w-2/3 aspect-video rounded-lg overflow-hidden shadow-lg mx-auto">
+          <iframe
+            className="w-full h-full"
+            src="https://www.youtube.com/embed/D1In8W2qev4?si=CfjZcmks9oRHtJDs&amp;start=7"
+            title="TRANSFER OF ENERGY IN THE
+          TROPHIC LEVEL"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          ></iframe>
+        </div>
 
         <p className="indent-8 text-sm sm:text-base md:text-lg mb-8">
           Energy flow in the ecosystem is a <b>one-way process</b>. It flows
@@ -317,49 +327,7 @@ const Organism = ({ hideFloating }) => {
         </div>
       </div>
 
-      <div className="w-full flex flex-col items-start gap-6 mt-12">
-        <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl leading-snug text-gray-800">
-          WORKSHEET
-        </h1>
-        <ul className="list-disc pl-6 text-lg text-gray-700 flex flex-col gap-5">
-          <li className="hover:text-blue-600">
-            <a
-              href={OrganismWorksheetsLink.worksheet1.link}
-              target="_blank"
-              className="text-blue-600 hover:underline"
-            >
-              {OrganismWorksheetsLink.worksheet1.title}
-            </a>
-          </li>
-          <li className="hover:text-blue-600">
-            <a
-              href={OrganismWorksheetsLink.worksheet2.link}
-              target="_blank"
-              className="text-blue-600 hover:underline"
-            >
-              {OrganismWorksheetsLink.worksheet2.title}
-            </a>
-          </li>
-          <li className="hover:text-blue-600">
-            <a
-              href={OrganismWorksheetsLink.worksheet3.link}
-              target="_blank"
-              className="text-blue-600 hover:underline"
-            >
-              {OrganismWorksheetsLink.worksheet3.title}
-            </a>
-          </li>
-          <li className="hover:text-blue-600">
-            <a
-              href={OrganismWorksheetsLink.evaluation.link}
-              target="_blank"
-              className="text-blue-600 hover:underline"
-            >
-              {OrganismWorksheetsLink.evaluation.title}
-            </a>
-          </li>
-        </ul>
-      </div>
+      <Worksheets WorksheetData={OrganismWorksheetsLink} />
       {/* Footer */}
       <div className="flex flex-col items-end mt-10 space-y-4">
         <div className="bg-gray-200 w-full h-[1px]"></div>
