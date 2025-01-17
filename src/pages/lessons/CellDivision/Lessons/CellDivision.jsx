@@ -3,7 +3,7 @@ import FloatingButton from "../../../../components/FloatingButton/FloatingButton
 import { FaArrowRight } from "react-icons/fa";
 import cellCycle from "../../../../assets/images/NewCellCycle.jpg";
 import stagesOfMitosis from "../../../../assets/pdf/stagesOfMitosis.pdf";
-import { MitosisWorksheetsLink } from "../ConstantMitosis.jsx";
+import { MitosisWorksheetsLink, StageOfMitosis } from "../ConstantMitosis.jsx";
 import Worksheets from "../../../../components/Worksheets/Worksheets.jsx";
 
 const Module1 = ({ hideFloating }) => {
@@ -14,7 +14,7 @@ const Module1 = ({ hideFloating }) => {
 
     const link = document.createElement("a");
     link.href = pdfUrl;
-    link.download = "LESSON 1: CELL CYCLE: Interphase and cell Division";
+    link.download = "LESSON 2: CELL CYCLE: Interphase and cell Division";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -95,76 +95,66 @@ const Module1 = ({ hideFloating }) => {
           </p>
         </div>
 
-        <div className="p-6">
-          <h2 className="text-xl font-bold mb-4">A. INTERPHASE</h2>
-          <table className="w-full border border-gray-300">
-            <caption className="text-lg font-semibold mb-2">
-              Table 1: Event of Interphase stage
-            </caption>
-            <thead>
-              <tr className="bg-green-100">
-                <th className="border border-gray-300 px-4 py-2">
-                  SUMMARY EVENTS DURING THE INTERPHASE STAGE
-                </th>
-                <th className="border border-gray-300 px-4 py-2"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="border border-gray-300 px-4 py-2 font-bold">
-                  GO
-                </td>
-                <td className="border border-gray-300 px-4 py-2">
-                  <ul className="list-disc pl-5">
-                    <li>
-                      A resting phase where the cell has left the cycle and has
-                      stopped dividing
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 px-4 py-2 font-bold">
-                  First Gap 1 – G1
-                </td>
-                <td className="border border-gray-300 px-4 py-2">
-                  <ul className="list-disc pl-5">
-                    <li>Cell grows initially</li>
-                    <li>
-                      Synthesis of protein and ribonucleic acid or RNA occurs
-                    </li>
-                    <li>Organelles such as mitochondria increase in number</li>
-                  </ul>
-                </td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 px-4 py-2 font-bold">
-                  Synthesis phase or S phase
-                </td>
-                <td className="border border-gray-300 px-4 py-2">
-                  <ul className="list-disc pl-5">
-                    <li>
-                      DNA is synthesized, thus replicating the chromosomes in
-                      preparation for the next cell division
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 px-4 py-2 font-bold">
-                  Second Gap or G2
-                </td>
-                <td className="border border-gray-300 px-4 py-2">
-                  <ul className="list-disc pl-5">
-                    <li>Cell grows rapidly</li>
-                    <li>
-                      Cell prepares for the actual cell division (mitosis)
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div className="my-6">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-2 text-gray-800">
+            A. INTERPHASE
+          </h2>
+
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-center my-6">
+            Table 1: Events of Interphase Stage
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+            {[
+              {
+                title: "G0",
+                description: [
+                  "A resting phase where the cell has left the cycle and has stopped dividing.",
+                ],
+                icon: "🛑",
+              },
+              {
+                title: "First Gap 1 – G1",
+                description: [
+                  "Cell grows initially.",
+                  "Synthesis of protein and ribonucleic acid (RNA) occurs.",
+                  "Organelles such as mitochondria increase in number.",
+                ],
+                icon: "🌱",
+              },
+              {
+                title: "Synthesis Phase or S Phase",
+                description: [
+                  "DNA is synthesized, thus replicating the chromosomes in preparation for the next cell division.",
+                ],
+                icon: "🧬",
+              },
+              {
+                title: "Second Gap or G2",
+                description: [
+                  "Cell grows rapidly.",
+                  "Cell prepares for the actual cell division (mitosis).",
+                ],
+                icon: "⚡",
+              },
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all border border-gray-200 p-6"
+              >
+                <div className="flex items-center mb-4">
+                  <span className="text-3xl mr-4">{item.icon}</span>
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-700">
+                    {item.title}
+                  </h3>
+                </div>
+                <ul className="list-disc pl-7 space-y-2 text-gray-600">
+                  {item.description.map((desc, i) => (
+                    <li key={i}>{desc}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
 
         <p className="text-sm sm:text-base md:text-lg mb-8">
@@ -179,7 +169,10 @@ const Module1 = ({ hideFloating }) => {
           preparation for the cell division. Table 1 is the summary of the event
           during the interphase stage
         </p>
-        <h2 className="text-xl font-bold mb-4">B. Cell Division</h2>
+
+        <h2 className="text-2xl sm:text-3xl font-bold mb-2 text-gray-800">
+          B. Cell Division
+        </h2>
         <h2 className="text-sm sm:text-base md:text-lg mb-4">
           Cell Division may be the nuclear division (karyokinesis), which
           involves the division of the nucleus, and cytoplasmic division
@@ -215,122 +208,43 @@ const Module1 = ({ hideFloating }) => {
         </p>
 
         <div className="p-4 bg-gray-50">
-          <h2 className="text-2xl font-bold mb-4">
-            Table 2: Stages of Mitosis with Each Activity
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-center mb-6">
+            Table 2: Stages of Mitosis with Activities
           </h2>
 
-          <div className="border border-gray-300 rounded-lg overflow-hidden">
-            {/* Header */}
-            <div className="grid grid-cols-2 bg-green-100 font-bold p-2">
-              <div>Stages of Mitosis - PMAT</div>
-              <div>Activities within the Cell</div>
+          <div className="border border-gray-300 rounded-lg">
+            <div className="grid grid-cols-2 bg-green-100 text-center font-bold p-3">
+              <div className="text-sm sm:text-base md:text-lg">
+                Stages of Mitosis
+              </div>
+              <div className="text-sm sm:text-base md:text-lg">
+                Activities within the Cell
+              </div>
             </div>
 
-            {/* Prophase Row */}
-            <div className="grid grid-cols-2 border-t border-gray-300 p-2">
-              <div className="flex flex-col items-center">
-                <img
-                  src="/images/Prophase.jpg"
-                  alt="Prophase of Mitosis"
-                  className="mb-2 w-full max-w-xs h-auto object-contain"
-                />
-                <p className="font-bold text-center">Prophase of Mitosis</p>
-              </div>
-              <ul className="list-disc list-inside">
-                <li>
-                  Nucleolus disappears in the nucleus, serving as a starting
-                  signal.
-                </li>
-                <li>The nuclear membrane disintegrates.</li>
-                <li>
-                  Each chromosome appears as two identical sister chromatids
-                  joined at the centromere.
-                </li>
-                <li>
-                  In the cytoplasm, spindle fibers begin to form, made of
-                  microtubules arranged between the two centrioles.
-                </li>
-                <li>
-                  The centrioles move away from each other, propelled by
-                  lengthening bundles of microtubules.
-                </li>
-              </ul>
-            </div>
+            {StageOfMitosis.map((stage, index) => (
+              <div
+                key={index}
+                className="grid grid-cols-1 sm:grid-cols-2 items-start gap-4 border-t border-gray-300 p-4"
+              >
+                <div className="flex flex-col items-center">
+                  <img
+                    src={stage.image}
+                    alt={stage.title}
+                    className="mb-4 w-full max-w-md h-auto object-contain"
+                  />
+                  <p className="font-bold text-center text-sm sm:text-base md:text-lg">
+                    {stage.title}
+                  </p>
+                </div>
 
-            {/* Metaphase Row */}
-            <div className="grid grid-cols-2 border-t border-gray-300 p-2">
-              <div className="flex flex-col items-center">
-                <img
-                  src="/images/Metaphase.jpg"
-                  alt="Metaphase of Mitosis"
-                  className="mb-2 w-full max-w-xs h-auto object-contain"
-                />
-                <p className="font-bold text-center">Metaphase of Mitosis</p>
+                <ul className="list-disc pl-4 text-sm sm:text-base md:text-lg leading-relaxed">
+                  {stage.activities.map((activity, i) => (
+                    <li key={i}>{activity}</li>
+                  ))}
+                </ul>
               </div>
-              <ul className="list-disc list-inside">
-                <li>
-                  The centrioles are now at the opposite poles of the cell.
-                </li>
-                <li>Chromosomes align at the equatorial plane.</li>
-                <li>
-                  Each spindle fiber from both centrosomes connects to each
-                  chromosome through its kinetochore.
-                </li>
-              </ul>
-            </div>
-
-            <div className="grid grid-cols-2 border-t border-gray-300 p-2">
-              <div className="flex flex-col items-center">
-                <img
-                  src="/images/Anaphase.jpg"
-                  alt="Anaphase of Mitosis"
-                  className="mb-2 w-full max-w-xs h-auto object-contain"
-                />
-                <p className="font-bold text-center">Anaphase of Mitosis</p>
-              </div>
-              <ul className="list-disc list-inside">
-                <li>
-                  Spindle fibers begin to contract and become shorter. Continued
-                  contraction causes the separation of the genetically identical
-                  sister chromatids.
-                </li>
-                <li>Centromeres divide.</li>
-                <li>The single chromatids move towards the opposite poles</li>
-                <li>
-                  Each chromatid is now considered an individual chromosome.
-                </li>
-                <li>
-                  At the end of anaphase, the two poles of the cell have an
-                  equal set of chromosomes.
-                </li>
-              </ul>
-            </div>
-
-            <div className="grid grid-cols-2 border-t border-gray-300 p-2">
-              <div className="flex flex-col items-center">
-                <img
-                  src="/images/telophase.jpg"
-                  alt="Telophase of Mitosis"
-                  className="mb-2 w-full max-w-xs h-auto object-contain"
-                />
-                <p className="font-bold text-center">Telophase of Mitosis</p>
-              </div>
-              <ul className="list-disc list-inside">
-                <li>
-                  The chromosomes are now at the opposing poles of the spindle.
-                </li>
-                <li>The microtubules disappear.</li>
-                <li>
-                  Two sets of chromosomes are surrounded by new nuclear
-                  membranes, completing the nuclear division process known as{" "}
-                  <b>karyokinesis</b>.
-                </li>
-                <li>
-                  Cytoplasmic division called <b>cytokinesis</b> occurs
-                  concurrently, splitting the cell into two.
-                </li>
-              </ul>
-            </div>
+            ))}
           </div>
         </div>
 

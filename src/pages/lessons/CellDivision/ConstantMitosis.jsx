@@ -1,3 +1,47 @@
+export const StageOfMitosis = [
+  {
+    title: "Prophase of Mitosis",
+    image: "/images/Prophase.jpg",
+    activities: [
+      "Nucleolus disappears in the nucleus, serving as a starting signal.",
+      "The nuclear membrane disintegrates.",
+      "Each chromosome appears as two identical sister chromatids joined at the centromere.",
+      "In the cytoplasm, spindle fibers begin to form, made of microtubules arranged between the two centrioles.",
+      "The centrioles move away from each other, propelled by lengthening bundles of microtubules.",
+    ],
+  },
+  {
+    title: "Metaphase of Mitosis",
+    image: "/images/Metaphase.jpg",
+    activities: [
+      "The centrioles are now at the opposite poles of the cell.",
+      "Chromosomes align at the equatorial plane.",
+      "Each spindle fiber from both centrosomes connects to each chromosome through its kinetochore.",
+    ],
+  },
+  {
+    title: "Anaphase of Mitosis",
+    image: "/images/Anaphase.jpg",
+    activities: [
+      "Spindle fibers begin to contract and become shorter.",
+      "Centromeres divide.",
+      "The single chromatids move towards the opposite poles.",
+      "Each chromatid is now considered an individual chromosome.",
+      "At the end of anaphase, the two poles of the cell have an equal set of chromosomes.",
+    ],
+  },
+  {
+    title: "Telophase of Mitosis",
+    image: "/images/telophase.jpg",
+    activities: [
+      "The chromosomes are now at the opposing poles of the spindle.",
+      "The microtubules disappear.",
+      "Two sets of chromosomes are surrounded by new nuclear membranes, completing the nuclear division process known as karyokinesis.",
+      "Cytoplasmic division called cytokinesis occurs concurrently, splitting the cell into two.",
+    ],
+  },
+];
+
 export const MitosisWorksheetsLink = {
   worksheet1: {
     title: "Mitosis Worksheets 1",

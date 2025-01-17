@@ -16,7 +16,7 @@ const MiosisAndMitosis = ({ hideFloating }) => {
 
     const link = document.createElement("a");
     link.href = pdfUrl;
-    link.download = "LESSON 1: Cell Cycle: COMPARING MITOSIS AND MEIOSIS";
+    link.download = "LESSON 3: Cell Cycle: COMPARING MITOSIS AND MEIOSIS";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
