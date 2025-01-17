@@ -28,11 +28,11 @@ export const MiosisWorksheetsLink = {
   },
   worksheet2: {
     title: "Miosis Worksheets 2",
-    link: "#",
+    link: "https://forms.gle/jdLjVHgiKNhC38kN9",
   },
   worksheet3: {
     title: "Miosis Worksheets 3",
-    link: "#",
+    link: "https://forms.gle/LiXfYJUe8Zg7mVSg9",
   },
 
   evaluation: {
