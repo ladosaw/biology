@@ -3,7 +3,11 @@ import FloatingButton from "../../../../components/FloatingButton/FloatingButton
 import { FaArrowRight } from "react-icons/fa";
 import cellCycle from "../../../../assets/images/NewCellCycle.jpg";
 import stagesOfMitosis from "../../../../assets/pdf/stagesOfMitosis.pdf";
-import { MitosisWorksheetsLink, StageOfMitosis } from "../ConstantMitosis.jsx";
+import {
+  MitosisWorksheetsLink,
+  StageOfMitosis,
+  InterphaseStage,
+} from "../ConstantMitosis.jsx";
 import Worksheets from "../../../../components/Worksheets/Worksheets.jsx";
 
 const Module1 = ({ hideFloating }) => {
@@ -104,39 +108,7 @@ const Module1 = ({ hideFloating }) => {
             Table 1: Events of Interphase Stage
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
-            {[
-              {
-                title: "G0",
-                description: [
-                  "A resting phase where the cell has left the cycle and has stopped dividing.",
-                ],
-                icon: "🛑",
-              },
-              {
-                title: "First Gap 1 – G1",
-                description: [
-                  "Cell grows initially.",
-                  "Synthesis of protein and ribonucleic acid (RNA) occurs.",
-                  "Organelles such as mitochondria increase in number.",
-                ],
-                icon: "🌱",
-              },
-              {
-                title: "Synthesis Phase or S Phase",
-                description: [
-                  "DNA is synthesized, thus replicating the chromosomes in preparation for the next cell division.",
-                ],
-                icon: "🧬",
-              },
-              {
-                title: "Second Gap or G2",
-                description: [
-                  "Cell grows rapidly.",
-                  "Cell prepares for the actual cell division (mitosis).",
-                ],
-                icon: "⚡",
-              },
-            ].map((item, index) => (
+            {InterphaseStage.map((item, index) => (
               <div
                 key={index}
                 className="bg-white rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all border border-gray-200 p-6"

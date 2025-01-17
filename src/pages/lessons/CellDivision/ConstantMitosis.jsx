@@ -42,6 +42,40 @@ export const StageOfMitosis = [
   },
 ];
 
+export const InterphaseStage = [
+  {
+    title: "G0",
+    description: [
+      "A resting phase where the cell has left the cycle and has stopped dividing.",
+    ],
+    icon: "🛑",
+  },
+  {
+    title: "First Gap 1 – G1",
+    description: [
+      "Cell grows initially.",
+      "Synthesis of protein and ribonucleic acid (RNA) occurs.",
+      "Organelles such as mitochondria increase in number.",
+    ],
+    icon: "🌱",
+  },
+  {
+    title: "Synthesis Phase or S Phase",
+    description: [
+      "DNA is synthesized, thus replicating the chromosomes in preparation for the next cell division.",
+    ],
+    icon: "🧬",
+  },
+  {
+    title: "Second Gap or G2",
+    description: [
+      "Cell grows rapidly.",
+      "Cell prepares for the actual cell division (mitosis).",
+    ],
+    icon: "⚡",
+  },
+];
+
 export const MitosisWorksheetsLink = {
   worksheet1: {
     title: "Mitosis Worksheets 1",
