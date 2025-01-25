@@ -9,6 +9,7 @@ import {
   InterphaseStage,
 } from "../ConstantMitosis.jsx";
 import Worksheets from "../../../../components/Worksheets/Worksheets.jsx";
+import MitosisAnimation from "./MitosisAnimation.jsx";
 
 const Module1 = ({ hideFloating }) => {
   const handleNextClick = () => {};
@@ -78,15 +79,25 @@ const Module1 = ({ hideFloating }) => {
           </p>
         </div>
 
-        <div className="flex flex-col justify-center items-center mt-8z gap-8">
-          <div className="w-full sm:w-3/4 md:w-2/3 lg:w-3/4 xl:w-2/3 aspect-video rounded-lg overflow-hidden shadow-lg">
+        <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-semibold my-6">
+          Mitosis 3D Animation
+        </h1>
+        <div className="w-full h-auto rounded-lg">
+          <MitosisAnimation />
+        </div>
+        <div className="flex flex-col justify-center items-center mt-8z gap-8 my-8">
+          {/* <div className="w-full sm:w-3/4 md:w-2/3 lg:w-3/4 xl:w-2/3 aspect-video rounded-lg overflow-hidden shadow-lg">
+            <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
+              The Process of Mitosis
+            </h1>
             <iframe
               className="w-full h-full"
               src="https://www.youtube.com/embed/f-ldPgEfAHI?si=mdFsWp5wOdf5Jb2m&amp;start=6"
               title="Mitosis"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             ></iframe>
-          </div>
+          </div> */}
+
           <img
             src={cellCycle}
             alt="Digestion illustration"
@@ -98,7 +109,6 @@ const Module1 = ({ hideFloating }) => {
             </span>
           </p>
         </div>
-
         <div className="my-6">
           <h2 className="text-2xl sm:text-3xl font-bold mb-2 text-gray-800">
             A. INTERPHASE
@@ -128,7 +138,6 @@ const Module1 = ({ hideFloating }) => {
             ))}
           </div>
         </div>
-
         <p className="text-sm sm:text-base md:text-lg mb-8">
           The interphase refers to the period that follows one cell division and
           precedes another. During this stage, the cell does not divide; it
@@ -141,7 +150,6 @@ const Module1 = ({ hideFloating }) => {
           preparation for the cell division. Table 1 is the summary of the event
           during the interphase stage
         </p>
-
         <h2 className="text-2xl sm:text-3xl font-bold mb-2 text-gray-800">
           B. Cell Division
         </h2>
@@ -178,7 +186,6 @@ const Module1 = ({ hideFloating }) => {
           </span>{" "}
           Figure 2 above and 3 below: show the four Stages of Mitosis (IPMAT)
         </p>
-
         <div className="p-4 bg-gray-50">
           <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-center mb-6">
             Table 2: Stages of Mitosis with Activities
@@ -219,7 +226,6 @@ const Module1 = ({ hideFloating }) => {
             ))}
           </div>
         </div>
-
         <h2 className="text-xl font-bold mb-4">Remember</h2>
         <h2 className="text-sm sm:text-base md:text-lg mb-4">
           Two things happen in mitosis: First, the nucleus divides (called

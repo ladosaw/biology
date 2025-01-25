@@ -12,6 +12,7 @@ import pdfDgestive from "../../../../assets/pdf/humanDigestiveSystem.pdf";
 import { Link } from "react-router-dom";
 import { DigestiveWorksheetsLink } from "./ConstantDigestive.jsx";
 import Worksheets from "../../../../components/Worksheets/Worksheets.jsx";
+import DigestiveSystemAnimation from "../DigestiveSystemAnimation.jsx";
 
 const Module1 = ({ hideFloating }) => {
   const handleDownload = () => {
@@ -87,7 +88,7 @@ const Module1 = ({ hideFloating }) => {
 
         {/* Digestive System Section */}
         <div className="flex flex-col justify-center items-center mt-8 gap-8">
-          <div className="w-full sm:w-3/4 md:w-2/3 lg:w-3/4 xl:w-2/3 aspect-video rounded-lg overflow-hidden shadow-lg">
+          {/* <div className="w-full sm:w-3/4 md:w-2/3 lg:w-3/4 xl:w-2/3 aspect-video rounded-lg overflow-hidden shadow-lg">
             <iframe
               width="100%"
               height="100%"
@@ -95,16 +96,23 @@ const Module1 = ({ hideFloating }) => {
               title="Human digestive system - How it works! "
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             ></iframe>
-          </div>
+          </div> */}
 
           <h1 className="text-primary text-xl sm:text-2xl md:text-3xl font-semibold mt-6">
-            Digestive System
+            Digestive System 3D
           </h1>
-          <div className="w-full h-64 sm:h-80 md:h-[500px] rounded-lg">
-            <Render3d>
+          <div className="w-full h-auto rounded-lg">
+            {/* <Render3d>
               <DigestiveSystem />
-            </Render3d>
+            </Render3d> */}
+            <DigestiveSystemAnimation />
           </div>
+          {/* <div className="min-h-scree flex flex-col items-center justify-center space-y-10">
+            <h1 className="text-3xl font-bold text-center text-gray-800 py-6">
+              Biological System Animations
+            </h1>
+            <DigestiveSystemAnimation />
+          </div> */}
           <p className="text-sm sm:text-base md:text-lg text-center">
             These are processes namely:
             <span className="font-semibold block mt-2">

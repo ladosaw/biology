@@ -13,6 +13,7 @@ import FoodWebImage from "../../../assets/images/FoodWebImage.jpg";
 import BiomassImage from "../../../assets/images/BiomassImage.jpg";
 import { OrganismWorksheetsLink } from "./ConstantData";
 import Worksheets from "../../../components/Worksheets/Worksheets";
+import FoodWebAnimation from "./FoodWebAnimation.jsx";
 
 const Organism = ({ hideFloating }) => {
   const handleDownload = () => {
@@ -58,7 +59,14 @@ const Organism = ({ hideFloating }) => {
           INTRODUCTION
         </h1>
 
-        <div className="w-full sm:w-3/4 md:w-2/3 aspect-video rounded-lg overflow-hidden shadow-lg mx-auto">
+        <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-semibold my-6">
+          Food Web 3D
+        </h1>
+        <div className="w-full h-auto rounded-lg">
+          <FoodWebAnimation />
+        </div>
+
+        {/* <div className="w-full sm:w-3/4 md:w-2/3 aspect-video rounded-lg overflow-hidden shadow-lg mx-auto">
           <iframe
             className="w-full h-full"
             src="https://www.youtube.com/embed/D1In8W2qev4?si=CfjZcmks9oRHtJDs&amp;start=7"
@@ -66,7 +74,7 @@ const Organism = ({ hideFloating }) => {
           TROPHIC LEVEL"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           ></iframe>
-        </div>
+        </div> */}
 
         <p className="indent-8 text-sm sm:text-base md:text-lg mb-8">
           Energy flow in the ecosystem is a <b>one-way process</b>. It flows

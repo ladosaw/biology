@@ -9,6 +9,7 @@ import roleMeiosis from "../../../assets/images/roleMeiosis.png";
 import meiosisPdf from "../../../assets/pdf/meiosisPdf.pdf";
 import { vocab, MiosisWorksheetsLink } from "./ConstantData.jsx";
 import Worksheets from "../../../components/Worksheets/Worksheets.jsx";
+import MitosisVsMeiosisAnimation from "./MitosisVsMeiosisAnimation.jsx";
 
 const MiosisAndMitosis = ({ hideFloating }) => {
   const handleDownload = () => {
@@ -69,7 +70,12 @@ const MiosisAndMitosis = ({ hideFloating }) => {
           </div>
         </div>
 
-        {/* Digestive System Section */}
+        <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-semibold my-6">
+          Mitosis & Meiosis Animations
+        </h1>
+        <div className="w-full h-auto rounded-lg">
+          <MitosisVsMeiosisAnimation />
+        </div>
         <div className="flex flex-col justify-center items-center mt-8 gap-8">
           <div className="w-full h-64 sm:h-80 md:h-auto rounded-lg flex items-center justify-center">
             <img
@@ -120,14 +126,14 @@ const MiosisAndMitosis = ({ hideFloating }) => {
               MEIOSIS: DIPLOID AND HAPLOID CHROMOSOMES
             </h1>
 
-            <div className="w-full sm:w-3/4 md:w-2/3 aspect-video rounded-lg overflow-hidden shadow-lg mx-auto">
+            {/* <div className="w-full sm:w-3/4 md:w-2/3 aspect-video rounded-lg overflow-hidden shadow-lg mx-auto">
               <iframe
                 className="w-full h-full"
                 src="https://www.youtube.com/embed/VzDMG7ke69g?si=CnmX7tQZfp_Ms__q&amp;start=5"
                 title="MEIOSIS"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               ></iframe>
-            </div>
+            </div> */}
 
             <div className="flex flex-wrap md:flex-nowrap gap-6">
               <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
