@@ -1,7 +1,7 @@
 const FoodWebAnimation = () => {
   return (
-    <div className="w-full bg-gray-50 py-12 px-6 sm:px-12">
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-sm overflow-hidden">
+    <div className="w-full py-12 px-6 sm:px-12">
+      <div className="max-w-4xl mx-auto bg-white rounded-lg overflow-hidden">
         <iframe
           title="Food Web"
           className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] rounded-lg"

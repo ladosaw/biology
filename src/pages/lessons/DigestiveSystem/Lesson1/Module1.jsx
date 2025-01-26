@@ -99,7 +99,7 @@ const Module1 = ({ hideFloating }) => {
           </div> */}
 
           <h1 className="text-primary text-xl sm:text-2xl md:text-3xl font-semibold mt-6">
-            Digestive System 3D
+            Digestive System 3D Model
           </h1>
           <div className="w-full h-auto rounded-lg">
             {/* <Render3d>

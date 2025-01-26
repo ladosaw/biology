@@ -60,7 +60,7 @@ const Organism = ({ hideFloating }) => {
         </h1>
 
         <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-semibold my-6">
-          Food Web 3D
+          Food Web 3D Model
         </h1>
         <div className="w-full h-auto rounded-lg">
           <FoodWebAnimation />
