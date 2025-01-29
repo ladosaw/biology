@@ -72,7 +72,7 @@ const MiosisAndMitosis = ({ hideFloating }) => {
         </div>
 
         <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-semibold my-6">
-          Meiosis 3D Model
+          Fun Meiosis Game
         </h1>
         <div className="w-full h-auto rounded-lg">
           {/* <MitosisVsMeiosisAnimation /> */}
