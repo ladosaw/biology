@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import FloatingButton from "../../../../components/FloatingButton/FloatingButton.jsx";
 import { FaArrowRight } from "react-icons/fa";
 import Indigestion from "../../../../assets/images/indigestion.svg";
@@ -13,8 +13,22 @@ import { Link } from "react-router-dom";
 import { DigestiveWorksheetsLink } from "./ConstantDigestive.jsx";
 import Worksheets from "../../../../components/Worksheets/Worksheets.jsx";
 import DigestiveSystemAnimation from "../DigestiveSystemAnimation.jsx";
+import WorksheetModal from "../../../../components/Modal/WorksheetModal.jsx";
+import Worksheet from "./Worksheet.jsx";
+import Worksheet2 from "./Worksheet2.jsx";
 
 const Module1 = ({ hideFloating }) => {
+  const [isModalWorksheetOpen, setIsModalWorksheetModalOpen] = useState(false);
+  const [isModalWorksheet2Open, setIsModalWorksheet2ModalOpen] =
+    useState(false);
+
+  const toggleModalWorksheet = () => {
+    setIsModalWorksheetModalOpen((prev) => !prev);
+  };
+  const toggleModalWorksheet2 = () => {
+    setIsModalWorksheet2ModalOpen((prev) => !prev);
+  };
+
   const handleDownload = () => {
     const pdfUrl = pdfDgestive;
 
@@ -285,7 +299,29 @@ const Module1 = ({ hideFloating }) => {
         </div>
       </div>
 
-      <Worksheets WorksheetData={DigestiveWorksheetsLink} />
+      {/* <Worksheet /> */}
+
+      <Worksheets
+        WorksheetData={DigestiveWorksheetsLink}
+        toggleModalWorksheet={toggleModalWorksheet}
+        toggleModalWorksheet2={toggleModalWorksheet2}
+      />
+
+      <WorksheetModal
+        open={isModalWorksheetOpen}
+        onClose={toggleModalWorksheet}
+        title={DigestiveWorksheetsLink.worksheet1.title}
+      >
+        <Worksheet />
+      </WorksheetModal>
+
+      <WorksheetModal
+        open={isModalWorksheet2Open}
+        onClose={toggleModalWorksheet2}
+        title={DigestiveWorksheetsLink.worksheet2.title}
+      >
+        <Worksheet2 />
+      </WorksheetModal>
 
       {/* Footer */}
       <div className="flex flex-col items-end mt-10 space-y-4">

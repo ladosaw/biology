@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
-const Worksheet = ({ WorksheetData }) => {
+const Worksheet = ({
+  WorksheetData,
+  toggleModalWorksheet,
+  toggleModalWorksheet2,
+}) => {
   const [clickedLinks, setClickedLinks] = useState({
     worksheet1: false,
     worksheet2: false,
@@ -25,24 +29,30 @@ const Worksheet = ({ WorksheetData }) => {
       </h1>
       <ul className="list-disc pl-6 text-lg text-gray-700 flex flex-col gap-5">
         <li className="hover:text-blue-600">
-          <a
+          {/* <a
             href={WorksheetData.worksheet1.link}
             target="_blank"
             onClick={() => handleLinkClick("worksheet1")}
             className="text-blue-600 hover:underline"
           >
             {WorksheetData.worksheet1.title}
-          </a>
+          </a> */}
+          <button onClick={toggleModalWorksheet}>
+            {WorksheetData.worksheet1.title}
+          </button>
         </li>
         <li className="hover:text-blue-600">
-          <a
+          {/* <a
             href={WorksheetData.worksheet2.link}
             target="_blank"
             onClick={() => handleLinkClick("worksheet2")}
             className="text-blue-600 hover:underline"
           >
             {WorksheetData.worksheet2.title}
-          </a>
+          </a> */}
+          <button onClick={toggleModalWorksheet2}>
+            {WorksheetData.worksheet2.title}
+          </button>
         </li>
         <li className="hover:text-blue-600">
           <a
