@@ -10,6 +10,7 @@ import meiosisPdf from "../../../assets/pdf/meiosisPdf.pdf";
 import { vocab, MiosisWorksheetsLink } from "./ConstantData.jsx";
 import Worksheets from "../../../components/Worksheets/Worksheets.jsx";
 import MitosisVsMeiosisAnimation from "./MitosisVsMeiosisAnimation.jsx";
+import FunMeiosisGame from "./FunMeiosisGame.jsx";
 
 const MiosisAndMitosis = ({ hideFloating }) => {
   const handleDownload = () => {
@@ -74,7 +75,8 @@ const MiosisAndMitosis = ({ hideFloating }) => {
           Meiosis 3D Model
         </h1>
         <div className="w-full h-auto rounded-lg">
-          <MitosisVsMeiosisAnimation />
+          {/* <MitosisVsMeiosisAnimation /> */}
+          <FunMeiosisGame />
         </div>
         <div className="flex flex-col justify-center items-center mt-8 gap-8">
           <div className="w-full h-64 sm:h-80 md:h-auto rounded-lg flex items-center justify-center">
