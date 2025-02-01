@@ -8,6 +8,7 @@ import {
   MenuItem,
   Button,
   Box,
+  Divider,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { motion, AnimatePresence } from "framer-motion";
@@ -16,80 +17,93 @@ import { menuItems } from "./constant";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
-
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  // Get user role and token from localStorage
+  const userRole = localStorage.getItem("role");
+  const authToken = localStorage.getItem("authToken");
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
+  const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
+  const handleMenuClose = () => setAnchorEl(null);
 
   const handleNavigation = (path) => {
-    if (path) {
-      navigate(path);
-    }
+    if (path) navigate(path);
     handleMenuClose();
   };
 
   const isActive = (path) => location.pathname === path;
 
+  const handleLogout = () => {
+    // Remove auth_token and user_role from localStorage
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("role");
+    // Redirect to login page
+    navigate("/");
+  };
+
   return (
     <AppBar
       position="sticky"
       sx={{
-        paddingX: { lg: 23 },
         backgroundColor: "#f5f5f5",
         boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
       }}
-      elevation={0}
     >
       <Toolbar>
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+        <Typography
+          variant="h5"
+          component="h2"
+          sx={{ color: "#88C273", fontWeight: "bold", cursor: "pointer" }}
+          onClick={() => handleNavigation("/")}
         >
+          BIO
           <Typography
             variant="h5"
-            component="h2"
-            sx={{ color: "#88C273", fontWeight: "bold", cursor: "pointer" }}
-            onClick={() => handleNavigation("/")}
+            component="span"
+            sx={{ color: "#353434", fontWeight: "bold" }}
           >
-            BIO
-            <Typography
-              variant="h5"
-              component="span"
-              sx={{ color: "#353434", fontWeight: "bold" }}
-            >
-              Verse
-            </Typography>
+            Verse
           </Typography>
-        </motion.div>
+        </Typography>
 
         {/* Desktop Menu */}
         <Box sx={{ display: { xs: "none", lg: "flex" }, ml: "auto" }}>
-          {menuItems.map((item) => (
-            <motion.div
-              key={item.id}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.2 }}
-            >
+          {menuItems.map(
+            (item) =>
+              (item.id !== "admin" || userRole === "admin") && (
+                <motion.div
+                  key={item.id}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Button
+                    sx={{
+                      mx: 1,
+                      color: isActive(item.path) ? "#88C273" : "black",
+                    }}
+                    onClick={() => handleNavigation(item.path)}
+                  >
+                    {item.label}
+                  </Button>
+                </motion.div>
+              )
+          )}
+          {authToken && ( // Only show Logout if the user is authenticated
+            <>
+              <Divider sx={{ my: 1 }} /> {/* Divider before Logout */}
               <Button
                 sx={{
                   mx: 1,
-                  color: isActive(item.path) ? "#88C273" : "black",
+                  color: "black",
                 }}
-                onClick={() => handleNavigation(item.path)}
+                onClick={handleLogout}
               >
-                {item.label}
+                Logout
               </Button>
-            </motion.div>
-          ))}
+            </>
+          )}
         </Box>
 
         {/* Mobile Menu */}
@@ -131,17 +145,28 @@ const Navbar = () => {
                     },
                   }}
                 >
-                  {menuItems.map((item) => (
-                    <MenuItem
-                      key={item.id}
-                      onClick={() => handleNavigation(item.path)}
-                      sx={{
-                        color: isActive(item.path) ? "#88C273" : "black",
-                      }}
-                    >
-                      {item.label}
-                    </MenuItem>
-                  ))}
+                  {menuItems.map(
+                    (item) =>
+                      (item.id !== "admin" || userRole === "admin") && (
+                        <MenuItem
+                          key={item.id}
+                          onClick={() => handleNavigation(item.path)}
+                          sx={{
+                            color: isActive(item.path) ? "#88C273" : "black",
+                          }}
+                        >
+                          {item.label}
+                        </MenuItem>
+                      )
+                  )}
+                  {authToken && ( // Show Logout in mobile menu if the user is authenticated
+                    <>
+                      <Divider sx={{ my: 1 }} /> {/* Divider before Logout */}
+                      <MenuItem onClick={handleLogout} sx={{ color: "black" }}>
+                        Logout
+                      </MenuItem>
+                    </>
+                  )}
                 </Menu>
               </motion.div>
             )}

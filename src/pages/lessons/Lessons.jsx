@@ -1,48 +1,17 @@
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import LeftNavigationLesson from "../../components/leftNav/LeftNavigationLesson.jsx";
 import Module1 from "./DigestiveSystem/Lesson1/Module1.jsx";
 import MitosisAndMiosis from "./MitosisAndMiosis/MitosisAndMiosis.jsx";
 import CellDivision from "./CellDivision/Lessons/CellDivision.jsx";
-import React, { useState, useEffect } from "react";
 import {
   initializeAnalytics,
   trackPageView,
 } from "../../components/analytics/Analytics";
-import undermaintenance from "../../assets/images/undermaintenance.png";
 import Overall from "./Overall/Overall.jsx";
 import MendelianGenetics from "./MendelianGenetics/MendelianGenetics.jsx";
 import Organism from "./Organism/Organism.jsx";
-
-const UnderMaintenance = () => (
-  <div className="min-h-screen flex items-center justify-center px-4">
-    <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center">
-      {/* Left Section - Text */}
-      <div className="lg:w-1/2 text-center lg:text-left mt-10 lg:mt-0">
-        <h1 className="text-4xl font-extrabold text-primary mb-4">
-          Oops! <span className="text-secondary">Under Construction</span>
-        </h1>
-        <p className="text-textPrimary text-lg mb-6">
-          We're currently improving this page to serve you better. Please check
-          back later!
-        </p>
-        <button
-          className="px-6 py-3 bg-primary text-backgroundWhite font-bold rounded-md shadow hover:bg-secondary hover:text-white"
-          onClick={() => (window.location.href = "/")}
-        >
-          Go Back Home
-        </button>
-      </div>
-
-      {/* Right Section - Image */}
-      <div className="lg:w-1/2 flex justify-center items-center">
-        <img
-          src={undermaintenance}
-          alt="Under Construction"
-          className="w-full max-w-lg lg:max-w-xl"
-        />
-      </div>
-    </div>
-  </div>
-);
+import API from "../../utils/api/api.js";
 
 const Lessons = () => {
   const [selectedLesson, setSelectedLesson] = useState({
@@ -50,9 +19,18 @@ const Lessons = () => {
     subsubtitle: "Overall",
   });
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     initializeAnalytics();
     trackPageView(window.location.pathname, "Lessons.jsx");
+
+    // Check if token exists in localStorage
+    // const token = localStorage.getItem("authToken");
+    // if (!token) {
+    //   navigate("/login"); // Redirect to login if no token
+    //   return;
+    // }
 
     const hash = window.location.hash.slice(1).toLowerCase();
 

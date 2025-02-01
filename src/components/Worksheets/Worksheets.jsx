@@ -5,22 +5,12 @@ const Worksheet = ({
   toggleModalWorksheet,
   toggleModalWorksheet2,
 }) => {
-  const [clickedLinks, setClickedLinks] = useState({
-    worksheet1: false,
-    worksheet2: false,
-    worksheet3: false,
-  });
-
   const handleLinkClick = (key) => {
     setClickedLinks((prevState) => ({
       ...prevState,
       [key]: true,
     }));
   };
-
-  const allLinksClicked = Object.values(clickedLinks).every(
-    (clicked) => clicked
-  );
 
   return (
     <div className="w-full flex flex-col items-start gap-6 p-4">
@@ -64,17 +54,16 @@ const Worksheet = ({
             {WorksheetData.worksheet3.title}
           </a>
         </li>
-        {allLinksClicked && (
-          <li className="hover:text-blue-600">
-            <a
-              href={WorksheetData.evaluation.link}
-              target="_blank"
-              className="text-blue-600 hover:underline"
-            >
-              {WorksheetData.evaluation.title}
-            </a>
-          </li>
-        )}
+
+        <li className="hover:text-blue-600">
+          <a
+            href={WorksheetData.evaluation.link}
+            target="_blank"
+            className="text-blue-600 hover:underline"
+          >
+            {WorksheetData.evaluation.title}
+          </a>
+        </li>
       </ul>
     </div>
   );

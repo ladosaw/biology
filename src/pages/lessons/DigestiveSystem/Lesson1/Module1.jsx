@@ -22,12 +22,10 @@ const Module1 = ({ hideFloating }) => {
   const [isModalWorksheet2Open, setIsModalWorksheet2ModalOpen] =
     useState(false);
 
-  const toggleModalWorksheet = () => {
+  const toggleModalWorksheet = () =>
     setIsModalWorksheetModalOpen((prev) => !prev);
-  };
-  const toggleModalWorksheet2 = () => {
+  const toggleModalWorksheet2 = () =>
     setIsModalWorksheet2ModalOpen((prev) => !prev);
-  };
 
   const handleDownload = () => {
     const pdfUrl = pdfDgestive;
@@ -307,6 +305,7 @@ const Module1 = ({ hideFloating }) => {
         toggleModalWorksheet2={toggleModalWorksheet2}
       />
 
+      {/* Modals for Worksheets */}
       <WorksheetModal
         open={isModalWorksheetOpen}
         onClose={toggleModalWorksheet}

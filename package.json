@@ -20,6 +20,7 @@
     "@react-three/drei": "^9.120.5",
     "@react-three/fiber": "^8.17.10",
     "@vercel/analytics": "^1.4.1",
+    "axios": "^1.7.9",
     "dnd-core": "^16.0.1",
     "motion": "^11.15.0",
     "react": "^18.3.1",
@@ -35,6 +36,7 @@
     "react-slick": "^0.30.3",
     "react-to-print": "^3.0.4",
     "slick-carousel": "^1.8.1",
+    "sweetalert2": "^11.15.10",
     "three": "^0.171.0"
   },
   "devDependencies": {

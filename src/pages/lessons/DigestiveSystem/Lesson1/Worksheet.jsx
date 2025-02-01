@@ -4,7 +4,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
 import { MultiBackend, TouchTransition } from "react-dnd-multi-backend";
 import image from "../../../../assets/images/DigestiveWorksheet.png";
-import { Box, Typography, Paper, Grid } from "@mui/material";
+import { Box, Typography, Paper, Grid, Button } from "@mui/material";
 import { WorksheetsQuestion1 } from "./ConstantDigestive.jsx";
 import TextField from "../../../../components/TextField/TextField.jsx";
 
@@ -29,6 +29,7 @@ const initialOrgans = [
   "Large Intestine",
   "Rectum",
   "Anus",
+  "Gallbladder",
 ];
 
 const Organ = ({ name, onSelect, isSelected }) => {
@@ -80,6 +81,7 @@ const Worksheet = () => {
   const [assigned, setAssigned] = useState({});
   const [availableOrgans, setAvailableOrgans] = useState(initialOrgans);
   const [selectedOrgan, setSelectedOrgan] = useState(null); // Track selected organ
+  const [submittedAnswers, setSubmittedAnswers] = useState(false); // Track submission status
 
   const handleDrop = (id, organName) => {
     const previousOrgan = assigned[id];
@@ -100,6 +102,16 @@ const Worksheet = () => {
       handleDrop(id, selectedOrgan); // Drop the selected organ into the drop zone
       setSelectedOrgan(null); // Reset selected organ after drop
     }
+  };
+
+  const handleSubmit = () => {
+    // Collect all the assigned answers
+    const answers = Object.keys(assigned).map((key) => ({
+      dropZone: key,
+      organ: assigned[key],
+    }));
+    console.log("Submitted Answers: ", answers);
+    setSubmittedAnswers(true);
   };
 
   return (
@@ -159,6 +171,23 @@ const Worksheet = () => {
             </Grid>
           ))}
         </Grid>
+
+        {/* Submit Button */}
+        {/* {!submittedAnswers && (
+          <Button
+            sx={{ mt: 4 }}
+            variant="contained"
+            color="primary"
+            onClick={handleSubmit}
+          >
+            Submit Answers
+          </Button>
+        )}
+        {submittedAnswers && (
+          <Typography variant="body1" color="success.main" sx={{ mt: 2 }}>
+            Answers Submitted Successfully!
+          </Typography>
+        )} */}
       </Box>
 
       <Box
