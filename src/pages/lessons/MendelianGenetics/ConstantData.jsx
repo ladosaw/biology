@@ -223,3 +223,42 @@ export const MendelianGeneticsWorksheetsLink = {
     link: "https://forms.gle/uNWvyQrbfAr45gXVA",
   },
 };
+
+export const workSheetDirections = {
+  workSheet1: {
+    title: "Worksheet 1: What Am I?",
+    direction:
+      "Direction: Identify whether Genotype: Homozygous Dominant or Recessive, Genotype or Phenotype the following items. Write your answer in the blank provided",
+    subdirection: {
+      A: "A. Homozygous Dominant or Recessive/ Heterozygous",
+      B: "B. Phenotype vs. Genotype",
+      C: {
+        title:
+          "C. For each of the genotypes below, determine what phenotype could produce.",
+        subTitle: {
+          title: "Yellow (YY)  Flower are dominant to white (yy) ",
+        },
+      },
+    },
+  },
+  workSheet2: {
+    title: "Worksheet 2: Complete “D”",
+    direction:
+      "Direction: Let D =dominant allele and d =recessive while DD, Dd, and dd represent the dominant, heterozygous dominant, and recessive phenotype. For each type of cross, determine the genotypic and phenotypic ratios, respectively. The first cross is already done for you.",
+  },
+  workSheet3: {
+    title: "SOLVING PROBLEM: Monohybrid Cross Using the Punnett Square ",
+    direction:
+      "Directions: Read the situation and answer the questions that follow.",
+    situation: {
+      a: {
+        title:
+          "A homozygous red Santan flower (RR) is crossed with a homozygous pink Santan flower (rr). ",
+        task: {
+          one: "1. Show the given cross using the Punnett square.",
+          two: "Write the genotypes and phenotypes of the resulting offspring. ",
+        },
+      },
+    },
+  },
+};
