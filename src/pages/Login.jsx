@@ -3,11 +3,14 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import API from "../utils/api/api.js";
 import { CircularProgress } from "@mui/material"; // Import CircularProgress for loading spinner
+import Visibility from "@mui/icons-material/Visibility"; // Import Visibility icon
+import VisibilityOff from "@mui/icons-material/VisibilityOff"; // Import VisibilityOff icon
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false); // State to track loading
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false); // State for toggling password visibility
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -17,6 +20,7 @@ const Login = () => {
       const response = await API.post("/login", { email, password });
       localStorage.setItem("authToken", response.data.token);
       localStorage.setItem("role", response.data.role);
+      localStorage.setItem("id", response.data.user_id);
 
       Swal.fire({
         icon: "success",
@@ -51,14 +55,28 @@ const Login = () => {
             className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-400"
             disabled={isLoading} // Disable input while loading
           />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-400"
-            disabled={isLoading} // Disable input while loading
-          />
+          <div className="relative">
+            <input
+              type={isPasswordVisible ? "text" : "password"} // Toggle between text and password
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-400"
+              disabled={isLoading} // Disable input while loading
+            />
+            <button
+              type="button"
+              className="absolute right-3 top-1/2 transform -translate-y-1/2"
+              onClick={() => setIsPasswordVisible(!isPasswordVisible)} // Toggle password visibility
+              disabled={isLoading} // Disable the button while loading
+            >
+              {isPasswordVisible ? (
+                <VisibilityOff /> // Show the VisibilityOff icon when password is visible
+              ) : (
+                <Visibility /> // Show the Visibility icon when password is hidden
+              )}
+            </button>
+          </div>
           <button
             type="submit"
             className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition duration-300"

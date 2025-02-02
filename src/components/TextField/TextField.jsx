@@ -1,21 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { TextField as MuiTextField, Box } from "@mui/material";
 
-function TextField({ label }) {
-  const [value, setValue] = useState(""); // manage the value with useState
-
-  const handleChange = (e) => {
-    setValue(e.target.value);
-  };
-
+// Receiving value and onChange as props
+function TextField({ label, value, onChange }) {
   return (
     <Box sx={{ width: "100%", mt: 2 }}>
       <MuiTextField
         id="outlined-textfield"
         label={label}
         type="text"
-        value={value}
-        onChange={handleChange}
+        value={value} // Use parent-provided value
+        onChange={onChange} // Call parent-provided onChange
         fullWidth
       />
     </Box>

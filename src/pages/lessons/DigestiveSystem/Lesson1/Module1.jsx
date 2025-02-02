@@ -22,8 +22,11 @@ const Module1 = ({ hideFloating }) => {
   const [isModalWorksheet2Open, setIsModalWorksheet2ModalOpen] =
     useState(false);
 
-  const toggleModalWorksheet = () =>
+  const toggleModalWorksheet = () => {
+    console.log("Toggle Modal Worksheet called");
     setIsModalWorksheetModalOpen((prev) => !prev);
+  };
+
   const toggleModalWorksheet2 = () =>
     setIsModalWorksheet2ModalOpen((prev) => !prev);
 
@@ -311,7 +314,13 @@ const Module1 = ({ hideFloating }) => {
         onClose={toggleModalWorksheet}
         title={DigestiveWorksheetsLink.worksheet1.title}
       >
-        <Worksheet />
+        <Worksheet
+          titles={
+            "LESSON 1: STRUCTURES AND FUNCTIONS IN HUMAN FOCUS ON THE DIGESTIVE SYSTEM"
+          }
+          worksheet_no={1}
+          setIsModalWorksheetModalOpen={setIsModalWorksheetModalOpen}
+        />
       </WorksheetModal>
 
       <WorksheetModal
@@ -319,7 +328,9 @@ const Module1 = ({ hideFloating }) => {
         onClose={toggleModalWorksheet2}
         title={DigestiveWorksheetsLink.worksheet2.title}
       >
-        <Worksheet2 />
+        <Worksheet2
+          setIsModalWorksheetModalOpen={setIsModalWorksheetModalOpen}
+        />
       </WorksheetModal>
 
       {/* Footer */}

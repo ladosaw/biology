@@ -38,6 +38,7 @@ const Navbar = () => {
     // Remove auth_token and user_role from localStorage
     localStorage.removeItem("authToken");
     localStorage.removeItem("role");
+    localStorage.removeItem("id");
     // Redirect to login page
     navigate("/");
   };

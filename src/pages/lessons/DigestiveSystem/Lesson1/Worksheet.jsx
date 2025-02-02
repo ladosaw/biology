@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
+import Swal from "sweetalert2";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
 import { MultiBackend, TouchTransition } from "react-dnd-multi-backend";
 import image from "../../../../assets/images/DigestiveWorksheet.png";
-import { Box, Typography, Paper, Grid, Button } from "@mui/material";
+import { Box, Typography, Paper, Grid, Button, Divider } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import { WorksheetsQuestion1 } from "./ConstantDigestive.jsx";
 import TextField from "../../../../components/TextField/TextField.jsx";
+import API from "../../../../utils/api/api.js";
 
 const HTML5toTouch = {
   backends: [
@@ -37,14 +40,13 @@ const Organ = ({ name, onSelect, isSelected }) => {
     <Box
       sx={{
         p: 1.5,
-        bgcolor: "primary.main",
-        color: "white",
+        color: "#353434",
         fontWeight: "bold",
         borderRadius: "8px",
         cursor: "pointer",
-        "&:hover": { bgcolor: "primary.dark" },
+        "&:hover": { bgcolor: "#E0E6F7" },
         transition: "all 0.2s ease",
-        border: isSelected ? "2px solid blue" : "none",
+        border: isSelected ? "2px solid #353434" : "none",
       }}
       onClick={() => onSelect(name)} // Tap to select
     >
@@ -77,11 +79,15 @@ const DropBox = ({ id, onDrop, organ, onTapDrop }) => {
   );
 };
 
-const Worksheet = () => {
+const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [assigned, setAssigned] = useState({});
   const [availableOrgans, setAvailableOrgans] = useState(initialOrgans);
   const [selectedOrgan, setSelectedOrgan] = useState(null); // Track selected organ
   const [submittedAnswers, setSubmittedAnswers] = useState(false); // Track submission status
+  const [textFieldAnswers, setTextFieldAnswers] = useState(
+    new Array(WorksheetsQuestion1.length).fill("")
+  );
 
   const handleDrop = (id, organName) => {
     const previousOrgan = assigned[id];
@@ -104,14 +110,78 @@ const Worksheet = () => {
     }
   };
 
-  const handleSubmit = () => {
-    // Collect all the assigned answers
-    const answers = Object.keys(assigned).map((key) => ({
-      dropZone: key,
-      organ: assigned[key],
-    }));
-    console.log("Submitted Answers: ", answers);
-    setSubmittedAnswers(true);
+  const handleTextFieldChange = (index, value) => {
+    const updatedAnswers = [...textFieldAnswers];
+    updatedAnswers[index] = value;
+    setTextFieldAnswers(updatedAnswers);
+  };
+
+  const handleSubmit = async () => {
+    setIsLoading(true);
+
+    try {
+      const answers = Object.keys(assigned).map((key) => ({
+        dropZone: key,
+        organ: assigned[key],
+      }));
+
+      const textAnswers = WorksheetsQuestion1.map((question, index) => ({
+        question: question,
+        answer: textFieldAnswers[index],
+      }));
+
+      const user_id = localStorage.getItem("id");
+      const authToken = localStorage.getItem("authToken");
+
+      if (!authToken) {
+        Swal.fire({
+          icon: "error",
+          title: "Unauthorized",
+          text: "You are not logged in. Please log in again.",
+          confirmButtonColor: "#dc2626",
+        });
+        setIsLoading(false);
+        return;
+      }
+
+      const payload = {
+        answers,
+        textAnswers,
+        user_id,
+        titles,
+        worksheet_no,
+      };
+
+      await API.post("/worksheets/checker", payload, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      setIsModalWorksheetModalOpen(false);
+
+      Swal.fire({
+        icon: "success",
+        title: "Successful Submission",
+        text: "Submitted answers successfully!",
+        confirmButtonColor: "#10B981",
+      }).then(() => {
+        navigate("/lessons");
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Submission Failed",
+        text:
+          error.response?.data?.message ||
+          "An error occurred while submitting the answers.",
+        confirmButtonColor: "#dc2626",
+      });
+    } finally {
+      setIsLoading(false);
+      setIsModalWorksheetModalOpen(false);
+    }
   };
 
   return (
@@ -171,23 +241,6 @@ const Worksheet = () => {
             </Grid>
           ))}
         </Grid>
-
-        {/* Submit Button */}
-        {/* {!submittedAnswers && (
-          <Button
-            sx={{ mt: 4 }}
-            variant="contained"
-            color="primary"
-            onClick={handleSubmit}
-          >
-            Submit Answers
-          </Button>
-        )}
-        {submittedAnswers && (
-          <Typography variant="body1" color="success.main" sx={{ mt: 2 }}>
-            Answers Submitted Successfully!
-          </Typography>
-        )} */}
       </Box>
 
       <Box
@@ -200,9 +253,29 @@ const Worksheet = () => {
         </Typography>
 
         {WorksheetsQuestion1.map((question, index) => (
-          <TextField key={index} label={question} />
+          <TextField
+            key={index}
+            label={question}
+            value={textFieldAnswers[index]} // Bind value from the parent state
+            onChange={(e) => handleTextFieldChange(index, e.target.value)} // Call the parent's handler
+          />
         ))}
       </Box>
+
+      <Divider sx={{ mt: 4 }} />
+
+      <Button
+        sx={{
+          mt: 4,
+          ml: "auto", // This will push the button to the right
+          display: "block", // Ensures the button takes up its own line
+        }}
+        variant="contained"
+        color="primary"
+        onClick={handleSubmit}
+      >
+        Submit Answers
+      </Button>
     </DndProvider>
   );
 };

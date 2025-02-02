@@ -26,11 +26,11 @@ const Lessons = () => {
     trackPageView(window.location.pathname, "Lessons.jsx");
 
     // Check if token exists in localStorage
-    // const token = localStorage.getItem("authToken");
-    // if (!token) {
-    //   navigate("/login"); // Redirect to login if no token
-    //   return;
-    // }
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      navigate("/login"); // Redirect to login if no token
+      return;
+    }
 
     const hash = window.location.hash.slice(1).toLowerCase();
 

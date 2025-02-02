@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Table,
@@ -11,129 +11,44 @@ import {
   Typography,
   TablePagination,
   TextField,
+  CircularProgress,
 } from "@mui/material";
-import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
+import API from "../utils/api/api.js";
 
 const AdminDash = () => {
-  const rows = [
-    {
-      id: 1,
-      title: "Math Exam",
-      grade: "8",
-      name: "John Doe",
-      worksheet_no: 5,
-      score: 95,
-    },
-    {
-      id: 2,
-      title: "Science Quiz",
-      grade: "9",
-      name: "Jane Smith",
-      worksheet_no: 3,
-      score: 88,
-    },
-    {
-      id: 3,
-      title: "History Test",
-      grade: "8",
-      name: "Emily Johnson",
-      worksheet_no: 2,
-      score: 91,
-    },
-    {
-      id: 4,
-      title: "Physics Test",
-      grade: "10",
-      name: "Michael Brown",
-      worksheet_no: 4,
-      score: 87,
-    },
-    {
-      id: 5,
-      title: "Chemistry Exam",
-      grade: "7",
-      name: "Sarah White",
-      worksheet_no: 6,
-      score: 92,
-    },
-    {
-      id: 6,
-      title: "English Test",
-      grade: "8",
-      name: "Lucas Green",
-      worksheet_no: 3,
-      score: 89,
-    },
-    {
-      id: 7,
-      title: "Geography Quiz",
-      grade: "9",
-      name: "Olivia Black",
-      worksheet_no: 2,
-      score: 84,
-    },
-    {
-      id: 8,
-      title: "Math Quiz",
-      grade: "10",
-      name: "David Lee",
-      worksheet_no: 5,
-      score: 93,
-    },
-    {
-      id: 9,
-      title: "Biology Exam",
-      grade: "7",
-      name: "Sophia Adams",
-      worksheet_no: 4,
-      score: 90,
-    },
-    {
-      id: 10,
-      title: "Art Test",
-      grade: "8",
-      name: "Daniel Harris",
-      worksheet_no: 3,
-      score: 85,
-    },
-    {
-      id: 11,
-      title: "Music Exam",
-      grade: "9",
-      name: "Charlotte Scott",
-      worksheet_no: 2,
-      score: 92,
-    },
-    {
-      id: 12,
-      title: "History Quiz",
-      grade: "7",
-      name: "Benjamin Hall",
-      worksheet_no: 5,
-      score: 88,
-    },
-  ];
-
+  const [rows, setRows] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortConfig, setSortConfig] = useState({
-    key: "title",
+    key: "titles", // Match API field
     direction: "asc",
-  }); // Sorting state
+  });
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+  const authToken = localStorage.getItem("authToken");
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await API.get("/worksheets", {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        });
+        if (response.status !== 200) throw new Error("Failed to fetch data");
 
-  const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
-  };
+        console.log(response.data);
+        setRows(response.data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleSort = (column) => {
     let direction = "asc";
@@ -143,8 +58,8 @@ const AdminDash = () => {
     setSortConfig({ key: column, direction });
   };
 
-  const filteredRows = rows.filter((row) =>
-    row.name.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredRows = rows.filter(
+    (row) => row.user_id.toLowerCase().includes(searchQuery.toLowerCase()) // Change `name` to `user_id`
   );
 
   const sortedRows = [...filteredRows].sort((a, b) => {
@@ -165,80 +80,76 @@ const AdminDash = () => {
       </Typography>
 
       <TextField
-        label="Search by Name"
+        label="Search by User ID"
         variant="outlined"
         fullWidth
         value={searchQuery}
-        onChange={handleSearchChange}
+        onChange={(e) => setSearchQuery(e.target.value)}
         sx={{ mb: 2 }}
       />
 
-      <TableContainer
-        component={Paper}
-        elevation={2}
-        sx={{ borderRadius: 2, overflow: "hidden" }}
-      >
-        <Table>
-          <TableHead>
-            <TableRow sx={{ backgroundColor: "#f5f5f5" }}>
-              <TableCell
-                sx={{ cursor: "pointer" }}
-                onClick={() => handleSort("title")}
-              >
-                Title
-                {sortConfig.key === "title" ? (
-                  sortConfig.direction === "asc" ? (
-                    <ArrowUpward fontSize="small" />
-                  ) : (
-                    <ArrowDownward fontSize="small" />
-                  )
-                ) : null}
-              </TableCell>
-              <TableCell
-                sx={{ cursor: "pointer" }}
-                onClick={() => handleSort("name")}
-              >
-                Name
-                {sortConfig.key === "name" ? (
-                  sortConfig.direction === "asc" ? (
-                    <ArrowUpward fontSize="small" />
-                  ) : (
-                    <ArrowDownward fontSize="small" />
-                  )
-                ) : null}
-              </TableCell>
-              <TableCell>Grade</TableCell>
-              <TableCell>Worksheet No</TableCell>
-              <TableCell
-                sx={{ cursor: "pointer" }}
-                onClick={() => handleSort("score")}
-              >
-                Score
-                {sortConfig.key === "score" ? (
-                  sortConfig.direction === "asc" ? (
-                    <ArrowUpward fontSize="small" />
-                  ) : (
-                    <ArrowDownward fontSize="small" />
-                  )
-                ) : null}
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {sortedRows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.title}</TableCell>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.grade}</TableCell>
-                  <TableCell>{row.worksheet_no}</TableCell>
-                  <TableCell>{row.score}</TableCell>
-                </TableRow>
-              ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      {loading ? (
+        <Typography align="center">
+          <CircularProgress />
+        </Typography>
+      ) : error ? (
+        <Typography color="error" align="center">
+          {error}
+        </Typography>
+      ) : (
+        <TableContainer
+          component={Paper}
+          elevation={2}
+          sx={{ borderRadius: 2, overflow: "hidden" }}
+        >
+          <Table>
+            <TableHead>
+              <TableRow sx={{ backgroundColor: "#f5f5f5" }}>
+                <TableCell
+                  onClick={() => handleSort("titles")}
+                  sx={{ cursor: "pointer" }}
+                >
+                  Title
+                </TableCell>
+                <TableCell
+                  onClick={() => handleSort("name")}
+                  sx={{ cursor: "pointer" }}
+                >
+                  Name
+                </TableCell>
+                <TableCell>Worksheet No</TableCell>
+                <TableCell
+                  onClick={() => handleSort("score")}
+                  sx={{ cursor: "pointer" }}
+                >
+                  Score
+                </TableCell>
+                <TableCell
+                  onClick={() => handleSort("created_at")}
+                  sx={{ cursor: "pointer" }}
+                >
+                  Date Added
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {sortedRows
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row) => (
+                  <TableRow key={row.worksheet_id}>
+                    <TableCell>{row.titles}</TableCell>
+                    <TableCell>{`${row.user.lname}, ${row.user.fname} ${row.user?.mname}.`}</TableCell>
+                    <TableCell>{row.worksheet_no}</TableCell>
+                    <TableCell>{row.score}</TableCell>
+                    <TableCell>
+                      {new Date(row.created_at).toLocaleDateString()}
+                    </TableCell>
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
 
       <TablePagination
         rowsPerPageOptions={[10, 25, 50]}
@@ -246,8 +157,8 @@ const AdminDash = () => {
         count={sortedRows.length}
         rowsPerPage={rowsPerPage}
         page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
+        onPageChange={(event, newPage) => setPage(newPage)}
+        onRowsPerPageChange={(event) => setRowsPerPage(+event.target.value)}
         sx={{ mt: 2 }}
       />
     </Container>

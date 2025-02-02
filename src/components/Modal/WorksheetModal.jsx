@@ -58,7 +58,7 @@ export default function WorksheetModal({ open, onClose, children, title }) {
       <DialogContent dividers>{children}</DialogContent>
 
       {/* Dialog Actions (Buttons at the Bottom) */}
-      <DialogActions>
+      {/* <DialogActions>
         <Button
           autoFocus
           variant="contained"
@@ -69,7 +69,7 @@ export default function WorksheetModal({ open, onClose, children, title }) {
         >
           Submit
         </Button>
-      </DialogActions>
+      </DialogActions> */}
     </BootstrapDialog>
   );
 }
