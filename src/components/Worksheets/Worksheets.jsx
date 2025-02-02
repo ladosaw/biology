@@ -5,12 +5,14 @@ const Worksheet = ({
   toggleModalWorksheet,
   toggleModalWorksheet2,
   toggleModalWorksheet3,
+  toggleEvaluation,
 }) => {
   const [clickedLinks, setClickedLinks] = useState({
     worksheet1: false,
     worksheet2: false,
     worksheet3: false,
     worksheet4: false,
+    evaluation: false,
   });
 
   const handleLinkClick = (key) => {
@@ -67,6 +69,19 @@ const Worksheet = ({
           </a> */}
           <button onClick={toggleModalWorksheet3}>
             {WorksheetData.worksheet3.title}
+          </button>
+        </li>
+        <li className="hover:text-blue-600">
+          {/* <a
+            href={WorksheetData.worksheet3.link}
+            target="_blank"
+            onClick={() => handleLinkClick("worksheet3")}
+            className="text-blue-600 hover:underline"
+          >
+            {WorksheetData.worksheet3.title}
+          </a> */}
+          <button onClick={toggleEvaluation}>
+            {WorksheetData.evaluation.title}
           </button>
         </li>
         {allLinksClicked && (

@@ -22,6 +22,7 @@ import Worksheet2 from "./Worksheet2";
 import Worksheet3 from "./Worksheet3";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import Evaluation from "./Evaluation";
 
 const MendelianGenetics = ({ hideFloating }) => {
   const [isModalWorksheetOpen, setIsModalWorksheetModalOpen] = useState(false);
@@ -29,6 +30,8 @@ const MendelianGenetics = ({ hideFloating }) => {
     useState(false);
   const [isModalWorksheet3Open, setIsModalWorksheet3ModalOpen] =
     useState(false);
+
+  const [evaluationOpen, setEvaluationOpen] = useState(false);
 
   const toggleModalWorksheet = () => {
     setIsModalWorksheetModalOpen((prev) => !prev);
@@ -38,6 +41,10 @@ const MendelianGenetics = ({ hideFloating }) => {
   };
   const toggleModalWorksheet3 = () => {
     setIsModalWorksheet3ModalOpen((prev) => !prev);
+  };
+
+  const toggleEvaluation = () => {
+    setEvaluationOpen((prev) => !prev);
   };
 
   const handleDownload = () => {
@@ -659,6 +666,7 @@ const MendelianGenetics = ({ hideFloating }) => {
         toggleModalWorksheet={toggleModalWorksheet}
         toggleModalWorksheet2={toggleModalWorksheet2}
         toggleModalWorksheet3={toggleModalWorksheet3}
+        toggleEvaluation={toggleEvaluation}
       />
 
       <WorksheetModal
@@ -685,6 +693,14 @@ const MendelianGenetics = ({ hideFloating }) => {
         <DndProvider backend={HTML5Backend}>
           <Worksheet3 />
         </DndProvider>
+      </WorksheetModal>
+
+      <WorksheetModal
+        open={evaluationOpen}
+        onClose={toggleEvaluation}
+        title={MendelianGeneticsWorksheetsLink.evaluation.title}
+      >
+        <Evaluation />
       </WorksheetModal>
 
       {/* Floating Button */}

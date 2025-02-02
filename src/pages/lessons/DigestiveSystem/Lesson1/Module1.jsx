@@ -22,6 +22,8 @@ const Module1 = ({ hideFloating }) => {
   const [isModalWorksheet2Open, setIsModalWorksheet2ModalOpen] =
     useState(false);
 
+  const [evaluationOpen, setEvaluationOpen] = useState(false);
+
   const toggleModalWorksheet = () => {
     setIsModalWorksheetModalOpen((prev) => !prev);
   };
