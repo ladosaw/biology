@@ -22,13 +22,13 @@ const questions = [
       "Father of Genetics",
       "Proponent of Law of Dominance",
     ],
-    correctAnswer: "Author of Punnett Square",
+    correctAnswer: "B" || "b",
   },
   {
     id: 3,
     question: "Which pair of letters represents a pure line dominant trait?",
     choices: ["CC", "Ee", "Gg", "tt"],
-    correctAnswer: "CC",
+    correctAnswer: "A" || "a",
   },
   {
     id: 4,
@@ -39,7 +39,62 @@ const questions = [
       "Heterozygous",
       "Recessive heterozygous",
     ],
-    correctAnswer: "Homozygous",
+    correctAnswer: "A" || "a",
+  },
+  {
+    id: 5,
+    question: "Describe someone who is heterozygous for a trait.",
+    choices: [
+      "Two of the same alleles for a particular trait",
+      "Two different alleles for a particular trait",
+      "One of the same alleles for a particular trait ",
+      "One different allele for a particular trait ",
+    ],
+    correctAnswer: "B" || "b",
+  },
+  {
+    id: 6,
+    question:
+      "A plant with a flower position (aa) is crossed with a heterozygous plant. What percentage of their offspring have axial flower position?",
+    choices: ["25% ", "50%", "75%  ", "100% "],
+    correctAnswer: "C" || "c",
+  },
+  {
+    id: 7,
+    question:
+      "If a constricted pod pea plant is crossed with one heterozygous, how many of its offspring will also be a constricted pod? ",
+    choices: ["1:1", "2:2 ", "1:3  ", "1:4"],
+    correctAnswer: "A" || "a",
+  },
+  {
+    id: 8,
+    question: "How would you differentiate genotype from phenotype?",
+    choices: [
+      "Genotype are the genetic makeup while phenotypes are physical traits.",
+      "Genotypes are physical traits while phenotypes are the genetic makeup.",
+      "Genotypes are physical character traits       ",
+      "Phenotypes are the genetic traits.",
+    ],
+    correctAnswer: "A" || "a",
+  },
+  {
+    id: 9,
+    question:
+      "Which refers to the offspring resulting from cross-between parents with two contrasting traits?",
+    choices: ["Hybrids ", "Crossbred ", "Multiple Allele ", "Purebred"],
+    correctAnswer: "A" || "a",
+  },
+  {
+    id: 10,
+    question:
+      "Which refers to the offspring resulting from cross-between parents with two contrasting traits?",
+    choices: [
+      "Law of segregation is the law of purity of genes ",
+      "Alleles separate from each other during gametogenesis ",
+      "Segregation of factors is due to the segregation of chromosomes during meiosis",
+      "All of the choices are correct statements.",
+    ],
+    correctAnswer: "b" || "B",
   },
 ];
 
