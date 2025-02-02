@@ -16,6 +16,7 @@ import DigestiveSystemAnimation from "../DigestiveSystemAnimation.jsx";
 import WorksheetModal from "../../../../components/Modal/WorksheetModal.jsx";
 import Worksheet from "./Worksheet.jsx";
 import Worksheet2 from "./Worksheet2.jsx";
+import Evaluation from "./Evaluation.jsx";
 
 const Module1 = ({ hideFloating }) => {
   const [isModalWorksheetOpen, setIsModalWorksheetModalOpen] = useState(false);
@@ -29,6 +30,10 @@ const Module1 = ({ hideFloating }) => {
   };
   const toggleModalWorksheet2 = () => {
     setIsModalWorksheet2ModalOpen((prev) => !prev);
+  };
+
+  const toggleEvaluation = () => {
+    setEvaluationOpen((prev) => !prev);
   };
 
   const handleDownload = () => {
@@ -307,6 +312,7 @@ const Module1 = ({ hideFloating }) => {
         WorksheetData={DigestiveWorksheetsLink}
         toggleModalWorksheet={toggleModalWorksheet}
         toggleModalWorksheet2={toggleModalWorksheet2}
+        toggleEvaluation={toggleEvaluation}
       />
 
       <WorksheetModal
@@ -323,6 +329,14 @@ const Module1 = ({ hideFloating }) => {
         title={DigestiveWorksheetsLink.worksheet2.title}
       >
         <Worksheet2 />
+      </WorksheetModal>
+
+      <WorksheetModal
+        open={evaluationOpen}
+        onClose={toggleEvaluation}
+        title={DigestiveWorksheetsLink.evaluation.title}
+      >
+        <Evaluation />
       </WorksheetModal>
 
       {/* Footer */}
