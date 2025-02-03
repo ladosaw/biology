@@ -3,10 +3,8 @@ import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import Button from "@mui/material/Button";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -28,7 +26,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-export default function WorksheetModal({ open, onClose, children, title }) {
+export default function Modal({ open, onClose, children, title }) {
   return (
     <BootstrapDialog
       onClose={onClose}
@@ -56,20 +54,6 @@ export default function WorksheetModal({ open, onClose, children, title }) {
 
       {/* Dialog Content - Dynamically passing children */}
       <DialogContent dividers>{children}</DialogContent>
-
-      {/* Dialog Actions (Buttons at the Bottom) */}
-      {/* <DialogActions>
-        <Button
-          autoFocus
-          variant="contained"
-          onClick={() => {
-            alert("Submitted!");
-          }}
-          color="primary"
-        >
-          Submit
-        </Button>
-      </DialogActions> */}
     </BootstrapDialog>
   );
 }

@@ -13,8 +13,11 @@ import {
   TextField,
   CircularProgress,
   Box,
+  Button,
 } from "@mui/material";
 import API from "../utils/api/api.js";
+import Modal from "../components/Modal/Modal.jsx";
+import SignUp from "./SignUp.jsx";
 
 const AdminDash = () => {
   const [rows, setRows] = useState([]);
@@ -23,6 +26,10 @@ const AdminDash = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const toggleModal = () => {
+    setIsModalOpen((prev) => !prev);
+  };
   const [sortConfig, setSortConfig] = useState({
     key: "titles",
     direction: "asc",
@@ -31,6 +38,10 @@ const AdminDash = () => {
   const authToken = localStorage.getItem("authToken");
 
   useEffect(() => {
+    if (!authToken) {
+      navigate("/login");
+      return;
+    }
     const fetchData = async () => {
       try {
         const response = await API.get("/worksheets", {
@@ -81,6 +92,28 @@ const AdminDash = () => {
       >
         Admin Dashboard
       </Typography>
+
+      <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{
+            textTransform: "none",
+            fontWeight: "bold",
+            borderRadius: "8px",
+            px: 3,
+            py: 1,
+            boxShadow: "none",
+            "&:hover": {
+              backgroundColor: "#1976d2",
+              boxShadow: "none",
+            },
+          }}
+          onClick={toggleModal}
+        >
+          New User
+        </Button>
+      </Box>
 
       <TextField
         label="Search by User ID"
@@ -175,6 +208,10 @@ const AdminDash = () => {
           onRowsPerPageChange={(event) => setRowsPerPage(+event.target.value)}
         />
       </Box>
+
+      <Modal open={isModalOpen} onClose={toggleModal} title="Add New User">
+        <SignUp onClose={toggleModal} />
+      </Modal>
     </Container>
   );
 };

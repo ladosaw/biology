@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import { DigestiveWorksheetsLink } from "./ConstantDigestive.jsx";
 import Worksheets from "../../../../components/Worksheets/Worksheets.jsx";
 import DigestiveSystemAnimation from "../DigestiveSystemAnimation.jsx";
-import WorksheetModal from "../../../../components/Modal/WorksheetModal.jsx";
+import Modal from "../../../../components/Modal/Modal.jsx";
 import Worksheet from "./Worksheet.jsx";
 import Worksheet2 from "./Worksheet2.jsx";
 
@@ -23,7 +23,6 @@ const Module1 = ({ hideFloating }) => {
     useState(false);
 
   const toggleModalWorksheet = () => {
-    console.log("Toggle Modal Worksheet called");
     setIsModalWorksheetModalOpen((prev) => !prev);
   };
 
@@ -309,7 +308,7 @@ const Module1 = ({ hideFloating }) => {
       />
 
       {/* Modals for Worksheets */}
-      <WorksheetModal
+      <Modal
         open={isModalWorksheetOpen}
         onClose={toggleModalWorksheet}
         title={DigestiveWorksheetsLink.worksheet1.title}
@@ -321,9 +320,9 @@ const Module1 = ({ hideFloating }) => {
           worksheet_no={1}
           setIsModalWorksheetModalOpen={setIsModalWorksheetModalOpen}
         />
-      </WorksheetModal>
+      </Modal>
 
-      <WorksheetModal
+      <Modal
         open={isModalWorksheet2Open}
         onClose={toggleModalWorksheet2}
         title={DigestiveWorksheetsLink.worksheet2.title}
@@ -331,7 +330,7 @@ const Module1 = ({ hideFloating }) => {
         <Worksheet2
           setIsModalWorksheetModalOpen={setIsModalWorksheetModalOpen}
         />
-      </WorksheetModal>
+      </Modal>
 
       {/* Footer */}
       <div className="flex flex-col items-end mt-10 space-y-4">
