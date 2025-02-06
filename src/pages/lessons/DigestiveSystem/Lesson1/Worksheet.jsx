@@ -151,20 +151,26 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         titles,
         worksheet_no,
       };
-
-      await API.post("/worksheets/checker", payload, {
+      const response = await API.post("/worksheets/checker", payload, {
         headers: {
           Authorization: `Bearer ${authToken}`,
           "Content-Type": "application/json",
         },
       });
 
+      // Extracting score and worksheet details
+      const { score, worksheet } = response.data;
+
       setIsModalWorksheetModalOpen(false);
 
       Swal.fire({
         icon: "success",
-        title: "Successful Submission",
-        text: "Submitted answers successfully!",
+        title: "Quiz Submitted!",
+        html: `
+          <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
+          <p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>
+          <p><strong>Your Score:</strong> ${score}</p>
+        `,
         confirmButtonColor: "#10B981",
       }).then(() => {
         navigate("/lessons");

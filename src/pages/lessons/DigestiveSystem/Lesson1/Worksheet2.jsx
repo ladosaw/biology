@@ -114,14 +114,46 @@ const Worksheet2 = ({ setIsModalWorksheet2ModalOpen }) => {
   };
 
   const data = [
-    { id: 1, description: "J-shaped organ producing gastric juices." },
-    { id: 2, description: "Final digestion and absorption occur here." },
-    { id: 3, description: "Reabsorbs liquid and compacts waste." },
-    { id: 4, description: "Breaks down food with chewing and saliva." },
-    { id: 5, description: "Stores and eliminates feces." },
-    { id: 6, description: "Tube connecting mouth to stomach." },
-    { id: 7, description: "Produces bile for fat emulsification." },
-    { id: 8, description: "Produces digestive enzymes." },
+    {
+      id: 1,
+      description:
+        "I am an organ that is a j-shaped organ found at the end of the esophagus on the upper left side of the abdomen or abdominal cavity that produces gastric juices and acids.",
+    },
+    {
+      id: 2,
+      description:
+        "I am and where food is mixed with intestinal juices containing enzymes that help digestion. It is where the final digestion and absorption of nutrients happen.",
+    },
+    {
+      id: 3,
+      description:
+        "I am an organ where liquid, electrolytes, and some vitamins are reabsorbed from undigested food. It secretes mucus to aid in the formation of feces and maintains alkaline conditions. This is the last segment of the gastrointestinal tract that completes absorption and compacts waste.",
+    },
+    {
+      id: 4,
+      description:
+        "I am an organ where food is mechanically broken down by chewing chewed pulp and the tongue helps in pushing the bits, broken into small pieces for easier digestion. Here, the saliva softens the food into the pharynx.",
+    },
+    {
+      id: 5,
+      description:
+        "I am an organ where waste or remaining materials become more solid known as feces will be temporarily stored and eliminated.",
+    },
+    {
+      id: 6,
+      description:
+        "I am a tube that connects the mouth and stomach. It carries the food down to the stomach for temporary storage and further digestion",
+    },
+    {
+      id: 7,
+      description:
+        "I am the biggest organ that produces bile for the emulsification of fats into droplets.",
+    },
+    {
+      id: 8,
+      description:
+        "I am an organ that makes three diverse kinds of enzymes namely amylase, peptidase, and lipase released through a pancreatic duct that aids in the digestion of all three organic compounds such as carbohydrates, proteins, and fats, respectively. The process takes about half of a liter of digestive juices each day",
+    },
   ];
 
   const images = [a, b, c, d, e, f, g, h];
