@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import { DigestiveWorksheetsLink } from "./ConstantDigestive.jsx";
 import Worksheets from "../../../../components/Worksheets/Worksheets.jsx";
 import DigestiveSystemAnimation from "../DigestiveSystemAnimation.jsx";
-import WorksheetModal from "../../../../components/Modal/WorksheetModal.jsx";
+import Modal from "../../../../components/Modal/Modal.jsx";
 import Worksheet from "./Worksheet.jsx";
 import Worksheet2 from "./Worksheet2.jsx";
 import Evaluation from "./Evaluation.jsx";
@@ -28,9 +28,9 @@ const Module1 = ({ hideFloating }) => {
   const toggleModalWorksheet = () => {
     setIsModalWorksheetModalOpen((prev) => !prev);
   };
-  const toggleModalWorksheet2 = () => {
+
+  const toggleModalWorksheet2 = () =>
     setIsModalWorksheet2ModalOpen((prev) => !prev);
-  };
 
   const toggleEvaluation = () => {
     setEvaluationOpen((prev) => !prev);
@@ -315,21 +315,30 @@ const Module1 = ({ hideFloating }) => {
         toggleEvaluation={toggleEvaluation}
       />
 
-      <WorksheetModal
+      {/* Modals for Worksheets */}
+      <Modal
         open={isModalWorksheetOpen}
         onClose={toggleModalWorksheet}
         title={DigestiveWorksheetsLink.worksheet1.title}
       >
-        <Worksheet />
-      </WorksheetModal>
+        <Worksheet
+          titles={
+            "LESSON 1: STRUCTURES AND FUNCTIONS IN HUMAN FOCUS ON THE DIGESTIVE SYSTEM"
+          }
+          worksheet_no={1}
+          setIsModalWorksheetModalOpen={setIsModalWorksheetModalOpen}
+        />
+      </Modal>
 
-      <WorksheetModal
+      <Modal
         open={isModalWorksheet2Open}
         onClose={toggleModalWorksheet2}
         title={DigestiveWorksheetsLink.worksheet2.title}
       >
-        <Worksheet2 />
-      </WorksheetModal>
+        <Worksheet2
+          setIsModalWorksheetModalOpen={setIsModalWorksheetModalOpen}
+        />
+      </Modal>
 
       <WorksheetModal
         open={evaluationOpen}

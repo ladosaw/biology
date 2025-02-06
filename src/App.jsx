@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useEffect } from "react";
 import { Container, Box } from "@mui/material";
 import { BrowserRouter } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
@@ -11,7 +11,7 @@ import {
 } from "./components/analytics/Analytics";
 
 const App = () => {
-  React.useEffect(() => {
+  useEffect(() => {
     initializeAnalytics();
     trackPageView(window.location.pathname, "App.jsx");
   }, []);
