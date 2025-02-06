@@ -11,7 +11,7 @@ import {
 import Worksheets from "../../../../components/Worksheets/Worksheets.jsx";
 import MitosisAnimation from "./MitosisAnimation.jsx";
 import Evaluation from "./Evaluation.jsx";
-import WorksheetModal from "../../../../components/Modal/WorksheetModal.jsx";
+import Modal from "../../../../components/Modal/Modal.jsx";
 import Worksheet from "./Worksheet.jsx";
 import Worksheet2 from "./Worksheet2.jsx";
 import Worksheet3 from "./Worksheet3.jsx";
@@ -273,37 +273,37 @@ const Module1 = ({ hideFloating }) => {
         toggleEvaluation={toggleEvaluation}
       />
 
-      <WorksheetModal
+      <Modal
         open={isModalWorksheetOpen}
         onClose={toggleModalWorksheet}
         title={MitosisWorksheetsLink.worksheet1.title}
       >
         <Worksheet />
-      </WorksheetModal>
+      </Modal>
 
-      <WorksheetModal
+      <Modal
         open={isModalWorksheet2Open}
         onClose={toggleModalWorksheet2}
         title={MitosisWorksheetsLink.worksheet2.title}
       >
         <Worksheet2 />
-      </WorksheetModal>
+      </Modal>
 
-      <WorksheetModal
+      <Modal
         open={isModalWorksheet3Open}
         onClose={toggleModalWorksheet3}
         title={MitosisWorksheetsLink.worksheet3.title}
       >
         <Worksheet3 />
-      </WorksheetModal>
+      </Modal>
 
-      <WorksheetModal
+      <Modal
         open={evaluationOpen}
         onClose={toggleEvaluation}
         title={MitosisWorksheetsLink.evaluation.title}
       >
         <Evaluation />
-      </WorksheetModal>
+      </Modal>
 
       {/* Footer */}
       <div className="flex flex-col items-end mt-10 space-y-4">
