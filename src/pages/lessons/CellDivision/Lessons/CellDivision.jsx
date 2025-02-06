@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import FloatingButton from "../../../../components/FloatingButton/FloatingButton.jsx";
 import { FaArrowRight } from "react-icons/fa";
 import cellCycle from "../../../../assets/images/NewCellCycle.jpg";
@@ -10,8 +10,35 @@ import {
 } from "../ConstantMitosis.jsx";
 import Worksheets from "../../../../components/Worksheets/Worksheets.jsx";
 import MitosisAnimation from "./MitosisAnimation.jsx";
+import Evaluation from "./Evaluation.jsx";
+import WorksheetModal from "../../../../components/Modal/WorksheetModal.jsx";
+import Worksheet from "./Worksheet.jsx";
+import Worksheet2 from "./Worksheet2.jsx";
+import Worksheet3 from "./Worksheet3.jsx";
 
 const Module1 = ({ hideFloating }) => {
+  const [isModalWorksheetOpen, setIsModalWorksheetModalOpen] = useState(false);
+  const [isModalWorksheet2Open, setIsModalWorksheet2ModalOpen] =
+    useState(false);
+  const [isModalWorksheet3Open, setIsModalWorksheet3ModalOpen] =
+    useState(false);
+
+  const [evaluationOpen, setEvaluationOpen] = useState(false);
+
+  const toggleModalWorksheet = () => {
+    setIsModalWorksheetModalOpen((prev) => !prev);
+  };
+  const toggleModalWorksheet2 = () => {
+    setIsModalWorksheet2ModalOpen((prev) => !prev);
+  };
+  const toggleModalWorksheet3 = () => {
+    setIsModalWorksheet3ModalOpen((prev) => !prev);
+  };
+
+  const toggleEvaluation = () => {
+    setEvaluationOpen((prev) => !prev);
+  };
+
   const handleNextClick = () => {};
 
   const handleDownload = () => {
@@ -238,7 +265,46 @@ const Module1 = ({ hideFloating }) => {
         </h2>
       </div>
 
-      <Worksheets WorksheetData={MitosisWorksheetsLink} />
+      <Worksheets
+        WorksheetData={MitosisWorksheetsLink}
+        toggleModalWorksheet={toggleModalWorksheet}
+        toggleModalWorksheet2={toggleModalWorksheet2}
+        toggleModalWorksheet3={toggleModalWorksheet3}
+        toggleEvaluation={toggleEvaluation}
+      />
+
+      <WorksheetModal
+        open={isModalWorksheetOpen}
+        onClose={toggleModalWorksheet}
+        title={MitosisWorksheetsLink.worksheet1.title}
+      >
+        <Worksheet />
+      </WorksheetModal>
+
+      <WorksheetModal
+        open={isModalWorksheet2Open}
+        onClose={toggleModalWorksheet2}
+        title={MitosisWorksheetsLink.worksheet2.title}
+      >
+        <Worksheet2 />
+      </WorksheetModal>
+
+      <WorksheetModal
+        open={isModalWorksheet3Open}
+        onClose={toggleModalWorksheet3}
+        title={MitosisWorksheetsLink.worksheet3.title}
+      >
+        <Worksheet3 />
+      </WorksheetModal>
+
+      <WorksheetModal
+        open={evaluationOpen}
+        onClose={toggleEvaluation}
+        title={MitosisWorksheetsLink.evaluation.title}
+      >
+        <Evaluation />
+      </WorksheetModal>
+
       {/* Footer */}
       <div className="flex flex-col items-end mt-10 space-y-4">
         <div className="bg-gray-200 w-full h-[1px]"></div>

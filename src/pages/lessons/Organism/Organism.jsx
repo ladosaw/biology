@@ -336,12 +336,6 @@ const Organism = ({ hideFloating }) => {
       </div>
 
       <Worksheets WorksheetData={OrganismWorksheetsLink} />
-      {/* Footer */}
-      <div className="flex flex-col items-end mt-10 space-y-4">
-        <div className="bg-gray-200 w-full h-[1px]"></div>
-
-        <div className="bg-gray-200 w-full h-[1px]"></div>
-      </div>
 
       {/* Floating Button */}
       <div className={`fixed bottom-4 right-4 ${hideFloating ? "hidden" : ""}`}>

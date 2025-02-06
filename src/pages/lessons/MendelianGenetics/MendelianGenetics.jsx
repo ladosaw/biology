@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import FloatingButton from "../../../components/FloatingButton/FloatingButton";
 import MendelianGeneticsPdf from "../../../assets/pdf/MendelianGenetics.pdf";
 import {
@@ -16,8 +16,37 @@ import Figure4 from "../../../assets/images/Figure4.png";
 import PunnettSquare from "../../../assets/images/PunnettSquares.jpg";
 import DihybridCrossExample from "../../../assets/images/DihybridCrossExample.jpg";
 import Worksheets from "../../../components/Worksheets/Worksheets";
+import WorksheetModal from "../../../components/Modal/WorksheetModal";
+import Worksheet1 from "./Worksheet1";
+import Worksheet2 from "./Worksheet2";
+import Worksheet3 from "./Worksheet3";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import Evaluation from "./Evaluation";
 
 const MendelianGenetics = ({ hideFloating }) => {
+  const [isModalWorksheetOpen, setIsModalWorksheetModalOpen] = useState(false);
+  const [isModalWorksheet2Open, setIsModalWorksheet2ModalOpen] =
+    useState(false);
+  const [isModalWorksheet3Open, setIsModalWorksheet3ModalOpen] =
+    useState(false);
+
+  const [evaluationOpen, setEvaluationOpen] = useState(false);
+
+  const toggleModalWorksheet = () => {
+    setIsModalWorksheetModalOpen((prev) => !prev);
+  };
+  const toggleModalWorksheet2 = () => {
+    setIsModalWorksheet2ModalOpen((prev) => !prev);
+  };
+  const toggleModalWorksheet3 = () => {
+    setIsModalWorksheet3ModalOpen((prev) => !prev);
+  };
+
+  const toggleEvaluation = () => {
+    setEvaluationOpen((prev) => !prev);
+  };
+
   const handleDownload = () => {
     const pdfUrl = MendelianGeneticsPdf;
 
@@ -632,13 +661,47 @@ const MendelianGenetics = ({ hideFloating }) => {
         <span className="font-semibold"> 9:3:3:1</span>
       </p>
 
-      <Worksheets WorksheetData={MendelianGeneticsWorksheetsLink} />
-      {/* Footer */}
-      <div className="flex flex-col items-end mt-10 space-y-4">
-        <div className="bg-gray-200 w-full h-[1px]"></div>
+      <Worksheets
+        WorksheetData={MendelianGeneticsWorksheetsLink}
+        toggleModalWorksheet={toggleModalWorksheet}
+        toggleModalWorksheet2={toggleModalWorksheet2}
+        toggleModalWorksheet3={toggleModalWorksheet3}
+        toggleEvaluation={toggleEvaluation}
+      />
 
-        <div className="bg-gray-200 w-full h-[1px]"></div>
-      </div>
+      <WorksheetModal
+        open={isModalWorksheetOpen}
+        onClose={toggleModalWorksheet}
+        title={MendelianGeneticsWorksheetsLink.worksheet1.title}
+      >
+        <Worksheet1 />
+      </WorksheetModal>
+
+      <WorksheetModal
+        open={isModalWorksheet2Open}
+        onClose={toggleModalWorksheet2}
+        title={MendelianGeneticsWorksheetsLink.worksheet2.title}
+      >
+        <Worksheet2 />
+      </WorksheetModal>
+
+      <WorksheetModal
+        open={isModalWorksheet3Open}
+        onClose={toggleModalWorksheet3}
+        title={MendelianGeneticsWorksheetsLink.worksheet3.title}
+      >
+        <DndProvider backend={HTML5Backend}>
+          <Worksheet3 />
+        </DndProvider>
+      </WorksheetModal>
+
+      <WorksheetModal
+        open={evaluationOpen}
+        onClose={toggleEvaluation}
+        title={MendelianGeneticsWorksheetsLink.evaluation.title}
+      >
+        <Evaluation />
+      </WorksheetModal>
 
       {/* Floating Button */}
       <div className={`fixed bottom-4 right-4 ${hideFloating ? "hidden" : ""}`}>
