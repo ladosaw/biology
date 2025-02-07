@@ -16,11 +16,14 @@ import DigestiveSystemAnimation from "../DigestiveSystemAnimation.jsx";
 import Modal from "../../../../components/Modal/Modal.jsx";
 import Worksheet from "./Worksheet.jsx";
 import Worksheet2 from "./Worksheet2.jsx";
+import Worksheets3 from "./Worksheet3.jsx";
 import Evaluation from "./Evaluation.jsx";
 
 const Module1 = ({ hideFloating }) => {
   const [isModalWorksheetOpen, setIsModalWorksheetModalOpen] = useState(false);
   const [isModalWorksheet2Open, setIsModalWorksheet2ModalOpen] =
+    useState(false);
+  const [isModalWorksheet3Open, setIsModalWorksheet3ModalOpen] =
     useState(false);
 
   const [evaluationOpen, setEvaluationOpen] = useState(false);
@@ -31,6 +34,9 @@ const Module1 = ({ hideFloating }) => {
 
   const toggleModalWorksheet2 = () =>
     setIsModalWorksheet2ModalOpen((prev) => !prev);
+
+  const toggleModalWorksheet3 = () =>
+    setIsModalWorksheet3ModalOpen((prev) => !prev);
 
   const toggleEvaluation = () => {
     setEvaluationOpen((prev) => !prev);
@@ -312,6 +318,7 @@ const Module1 = ({ hideFloating }) => {
         WorksheetData={DigestiveWorksheetsLink}
         toggleModalWorksheet={toggleModalWorksheet}
         toggleModalWorksheet2={toggleModalWorksheet2}
+        toggleModalWorksheet3={toggleModalWorksheet3}
         toggleEvaluation={toggleEvaluation}
       />
 
@@ -341,6 +348,20 @@ const Module1 = ({ hideFloating }) => {
           }
           worksheet_no={2}
           setIsModalWorksheet2ModalOpen={setIsModalWorksheet2ModalOpen}
+        />
+      </Modal>
+
+      <Modal
+        open={isModalWorksheet3Open}
+        onClose={toggleModalWorksheet3}
+        title={DigestiveWorksheetsLink.worksheet3.title}
+      >
+        <Worksheets3
+          titles={
+            "LESSON 1: STRUCTURES AND FUNCTIONS IN HUMAN FOCUS ON THE DIGESTIVE SYSTEM"
+          }
+          worksheet_no={3}
+          setIsModalWorksheet3ModalOpen={setIsModalWorksheet3ModalOpen}
         />
       </Modal>
 
