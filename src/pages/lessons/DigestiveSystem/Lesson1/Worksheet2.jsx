@@ -98,7 +98,7 @@ const DropZone = ({ id, onDrop, currentImage }) => {
   );
 };
 
-const Worksheet2 = () => {
+const Worksheet2 = ({ setIsModalWorksheet2ModalOpen }) => {
   const [assignedImages, setAssignedImages] = useState({});
   const [selectedImage, setSelectedImage] = useState(null);
 

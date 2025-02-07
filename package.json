@@ -38,6 +38,7 @@
     "react-slick": "^0.30.3",
     "react-to-print": "^3.0.4",
     "slick-carousel": "^1.8.1",
+    "sweetalert2": "^11.15.10",
     "three": "^0.171.0"
   },
   "devDependencies": {
