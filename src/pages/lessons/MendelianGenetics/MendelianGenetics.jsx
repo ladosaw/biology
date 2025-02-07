@@ -16,7 +16,7 @@ import Figure4 from "../../../assets/images/Figure4.png";
 import PunnettSquare from "../../../assets/images/PunnettSquares.jpg";
 import DihybridCrossExample from "../../../assets/images/DihybridCrossExample.jpg";
 import Worksheets from "../../../components/Worksheets/Worksheets";
-import WorksheetModal from "../../../components/Modal/WorksheetModal";
+import WorksheetModal from "../../../components/Modal/Modal";
 import Worksheet1 from "./Worksheet1";
 import Worksheet2 from "./Worksheet2";
 import Worksheet3 from "./Worksheet3";

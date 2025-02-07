@@ -11,7 +11,7 @@ import {
 import Worksheets from "../../../../components/Worksheets/Worksheets.jsx";
 import MitosisAnimation from "./MitosisAnimation.jsx";
 import Evaluation from "./Evaluation.jsx";
-import WorksheetModal from "../../../../components/Modal/WorksheetModal.jsx";
+import WorksheetModal from "../../../../components/Modal/Modal.jsx";
 import Worksheet from "./Worksheet.jsx";
 import Worksheet2 from "./Worksheet2.jsx";
 import Worksheet3 from "./Worksheet3.jsx";

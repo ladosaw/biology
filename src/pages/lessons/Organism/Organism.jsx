@@ -14,7 +14,7 @@ import BiomassImage from "../../../assets/images/BiomassImage.jpg";
 import { OrganismWorksheetsLink } from "./ConstantData";
 import Worksheets from "../../../components/Worksheets/Worksheets";
 import FoodWebAnimation from "./FoodWebAnimation.jsx";
-import WorksheetModal from "../../../components/Modal/WorksheetModal.jsx";
+import WorksheetModal from "../../../components/Modal/Modal.jsx";
 import Worksheet1 from "./Worksheet1";
 import Worksheet2 from "./Worksheet2";
 import { DndProvider } from "react-dnd";

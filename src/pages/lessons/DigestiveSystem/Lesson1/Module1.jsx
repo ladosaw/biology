@@ -340,13 +340,13 @@ const Module1 = ({ hideFloating }) => {
         />
       </Modal>
 
-      <WorksheetModal
+      <Modal
         open={evaluationOpen}
         onClose={toggleEvaluation}
         title={DigestiveWorksheetsLink.evaluation.title}
       >
         <Evaluation />
-      </WorksheetModal>
+      </Modal>
 
       {/* Footer */}
       <div className="flex flex-col items-end mt-10 space-y-4">
