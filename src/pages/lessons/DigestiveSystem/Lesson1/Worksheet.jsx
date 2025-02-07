@@ -120,15 +120,19 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
     setIsLoading(true);
 
     try {
-      const answers = Object.keys(assigned).map((key) => ({
-        dropZone: key,
-        organ: assigned[key],
-      }));
+      // Combine drag-and-drop and text answers into a single object
+      const answers = {};
 
-      const textAnswers = WorksheetsQuestion1.map((question, index) => ({
-        question: question,
-        answer: textFieldAnswers[index],
-      }));
+      // Add drag-and-drop answers
+      Object.keys(assigned).forEach((key) => {
+        answers[key] = assigned[key]; // Assign organ name
+      });
+
+      // Add text-based answers
+      WorksheetsQuestion1.forEach((question, index) => {
+        const questionId = index + 1 + Object.keys(assigned).length; // Ensure unique ID
+        answers[questionId] = textFieldAnswers[index]; // Assign text answer
+      });
 
       const user_id = localStorage.getItem("id");
       const authToken = localStorage.getItem("authToken");
@@ -145,12 +149,12 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
       }
 
       const payload = {
-        answers,
-        textAnswers,
+        answer: [answers],
         user_id,
         titles,
         worksheet_no,
       };
+
       const response = await API.post("/worksheets/checker", payload, {
         headers: {
           Authorization: `Bearer ${authToken}`,
@@ -176,6 +180,7 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         navigate("/lessons");
       });
     } catch (error) {
+      setIsModalWorksheetModalOpen(false);
       Swal.fire({
         icon: "error",
         title: "Submission Failed",

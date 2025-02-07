@@ -336,7 +336,11 @@ const Module1 = ({ hideFloating }) => {
         title={DigestiveWorksheetsLink.worksheet2.title}
       >
         <Worksheet2
-          setIsModalWorksheetModalOpen={setIsModalWorksheetModalOpen}
+          titles={
+            "LESSON 1: STRUCTURES AND FUNCTIONS IN HUMAN FOCUS ON THE DIGESTIVE SYSTEM"
+          }
+          worksheet_no={2}
+          setIsModalWorksheet2ModalOpen={setIsModalWorksheet2ModalOpen}
         />
       </Modal>
 

@@ -3,6 +3,7 @@ import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
 import { MultiBackend, TouchTransition } from "react-dnd-multi-backend";
+import Swal from "sweetalert2";
 import {
   Box,
   Typography,
@@ -13,15 +14,17 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Button,
 } from "@mui/material";
-import a from "../../../../assets/images/Lesson1Worksheet2/A.png";
-import b from "../../../../assets/images/Lesson1Worksheet2/B.png";
-import c from "../../../../assets/images/Lesson1Worksheet2/C.png";
-import d from "../../../../assets/images/Lesson1Worksheet2/D.png";
-import e from "../../../../assets/images/Lesson1Worksheet2/E.png";
-import f from "../../../../assets/images/Lesson1Worksheet2/F.png";
-import g from "../../../../assets/images/Lesson1Worksheet2/G.png";
-import h from "../../../../assets/images/Lesson1Worksheet2/H.png";
+import Large_Intestine from "../../../../assets/images/Lesson1Worksheet2/A.png";
+import Stomach from "../../../../assets/images/Lesson1Worksheet2/B.png";
+import Esophagus from "../../../../assets/images/Lesson1Worksheet2/C.png";
+import Pancreas from "../../../../assets/images/Lesson1Worksheet2/D.png";
+import Small_Intestine from "../../../../assets/images/Lesson1Worksheet2/E.png";
+import Mouth from "../../../../assets/images/Lesson1Worksheet2/F.png";
+import Rectum from "../../../../assets/images/Lesson1Worksheet2/G.png";
+import Liver from "../../../../assets/images/Lesson1Worksheet2/H.png";
+import API from "../../../../utils/api/api.js";
 
 const HTML5toTouch = {
   backends: [
@@ -98,7 +101,11 @@ const DropZone = ({ id, onDrop, currentImage }) => {
   );
 };
 
-const Worksheet2 = ({ setIsModalWorksheet2ModalOpen }) => {
+const Worksheet2 = ({
+  titles,
+  worksheet_no,
+  setIsModalWorksheet2ModalOpen,
+}) => {
   const [assignedImages, setAssignedImages] = useState({});
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -111,6 +118,95 @@ const Worksheet2 = ({ setIsModalWorksheet2ModalOpen }) => {
 
   const handleSelect = (id, image) => {
     setSelectedImage(image);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const organOrder = [
+        "Large Intestine",
+        "Stomach",
+        "Esophagus",
+        "Pancreas",
+        "Small Intestine",
+        "Mouth",
+        "Rectum",
+        "Liver",
+      ];
+
+      // Map assignedImages to their corresponding organ names
+      const mappedData = Object.entries(assignedImages).reduce(
+        (acc, [descriptionId, imagePath]) => {
+          const organ = images.find((img) => img.image === imagePath);
+          if (organ) {
+            acc[organ.name] = descriptionId; // Map organ name to its assigned description ID
+          }
+          return acc;
+        },
+        {}
+      );
+
+      // Create a new object with the organs arranged in the required order
+      const orderedSubmissionData = organOrder.reduce((acc, organ) => {
+        acc[organ] = mappedData[organ] || ""; // Use an empty string if no match is found
+        return acc;
+      }, {});
+
+      const user_id = localStorage.getItem("id");
+      const authToken = localStorage.getItem("authToken");
+
+      if (!authToken) {
+        Swal.fire({
+          icon: "error",
+          title: "Unauthorized",
+          text: "You are not logged in. Please log in again.",
+          confirmButtonColor: "#dc2626",
+        });
+      }
+
+      const payload = {
+        answer: [orderedSubmissionData],
+        user_id,
+        titles,
+        worksheet_no,
+      };
+
+      const response = await API.post("/worksheets/checker", payload, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      // Extracting score and worksheet details
+      const { score, worksheet } = response.data;
+
+      setIsModalWorksheet2ModalOpen(false);
+
+      Swal.fire({
+        icon: "success",
+        title: "Quiz Submitted!",
+        html: `
+              <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
+              <p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>
+              <p><strong>Your Score:</strong> ${score}</p>
+            `,
+        confirmButtonColor: "#10B981",
+      }).then(() => {
+        navigate("/lessons");
+      });
+    } catch (error) {
+      setIsModalWorksheet2ModalOpen(false);
+      Swal.fire({
+        icon: "error",
+        title: "Submission Failed",
+        text:
+          error.response?.data?.message ||
+          "An error occurred while submitting the answers.",
+        confirmButtonColor: "#dc2626",
+      });
+    } finally {
+      setIsModalWorksheet2ModalOpen(false);
+    }
   };
 
   const data = [
@@ -156,7 +252,16 @@ const Worksheet2 = ({ setIsModalWorksheet2ModalOpen }) => {
     },
   ];
 
-  const images = [a, b, c, d, e, f, g, h];
+  const images = [
+    { id: "A", name: "Large Intestine", image: Large_Intestine },
+    { id: "B", name: "Stomach", image: Stomach },
+    { id: "C", name: "Esophagus", image: Esophagus },
+    { id: "D", name: "Pancreas", image: Pancreas },
+    { id: "E", name: "Small Intestine", image: Small_Intestine },
+    { id: "F", name: "Mouth", image: Mouth },
+    { id: "G", name: "Rectum", image: Rectum },
+    { id: "H", name: "Liver", image: Liver },
+  ];
 
   return (
     <DndProvider backend={MultiBackend} options={HTML5toTouch}>
@@ -180,16 +285,16 @@ const Worksheet2 = ({ setIsModalWorksheet2ModalOpen }) => {
             gap: 1,
             mb: 2,
             flexWrap: "wrap",
-            justifyContent: "center",
+            justifyContent: "right",
           }}
         >
           {images.map((img, index) => (
             <DraggableImage
               key={index}
-              image={img}
+              image={img.image}
               id={index + 1}
               onSelect={handleSelect}
-              isSelected={selectedImage === img} // Pass isSelected prop
+              isSelected={selectedImage === img.image} // Pass isSelected prop
             />
           ))}
         </Box>
@@ -222,6 +327,14 @@ const Worksheet2 = ({ setIsModalWorksheet2ModalOpen }) => {
             </TableBody>
           </Table>
         </TableContainer>
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{ mt: 3 }}
+          onClick={handleSubmit}
+        >
+          Submit
+        </Button>
       </Box>
     </DndProvider>
   );
