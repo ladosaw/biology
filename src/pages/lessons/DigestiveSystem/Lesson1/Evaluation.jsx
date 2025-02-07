@@ -129,7 +129,7 @@ const Evaluation = () => {
     setScore(totalScore);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const unanswered = questions.filter((q) => !answers[q.id]);
 
     if (unanswered.length > 0) {
@@ -137,27 +137,33 @@ const Evaluation = () => {
       alert("Please answer all questions before submitting.");
       return;
     }
-
-    // try {
-    //   await axios.post("sent to backend API END Point", {
-    //     score: score,
-    //     totalQuestions: questions.length,
-    //   });
-    //   alert("Score submitted successfully!");
-    // } catch (error) {
-    //   alert("Error submitting score.");
-    //   console.error(error);
-    // }
+    console.log("Score:", score);
 
     calculateScore();
     setSubmitted(true);
+
+    console.log("Submitting answers...", answers);
+
+    // try {
+    //   await axios.post("API_ENDPOINT_URL", {
+    //     answers,
+    //     score,
+    //     totalQuestions: questions.length,
+    //   });
+    //   alert("Answers and score submitted successfully!");
+    // } catch (error) {
+    //   alert("Error submitting answers.");
+    //   console.error(error);
+    // }
   };
 
   const choiceLetters = ["A", "B", "C", "D"];
 
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto space-y-8">
-      <h1 className="text-3xl font-bold text-center">Digestive System Quiz</h1>
+      <h1 className="text-3xl font-bold text-center">
+        Digestive System Evaluation
+      </h1>
       {questions.map((q) => (
         <div key={q.id} className="mb-6 bg-white p-4 rounded-lg shadow-md">
           <div className="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-4">

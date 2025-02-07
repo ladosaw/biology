@@ -4,97 +4,92 @@ import axios from "axios";
 const questions = [
   {
     id: 1,
-    question: "What does the word 'inherit' mean?",
+    question:
+      "The following practices should be observed in order to sustain feeding process in the ecosystem",
     choices: [
-      "The passage of heredity material DNA to offspring.",
-      "To pass characteristics through the transmission of heredity material known as DNA.",
-      "To receive a characteristic through the transfusion of heredity material.",
-      "To receive characteristics through the transfusion of heredity material.",
+      "Raise animals and insects to fight other pests. ",
+      "Dump organic wastes into rivers and streams. ",
+      "Grow a variety of crops instead of only one crop. ",
+      "Use organic fertilizers instead of chemical fertilizers. ",
     ],
-    correctAnswer: "B" || "b",
+    correctAnswer: "C" || "c",
   },
   {
     id: 2,
-    question: "Which does not describe Gregor Mendel?",
-    choices: [
-      "An Austrian Monk",
-      "Author of Punnett Square",
-      "Father of Genetics",
-      "Proponent of Law of Dominance",
-    ],
-    correctAnswer: "B" || "b",
+    question:
+      "The food chain is characterized as a simple illustration of who eats and ",
+    choices: ["One path", "Two paths", "Three paths", "Four path"],
+    correctAnswer: "A" || "a",
   },
   {
     id: 3,
-    question: "Which pair of letters represents a pure line dominant trait?",
-    choices: ["CC", "Ee", "Gg", "tt"],
-    correctAnswer: "A" || "a",
+    question:
+      "Which of the following organisms will a first-order consumer eat? ",
+    choices: ["Giraffes", "Grasses", "Goats", "Grasshoppers"],
+    correctAnswer: "C" || "c" || "D" || "d",
   },
   {
     id: 4,
-    question: "Purebred organisms, also called ________.",
-    choices: [
-      "Homozygous",
-      "Dominant",
-      "Heterozygous",
-      "Recessive heterozygous",
-    ],
-    correctAnswer: "A" || "a",
+    question:
+      "Which consumer in a trophic level can eat both plants and animals? ",
+    choices: ["Carnivores", "Herbivores", "Decomposers", "Omnivores"],
+    correctAnswer: "D" || "d",
   },
   {
     id: 5,
-    question: "Describe someone who is heterozygous for a trait.",
+    question:
+      "Which of the following shows the correct sequence of feeding relationships in a food chain",
     choices: [
-      "Two of the same alleles for a particular trait",
-      "Two different alleles for a particular trait",
-      "One of the same alleles for a particular trait ",
-      "One different allele for a particular trait ",
+      "Grasses—Grasshoppers—Frogs—Snakes-- Eagle ",
+      "Grasshoppers –Grasses—Frogs—Snakes-- Eagle ",
+      "Frogs--- Snakes--- Eagle--- Grasses--- Grasshoppers ",
+      "Snakes--- Eagle--- Frogs--- Grasses--- Grasshoppers  ",
     ],
-    correctAnswer: "B" || "b",
+    correctAnswer: "A" || "a",
   },
   {
     id: 6,
     question:
-      "A plant with a flower position (aa) is crossed with a heterozygous plant. What percentage of their offspring have axial flower position?",
-    choices: ["25% ", "50%", "75%  ", "100% "],
-    correctAnswer: "C" || "c",
+      "If 600 kg of biomass is at the third trophic level, how much biomass was available at the first trophic level? ",
+    choices: ["60 kg ", "600 kg", "6,000 kg", "60,000 kg "],
+    correctAnswer: "D" || "d",
   },
   {
     id: 7,
     question:
-      "If a constricted pod pea plant is crossed with one heterozygous, how many of its offspring will also be a constricted pod? ",
-    choices: ["1:1", "2:2 ", "1:3  ", "1:4"],
-    correctAnswer: "A" || "a",
+      "If there are 100,000 kilocalories of energy in the first trophic level, how many kilocalories are available to organisms in the second trophic level? ",
+    choices: [
+      "100 kilocalories",
+      "1000 kilocalories",
+      "10,000 kilocalories",
+      "100,000 kilocalories",
+    ],
+    correctAnswer: "C" || "c",
   },
   {
     id: 8,
-    question: "How would you differentiate genotype from phenotype?",
-    choices: [
-      "Genotype are the genetic makeup while phenotypes are physical traits.",
-      "Genotypes are physical traits while phenotypes are the genetic makeup.",
-      "Genotypes are physical character traits       ",
-      "Phenotypes are the genetic traits.",
-    ],
-    correctAnswer: "A" || "a",
+    question:
+      "Which of the following organisms are placed at the base of the energy pyramid?",
+    choices: ["Carnivores", "Decomposers", "Omnivores", "Producers"],
+    correctAnswer: "D" || "d",
   },
   {
     id: 9,
-    question:
-      "Which refers to the offspring resulting from cross-between parents with two contrasting traits?",
-    choices: ["Hybrids ", "Crossbred ", "Multiple Allele ", "Purebred"],
-    correctAnswer: "A" || "a",
+    question: "Which consumer helps with the recycling of nutrients? ",
+    choices: ["Carnivore ", "Decomposer ", "Herbivore", "Omnivore"],
+    correctAnswer: "B" || "b",
   },
   {
     id: 10,
     question:
-      "Which refers to the offspring resulting from cross-between parents with two contrasting traits?",
+      "Which of the following explains why fruit and vegetables eaters are energy efficient? ",
     choices: [
-      "Law of segregation is the law of purity of genes ",
-      "Alleles separate from each other during gametogenesis ",
-      "Segregation of factors is due to the segregation of chromosomes during meiosis",
-      "All of the choices are correct statements.",
+      "They do not use energy at all. ",
+      "They burn much of their energy in a day.  ",
+      "They directly derive energy from the producer level. ",
+      "They get their energy from first-degree consumer level.",
     ],
-    correctAnswer: "b" || "B",
+    correctAnswer: "C" || "c",
   },
 ];
 
@@ -153,9 +148,7 @@ const Evaluation = () => {
 
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto space-y-8">
-      <h1 className="text-3xl font-bold text-center">
-        Mandellian Genetics Evaluation
-      </h1>
+      <h1 className="text-3xl font-bold text-center">Organism</h1>
       {questions.map((q) => (
         <div key={q.id} className="mb-6 bg-white p-4 rounded-lg shadow-md">
           <div className="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-4">
