@@ -111,3 +111,108 @@ export const Worksheets3Question = [
       "10. Explain how the liver contributes to digestion and metabolism.",
   },
 ];
+
+export const EvaluationQuestion = [
+  {
+    id: 1,
+    question:
+      "In what process do animals take in food that provides energy and nutrients",
+    choices: ["assimilation", "digestion", "excretion", "ingestion"],
+    correctAnswer: "B" || "b",
+  },
+  {
+    id: 2,
+    question:
+      "What organ system is responsible for breaking down large molecules into smaller molecules and absorbing organic compounds needed by the body?",
+    choices: [
+      "circulatory system",
+      "Nervous system",
+      "digestive system",
+      "Respiratory system",
+    ],
+    correctAnswer: "B" || "b",
+  },
+  {
+    id: 3,
+    question:
+      "Which of the following breaks down food into tinier pieces to begin mechanical digestion?",
+    choices: ["esophagus", "stomach", "teeth", "tongue"],
+    correctAnswer: "A" || "a",
+  },
+  {
+    id: 4,
+    question: "How does saliva help in the digestion process?",
+    choices: [
+      "It reabsorbs nutrients from the food we eat.",
+      "It contains the enzyme amylase that helps in the digestion of starch.",
+      "It absorbs nutrients and distributes them in the bloodstream.",
+      "It is necessary for the egestion process.",
+    ],
+    correctAnswer: "A" || "a",
+  },
+  {
+    id: 5,
+    question: "What is the most essential function of the intestinal villi?",
+    choices: [
+      "pushes the fecal matter into the rectum.",
+      "increases surface area for nutrient absorption",
+      "secretes serous fluid to decrease friction among the organs.",
+      "secretes mucous to facilitate the movement of chyme via the alimentary canal. ",
+    ],
+    correctAnswer: "B" || "b",
+  },
+  {
+    id: 6,
+    question:
+      "The following are the reasons why digested food should be assimilated into the cell EXCEPT _.",
+    choices: [
+      "they are converted into protoplasm.",
+      "they are needed to store fats.",
+      "they provide the energy needed in cell activities.",
+      "they are converted to build cell membranes.",
+    ],
+    correctAnswer: "C" || "c",
+  },
+  {
+    id: 7,
+    question:
+      "A student has a hamburger, fries, and soda for lunch. Which sequence represents the correct order of events in the nutritional processing of this food?",
+    choices: [
+      "ingestion → digestion → absorption → egestion",
+      "digestion → absorption → ingestion → egestion",
+      "digestion → egestion → ingestion → absorption",
+      "ingestion → absorption → digestion → egestion",
+    ],
+    correctAnswer: "A" || "a",
+  },
+  {
+    id: 8,
+    question:
+      "The digestion system processes food into usable and unusable materials. The usable materials are sent to the body’s cells as food. What happens to unusable materials?",
+    choices: [
+      "It goes to the pancreas to await disposal.",
+      "It goes to the right ventricle to await disposal.",
+      "It goes to the large intestine to await disposal.",
+      "It goes to the small intestine to await disposal.",
+    ],
+    correctAnswer: "A" || "a",
+  },
+  {
+    id: 9,
+    question: "What happens when food reaches the stomach?",
+    choices: [
+      "Mechanical digestion starts in the stomach ",
+      "The food moves quickly into the small intestine. ",
+      "Juices mix with the food and stomach muscles squeeze it.",
+      "The food is completely digested and is absorbed by tiny blood vessels in the walls of the stomach.",
+    ],
+    correctAnswer: "A" || "a",
+  },
+  {
+    id: 10,
+    question:
+      "The choices below are tips for maintaining a healthy digestive system. Which of these should be followed?\nI. Stay hydrated\nII. Avoid overeating\nIII. Smoking after eating\nIV. Sleep at least 7-8 hours per night",
+    choices: ["I, II, III, IV", "I, II, IV", "I, III", "II, IV"],
+    correctAnswer: "b" || "B",
+  },
+];

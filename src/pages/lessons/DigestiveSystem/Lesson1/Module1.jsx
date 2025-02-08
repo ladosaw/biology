@@ -25,7 +25,6 @@ const Module1 = ({ hideFloating }) => {
     useState(false);
   const [isModalWorksheet3Open, setIsModalWorksheet3ModalOpen] =
     useState(false);
-
   const [evaluationOpen, setEvaluationOpen] = useState(false);
 
   const toggleModalWorksheet = () => {
@@ -370,7 +369,13 @@ const Module1 = ({ hideFloating }) => {
         onClose={toggleEvaluation}
         title={DigestiveWorksheetsLink.evaluation.title}
       >
-        <Evaluation />
+        <Evaluation
+          titles={
+            "LESSON 1: STRUCTURES AND FUNCTIONS IN HUMAN FOCUS ON THE DIGESTIVE SYSTEM"
+          }
+          worksheet_no={0}
+          setEvaluationOpen={setEvaluationOpen}
+        />
       </Modal>
 
       {/* Footer */}
