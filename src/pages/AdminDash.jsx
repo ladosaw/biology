@@ -66,9 +66,12 @@ const AdminDash = () => {
     setSortConfig({ key: column, direction });
   };
 
-  const filteredRows = rows.filter((row) =>
-    row.user_id.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredRows = rows.filter((row) => {
+    const fullName = `${row.user.lname}, ${row.user.fname} ${
+      row.user.mname || ""
+    }`.toLowerCase();
+    return fullName.includes(searchQuery.toLowerCase());
+  });
 
   const sortedRows = [...filteredRows].sort((a, b) =>
     sortConfig.direction === "asc"
@@ -116,7 +119,7 @@ const AdminDash = () => {
       </Box>
 
       <TextField
-        label="Search by User ID"
+        label="Search by Name"
         variant="outlined"
         fullWidth
         value={searchQuery}
