@@ -2,12 +2,14 @@ import { useState } from "react";
 import { Box, Typography, TextField, Button } from "@mui/material";
 import { Worksheets3Question } from "./ConstantDigestive.jsx";
 import Swal from "sweetalert2";
+import { LoadingButton } from "@mui/lab";
 
 const Worksheet3 = ({
   titles,
   worksheet_no,
   setIsModalWorksheet3ModalOpen,
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [textFieldAnswers, setTextFieldAnswers] = useState(
     new Array(Worksheets3Question.length).fill("")
   );
@@ -19,6 +21,7 @@ const Worksheet3 = ({
   };
 
   const handleSubmit = () => {
+    setIsLoading(true);
     setIsModalWorksheet3ModalOpen(false);
     console.log("Submitted Answers:", textFieldAnswers);
     Swal.fire({
@@ -29,7 +32,7 @@ const Worksheet3 = ({
   };
 
   return (
-    <Box sx={{ p: 3, textAlign: "center", maxWidth: 600, mx: "auto" }}>
+    <Box sx={{ p: 3, textAlign: "center", maxWidth: "600px", mx: "auto" }}>
       <Typography variant="h6" color="primary" gutterBottom>
         Worksheet {worksheet_no}: {titles}
       </Typography>
@@ -55,15 +58,19 @@ const Worksheet3 = ({
           />
         </Box>
       ))}
-      <Button
+      <LoadingButton
         variant="contained"
         color="primary"
-        sx={{ mt: 2 }}
-        fullWidth
+        sx={{
+          mt: 4,
+          ml: "auto", // This will push the button to the right
+          display: "block", // Ensures the button takes up its own line
+        }}
+        loading={isLoading}
         onClick={handleSubmit}
       >
-        Submit Answers
-      </Button>
+        Submit
+      </LoadingButton>
     </Box>
   );
 };

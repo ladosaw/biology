@@ -25,6 +25,7 @@ import Mouth from "../../../../assets/images/Lesson1Worksheet2/F.png";
 import Rectum from "../../../../assets/images/Lesson1Worksheet2/G.png";
 import Liver from "../../../../assets/images/Lesson1Worksheet2/H.png";
 import API from "../../../../utils/api/api.js";
+import { LoadingButton } from "@mui/lab";
 
 const HTML5toTouch = {
   backends: [
@@ -106,6 +107,7 @@ const Worksheet2 = ({
   worksheet_no,
   setIsModalWorksheet2ModalOpen,
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [assignedImages, setAssignedImages] = useState({});
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -121,6 +123,7 @@ const Worksheet2 = ({
   };
 
   const handleSubmit = async () => {
+    setIsLoading(true);
     try {
       const organOrder = [
         "Large Intestine",
@@ -161,6 +164,9 @@ const Worksheet2 = ({
           text: "You are not logged in. Please log in again.",
           confirmButtonColor: "#dc2626",
         });
+        setIsLoading(false);
+        setIsModalWorksheet2ModalOpen(false);
+        return;
       }
 
       const payload = {
@@ -196,6 +202,7 @@ const Worksheet2 = ({
       });
     } catch (error) {
       setIsModalWorksheet2ModalOpen(false);
+      setIsLoading(false);
       Swal.fire({
         icon: "error",
         title: "Submission Failed",
@@ -206,6 +213,7 @@ const Worksheet2 = ({
       });
     } finally {
       setIsModalWorksheet2ModalOpen(false);
+      setIsLoading(false);
     }
   };
 
@@ -327,14 +335,19 @@ const Worksheet2 = ({
             </TableBody>
           </Table>
         </TableContainer>
-        <Button
+        <LoadingButton
           variant="contained"
           color="primary"
-          sx={{ mt: 3 }}
+          sx={{
+            mt: 4,
+            ml: "auto", // This will push the button to the right
+            display: "block", // Ensures the button takes up its own line
+          }}
+          loading={isLoading}
           onClick={handleSubmit}
         >
           Submit
-        </Button>
+        </LoadingButton>
       </Box>
     </DndProvider>
   );

@@ -19,14 +19,45 @@ export const DigestiveWorksheetsLink = {
 };
 
 export const WorksheetsQuestion1 = [
-  "The food is mixed with the acids and stays in the stomach for 1 or 2 hours.",
-  "The useful substances pass through the walls of the intestines into the blood",
-  "The unuseful substances pass on to the large intestine, where some water and leftovers pass back into the blood.",
-  "The food enters your mouth and is then chewed and broken down into smaller pieces by the teeth",
-  "The rectum muscles help to remove the waste out of the body.",
-  "The food goes down the alimentary canal: the walls of the esophagus push down the bolus into the stomach.",
-  "The food goes into the small intestine, where it is mixed with juices produced by the liver, the gallbladder, and the pancreas.",
-  "The food is mixed with the saliva produced by the salivary glands, which makes the food easy to swallow (we call it bolus) ",
+  {
+    id: 1,
+    question:
+      "1. The food is mixed with the acids and stays in the stomach for 1 or 2 hours.",
+  },
+  {
+    id: 2,
+    question:
+      "2. The useful substances pass through the walls of the intestines into the blood",
+  },
+  {
+    id: 3,
+    question:
+      "3. The unuseful substances pass on to the large intestine, where some water and leftovers pass back into the blood.",
+  },
+  {
+    id: 4,
+    question:
+      "4. The food enters your mouth and is then chewed and broken down into smaller pieces by the teeth",
+  },
+  {
+    id: 5,
+    question: "5. The rectum muscles help to remove the waste out of the body.",
+  },
+  {
+    id: 6,
+    question:
+      "6. The food goes down the alimentary canal: the walls of the esophagus push down the bolus into the stomach.",
+  },
+  {
+    id: 7,
+    question:
+      "7. The food goes into the small intestine, where it is mixed with juices produced by the liver, the gallbladder, and the pancreas.",
+  },
+  {
+    id: 8,
+    question:
+      "8. The food is mixed with the saliva produced by the salivary glands, which makes the food easy to swallow (we call it bolus) ",
+  },
 ];
 
 export const Worksheets3Question = [

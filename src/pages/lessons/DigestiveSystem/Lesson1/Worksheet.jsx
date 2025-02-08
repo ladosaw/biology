@@ -1,14 +1,21 @@
 import React, { useState } from "react";
-import { DndProvider, useDrag, useDrop } from "react-dnd";
+import { DndProvider } from "react-dnd";
 import Swal from "sweetalert2";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
 import { MultiBackend, TouchTransition } from "react-dnd-multi-backend";
 import image from "../../../../assets/images/DigestiveWorksheet.png";
-import { Box, Typography, Paper, Grid, Button, Divider } from "@mui/material";
-import { CircularProgress } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Paper,
+  Grid,
+  Button,
+  Divider,
+  TextField,
+} from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import { WorksheetsQuestion1 } from "./ConstantDigestive.jsx";
-import TextField from "../../../../components/TextField/TextField.jsx";
 import API from "../../../../utils/api/api.js";
 
 const HTML5toTouch = {
@@ -83,8 +90,7 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [assigned, setAssigned] = useState({});
   const [availableOrgans, setAvailableOrgans] = useState(initialOrgans);
-  const [selectedOrgan, setSelectedOrgan] = useState(null); // Track selected organ
-  const [submittedAnswers, setSubmittedAnswers] = useState(false); // Track submission status
+  const [selectedOrgan, setSelectedOrgan] = useState(null);
   const [textFieldAnswers, setTextFieldAnswers] = useState(
     new Array(WorksheetsQuestion1.length).fill("")
   );
@@ -145,6 +151,7 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
           confirmButtonColor: "#dc2626",
         });
         setIsLoading(false);
+        setIsModalWorksheetModalOpen(false);
         return;
       }
 
@@ -166,7 +173,6 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
       const { score, worksheet } = response.data;
 
       setIsModalWorksheetModalOpen(false);
-
       Swal.fire({
         icon: "success",
         title: "Quiz Submitted!",
@@ -180,6 +186,7 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         navigate("/lessons");
       });
     } catch (error) {
+      setIsLoading(false);
       setIsModalWorksheetModalOpen(false);
       Swal.fire({
         icon: "error",
@@ -254,28 +261,37 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         </Grid>
       </Box>
 
-      <Box
-        sx={{ borderTop: 1, borderColor: "divider", p: 3, textAlign: "center" }}
-      >
-        <Typography variant="body1" color="textSecondary" paragraph>
-          <strong>B. Directions:</strong> Read the sentences below, then write
-          the number of events in the digestion process. Write numbers 1-8
-          before the sentences.
+      <Box sx={{ p: 3, textAlign: "center", maxWidth: 600, mx: "auto" }}>
+        <Typography variant="h6" color="primary" gutterBottom>
+          Worksheet {worksheet_no}: {titles}
         </Typography>
-
-        {WorksheetsQuestion1.map((question, index) => (
-          <TextField
-            key={index}
-            label={question}
-            value={textFieldAnswers[index]} // Bind value from the parent state
-            onChange={(e) => handleTextFieldChange(index, e.target.value)} // Call the parent's handler
-          />
+        <Typography variant="body1" color="textSecondary" paragraph>
+          B. Direction: Read the sentences below, then write the number of
+          events in the digestion process. Write numbers 1-8 before the
+          sentences.
+        </Typography>
+        {WorksheetsQuestion1.map((data, index) => (
+          <Box key={data.id} sx={{ textAlign: "left", mb: 2 }}>
+            <Typography variant="body2" fontWeight="bold" gutterBottom>
+              {data.question}
+            </Typography>
+            <TextField
+              value={textFieldAnswers[index]}
+              onChange={(e) => handleTextFieldChange(index, e.target.value)}
+              fullWidth
+              multiline
+              rows={3}
+              margin="normal"
+              variant="outlined"
+              sx={{ minWidth: "100%" }}
+            />
+          </Box>
         ))}
       </Box>
 
       <Divider sx={{ mt: 4 }} />
 
-      <Button
+      <LoadingButton
         sx={{
           mt: 4,
           ml: "auto", // This will push the button to the right
@@ -283,10 +299,11 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         }}
         variant="contained"
         color="primary"
+        loading={isLoading}
         onClick={handleSubmit}
       >
-        Submit Answers
-      </Button>
+        Submit
+      </LoadingButton>
     </DndProvider>
   );
 };
