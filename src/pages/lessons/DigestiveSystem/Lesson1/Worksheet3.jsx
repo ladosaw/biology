@@ -21,14 +21,40 @@ const Worksheet3 = ({
   };
 
   const handleSubmit = () => {
-    setIsLoading(true);
-    setIsModalWorksheet3ModalOpen(false);
-    console.log("Submitted Answers:", textFieldAnswers);
-    Swal.fire({
-      title: "Submission Successful",
-      text: "Your answers have been recorded!",
-      icon: "success",
-    });
+    try {
+      setIsLoading(true);
+
+      // Ensure all text fields are filled
+      if (textFieldAnswers.some((answer) => answer.trim() === "")) {
+        Swal.fire({
+          icon: "warning",
+          title: "Incomplete Answers",
+          text: "Please answer all text fields before submitting.",
+          confirmButtonColor: "#f59e0b",
+        });
+        return;
+      }
+
+      setIsModalWorksheet3ModalOpen(false);
+      console.log("Submitted Answers:", textFieldAnswers);
+      Swal.fire({
+        title: "Submission Successful",
+        text: "Your answers have been recorded!",
+        icon: "success",
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Submission Failed",
+        text: error || "An error occurred while submitting the answers.",
+        confirmButtonColor: "#dc2626",
+      });
+      setIsLoading(false);
+      setIsModalWorksheet3ModalOpen(false);
+    } finally {
+      setIsLoading(false);
+      setIsModalWorksheet3ModalOpen(false);
+    }
   };
 
   return (

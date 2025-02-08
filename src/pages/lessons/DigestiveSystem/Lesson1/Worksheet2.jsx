@@ -123,8 +123,20 @@ const Worksheet2 = ({
   };
 
   const handleSubmit = async () => {
-    setIsLoading(true);
     try {
+      setIsLoading(true);
+
+      // Ensure all organs are placed
+      if (Object.keys(assignedImages).length !== 10) {
+        Swal.fire({
+          icon: "warning",
+          title: "Incomplete Answers",
+          text: "Please place all digestive organs before submitting.",
+          confirmButtonColor: "#f59e0b", // Yellow warning color
+        });
+        return;
+      }
+
       const organOrder = [
         "Large Intestine",
         "Stomach",

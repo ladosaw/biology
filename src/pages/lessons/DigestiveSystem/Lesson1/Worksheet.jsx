@@ -123,9 +123,30 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
   };
 
   const handleSubmit = async () => {
-    setIsLoading(true);
-
     try {
+      setIsLoading(true);
+      // Ensure all organs are placed
+      if (Object.keys(assigned).length !== 10) {
+        Swal.fire({
+          icon: "warning",
+          title: "Incomplete Answers",
+          text: "Please place all digestive organs before submitting.",
+          confirmButtonColor: "#f59e0b", // Yellow warning color
+        });
+        return;
+      }
+
+      // Ensure all text fields are filled
+      if (textFieldAnswers.some((answer) => answer.trim() === "")) {
+        Swal.fire({
+          icon: "warning",
+          title: "Incomplete Answers",
+          text: "Please answer all text fields before submitting.",
+          confirmButtonColor: "#f59e0b",
+        });
+        return;
+      }
+
       // Combine drag-and-drop and text answers into a single object
       const answers = {};
 
