@@ -184,7 +184,11 @@ const AdminDash = () => {
                       <TableCell>
                         {`${row.user.lname}, ${row.user.fname} ${row.user?.mname}.`}
                       </TableCell>
-                      <TableCell>{row.worksheet_no}</TableCell>
+                      <TableCell>
+                        {row.worksheet_no === 0
+                          ? "Evaluation"
+                          : row.worksheet_no}
+                      </TableCell>
                       <TableCell>{row.score}</TableCell>
                       <TableCell>
                         {new Date(row.created_at).toLocaleDateString()}
