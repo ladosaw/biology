@@ -7,7 +7,6 @@ const Worksheet = ({
   toggleModalWorksheet3,
   toggleEvaluation,
 }) => {
-
   const handleLinkClick = (key) => {
     setClickedLinks((prevState) => ({
       ...prevState,
@@ -47,19 +46,7 @@ const Worksheet = ({
             {WorksheetData.worksheet2.title}
           </button>
         </li>
-        <li className="hover:text-blue-600">
-          {/* <a
-            href={WorksheetData.worksheet3.link}
-            target="_blank"
-            onClick={() => handleLinkClick("worksheet3")}
-            className="text-blue-600 hover:underline"
-          >
-            {WorksheetData.worksheet3.title}
-          </a> */}
-          <button onClick={toggleModalWorksheet3}>
-            {WorksheetData.worksheet3.title}
-          </button>
-        </li>
+
         <li className="hover:text-blue-600">
           {/* <a
             href={WorksheetData.worksheet3.link}
@@ -72,16 +59,6 @@ const Worksheet = ({
           <button onClick={toggleEvaluation}>
             {WorksheetData.evaluation.title}
           </button>
-        </li>
-
-        <li className="hover:text-blue-600">
-          <a
-            href={WorksheetData.evaluation.link}
-            target="_blank"
-            className="text-blue-600 hover:underline"
-          >
-            {WorksheetData.evaluation.title}
-          </a>
         </li>
       </ul>
     </div>

@@ -270,7 +270,6 @@ const Module1 = ({ hideFloating }) => {
         WorksheetData={MitosisWorksheetsLink}
         toggleModalWorksheet={toggleModalWorksheet}
         toggleModalWorksheet2={toggleModalWorksheet2}
-        toggleModalWorksheet3={toggleModalWorksheet3}
         toggleEvaluation={toggleEvaluation}
       />
 
@@ -288,14 +287,6 @@ const Module1 = ({ hideFloating }) => {
         title={MitosisWorksheetsLink.worksheet2.title}
       >
         <Worksheet2 />
-      </Modal>
-
-      <Modal
-        open={isModalWorksheet3Open}
-        onClose={toggleModalWorksheet3}
-        title={MitosisWorksheetsLink.worksheet3.title}
-      >
-        <Worksheet3 />
       </Modal>
 
       <Modal
