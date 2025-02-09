@@ -365,10 +365,12 @@ const Module1 = ({ hideFloating }) => {
       </Modal>
 
       <Modal
+
         open={evaluationOpen}
         onClose={toggleEvaluation}
         title={DigestiveWorksheetsLink.evaluation.title}
       >
+
         <Evaluation
           titles={
             "LESSON 1: STRUCTURES AND FUNCTIONS IN HUMAN FOCUS ON THE DIGESTIVE SYSTEM"
@@ -376,6 +378,7 @@ const Module1 = ({ hideFloating }) => {
           worksheet_no={0}
           setEvaluationOpen={setEvaluationOpen}
         />
+
       </Modal>
 
       {/* Footer */}
