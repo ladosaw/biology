@@ -131,13 +131,6 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
       >
         Submit
       </LoadingButton>
-      {/* <button
-
-        onClick={handleSubmit}
-        className="bg-blue-500 w-full md:w-auto text-white px-6 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
-      >
-        Submit Answers
-      </button> */}
     </div>
   );
 };

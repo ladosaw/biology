@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Box, Typography, TextField, Button } from "@mui/material";
+import { Box, Typography, TextField } from "@mui/material";
 import { Worksheets3Question } from "./ConstantDigestive.jsx";
 import Swal from "sweetalert2";
 import { LoadingButton } from "@mui/lab";
+import API from "../../../../utils/api/api.js";
 
 const Worksheet3 = ({
   titles,
@@ -20,7 +21,7 @@ const Worksheet3 = ({
     setTextFieldAnswers(updatedAnswers);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     try {
       setIsLoading(true);
 
@@ -35,11 +36,31 @@ const Worksheet3 = ({
         return;
       }
 
+      const user_id = localStorage.getItem("id");
+      const authToken = localStorage.getItem("authToken");
+
+      const payload = {
+        answer: textFieldAnswers,
+        user_id,
+        titles,
+        worksheet_no: worksheet_no.toString(),
+      };
+
+      const response = await API.post("/worksheets", payload, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      // Extracting message and worksheet details
+      const { message } = response.data;
+
       setIsModalWorksheet3ModalOpen(false);
       console.log("Submitted Answers:", textFieldAnswers);
       Swal.fire({
         title: "Submission Successful",
-        text: "Your answers have been recorded!",
+        text: message || "Your answers have been recorded!",
         icon: "success",
       });
     } catch (error) {
