@@ -289,7 +289,6 @@ const Module1 = ({ hideFloating }) => {
       </Modal>
 
       <Modal
-
         open={isModalWorksheet3Open}
         onClose={toggleModalWorksheet3}
         title={MitosisWorksheetsLink.worksheet3.title}
@@ -298,14 +297,16 @@ const Module1 = ({ hideFloating }) => {
       </Modal>
 
       <Modal
-
         open={evaluationOpen}
         onClose={toggleEvaluation}
         title={MitosisWorksheetsLink.evaluation.title}
       >
-        <Evaluation />
+        <Evaluation
+          titles={"LESSON 2: CELL CYCLE: Interphase and Cell Division"}
+          worksheet_no={0}
+          setEvaluationOpen={setEvaluationOpen}
+        />
       </Modal>
-
 
       {/* Footer */}
       <div className="flex flex-col items-end mt-10 space-y-4">
@@ -319,7 +320,6 @@ const Module1 = ({ hideFloating }) => {
         </button> */}
         <div className="bg-gray-200 w-full h-[1px]"></div>
       </div>
-
 
       {/* Floating Button */}
       <div className={`fixed bottom-4 right-4 ${hideFloating ? "hidden" : ""}`}>

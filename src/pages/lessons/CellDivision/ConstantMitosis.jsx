@@ -95,3 +95,89 @@ export const MitosisWorksheetsLink = {
     link: "https://forms.gle/EDugtXsY2RXkBFFr5",
   },
 };
+
+export const MitosisQuestions = [
+  {
+    id: 1,
+    question: "How many daughter cells are produced after mitosis?",
+    choices: ["2", "4", "23", "46"],
+  },
+  {
+    id: 2,
+    question: "Which of the following cells undergo mitosis? ",
+    choices: [
+      "Cardiac muscle",
+      "sperm and egg cell",
+      "skin cells",
+      "Both A and C",
+    ],
+  },
+  {
+    id: 3,
+    question:
+      "Which checkpoint in the cell ensures that the cell is ready to enter the M phase?",
+    choices: ["G1 Phase", "G2 Phase", "M Checkpoint", "5 checkpoint"],
+  },
+  {
+    id: 4,
+    question: "Which sequence of the cell cycle is common to eukaryotes?",
+    choices: [
+      "G1 to G2 to S to M to cytokinesis",
+      "G1 to S to M to G2 to cytokinesis ",
+      "G1 to M to G2 to S to cytokinesis ",
+      "G1 to S to G2 to M to cytokinesis",
+    ],
+  },
+  {
+    id: 5,
+    question: "Where does the duplication of genetic materials happen?",
+    choices: ["G1 Phase", "G2 Phase", "M Checkpoint", "5 checkpoint"],
+  },
+  {
+    id: 6,
+    question: "What is not a function of mitosis?",
+    choices: [
+      "growth ",
+      "production of reproductive cell",
+      "wound repair",
+      "replacement of old worn-out-cell",
+    ],
+  },
+  {
+    id: 7,
+    question: "Which is the correct sequence of steps in the cell cycle? ",
+    choices: [
+      "Anaphase, prophase, interphase, metaphase, telophase ",
+      "Interphase, anaphase, metaphase, prophase, telophase",
+      "Interphase, prophase, metaphase, anaphase, telophase ",
+      "Prophase, metaphase,  interphase, anaphase, telophase",
+    ],
+  },
+  {
+    id: 8,
+    question: "Which of the following statements of miosis is correct?",
+    choices: [
+      "The centromere of the chromosome separates during metaphase.",
+      "The chromatid number in a daughter cell is the same as in the parent cell.",
+      "The chromosome number in a daughter cell is the same as that in the parent cell. ",
+      "The chromosome number in a daughter cell is the same as the chromatid number in the parent cell.",
+    ],
+  },
+  {
+    id: 9,
+    question:
+      "Which of the following is true about plant cell division that differentiates it from animal cell division?",
+    choices: [
+      "Formation of cell plate ",
+      "Inability to undergo cytokinesis ",
+      "Formation of cleavage furrow  ",
+      "Production of four new cells after mitosis",
+    ],
+  },
+  {
+    id: 10,
+    question:
+      "Your teacher asked you to identify a specimen's mitosis stage under the microscope. You observe that instead of a typical round cell shape, the cell has a narrow middle part that almost separates into two bulging ends, which looks like the number 8. The cell is undergoing ___________",
+    choices: ["Anaphase", "Metaphase", "Cytokinesis", "Prophase"],
+  },
+];
