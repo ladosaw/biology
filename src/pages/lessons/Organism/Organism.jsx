@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import FloatingButton from "../../../components/FloatingButton/FloatingButton";
 import OrganismPdf from "../../../assets/pdf/Organism.pdf";
 
@@ -14,8 +14,37 @@ import BiomassImage from "../../../assets/images/BiomassImage.jpg";
 import { OrganismWorksheetsLink } from "./ConstantData";
 import Worksheets from "../../../components/Worksheets/Worksheets";
 import FoodWebAnimation from "./FoodWebAnimation.jsx";
+import WorksheetModal from "../../../components/Modal/Modal.jsx";
+import Worksheet1 from "./Worksheet1";
+import Worksheet2 from "./Worksheet2";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import Worksheet3 from "./Worksheet3";
+import Evaluation from "./Evaluation";
 
 const Organism = ({ hideFloating }) => {
+  const [isModalWorksheetOpen, setIsModalWorksheetModalOpen] = useState(false);
+  const [isModalWorksheet2Open, setIsModalWorksheet2ModalOpen] =
+    useState(false);
+  const [isModalWorksheet3Open, setIsModalWorksheet3ModalOpen] =
+    useState(false);
+
+  const [evaluationOpen, setEvaluationOpen] = useState(false);
+
+  const toggleModalWorksheet = () => {
+    setIsModalWorksheetModalOpen((prev) => !prev);
+  };
+  const toggleModalWorksheet2 = () => {
+    setIsModalWorksheet2ModalOpen((prev) => !prev);
+  };
+  const toggleModalWorksheet3 = () => {
+    setIsModalWorksheet3ModalOpen((prev) => !prev);
+  };
+
+  const toggleEvaluation = () => {
+    setEvaluationOpen((prev) => !prev);
+  };
+
   const handleDownload = () => {
     const pdfUrl = OrganismPdf;
 
@@ -335,7 +364,47 @@ const Organism = ({ hideFloating }) => {
         </div>
       </div>
 
-      <Worksheets WorksheetData={OrganismWorksheetsLink} />
+      <Worksheets
+        WorksheetData={OrganismWorksheetsLink}
+        toggleModalWorksheet={toggleModalWorksheet}
+        toggleModalWorksheet2={toggleModalWorksheet2}
+        toggleModalWorksheet3={toggleModalWorksheet3}
+        toggleEvaluation={toggleEvaluation}
+      />
+
+      <WorksheetModal
+        open={isModalWorksheetOpen}
+        onClose={toggleModalWorksheet}
+        title={OrganismWorksheetsLink.worksheet1.title}
+      >
+        <Worksheet1 />
+      </WorksheetModal>
+
+      <WorksheetModal
+        open={isModalWorksheet2Open}
+        onClose={toggleModalWorksheet2}
+        title={OrganismWorksheetsLink.worksheet2.title}
+      >
+        <Worksheet2 />
+      </WorksheetModal>
+
+      <WorksheetModal
+        open={isModalWorksheet3Open}
+        onClose={toggleModalWorksheet3}
+        title={OrganismWorksheetsLink.worksheet3.title}
+      >
+        <DndProvider backend={HTML5Backend}>
+          <Worksheet3 />
+        </DndProvider>
+      </WorksheetModal>
+
+      <WorksheetModal
+        open={evaluationOpen}
+        onClose={toggleEvaluation}
+        title={OrganismWorksheetsLink.evaluation.title}
+      >
+        <Evaluation />
+      </WorksheetModal>
 
       {/* Floating Button */}
       <div className={`fixed bottom-4 right-4 ${hideFloating ? "hidden" : ""}`}>

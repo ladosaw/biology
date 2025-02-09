@@ -11,10 +11,10 @@ import {
 import Worksheets from "../../../../components/Worksheets/Worksheets.jsx";
 import MitosisAnimation from "./MitosisAnimation.jsx";
 import Evaluation from "./Evaluation.jsx";
-import Modal from "../../../../components/Modal/Modal.jsx";
 import Worksheet from "./Worksheet.jsx";
 import Worksheet2 from "./Worksheet2.jsx";
 import Worksheet3 from "./Worksheet3.jsx";
+import Modal from "../../../../components/Modal/Modal.jsx";
 
 const Module1 = ({ hideFloating }) => {
   const [isModalWorksheetOpen, setIsModalWorksheetModalOpen] = useState(false);
@@ -269,7 +269,6 @@ const Module1 = ({ hideFloating }) => {
         WorksheetData={MitosisWorksheetsLink}
         toggleModalWorksheet={toggleModalWorksheet}
         toggleModalWorksheet2={toggleModalWorksheet2}
-        toggleModalWorksheet3={toggleModalWorksheet3}
         toggleEvaluation={toggleEvaluation}
       />
 
@@ -290,6 +289,7 @@ const Module1 = ({ hideFloating }) => {
       </Modal>
 
       <Modal
+
         open={isModalWorksheet3Open}
         onClose={toggleModalWorksheet3}
         title={MitosisWorksheetsLink.worksheet3.title}
@@ -298,12 +298,14 @@ const Module1 = ({ hideFloating }) => {
       </Modal>
 
       <Modal
+
         open={evaluationOpen}
         onClose={toggleEvaluation}
         title={MitosisWorksheetsLink.evaluation.title}
       >
         <Evaluation />
       </Modal>
+
 
       {/* Footer */}
       <div className="flex flex-col items-end mt-10 space-y-4">
@@ -317,6 +319,7 @@ const Module1 = ({ hideFloating }) => {
         </button> */}
         <div className="bg-gray-200 w-full h-[1px]"></div>
       </div>
+
 
       {/* Floating Button */}
       <div className={`fixed bottom-4 right-4 ${hideFloating ? "hidden" : ""}`}>
