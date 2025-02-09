@@ -16,7 +16,9 @@ import Figure4 from "../../../assets/images/Figure4.png";
 import PunnettSquare from "../../../assets/images/PunnettSquares.jpg";
 import DihybridCrossExample from "../../../assets/images/DihybridCrossExample.jpg";
 import Worksheets from "../../../components/Worksheets/Worksheets";
-import WorksheetModal from "../../../components/Modal/Modal";
+
+import Modal from "../../../components/Modal/Modal";
+
 import Worksheet1 from "./Worksheet1";
 import Worksheet2 from "./Worksheet2";
 import Worksheet3 from "./Worksheet3";
@@ -669,23 +671,23 @@ const MendelianGenetics = ({ hideFloating }) => {
         toggleEvaluation={toggleEvaluation}
       />
 
-      <WorksheetModal
+      <Modal
         open={isModalWorksheetOpen}
         onClose={toggleModalWorksheet}
         title={MendelianGeneticsWorksheetsLink.worksheet1.title}
       >
         <Worksheet1 />
-      </WorksheetModal>
+      </Modal>
 
-      <WorksheetModal
+      <Modal
         open={isModalWorksheet2Open}
         onClose={toggleModalWorksheet2}
         title={MendelianGeneticsWorksheetsLink.worksheet2.title}
       >
         <Worksheet2 />
-      </WorksheetModal>
+      </Modal>
 
-      <WorksheetModal
+      <Modal
         open={isModalWorksheet3Open}
         onClose={toggleModalWorksheet3}
         title={MendelianGeneticsWorksheetsLink.worksheet3.title}
@@ -693,15 +695,15 @@ const MendelianGenetics = ({ hideFloating }) => {
         <DndProvider backend={HTML5Backend}>
           <Worksheet3 />
         </DndProvider>
-      </WorksheetModal>
+      </Modal>
 
-      <WorksheetModal
+      <Modal
         open={evaluationOpen}
         onClose={toggleEvaluation}
         title={MendelianGeneticsWorksheetsLink.evaluation.title}
       >
         <Evaluation />
-      </WorksheetModal>
+      </Modal>
 
       {/* Floating Button */}
       <div className={`fixed bottom-4 right-4 ${hideFloating ? "hidden" : ""}`}>

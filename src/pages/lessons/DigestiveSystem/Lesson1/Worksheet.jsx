@@ -1,14 +1,21 @@
 import React, { useState } from "react";
-import { DndProvider, useDrag, useDrop } from "react-dnd";
+import { DndProvider } from "react-dnd";
 import Swal from "sweetalert2";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
 import { MultiBackend, TouchTransition } from "react-dnd-multi-backend";
 import image from "../../../../assets/images/DigestiveWorksheet.png";
-import { Box, Typography, Paper, Grid, Button, Divider } from "@mui/material";
-import { CircularProgress } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Paper,
+  Grid,
+  Button,
+  Divider,
+  TextField,
+} from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import { WorksheetsQuestion1 } from "./ConstantDigestive.jsx";
-import TextField from "../../../../components/TextField/TextField.jsx";
 import API from "../../../../utils/api/api.js";
 
 const HTML5toTouch = {
@@ -83,8 +90,7 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [assigned, setAssigned] = useState({});
   const [availableOrgans, setAvailableOrgans] = useState(initialOrgans);
-  const [selectedOrgan, setSelectedOrgan] = useState(null); // Track selected organ
-  const [submittedAnswers, setSubmittedAnswers] = useState(false); // Track submission status
+  const [selectedOrgan, setSelectedOrgan] = useState(null);
   const [textFieldAnswers, setTextFieldAnswers] = useState(
     new Array(WorksheetsQuestion1.length).fill("")
   );
@@ -117,18 +123,43 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
   };
 
   const handleSubmit = async () => {
-    setIsLoading(true);
-
     try {
-      const answers = Object.keys(assigned).map((key) => ({
-        dropZone: key,
-        organ: assigned[key],
-      }));
+      setIsLoading(true);
+      // Ensure all organs are placed
+      if (Object.keys(assigned).length !== 10) {
+        Swal.fire({
+          icon: "warning",
+          title: "Incomplete Answers",
+          text: "Please place all digestive organs before submitting.",
+          confirmButtonColor: "#f59e0b", // Yellow warning color
+        });
+        return;
+      }
 
-      const textAnswers = WorksheetsQuestion1.map((question, index) => ({
-        question: question,
-        answer: textFieldAnswers[index],
-      }));
+      // Ensure all text fields are filled
+      if (textFieldAnswers.some((answer) => answer.trim() === "")) {
+        Swal.fire({
+          icon: "warning",
+          title: "Incomplete Answers",
+          text: "Please answer all text fields before submitting.",
+          confirmButtonColor: "#f59e0b",
+        });
+        return;
+      }
+
+      // Combine drag-and-drop and text answers into a single object
+      const answers = {};
+
+      // Add drag-and-drop answers
+      Object.keys(assigned).forEach((key) => {
+        answers[key] = assigned[key]; // Assign organ name
+      });
+
+      // Add text-based answers
+      WorksheetsQuestion1.forEach((question, index) => {
+        const questionId = index + 1 + Object.keys(assigned).length; // Ensure unique ID
+        answers[questionId] = textFieldAnswers[index]; // Assign text answer
+      });
 
       const user_id = localStorage.getItem("id");
       const authToken = localStorage.getItem("authToken");
@@ -141,35 +172,43 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
           confirmButtonColor: "#dc2626",
         });
         setIsLoading(false);
+        setIsModalWorksheetModalOpen(false);
         return;
       }
 
       const payload = {
-        answers,
-        textAnswers,
+        answer: [answers],
         user_id,
         titles,
         worksheet_no,
       };
 
-      await API.post("/worksheets/checker", payload, {
+      const response = await API.post("/worksheets/checker", payload, {
         headers: {
           Authorization: `Bearer ${authToken}`,
           "Content-Type": "application/json",
         },
       });
 
-      setIsModalWorksheetModalOpen(false);
+      // Extracting score and worksheet details
+      const { score, worksheet } = response.data;
 
+      setIsModalWorksheetModalOpen(false);
       Swal.fire({
         icon: "success",
-        title: "Successful Submission",
-        text: "Submitted answers successfully!",
+        title: "Quiz Submitted!",
+        html: `
+          <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
+          <p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>
+          <p><strong>Your Score:</strong> ${score}</p>
+        `,
         confirmButtonColor: "#10B981",
       }).then(() => {
         navigate("/lessons");
       });
     } catch (error) {
+      setIsLoading(false);
+      setIsModalWorksheetModalOpen(false);
       Swal.fire({
         icon: "error",
         title: "Submission Failed",
@@ -243,28 +282,37 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         </Grid>
       </Box>
 
-      <Box
-        sx={{ borderTop: 1, borderColor: "divider", p: 3, textAlign: "center" }}
-      >
-        <Typography variant="body1" color="textSecondary" paragraph>
-          <strong>B. Directions:</strong> Read the sentences below, then write
-          the number of events in the digestion process. Write numbers 1-8
-          before the sentences.
+      <Box sx={{ p: 3, textAlign: "center", maxWidth: 600, mx: "auto" }}>
+        <Typography variant="h6" color="primary" gutterBottom>
+          Worksheet {worksheet_no}: {titles}
         </Typography>
-
-        {WorksheetsQuestion1.map((question, index) => (
-          <TextField
-            key={index}
-            label={question}
-            value={textFieldAnswers[index]} // Bind value from the parent state
-            onChange={(e) => handleTextFieldChange(index, e.target.value)} // Call the parent's handler
-          />
+        <Typography variant="body1" color="textSecondary" paragraph>
+          B. Direction: Read the sentences below, then write the number of
+          events in the digestion process. Write numbers 1-8 before the
+          sentences.
+        </Typography>
+        {WorksheetsQuestion1.map((data, index) => (
+          <Box key={data.id} sx={{ textAlign: "left", mb: 2 }}>
+            <Typography variant="body2" fontWeight="bold" gutterBottom>
+              {data.question}
+            </Typography>
+            <TextField
+              value={textFieldAnswers[index]}
+              onChange={(e) => handleTextFieldChange(index, e.target.value)}
+              fullWidth
+              multiline
+              rows={3}
+              margin="normal"
+              variant="outlined"
+              sx={{ minWidth: "100%" }}
+            />
+          </Box>
         ))}
       </Box>
 
       <Divider sx={{ mt: 4 }} />
 
-      <Button
+      <LoadingButton
         sx={{
           mt: 4,
           ml: "auto", // This will push the button to the right
@@ -272,10 +320,11 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         }}
         variant="contained"
         color="primary"
+        loading={isLoading}
         onClick={handleSubmit}
       >
-        Submit Answers
-      </Button>
+        Submit
+      </LoadingButton>
     </DndProvider>
   );
 };
