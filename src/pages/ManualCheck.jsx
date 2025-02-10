@@ -114,9 +114,9 @@ const ManualCheck = ({ worksheet, fetchData, onClose }) => {
         }`}
       </Typography>
 
-      {/* Display the worksheet answers */}
+      {/* Display the worksheet questions with answers */}
       <Grid container spacing={2}>
-        {worksheet.answers.map((answer, index) => (
+        {worksheet.answers.map((data, index) => (
           <Grid item xs={12} key={index}>
             <Paper
               sx={{
@@ -127,13 +127,23 @@ const ManualCheck = ({ worksheet, fetchData, onClose }) => {
               }}
             >
               <Typography
+                variant="body1"
+                sx={{
+                  fontSize: { xs: "1rem", md: "1.1rem" },
+                  fontWeight: "bold",
+                  mb: 1,
+                }}
+              >
+                {data.question || `Question ${index + 1}`}
+              </Typography>
+              <Typography
                 variant="body2"
                 sx={{
                   fontSize: { xs: "0.9rem", md: "1rem" },
-                  lineHeight: 1.5,
+                  color: "text.secondary",
                 }}
               >
-                <strong>{`${index + 1}.`}</strong> {answer}
+                {`Answer: ${data.answer}` || "No answer provided"}
               </Typography>
             </Paper>
           </Grid>

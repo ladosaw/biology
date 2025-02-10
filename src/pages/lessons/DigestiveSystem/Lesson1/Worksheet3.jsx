@@ -39,11 +39,18 @@ const Worksheet3 = ({
       const user_id = localStorage.getItem("id");
       const authToken = localStorage.getItem("authToken");
 
+      // Creating the required answer format
+      const formattedAnswers = Worksheets3Question.map((question, index) => ({
+        id: question.id,
+        question: question.question,
+        answer: textFieldAnswers[index],
+      }));
+
       const payload = {
-        answer: textFieldAnswers,
         user_id,
         titles,
         worksheet_no: worksheet_no.toString(),
+        answer: formattedAnswers, // Updated payload
       };
 
       const response = await API.post("/worksheets", payload, {
@@ -57,7 +64,7 @@ const Worksheet3 = ({
       const { message } = response.data;
 
       setIsModalWorksheet3ModalOpen(false);
-      console.log("Submitted Answers:", textFieldAnswers);
+      console.log("Submitted Answers:", payload);
       Swal.fire({
         title: "Submission Successful",
         text: message || "Your answers have been recorded!",
@@ -71,10 +78,10 @@ const Worksheet3 = ({
         confirmButtonColor: "#dc2626",
       });
       setIsLoading(false);
-      setIsModalWorksheet3ModalOpen(false);
+      // setIsModalWorksheet3ModalOpen(false);
     } finally {
       setIsLoading(false);
-      setIsModalWorksheet3ModalOpen(false);
+      // setIsModalWorksheet3ModalOpen(false);
     }
   };
 
