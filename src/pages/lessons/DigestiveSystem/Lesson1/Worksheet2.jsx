@@ -127,7 +127,7 @@ const Worksheet2 = ({
       setIsLoading(true);
 
       // Ensure all organs are placed
-      if (Object.keys(assignedImages).length !== 10) {
+      if (Object.keys(assignedImages).length !== 8) {
         Swal.fire({
           icon: "warning",
           title: "Incomplete Answers",
