@@ -81,7 +81,7 @@ const SignUp = ({ onClose }) => {
             className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-400"
             disabled={isLoading}
           />
-          <select
+          {/* <select
             name="role"
             value={formData.role}
             onChange={handleChange}
@@ -90,7 +90,7 @@ const SignUp = ({ onClose }) => {
           >
             <option value="student">Student</option>
             <option value="admin">Admin</option>
-          </select>
+          </select> */}
           <input
             type="email"
             name="email"
