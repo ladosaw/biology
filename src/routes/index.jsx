@@ -1,5 +1,5 @@
 import { Navigate, useRoutes } from "react-router-dom";
-import { Home, About, Lessons, Login, AdminDash } from "./elements";
+import { Home, About, Lessons, Login, Register, AdminDash } from "./elements";
 
 const Router = () =>
   useRoutes([
@@ -8,6 +8,7 @@ const Router = () =>
     { path: "/lessons", element: <Lessons /> },
     { path: "/login", element: <Login /> },
     { path: "/admin", element: <AdminDash /> },
+    { path: "/register", element: <Register /> },
     { path: "*", element: <Navigate to="/" /> },
   ]);
 

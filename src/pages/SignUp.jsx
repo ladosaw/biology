@@ -34,7 +34,7 @@ const SignUp = ({ onClose }) => {
         text: "Your account has been created!",
         confirmButtonColor: "#10B981",
       }).then(() => {
-        navigate("/admin");
+        navigate("/lessons");
       });
     } catch (error) {
       Swal.fire({
@@ -129,6 +129,13 @@ const SignUp = ({ onClose }) => {
             ) : (
               "Sign Up"
             )}
+          </button>
+          <button
+            type="button"
+            className="w-full bg-gray-200 text-gray-700 py-3 rounded-lg hover:bg-gray-300 transition duration-300"
+            onClick={() => navigate("/login")}
+          >
+            Login
           </button>
         </form>
       </div>

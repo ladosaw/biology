@@ -14,4 +14,5 @@ export const Home = Loadable(lazy(() => import("../pages/Home/Home")));
 export const About = Loadable(lazy(() => import("../pages/about/About")));
 export const Lessons = Loadable(lazy(() => import("../pages/lessons/Lessons")));
 export const Login = Loadable(lazy(() => import("../pages/Login")));
+export const Register = Loadable(lazy(() => import("../pages/SignUp")));
 export const AdminDash = Loadable(lazy(() => import("../pages/AdminDash")));
