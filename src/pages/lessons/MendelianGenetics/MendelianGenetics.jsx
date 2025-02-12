@@ -702,7 +702,11 @@ const MendelianGenetics = ({ hideFloating }) => {
         onClose={toggleEvaluation}
         title={MendelianGeneticsWorksheetsLink.evaluation.title}
       >
-        <Evaluation />
+        <Evaluation
+          titles={"LESSON 4: PATTERNS OF MENDELIAN GENETICS"}
+          worksheet_no={0}
+          setEvaluationOpen={setEvaluationOpen}
+        />
       </Modal>
 
       {/* Floating Button */}

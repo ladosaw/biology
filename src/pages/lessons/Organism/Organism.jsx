@@ -403,7 +403,11 @@ const Organism = ({ hideFloating }) => {
         onClose={toggleEvaluation}
         title={OrganismWorksheetsLink.evaluation.title}
       >
-        <Evaluation />
+        <Evaluation
+          titles={"LESSON 5: TRANSFER OF ENERGY IN THE TROPHIC LEVEL"}
+          worksheet_no={0}
+          setEvaluationOpen={setEvaluationOpen}
+        />
       </WorksheetModal>
 
       {/* Floating Button */}
