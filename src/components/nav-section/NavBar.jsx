@@ -72,7 +72,8 @@ const Navbar = () => {
         <Box sx={{ display: { xs: "none", lg: "flex" }, ml: "auto" }}>
           {menuItems.map(
             (item) =>
-              (item.id !== "admin" || userRole === "admin") && (
+              (item.id !== "admin" || userRole === "admin") &&
+              (item.id !== "student" || userRole === "student") && (
                 <motion.div
                   key={item.id}
                   whileHover={{ scale: 1.1 }}
@@ -91,6 +92,7 @@ const Navbar = () => {
                 </motion.div>
               )
           )}
+
           {authToken && ( // Only show Logout if the user is authenticated
             <>
               <Divider sx={{ my: 1 }} /> {/* Divider before Logout */}
@@ -148,7 +150,8 @@ const Navbar = () => {
                 >
                   {menuItems.map(
                     (item) =>
-                      (item.id !== "admin" || userRole === "admin") && (
+                      (item.id !== "admin" || userRole === "admin") &&
+                      (item.id !== "student" || userRole === "student") && (
                         <MenuItem
                           key={item.id}
                           onClick={() => handleNavigation(item.path)}
