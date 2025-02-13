@@ -40,3 +40,102 @@ export const MiosisWorksheetsLink = {
     link: "https://forms.gle/g983B6tKtmvWaUkJ7",
   },
 };
+
+export const MiosisWorksheetsEvaluationQuestions = [
+  {
+    id: 1,
+    question: "Meiosis results in the formation of ",
+    choices: [
+      "2 haploid daughter cells ",
+      "4 haploid daughter cells ",
+      "2 diploid daughter cells ",
+      "4 diploid daughter cells",
+    ],
+    correctAnswer: "B" || "b",
+  },
+  {
+    id: 2,
+    question: "Which of the following cells undergo meiosis ",
+    choices: [
+      "sperm cell",
+      "liver cell",
+      "unicellular organisms",
+      "all of these",
+    ],
+    correctAnswer: "B" || "b",
+  },
+  {
+    id: 3,
+    question:
+      "In what phase of meiosis do synapsis and crossing over happened?",
+    choices: ["Anaphase II", "Interphase I", "Telophase II", " Prophase I"],
+    correctAnswer: "A" || "a",
+  },
+  {
+    id: 4,
+    question:
+      "A cell with a diploid number of chromosomes of 46 undergo meiosis 1. How many chromosomes will each resulting daughter cell have?",
+    choices: ["6", "12", "23", "48"],
+    correctAnswer: "A" || "a",
+  },
+  {
+    id: 5,
+    question:
+      "What is the substage of prophase I where pairing of chromosome begins?",
+    choices: ["diplotene", "pachytene", "leptotene", "zygotene"],
+    correctAnswer: "B" || "b",
+  },
+  {
+    id: 6,
+    question:
+      "What stage of development as human being when you were just one cell?",
+    choices: ["infant ", "fetus", "baby ", "zygote"],
+    correctAnswer: "C" || "c",
+  },
+  {
+    id: 7,
+    question: "What process is shown in the illustration?  ",
+    choices: [
+      "synapsis only",
+      "crossing over only",
+      "synapsis and crossing over",
+      "pulling apart of chromosomes",
+    ],
+    correctAnswer: "A" || "a",
+  },
+  {
+    id: 8,
+    question:
+      "What information is provided to complete column 3 under meiosis?",
+    choices: [
+      "2-2N or diploid  ",
+      "4-2N or diploid.",
+      "2- 2N or haploid",
+      "4-N or haploid",
+    ],
+    correctAnswer: "A" || "a",
+  },
+  {
+    id: 9,
+    question: "The following statements are true about meiosis EXCEPT.",
+    choices: [
+      "It occurs in reproductive cells.    ",
+      "It results in four haploid (N) daughter cells. ",
+      "Exchanging of genetic materials does not occur.",
+      "Pulling apart of homologous pairs of chromosomes occurs.",
+    ],
+    correctAnswer: "A" || "a",
+  },
+  {
+    id: 10,
+    question:
+      "Which refers to the offspring resulting from cross-between parents with two contrasting traits?",
+    choices: [
+      "Law of segregation is the law of purity of genes ",
+      "Alleles separate from each other during gametogenesis ",
+      "Segregation of factors is due to the segregation of chromosomes during meiosis",
+      "All of the choices are correct statements.",
+    ],
+    correctAnswer: "b" || "B",
+  },
+];

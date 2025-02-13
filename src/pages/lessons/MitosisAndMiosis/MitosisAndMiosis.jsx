@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useState } from "react";
 import crossingOver from "../../../assets/images/crossingOver.jpg";
 import FloatingButton from "../../../components/FloatingButton/FloatingButton.jsx";
 import karyotype from "../../../assets/images/karyotype.jpg";
@@ -10,8 +10,35 @@ import meiosisPdf from "../../../assets/pdf/meiosisPdf.pdf";
 import { vocab, MiosisWorksheetsLink } from "./ConstantData.jsx";
 import Worksheets from "../../../components/Worksheets/Worksheets.jsx";
 import MitosisVsMeiosisAnimation from "./MitosisVsMeiosisAnimation.jsx";
+import Worksheet2 from "./Worksheet2.jsx";
+import Worksheet1 from "./Worksheet1.jsx";
+import Worksheet3 from "./Worksheet3.jsx";
+import Evaluation from "./Evaluation.jsx";
+import Modal from "../../../components/Modal/Modal.jsx";
 
 const MiosisAndMitosis = ({ hideFloating }) => {
+  const [isModalWorksheetOpen, setIsModalWorksheetModalOpen] = useState(false);
+  const [isModalWorksheet2Open, setIsModalWorksheet2ModalOpen] =
+    useState(false);
+  const [isModalWorksheet3Open, setIsModalWorksheet3ModalOpen] =
+    useState(false);
+
+  const [evaluationOpen, setEvaluationOpen] = useState(false);
+
+  const toggleModalWorksheet = () => {
+    setIsModalWorksheetModalOpen((prev) => !prev);
+  };
+  const toggleModalWorksheet2 = () => {
+    setIsModalWorksheet2ModalOpen((prev) => !prev);
+  };
+  const toggleModalWorksheet3 = () => {
+    setIsModalWorksheet3ModalOpen((prev) => !prev);
+  };
+
+  const toggleEvaluation = () => {
+    setEvaluationOpen((prev) => !prev);
+  };
+
   const handleDownload = () => {
     const pdfUrl = meiosisPdf;
 
@@ -504,18 +531,49 @@ const MiosisAndMitosis = ({ hideFloating }) => {
         </div>
       </div>
 
-      <Worksheets WorksheetData={MiosisWorksheetsLink} />
-      <div className="flex flex-col items-end mt-10 space-y-4">
-        <div className="bg-gray-200 w-full h-[1px]"></div>
-        {/* <Link to="lessons#mendelian-genetics">
-          <button className="flex items-center gap-2 bg-primary text-white py-2 px-4 rounded shadow hover:bg-primary-dark transition">
-            <p className="font-semibold text-lg">Lesson 3: Meiosis</p>
-            <FaArrowRight />
-          </button>
-        </Link> */}
+      <Worksheets
+        WorksheetData={MiosisWorksheetsLink}
+        toggleModalWorksheet={toggleModalWorksheet}
+        toggleModalWorksheet2={toggleModalWorksheet2}
+        toggleModalWorksheet3={toggleModalWorksheet3}
+        toggleEvaluation={toggleEvaluation}
+      />
 
-        <div className="bg-gray-200 w-full h-[1px]"></div>
-      </div>
+      <Modal
+        open={isModalWorksheetOpen}
+        onClose={toggleModalWorksheet}
+        title={MiosisWorksheetsLink.worksheet1.title}
+      >
+        <Worksheet1 />
+      </Modal>
+
+      <Modal
+        open={isModalWorksheet2Open}
+        onClose={toggleModalWorksheet2}
+        title={MiosisWorksheetsLink.worksheet2.title}
+      >
+        <Worksheet2 />
+      </Modal>
+
+      <Modal
+        open={isModalWorksheet3Open}
+        onClose={toggleModalWorksheet3}
+        title={MiosisWorksheetsLink.worksheet3.title}
+      >
+        <Worksheet3 />
+      </Modal>
+
+      <Modal
+        open={evaluationOpen}
+        onClose={toggleEvaluation}
+        title={MiosisWorksheetsLink.evaluation.title}
+      >
+        <Evaluation
+          titles={"LESSON 4: PATTERNS OF MENDELIAN GENETICS"}
+          worksheet_no={0}
+          setEvaluationOpen={setEvaluationOpen}
+        />
+      </Modal>
 
       {/* Floating Button */}
       <div className={`fixed bottom-4 right-4 ${hideFloating ? "hidden" : ""}`}>
