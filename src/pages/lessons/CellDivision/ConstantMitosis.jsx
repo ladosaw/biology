@@ -85,10 +85,10 @@ export const MitosisWorksheetsLink = {
     title: "Mitosis Worksheets 2",
     link: "https://forms.gle/YhSJ4rpcc3HfTKUG8",
   },
-  worksheet3: {
-    title: "Mitosis Worksheets 3",
-    link: "https://forms.gle/gTK61SvcarQ16GqC9",
-  },
+  // worksheet3: {
+  //   title: "Mitosis Worksheets 3",
+  //   link: "https://forms.gle/gTK61SvcarQ16GqC9",
+  // },
 
   evaluation: {
     title: "Written Evaluation Form",

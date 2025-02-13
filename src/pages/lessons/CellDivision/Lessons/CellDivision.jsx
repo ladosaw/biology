@@ -296,13 +296,13 @@ const Module1 = ({ hideFloating }) => {
         />
       </Modal>
 
-      <Modal
+      {/* <Modal
         open={isModalWorksheet3Open}
         onClose={toggleModalWorksheet3}
         title={MitosisWorksheetsLink.worksheet3.title}
       >
         <Worksheet3 />
-      </Modal>
+      </Modal> */}
 
       <Modal
         open={evaluationOpen}
