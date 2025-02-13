@@ -1,20 +1,97 @@
 import React, { useState } from "react";
+import { LoadingButton } from "@mui/lab";
+import Swal from "sweetalert2";
+import API from "../../../utils/api/api.js";
 
-const Worksheet2 = () => {
-  const [answers, setAnswers] = useState(
-    Array(6).fill({ genotypic: "", phenotypic: "" })
-  );
+const Worksheet2 = ({
+  titles,
+  worksheet_no,
+  setIsModalWorksheet2ModalOpen,
+}) => {
+  const [answers, setAnswers] = useState({
+    genotypic: {},
+    phenotypic: {},
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  // const [answers, setAnswers] = useState(
+  //   Array(6).fill({ genotypic: "", phenotypic: "" })
+  // );
 
-  const handleInputChange = (index, type, value) => {
-    const updatedAnswers = answers.map((answer, i) =>
-      i === index ? { ...answer, [type]: value } : answer
-    );
-    setAnswers(updatedAnswers);
+  // const handleInputChange = (index, type, value) => {
+  //   const updatedAnswers = answers.map((answer, i) =>
+  //     i === index ? { ...answer, [type]: value } : answer
+  //   );
+  //   setAnswers(updatedAnswers);
+  // };
+
+  const handleInputChange = (section, key, value) => {
+    setAnswers((prev) => ({
+      ...prev,
+      [section]: {
+        ...prev[section],
+        [key]: value,
+      },
+    }));
   };
 
-  const handleSubmit = () => {
-    console.log("User Answers:", answers);
-    alert("Answers submitted successfully!");
+  const handleSubmit = async () => {
+    try {
+      const combinedAnswers = [{ ...answers.genotypic, ...answers.phenotypic }];
+      setIsLoading(true);
+      const user_id = localStorage.getItem("id");
+      const authToken = localStorage.getItem("authToken");
+
+      if (!authToken) {
+        Swal.fire({
+          icon: "error",
+          title: "Unauthorized",
+          text: "You are not logged in. Please log in again.",
+          confirmButtonColor: "#dc2626",
+        });
+        setIsLoading(false);
+        setIsModalWorksheet2ModalOpen(false);
+        return;
+      }
+
+      const payload = {
+        answer: combinedAnswers,
+        user_id,
+        titles,
+        worksheet_no,
+      };
+      const response = await API.post("/worksheets/checker", payload, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      // Extracting score and worksheet details
+      const { score, worksheet } = response.data;
+      Swal.fire({
+        icon: "success",
+        title: "Quiz Submitted!",
+        html: `<p><strong>Worksheet:</strong> ${worksheet.titles}</p>
+                            <p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>
+                            <p><strong>Your Score:</strong> ${score}</p>
+                          `,
+        confirmButtonColor: "#10B981",
+      }).then(() => {
+        navigate("/lessons");
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Submission Failed",
+        text:
+          error.response?.data?.message ||
+          "An error occurred while submitting the answers.",
+        confirmButtonColor: "#dc2626",
+      });
+    } finally {
+      setIsLoading(false);
+      setIsModalWorksheet2ModalOpen(false);
+    }
   };
 
   const crosses = [
@@ -55,9 +132,14 @@ const Worksheet2 = () => {
                 <td className="border border-gray-300 p-2">
                   <input
                     type="text"
-                    value={answers[i].genotypic}
+                    // value={answers[i].genotypic}
                     onChange={(e) =>
-                      handleInputChange(i, "genotypic", e.target.value)
+                      // handleInputChange(i, "genotypic", e.target.value)
+                      handleInputChange(
+                        "genotypic",
+                        "genotypic" + i,
+                        e.target.value?.toLowerCase()
+                      )
                     }
                     className="w-full p-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Enter genotypic ratio"
@@ -66,9 +148,14 @@ const Worksheet2 = () => {
                 <td className="border border-gray-300 p-2">
                   <input
                     type="text"
-                    value={answers[i].phenotypic}
+                    // value={answers[i].phenotypic}
                     onChange={(e) =>
-                      handleInputChange(i, "phenotypic", e.target.value)
+                      // handleInputChange(i, "phenotypic", e.target.value)
+                      handleInputChange(
+                        "phenotypic",
+                        "phenotypic" + i,
+                        e.target.value?.toLowerCase()
+                      )
                     }
                     className="w-full p-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Enter phenotypic ratio"
@@ -91,9 +178,13 @@ const Worksheet2 = () => {
               </label>
               <input
                 type="text"
-                value={answers[i].genotypic}
+                // value={answers[i].genotypic}
                 onChange={(e) =>
-                  handleInputChange(i, "genotypic", e.target.value)
+                  handleInputChange(
+                    "genotypic",
+                    "genotypic" + i,
+                    e.target.value?.toLowerCase()
+                  )
                 }
                 className="w-full p-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter genotypic ratio"
@@ -105,9 +196,13 @@ const Worksheet2 = () => {
               </label>
               <input
                 type="text"
-                value={answers[i].phenotypic}
+                // value={answers[i].phenotypic}
                 onChange={(e) =>
-                  handleInputChange(i, "phenotypic", e.target.value)
+                  handleInputChange(
+                    "phenotypic",
+                    "phenotypic" + i,
+                    e.target.value?.toLowerCase()
+                  )
                 }
                 className="w-full p-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter phenotypic ratio"
@@ -118,12 +213,19 @@ const Worksheet2 = () => {
       </div>
 
       <div className="mt-4 flex justify-end">
-        <button
+        <LoadingButton
+          variant="contained"
+          color="primary"
+          sx={{
+            mt: 4,
+            ml: "auto", // This will push the button to the right
+            display: "block", // Ensures the button takes up its own line
+          }}
+          loading={isLoading}
           onClick={handleSubmit}
-          className="px-4 py-2 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-700 focus:outline-none"
         >
-          Submit Answers
-        </button>
+          Submit
+        </LoadingButton>
       </div>
     </div>
   );

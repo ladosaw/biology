@@ -1,21 +1,74 @@
 import { useState } from "react";
-import { TextField, Button, Container, Typography, Box } from "@mui/material";
+import { TextField, Container, Typography, Box } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
+import Swal from "sweetalert2";
+import API from "../../../utils/api/api.js";
 
-const Worksheet1 = () => {
+const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
   const [answers, setAnswers] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     setAnswers({ ...answers, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     try {
-      setLoading(true);
-      console.log("User Answers:", answers);
+      setIsLoading(true);
+      const user_id = localStorage.getItem("id");
+      const authToken = localStorage.getItem("authToken");
+
+      if (!authToken) {
+        Swal.fire({
+          icon: "error",
+          title: "Unauthorized",
+          text: "You are not logged in. Please log in again.",
+          confirmButtonColor: "#dc2626",
+        });
+        setIsLoading(false);
+        setIsModalWorksheetModalOpen(false);
+        return;
+      }
+
+      const payload = {
+        answer: [answers],
+        user_id,
+        titles,
+        worksheet_no,
+      };
+
+      const response = await API.post("/worksheets/checker", payload, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      // Extracting score and worksheet details
+      const { score, worksheet } = response.data;
+      Swal.fire({
+        icon: "success",
+        title: "Quiz Submitted!",
+        html: `<p><strong>Worksheet:</strong> ${worksheet.titles}</p>
+                      <p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>
+                      <p><strong>Your Score:</strong> ${score}</p>
+                    `,
+        confirmButtonColor: "#10B981",
+      }).then(() => {
+        navigate("/lessons");
+      });
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Submission Failed",
+        text:
+          error.response?.data?.message ||
+          "An error occurred while submitting the answers.",
+        confirmButtonColor: "#dc2626",
+      });
+    } finally {
+      setIsLoading(false);
+      setIsModalWorksheetModalOpen(false);
     }
   };
 
@@ -132,8 +185,8 @@ const Worksheet1 = () => {
           ml: "auto", // This will push the button to the right
           display: "block", // Ensures the button takes up its own line
         }}
+        loading={isLoading}
         onClick={handleSubmit}
-        loading={loading}
       >
         Submit
       </LoadingButton>

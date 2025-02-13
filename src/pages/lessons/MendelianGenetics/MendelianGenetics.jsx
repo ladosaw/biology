@@ -676,7 +676,11 @@ const MendelianGenetics = ({ hideFloating }) => {
         onClose={toggleModalWorksheet}
         title={MendelianGeneticsWorksheetsLink.worksheet1.title}
       >
-        <Worksheet1 />
+        <Worksheet1
+          titles={"LESSON 4: PATTERNS OF MENDELIAN GENETICS"}
+          worksheet_no={1}
+          setIsModalWorksheetModalOpen={setIsModalWorksheetModalOpen}
+        />
       </Modal>
 
       <Modal
@@ -684,10 +688,14 @@ const MendelianGenetics = ({ hideFloating }) => {
         onClose={toggleModalWorksheet2}
         title={MendelianGeneticsWorksheetsLink.worksheet2.title}
       >
-        <Worksheet2 />
+        <Worksheet2
+          titles={"LESSON 4: PATTERNS OF MENDELIAN GENETICS"}
+          worksheet_no={2}
+          setIsModalWorksheet2ModalOpen={setIsModalWorksheet2ModalOpen}
+        />
       </Modal>
 
-      <Modal
+      {/* <Modal
         open={isModalWorksheet3Open}
         onClose={toggleModalWorksheet3}
         title={MendelianGeneticsWorksheetsLink.worksheet3.title}
@@ -695,7 +703,7 @@ const MendelianGenetics = ({ hideFloating }) => {
         <DndProvider backend={HTML5Backend}>
           <Worksheet3 />
         </DndProvider>
-      </Modal>
+      </Modal> */}
 
       <Modal
         open={evaluationOpen}
