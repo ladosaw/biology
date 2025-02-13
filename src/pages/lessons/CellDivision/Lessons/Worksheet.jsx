@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { LoadingButton } from "@mui/lab";
+import Swal from "sweetalert2";
 import Worksheet1A from "../../../../assets/images/WorksheetA1A.png";
 import num1 from "../../../../assets/images/Worksheet1b/num1.png";
 import num2 from "../../../../assets/images/Worksheet1b/num2.png";
@@ -6,8 +8,11 @@ import num3 from "../../../../assets/images/Worksheet1b/num3.png";
 import num4 from "../../../../assets/images/Worksheet1b/num4.png";
 import num5 from "../../../../assets/images/Worksheet1b/num5.png";
 import num6 from "../../../../assets/images/Worksheet1b/num6.png";
+import worksheetImageQuestion from "../../../../assets/images/Worksheet1b/mitosis_worksheet2.png";
+import API from "../../../../utils/api/api.js";
 
-const Worksheet = () => {
+const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [answers, setAnswers] = useState({
     labels: {},
     phases: {},
@@ -24,16 +29,71 @@ const Worksheet = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Submitted Answers: ", answers);
-    // Here you can make an API call to send data to the backend.
-    // Example:
-    // fetch("/api/submit-answers", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(answers),
-    // });
+  const handleSubmit = async () => {
+    try {
+      const combinedAnswers = [
+        { ...answers.labels, ...answers.phases, ...answers.questions },
+      ];
+
+      setIsLoading(true);
+
+      const user_id = localStorage.getItem("id");
+      const authToken = localStorage.getItem("authToken");
+
+      if (!authToken) {
+        Swal.fire({
+          icon: "error",
+          title: "Unauthorized",
+          text: "You are not logged in. Please log in again.",
+          confirmButtonColor: "#dc2626",
+        });
+        setIsLoading(false);
+        setIsModalWorksheetModalOpen(false);
+        return;
+      }
+
+      const payload = {
+        answer: combinedAnswers,
+        user_id,
+        titles,
+        worksheet_no,
+      };
+
+      const response = await API.post("/worksheets/checker", payload, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      // Extracting score and worksheet details
+      const { score, worksheet } = response.data;
+
+      Swal.fire({
+        icon: "success",
+        title: "Quiz Submitted!",
+        html: `
+                <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
+                <p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>
+                <p><strong>Your Score:</strong> ${score}</p>
+              `,
+        confirmButtonColor: "#10B981",
+      }).then(() => {
+        navigate("/lessons");
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Submission Failed",
+        text:
+          error.response?.data?.message ||
+          "An error occurred while submitting the answers.",
+        confirmButtonColor: "#dc2626",
+      });
+    } finally {
+      setIsLoading(false);
+      setIsModalWorksheetModalOpen(false);
+    }
   };
 
   return (
@@ -57,6 +117,11 @@ const Worksheet = () => {
               alt="Cell Cycle Diagram"
               className="w-full max-w-lg h-auto border shadow-lg rounded"
             />
+            <img
+              src={worksheetImageQuestion}
+              alt="Cell Cycle Diagram"
+              className="w-full max-w-lg h-auto border shadow-lg rounded mt-4"
+            />
           </div>
 
           <div className="w-full lg:w-1/2 space-y-4">
@@ -68,7 +133,11 @@ const Worksheet = () => {
                   placeholder={`Enter description for ${label}`}
                   className="flex-grow border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
                   onChange={(e) =>
-                    handleInputChange("labels", label, e.target.value)
+                    handleInputChange(
+                      "labels",
+                      label,
+                      e.target.value?.toLowerCase()
+                    )
                   }
                 />
               </div>
@@ -106,7 +175,7 @@ const Worksheet = () => {
                   handleInputChange(
                     "phases",
                     `Phase${index + 1}`,
-                    e.target.value
+                    e.target.value?.toLowerCase()
                   )
                 }
               />
@@ -133,7 +202,7 @@ const Worksheet = () => {
                   handleInputChange(
                     "phases",
                     `Phase${index + 4}`,
-                    e.target.value
+                    e.target.value?.toLowerCase()
                   )
                 }
               />
@@ -197,15 +266,19 @@ const Worksheet = () => {
         </div>
       </div>
 
-      <div className="flex justify-center py-8">
-        <button
-          type="button"
-          className="py-3 px-8 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600"
-          onClick={handleSubmit}
-        >
-          Submit Answers
-        </button>
-      </div>
+      <LoadingButton
+        variant="contained"
+        color="primary"
+        sx={{
+          mt: 4,
+          ml: "auto", // This will push the button to the right
+          display: "block", // Ensures the button takes up its own line
+        }}
+        loading={isLoading}
+        onClick={handleSubmit}
+      >
+        Submit
+      </LoadingButton>
     </div>
   );
 };

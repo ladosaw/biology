@@ -54,8 +54,7 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
       Swal.fire({
         icon: "success",
         title: "Quiz Submitted!",
-        html: `
-                    <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
+        html: `<p><strong>Worksheet:</strong> ${worksheet.titles}</p>
                     <p><strong>Worksheet No:</strong> Evaluation</p>
                     <p><strong>Your Score:</strong> ${score}</p>
                   `,

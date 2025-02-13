@@ -277,7 +277,11 @@ const Module1 = ({ hideFloating }) => {
         onClose={toggleModalWorksheet}
         title={MitosisWorksheetsLink.worksheet1.title}
       >
-        <Worksheet />
+        <Worksheet
+          titles={"LESSON 2: CELL CYCLE: Interphase and Cell Division"}
+          worksheet_no={1}
+          setIsModalWorksheetModalOpen={setIsModalWorksheetModalOpen}
+        />
       </Modal>
 
       <Modal
@@ -285,7 +289,11 @@ const Module1 = ({ hideFloating }) => {
         onClose={toggleModalWorksheet2}
         title={MitosisWorksheetsLink.worksheet2.title}
       >
-        <Worksheet2 />
+        <Worksheet2
+          titles={"LESSON 2: CELL CYCLE: Interphase and Cell Division"}
+          worksheet_no={2}
+          setIsModalWorksheet2ModalOpen={setIsModalWorksheet2ModalOpen}
+        />
       </Modal>
 
       <Modal

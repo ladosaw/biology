@@ -1,6 +1,13 @@
 import React, { useState } from "react";
+import { LoadingButton } from "@mui/lab";
+import Swal from "sweetalert2";
+import API from "../../../../utils/api/api.js";
 
-const Worksheet2 = () => {
+const Worksheet2 = ({
+  titles,
+  worksheet_no,
+  setIsModalWorksheet2ModalOpen,
+}) => {
   const activities = [
     "Cytokinesis and karyokinesis occur",
     "Cells grow, and organelles increase in number",
@@ -14,6 +21,7 @@ const Worksheet2 = () => {
     "Consists of G1, S, and G2",
   ];
 
+  const [isLoading, setIsLoading] = useState(false);
   const [answers, setAnswers] = useState(
     Array(activities.length).fill({ interphase: false, mitosis: false })
   );
@@ -31,27 +39,75 @@ const Worksheet2 = () => {
   };
 
   const handleSubmit = async () => {
-    const payload = activities.map((activity, index) => ({
-      activity,
-      interphase: answers[index].interphase,
-      mitosis: answers[index].mitosis,
-    }));
+    try {
+      setIsLoading(true);
 
-    console.log(payload);
+      const user_id = localStorage.getItem("id");
+      const authToken = localStorage.getItem("authToken");
 
-    // try {
-    //   const response = await fetch("https://your-backend-api-url.com/submit", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(payload),
-    //   });
-    //   const data = await response.json();
-    //   alert("Submission successful! " + JSON.stringify(data));
-    // } catch (error) {
-    //   alert("Error submitting data: " + error.message);
-    // }
+      if (!authToken) {
+        Swal.fire({
+          icon: "error",
+          title: "Unauthorized",
+          text: "You are not logged in. Please log in again.",
+          confirmButtonColor: "#dc2626",
+        });
+        setIsLoading(false);
+        setIsModalWorksheet2ModalOpen(false);
+        return;
+      }
+
+      const payloadObject = {};
+
+      activities.forEach((_, index) => {
+        if (answers[index].interphase) {
+          payloadObject[index + 1] = "interphase";
+        } else if (answers[index].mitosis) {
+          payloadObject[index + 1] = "mitosis";
+        }
+      });
+
+      const payload = {
+        answer: [payloadObject],
+        user_id,
+        titles,
+        worksheet_no,
+      };
+
+      const response = await API.post("/worksheets/checker", payload, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      // Extracting score and worksheet details
+      const { score, worksheet } = response.data;
+      Swal.fire({
+        icon: "success",
+        title: "Quiz Submitted!",
+        html: `
+                <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
+                <p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>
+                <p><strong>Your Score:</strong> ${score}</p>
+              `,
+        confirmButtonColor: "#10B981",
+      }).then(() => {
+        navigate("/lessons");
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Submission Failed",
+        text:
+          error.response?.data?.message ||
+          "An error occurred while submitting the answers.",
+        confirmButtonColor: "#dc2626",
+      });
+    } finally {
+      setIsLoading(false);
+      setIsModalWorksheet2ModalOpen(false);
+    }
   };
 
   return (
@@ -75,7 +131,9 @@ const Worksheet2 = () => {
           <tbody>
             {activities.map((activity, index) => (
               <tr key={index}>
-                <td className="p-2 border border-gray-300">{activity}</td>
+                <td className="p-2 border border-gray-300">{`${
+                  index + 1
+                }. ${activity}`}</td>
                 <td className="p-2 border border-gray-300 text-center">
                   <input
                     type="checkbox"

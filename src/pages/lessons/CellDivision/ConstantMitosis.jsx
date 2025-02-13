@@ -116,7 +116,7 @@ export const MitosisQuestions = [
     id: 3,
     question:
       "Which checkpoint in the cell ensures that the cell is ready to enter the M phase?",
-    choices: ["G1 Phase", "G2 Phase", "M Checkpoint", "5 checkpoint"],
+    choices: ["G1 Phase", "G2 Phase", "M Checkpoint", "S checkpoint"],
   },
   {
     id: 4,
@@ -131,7 +131,7 @@ export const MitosisQuestions = [
   {
     id: 5,
     question: "Where does the duplication of genetic materials happen?",
-    choices: ["G1 Phase", "G2 Phase", "M Checkpoint", "5 checkpoint"],
+    choices: ["G1 Phase", "G2 Phase", "M Checkpoint", "S checkpoint"],
   },
   {
     id: 6,

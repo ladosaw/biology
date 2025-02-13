@@ -31,11 +31,11 @@ const Worksheet = ({
           </button>
         </li>
 
-        <li className="hover:text-blue-600">
+        {/* <li className="hover:text-blue-600">
           <button onClick={toggleModalWorksheet3}>
             {WorksheetData.worksheet3.title}
           </button>
-        </li>
+        </li> */}
 
         <li className="hover:text-blue-600">
           <button onClick={toggleEvaluation}>
