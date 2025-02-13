@@ -72,8 +72,7 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
       Swal.fire({
         icon: "success",
         title: "Quiz Submitted!",
-        html: `
-                <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
+        html: `<p><strong>Worksheet:</strong> ${worksheet.titles}</p>
                 <p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>
                 <p><strong>Your Score:</strong> ${score}</p>
               `,

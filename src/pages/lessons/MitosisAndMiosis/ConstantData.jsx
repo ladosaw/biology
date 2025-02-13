@@ -30,10 +30,10 @@ export const MiosisWorksheetsLink = {
     title: "Miosis Worksheets 2",
     link: "https://forms.gle/jdLjVHgiKNhC38kN9",
   },
-  worksheet3: {
-    title: "Miosis Worksheets 3",
-    link: "https://forms.gle/LiXfYJUe8Zg7mVSg9",
-  },
+  // worksheet3: {
+  //   title: "Miosis Worksheets 3",
+  //   link: "https://forms.gle/LiXfYJUe8Zg7mVSg9",
+  // },
 
   evaluation: {
     title: "Written Evaluation Form",

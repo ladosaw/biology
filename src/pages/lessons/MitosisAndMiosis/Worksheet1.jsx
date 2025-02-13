@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
+import { LoadingButton } from "@mui/lab";
 import Learn1 from "../../../assets/images/Worksheet1Lesson3/iLearn1.png";
 import Learn2 from "../../../assets/images/Worksheet1Lesson3/iLearn2.png";
 import Learn3 from "../../../assets/images/Worksheet1Lesson3/iLearn3.png";
@@ -11,7 +13,7 @@ import Learn9 from "../../../assets/images/Worksheet1Lesson3/iLearn9.png";
 import Learn10 from "../../../assets/images/Worksheet1Lesson3/iLearn10.png";
 import Learn11 from "../../../assets/images/Worksheet1Lesson3/iLearn11.png";
 import Learn12 from "../../../assets/images/Worksheet1Lesson3/iLearn12.png";
-import { LoadingButton } from "@mui/lab";
+import API from "../../../utils/api/api.js";
 
 const images = [
   Learn1,
@@ -43,26 +45,82 @@ const choices = [
   "L. Telophase II",
 ];
 
-const Worksheet1 = () => {
-  const [answers, setAnswers] = useState({});
-  const [guideAnswers, setGuideAnswers] = useState({});
+const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
+  const [answers, setAnswers] = useState({
+    ileard: {},
+    guide: {},
+  });
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleInputChange = (index, value) => {
-    setAnswers({ ...answers, [index]: value });
+  const handleInputChange = (section, key, value) => {
+    setAnswers((prev) => ({
+      ...prev,
+      [section]: {
+        ...prev[section],
+        [key]: value,
+      },
+    }));
   };
 
-  const handleGuideChange = (index, value) => {
-    setGuideAnswers({ ...guideAnswers, [index]: value });
-  };
-
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     try {
-      // setIsLoading(true);
-      console.log("Submitted Answers:", answers);
-      console.log("Guide Questions Answers:", guideAnswers);
-      // setIsLoading(false);
-    } catch (error) {}
+      const combinedAnswers = [{ ...answers.ileard, ...answers.guide }];
+      setIsLoading(true);
+
+      const user_id = localStorage.getItem("id");
+      const authToken = localStorage.getItem("authToken");
+
+      if (!authToken) {
+        Swal.fire({
+          icon: "error",
+          title: "Unauthorized",
+          text: "You are not logged in. Please log in again.",
+          confirmButtonColor: "#dc2626",
+        });
+        setIsLoading(false);
+        setIsModalWorksheetModalOpen(false);
+        return;
+      }
+      const payload = {
+        answer: combinedAnswers,
+        user_id,
+        titles,
+        worksheet_no,
+      };
+      const response = await API.post("/worksheets/checker", payload, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      // Extracting score and worksheet details
+      const { score, worksheet } = response.data;
+
+      Swal.fire({
+        icon: "success",
+        title: "Quiz Submitted!",
+        html: `<p><strong>Worksheet:</strong> ${worksheet.titles}</p>
+                     <p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>
+                     <p><strong>Your Score:</strong> ${score}</p>
+                   `,
+        confirmButtonColor: "#10B981",
+      }).then(() => {
+        navigate("/lessons");
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Submission Failed",
+        text:
+          error.response?.data?.message ||
+          "An error occurred while submitting the answers.",
+        confirmButtonColor: "#dc2626",
+      });
+    } finally {
+      setIsLoading(false);
+      setIsModalWorksheetModalOpen(false);
+    }
   };
 
   return (
@@ -142,6 +200,7 @@ const Worksheet1 = () => {
               boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
             }}
           >
+            <span>{index + 1}.</span>
             <img
               src={image}
               alt={`Worksheet ${index + 1}`}
@@ -155,8 +214,13 @@ const Worksheet1 = () => {
             <input
               type="text"
               placeholder={`Enter text for image ${index + 1}`}
-              value={answers[index] || ""}
-              onChange={(e) => handleInputChange(index, e.target.value)}
+              onChange={(e) =>
+                handleInputChange(
+                  "ileard",
+                  index + 1,
+                  e.target.value?.toLowerCase()
+                )
+              }
               style={{
                 width: "100%",
                 maxWidth: "350px",
@@ -193,7 +257,13 @@ const Worksheet1 = () => {
                 border: "1px solid #ccc",
               }}
               placeholder="Enter your answer here"
-              onChange={(e) => handleGuideChange(index, e.target.value)}
+              onChange={(e) =>
+                handleInputChange(
+                  "guide",
+                  `guide${index + 1}`,
+                  e.target.value?.toLowerCase()
+                )
+              }
             />
           </div>
         ))}

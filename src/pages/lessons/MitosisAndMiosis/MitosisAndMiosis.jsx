@@ -544,7 +544,11 @@ const MiosisAndMitosis = ({ hideFloating }) => {
         onClose={toggleModalWorksheet}
         title={MiosisWorksheetsLink.worksheet1.title}
       >
-        <Worksheet1 />
+        <Worksheet1
+          titles={"LESSON 3: Cell Cycle: COMPARING MITOSIS AND MEIOSIS"}
+          worksheet_no={1}
+          isModalWorksheetOpen={isModalWorksheetOpen}
+        />
       </Modal>
 
       <Modal
@@ -552,16 +556,20 @@ const MiosisAndMitosis = ({ hideFloating }) => {
         onClose={toggleModalWorksheet2}
         title={MiosisWorksheetsLink.worksheet2.title}
       >
-        <Worksheet2 />
+        <Worksheet2
+          titles={"LESSON 3: Cell Cycle: COMPARING MITOSIS AND MEIOSIS"}
+          worksheet_no={2}
+          setIsModalWorksheet2ModalOpen={setIsModalWorksheet2ModalOpen}
+        />
       </Modal>
 
-      <Modal
+      {/* <Modal
         open={isModalWorksheet3Open}
         onClose={toggleModalWorksheet3}
         title={MiosisWorksheetsLink.worksheet3.title}
       >
         <Worksheet3 />
-      </Modal>
+      </Modal> */}
 
       <Modal
         open={evaluationOpen}
@@ -569,7 +577,7 @@ const MiosisAndMitosis = ({ hideFloating }) => {
         title={MiosisWorksheetsLink.evaluation.title}
       >
         <Evaluation
-          titles={"LESSON 4: PATTERNS OF MENDELIAN GENETICS"}
+          titles={"LESSON 3: Cell Cycle: COMPARING MITOSIS AND MEIOSIS"}
           worksheet_no={0}
           setEvaluationOpen={setEvaluationOpen}
         />
