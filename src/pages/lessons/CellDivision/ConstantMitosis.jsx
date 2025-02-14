@@ -116,7 +116,7 @@ export const MitosisQuestions = [
     id: 3,
     question:
       "Which checkpoint in the cell ensures that the cell is ready to enter the M phase?",
-    choices: ["G1 Phase", "G2 Phase", "M Checkpoint", "S checkpoint"],
+    choices: ["G1 Phase", "G2 Phase", "M Phase", "S Phase"],
   },
   {
     id: 4,
@@ -131,7 +131,7 @@ export const MitosisQuestions = [
   {
     id: 5,
     question: "Where does the duplication of genetic materials happen?",
-    choices: ["G1 Phase", "G2 Phase", "M Checkpoint", "S checkpoint"],
+    choices: ["G1 Phase", "G2 Phase", "M Phase", "S Phase"],
   },
   {
     id: 6,
@@ -155,7 +155,7 @@ export const MitosisQuestions = [
   },
   {
     id: 8,
-    question: "Which of the following statements of miosis is correct?",
+    question: "Which of the following statements of mitosis is correct?",
     choices: [
       "The centromere of the chromosome separates during metaphase.",
       "The chromatid number in a daughter cell is the same as in the parent cell.",
