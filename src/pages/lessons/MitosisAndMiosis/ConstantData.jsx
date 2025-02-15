@@ -23,15 +23,15 @@ export const vocab = [
 
 export const MiosisWorksheetsLink = {
   worksheet1: {
-    title: "Miosis Worksheets 1",
+    title: "Meiosis Worksheets 1",
     link: "https://forms.gle/Nce5fbLuZfBVPTij7",
   },
   worksheet2: {
-    title: "Miosis Worksheets 2",
+    title: "Meiosis Worksheets 2",
     link: "https://forms.gle/jdLjVHgiKNhC38kN9",
   },
   // worksheet3: {
-  //   title: "Miosis Worksheets 3",
+  //   title: "Meiosis Worksheets 3",
   //   link: "https://forms.gle/LiXfYJUe8Zg7mVSg9",
   // },
 
