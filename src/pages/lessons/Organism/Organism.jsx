@@ -21,12 +21,16 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Worksheet3 from "./Worksheet3";
 import Evaluation from "./Evaluation";
+import Worksheet4 from "./Worksheet4.jsx";
 
 const Organism = ({ hideFloating }) => {
   const [isModalWorksheetOpen, setIsModalWorksheetModalOpen] = useState(false);
   const [isModalWorksheet2Open, setIsModalWorksheet2ModalOpen] =
     useState(false);
   const [isModalWorksheet3Open, setIsModalWorksheet3ModalOpen] =
+    useState(false);
+
+  const [isModalWorksheet4Open, setIsModalWorksheet4ModalOpen] =
     useState(false);
 
   const [evaluationOpen, setEvaluationOpen] = useState(false);
@@ -39,6 +43,10 @@ const Organism = ({ hideFloating }) => {
   };
   const toggleModalWorksheet3 = () => {
     setIsModalWorksheet3ModalOpen((prev) => !prev);
+  };
+
+  const toggleModalWorksheet4 = () => {
+    setIsModalWorksheet4ModalOpen((prev) => !prev);
   };
 
   const toggleEvaluation = () => {
@@ -369,6 +377,7 @@ const Organism = ({ hideFloating }) => {
         toggleModalWorksheet={toggleModalWorksheet}
         toggleModalWorksheet2={toggleModalWorksheet2}
         toggleModalWorksheet3={toggleModalWorksheet3}
+        toggleModalWorksheet4={toggleModalWorksheet4}
         toggleEvaluation={toggleEvaluation}
       />
 
@@ -396,6 +405,14 @@ const Organism = ({ hideFloating }) => {
         <DndProvider backend={HTML5Backend}>
           <Worksheet3 />
         </DndProvider>
+      </WorksheetModal>
+
+      <WorksheetModal
+        open={isModalWorksheet4Open}
+        onClose={toggleModalWorksheet4}
+        title={OrganismWorksheetsLink.worksheet4.title}
+      >
+        <Worksheet4 />
       </WorksheetModal>
 
       <WorksheetModal
