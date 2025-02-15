@@ -5,6 +5,7 @@ const Worksheet = ({
   toggleModalWorksheet,
   toggleModalWorksheet2,
   toggleModalWorksheet3,
+  toggleModalWorksheet4,
   toggleEvaluation,
 }) => {
   const handleLinkClick = (key) => {
@@ -35,6 +36,14 @@ const Worksheet = ({
           <li className="hover:text-blue-600">
             <button onClick={toggleModalWorksheet3}>
               {WorksheetData?.worksheet3?.title}
+            </button>
+          </li>
+        )}
+
+        {WorksheetData?.worksheet4 && (
+          <li className="hover:text-blue-600">
+            <button onClick={toggleModalWorksheet4}>
+              {WorksheetData?.worksheet4?.title}
             </button>
           </li>
         )}

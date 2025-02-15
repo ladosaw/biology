@@ -12,6 +12,11 @@ export const OrganismWorksheetsLink = {
     link: "#",
   },
 
+  worksheet4: {
+    title: "Organism Worksheets 4",
+    link: "#",
+  },
+
   evaluation: {
     title: "Written Evaluation Form",
     link: "#",
