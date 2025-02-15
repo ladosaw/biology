@@ -49,7 +49,7 @@ const Worksheet3 = ({
           confirmButtonColor: "#dc2626",
         });
         setIsLoading(false);
-        setIsModalWorksheet2ModalOpen(false);
+        setIsModalWorksheet3ModalOpen(false);
         return;
       }
 
