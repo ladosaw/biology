@@ -6,7 +6,7 @@ import API from "../../../utils/api/api.js";
 const Worksheet3 = ({
   titles,
   worksheet_no,
-  setIsModalWorksheet2ModalOpen,
+  setIsModalWorksheet3ModalOpen,
 }) => {
   const [answers, setAnswers] = useState({
     genotypic: {},
@@ -90,7 +90,7 @@ const Worksheet3 = ({
       });
     } finally {
       setIsLoading(false);
-      setIsModalWorksheet2ModalOpen(false);
+      setIsModalWorksheet3ModalOpen(false);
     }
   };
 
