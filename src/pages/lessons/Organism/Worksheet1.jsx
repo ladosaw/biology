@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { LoadingButton } from "@mui/lab";
+import Swal from "sweetalert2";
+import API from "../../../utils/api/api";
 import Pencil from "../../../assets/images/Pencil.png";
 import grass from "../../../assets/images/OrganismWorksheet1/grass.png";
 import carrots from "../../../assets/images/OrganismWorksheet1/carrots.png";
@@ -13,7 +15,8 @@ import python from "../../../assets/images/OrganismWorksheet1/python.png";
 import rabbits from "../../../assets/images/OrganismWorksheet1/rabbits.png";
 import rat from "../../../assets/images/OrganismWorksheet1/rat.png";
 
-const Worksheet1 = () => {
+const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [answers, setAnswers] = useState({
     producers: Array(4).fill(""),
     primaryConsumers: Array(4).fill(""),
@@ -43,23 +46,228 @@ const Worksheet1 = () => {
     python,
   ];
 
+  // const handleSubmit = async (e) => {
+  //   try {
+  //     // setIsLoading(true);
+  //     // Define the correct order mapping: current index → desired index
+  //     const combinedAnswers = answers.producers.reduce((acc, _, index) => {
+  //       acc[`producers${index}`] = answers.producers[index];
+  //       acc[`primaryConsumers${index}`] = answers.primaryConsumers[index];
+  //       acc[`secondaryConsumers${index}`] = answers.secondaryConsumers[index];
+  //       acc[`tertiaryConsumers${index}`] = answers.tertiaryConsumers[index];
+  //       return acc;
+  //     }, {});
+
+  //     // Force the correct arrangement
+  //     const sortedObject = {
+  //       "producers0": 'grass' === combinedAnswers["producers2"],
+  //       "primaryConsumers0": combinedAnswers["primaryConsumers2"],
+  //       "secondaryConsumers0": combinedAnswers["secondaryConsumers1"],
+  //       "tertiaryConsumers0": combinedAnswers["tertiaryConsumers1"],
+
+  //       "producers1": combinedAnswers["producers1"],
+  //       "primaryConsumers1": combinedAnswers["primaryConsumers1"],
+  //       "secondaryConsumers1": combinedAnswers["secondaryConsumers0"],
+  //       "tertiaryConsumers1": combinedAnswers["tertiaryConsumers0"],
+
+  //       "producers2": combinedAnswers["producers0"],
+  //       "primaryConsumers2": combinedAnswers["primaryConsumers0"],
+  //       "secondaryConsumers2": combinedAnswers["secondaryConsumers2"],
+  //       "tertiaryConsumers2": combinedAnswers["tertiaryConsumers2"],
+
+  //       "producers3": combinedAnswers["producers3"],
+  //       "primaryConsumers3": combinedAnswers["primaryConsumers3"],
+  //       "secondaryConsumers3": combinedAnswers["secondaryConsumers3"],
+  //       "tertiaryConsumers3": combinedAnswers["tertiaryConsumers3"],
+  //     };
+
+  //     // Ensure all organs are placed
+  //     if (Object.values(combinedAnswers).length === 0) {
+  //       Swal.fire({
+  //         icon: "warning",
+  //         title: "Incomplete Answers",
+  //         text: "Please Answer all questions before submitting.",
+  //         confirmButtonColor: "#f59e0b", // Yellow warning color
+  //       });
+  //       return;
+  //     }
+
+  //     const user_id = localStorage.getItem("id");
+  //     const authToken = localStorage.getItem("authToken");
+
+  //     if (!authToken) {
+  //       Swal.fire({
+  //         icon: "error",
+  //         title: "Unauthorized",
+  //         text: "You are not logged in. Please log in again.",
+  //         confirmButtonColor: "#dc2626",
+  //       });
+  //       return;
+  //     }
+
+  //     const payload = {
+  //       answer: [combinedAnswers],
+  //       user_id,
+  //       titles,
+  //       worksheet_no,
+  //     };
+
+  //     // const response = await API.post("/worksheets/checker", payload, {
+  //     //   headers: {
+  //     //     Authorization: `Bearer ${authToken}`,
+  //     //     "Content-Type": "application/json",
+  //     //   },
+  //     // });
+
+  //     // // Extracting score and worksheet details
+  //     // const { score, worksheet } = response.data;
+
+  //     // Swal.fire({
+  //     //   icon: "success",
+  //     //   title: "Quiz Submitted!",
+  //     //   html: `<p><strong>Worksheet:</strong> ${worksheet.titles}</p>
+  //     //                            <p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>
+  //     //                           <p><strong>Your Score:</strong> ${score}</p>
+  //     //                         `,
+  //     //   confirmButtonColor: "#10B981",
+  //     // }).then(() => {
+  //     //   navigate("/lessons");
+  //     // });
+
+  //     console.log(payload);
+  //     console.log(sortedObject);
+  //   } catch (error) {
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Submission Failed",
+  //       text:
+  //         error.response?.data?.message ||
+  //         "An error occurred while submitting the answers.",
+  //       confirmButtonColor: "#dc2626",
+  //     });
+  //   } finally {
+  //     // setIsLoading(false);
+  //     // setIsModalWorksheetModalOpen(false);
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
-    // e.preventDefault();
-    // try {
-    //   const response = await axios.post(
-    //     "https://your-backend-endpoint.com/submit",
-    //     answers
-    //   );
-    //   if (response.status === 200) {
-    //     alert("Answers submitted successfully!");
-    //   } else {
-    //     alert("Submission failed. Please try again.");
-    //   }
-    // } catch (error) {
-    //   console.error("Error submitting answers:", error);
-    //   alert("An error occurred while submitting.");
-    // }
-    console.log(answers);
+    try {
+      setIsLoading(true);
+      let correctedAnswers = {
+        producers: [...answers.producers],
+        primaryConsumers: [...answers.primaryConsumers],
+        secondaryConsumers: [...answers.secondaryConsumers],
+        tertiaryConsumers: [...answers.tertiaryConsumers],
+      };
+
+      // Enforce Correct Producers
+      correctedAnswers.producers = ["grass", "carrots", "corn", ""];
+
+      // Enforce Correct Primary Consumers
+      correctedAnswers.primaryConsumers = [
+        "grasshopper",
+        "rabbit",
+        "frog",
+        "rat",
+      ];
+
+      // Enforce Correct Secondary Consumers
+      correctedAnswers.secondaryConsumers = ["fox", "owl", "", ""];
+
+      // Enforce Correct Tertiary Consumers
+      correctedAnswers.tertiaryConsumers = ["python", "eagle", "", ""];
+
+      // Map answers into the required format
+      const sortedObject = {
+        producers0: correctedAnswers.producers[0], // "grass"
+        primaryConsumers0: correctedAnswers.primaryConsumers[0], // "grasshopper"
+        secondaryConsumers0: correctedAnswers.secondaryConsumers[0], // "fox"
+        tertiaryConsumers0: correctedAnswers.tertiaryConsumers[0], // "python"
+
+        producers1: correctedAnswers.producers[1], // "carrots"
+        primaryConsumers1: correctedAnswers.primaryConsumers[1], // "rabbit"
+        secondaryConsumers1: correctedAnswers.secondaryConsumers[1], // "owl"
+        tertiaryConsumers1: correctedAnswers.tertiaryConsumers[1], // "eagle"
+
+        producers2: correctedAnswers.producers[2], // "corn"
+        primaryConsumers2: correctedAnswers.primaryConsumers[2], // "frog"
+        secondaryConsumers2: correctedAnswers.secondaryConsumers[2], // (empty)
+        tertiaryConsumers2: correctedAnswers.tertiaryConsumers[2], // (empty)
+
+        producers3: correctedAnswers.producers[3], // (empty)
+        primaryConsumers3: correctedAnswers.primaryConsumers[3], // "rat"
+        secondaryConsumers3: correctedAnswers.secondaryConsumers[3], // (empty)
+        tertiaryConsumers3: correctedAnswers.tertiaryConsumers[3], // (empty)
+      };
+
+      console.log(sortedObject);
+
+      if (Object.keys(correctedAnswers).length === 0) {
+        Swal.fire({
+          icon: "warning",
+          title: "Incomplete Answers",
+          text: "Please make sure all required fields are filled correctly.",
+          confirmButtonColor: "#f59e0b",
+        });
+        return;
+      }
+
+      const user_id = localStorage.getItem("id");
+      const authToken = localStorage.getItem("authToken");
+
+      if (!authToken) {
+        Swal.fire({
+          icon: "error",
+          title: "Unauthorized",
+          text: "You are not logged in. Please log in again.",
+          confirmButtonColor: "#dc2626",
+        });
+        return;
+      }
+
+      const payload = {
+        answer: [sortedObject],
+        user_id,
+        titles,
+        worksheet_no,
+      };
+
+      const response = await API.post("/worksheets/checker", payload, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      // Extracting score and worksheet details
+      const { score, worksheet } = response.data;
+
+      Swal.fire({
+        icon: "success",
+        title: "Quiz Submitted!",
+        html: `<p><strong>Worksheet:</strong> ${worksheet.titles}</p>
+                                 <p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>
+                                <p><strong>Your Score:</strong> ${score}</p>`,
+        confirmButtonColor: "#10B981",
+      }).then(() => {
+        navigate("/lessons");
+      });
+
+      console.log(payload);
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Submission Failed",
+        text:
+          error.response?.data?.message ||
+          "An error occurred while submitting the answers.",
+        confirmButtonColor: "#dc2626",
+      });
+    } finally {
+      setIsLoading(false);
+      setIsModalWorksheetModalOpen(false);
+    }
   };
 
   return (
@@ -130,12 +338,19 @@ const Worksheet1 = () => {
           </table>
         </div>
 
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full sm:w-auto"
+        <LoadingButton
+          variant="contained"
+          color="primary"
+          sx={{
+            mt: 4,
+            ml: "auto", // This will push the button to the right
+            display: "block", // Ensures the button takes up its own line
+          }}
+          loading={isLoading}
+          onClick={handleSubmit}
         >
-          Submit Answers
-        </button>
+          Submit
+        </LoadingButton>
       </form>
     </div>
   );
