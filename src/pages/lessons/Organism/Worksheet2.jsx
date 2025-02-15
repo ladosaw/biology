@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import { Box, Typography, Grid, Paper, Button } from "@mui/material";
+import { Box, Typography, Grid, Paper, Button, Divider } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { LoadingButton } from "@mui/lab";
+import Swal from "sweetalert2";
+import API from "../../../utils/api/api";
 
 const initialOrganisms = [
   "Grass",
-  "Grasshopper",
   "Rat",
+  "Grasshopper",
   "Carrots",
-  "Rabbit",
-  "Fox",
   "Lion",
+  "Fox",
+  "Rabbit",
 ];
 
 const Organism = ({ name, onSelect, isSelected }) => (
@@ -54,11 +57,16 @@ const DropZone = ({ id, assignedOrganism, onDrop }) => (
     }}
     onClick={() => onDrop(id)}
   >
-    {assignedOrganism || `Drop here (${id})`}
+    {assignedOrganism || `Drop here`}
   </Paper>
 );
 
-const FoodChainWorksheet = () => {
+const Worksheet2 = ({
+  titles,
+  worksheet_no,
+  setIsModalWorksheet2ModalOpen,
+}) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [assigned, setAssigned] = useState({});
   const [availableOrganisms, setAvailableOrganisms] =
     useState(initialOrganisms);
@@ -86,6 +94,75 @@ const FoodChainWorksheet = () => {
     setAssigned({});
     setAvailableOrganisms(initialOrganisms);
     setSelectedOrganism(null);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      setIsLoading(true);
+
+      if (Object.keys(assigned).length === 0) {
+        Swal.fire({
+          icon: "warning",
+          title: "Incomplete Answers",
+          text: "Please make sure all required fields are filled correctly.",
+          confirmButtonColor: "#f59e0b",
+        });
+        return;
+      }
+
+      const user_id = localStorage.getItem("id");
+      const authToken = localStorage.getItem("authToken");
+
+      if (!authToken) {
+        Swal.fire({
+          icon: "error",
+          title: "Unauthorized",
+          text: "You are not logged in. Please log in again.",
+          confirmButtonColor: "#dc2626",
+        });
+        return;
+      }
+      const payload = {
+        answer: [assigned],
+        user_id,
+        titles,
+        worksheet_no,
+      };
+
+      const response = await API.post("/worksheets/checker", payload, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      // Extracting score and worksheet details
+      const { score, worksheet } = response.data;
+
+      Swal.fire({
+        icon: "success",
+        title: "Quiz Submitted!",
+        html: `<p><strong>Worksheet:</strong> ${worksheet.titles}</p>
+                                 <p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>
+                                <p><strong>Your Score:</strong> ${score}</p>`,
+        confirmButtonColor: "#10B981",
+      }).then(() => {
+        navigate("/lessons");
+      });
+      console.log("Submitted Food Chain:", payload);
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Submission Failed",
+        text:
+          error.response?.data?.message ||
+          "An error occurred while submitting the answers.",
+        confirmButtonColor: "#dc2626",
+      });
+    } finally {
+      setIsLoading(false);
+      setIsModalWorksheet2ModalOpen(false);
+    }
   };
 
   return (
@@ -130,13 +207,9 @@ const FoodChainWorksheet = () => {
         ))}
       </Grid>
 
-      <Grid
-        container
-        spacing={3}
-        alignItems="center"
-        justifyContent="center"
-        marginTop={3}
-      >
+      <Divider sx={{ marginY: "25px" }} />
+
+      <Grid container spacing={3} alignItems="center" justifyContent="center">
         {[4, 5, 6, 7].map((id) => (
           <React.Fragment key={id}>
             <Grid item xs={4} sm={2}>
@@ -146,7 +219,7 @@ const FoodChainWorksheet = () => {
                 onDrop={handleDrop}
               />
             </Grid>
-            {id !== 3 && (
+            {id !== 7 && (
               <Grid item xs={1} sx={{ textAlign: "center" }}>
                 <ArrowForwardIcon fontSize="large" />
               </Grid>
@@ -160,17 +233,21 @@ const FoodChainWorksheet = () => {
           variant="contained"
           color="error"
           onClick={handleReset}
-          sx={{
-            padding: "8px 16px",
-            borderRadius: "12px",
-            fontSize: { xs: "0.8rem", sm: "1rem" },
-          }}
+          sx={{ marginRight: 2 }}
         >
           Reset
         </Button>
+        <LoadingButton
+          variant="contained"
+          color="primary"
+          loading={isLoading}
+          onClick={handleSubmit}
+        >
+          Submit
+        </LoadingButton>
       </Box>
     </Box>
   );
 };
 
-export default FoodChainWorksheet;
+export default Worksheet2;
