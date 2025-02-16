@@ -701,7 +701,11 @@ const MendelianGenetics = ({ hideFloating }) => {
         title={MendelianGeneticsWorksheetsLink.worksheet3.title}
       >
         <DndProvider backend={HTML5Backend}>
-          <Worksheet3 />
+          <Worksheet3
+            titles={"LESSON 4: PATTERNS OF MENDELIAN GENETICS"}
+            worksheet_no={3}
+            setIsModalWorksheet3ModalOpen={setIsModalWorksheet3ModalOpen}
+          />
         </DndProvider>
       </Modal>
 
