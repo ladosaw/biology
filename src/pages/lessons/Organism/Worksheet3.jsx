@@ -116,9 +116,8 @@ const Worksheet3 = ({
     <div className="p-4">
       <h1 className="font-bold text-2xl mb-4">Worksheet No. 3: Who Am I?</h1>
       <p className="mb-6">
-        Direction: Match column A with column B. Write your answer in column C
-        with the corresponding number and letter from columns A and B
-        respectively. Example: 1-A
+        Direction :Write the role or organism in a trophic level kc pag match
+        column A to B. Example: Bacteria - Decomposer
       </p>
 
       {/* Table for larger screens */}
@@ -153,7 +152,7 @@ const Worksheet3 = ({
                       )
                     }
                     className="w-full p-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Enter Answer eg. 1-A"
+                    placeholder="Enter Answer"
                   />
                 </td>
               </tr>
