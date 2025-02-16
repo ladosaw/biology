@@ -695,7 +695,7 @@ const MendelianGenetics = ({ hideFloating }) => {
         />
       </Modal>
 
-      {/* <Modal
+      <Modal
         open={isModalWorksheet3Open}
         onClose={toggleModalWorksheet3}
         title={MendelianGeneticsWorksheetsLink.worksheet3.title}
@@ -703,7 +703,7 @@ const MendelianGenetics = ({ hideFloating }) => {
         <DndProvider backend={HTML5Backend}>
           <Worksheet3 />
         </DndProvider>
-      </Modal> */}
+      </Modal>
 
       <Modal
         open={evaluationOpen}
