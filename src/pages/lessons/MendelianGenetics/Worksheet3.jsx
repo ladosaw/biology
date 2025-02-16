@@ -23,6 +23,7 @@ import {
 import { LoadingButton } from "@mui/lab";
 import { formatAssignedData } from "../../../utils/helper.js";
 import API from "../../../utils/api/api.js";
+import FiveMinuteTimer from "../../../components/timer/FiveMinuteTimer.jsx";
 
 // Drag & Drop Configuration
 const HTML5toTouch = {
@@ -127,6 +128,7 @@ const Worksheet3 = ({
   setIsModalWorksheet3ModalOpen,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [startTimer, setStartTimer] = useState(false);
   const [assigned, setAssigned] = useState({});
   const [availablePunnettRed, setAvailablePunnettRed] =
     useState(initialPunnettRed);
@@ -265,6 +267,9 @@ const Worksheet3 = ({
   return (
     <DndProvider backend={MultiBackend} options={HTML5toTouch}>
       <Container maxWidth="md" sx={{ mt: 4 }}>
+        <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
+          <FiveMinuteTimer onSubmit={handleSubmit} />
+        </Box>
         <Typography
           variant="h4"
           fontWeight="bold"

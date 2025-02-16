@@ -352,7 +352,7 @@ export const mendelianGeneticsQuestions = [
   {
     id: 10,
     question:
-      "Which refers to the offspring resulting from cross-between parents with two contrasting traits?",
+      "Which of the following statements is true regarding the 'Law of Segregation'",
     choices: [
       "Law of segregation is the law of purity of genes ",
       "Alleles separate from each other during gametogenesis ",

@@ -129,7 +129,7 @@ export const MiosisWorksheetsEvaluationQuestions = [
   {
     id: 10,
     question:
-      "Which refers to the offspring resulting from cross-between parents with two contrasting traits?",
+      "Which diagram is the correctly illustrated the process of meiosis?",
     choices: [
       "Law of segregation is the law of purity of genes ",
       "Alleles separate from each other during gametogenesis ",
