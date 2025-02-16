@@ -50,3 +50,27 @@ export const formatAssignedData = (
 
   return formatted;
 };
+
+export const formatDataForWorksheet4Lessons4 = (input) => {
+  let formatted = {};
+
+  // Process assigned items
+  let colorCounters = {};
+  Object.values(input.assigned).forEach((item) => {
+    let color = item.color;
+    if (!(color in colorCounters)) {
+      colorCounters[color] = 0;
+    }
+    formatted[`${color}${colorCounters[color]}`] = item.name;
+    colorCounters[color]++;
+  });
+
+  // Copy the remaining fields
+  ["SubQ1", "SubQ2", "SubQ3", "SubQ4", "Q2", "Q3"].forEach((key) => {
+    if (key in input) {
+      formatted[key] = input[key];
+    }
+  });
+
+  return formatted;
+};

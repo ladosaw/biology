@@ -217,7 +217,10 @@ export const MendelianGeneticsWorksheetsLink = {
     title: "Mendelian Genetics Worksheets 3",
     link: "https://forms.gle/zzaw3EPAhoGqvdAD8",
   },
-
+  worksheet4: {
+    title: "Mendelian Genetics Worksheets 4",
+    link: "https://forms.gle/zzaw3EPAhoGqvdAD8",
+  },
   evaluation: {
     title: "Written Evaluation Form",
     link: "https://forms.gle/uNWvyQrbfAr45gXVA",
