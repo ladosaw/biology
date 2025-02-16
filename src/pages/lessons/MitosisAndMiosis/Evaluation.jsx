@@ -12,7 +12,7 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
   const [invalidQuestions, setInvalidQuestions] = useState([]); // Track unanswered questions
 
   const handleChange = (id, value) => {
-    setAnswers({ ...answers, [id]: value });
+    setAnswers({ ...answers, [id]: value.toLowerCase() });
     setInvalidQuestions(invalidQuestions.filter((qid) => qid !== id)); // Remove from invalid state if answered
   };
 
