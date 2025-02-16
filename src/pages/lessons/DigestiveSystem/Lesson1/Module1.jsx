@@ -114,7 +114,10 @@ const Module1 = ({ hideFloating }) => {
 
         {/* Digestive System Section */}
         <div className="flex flex-col justify-center items-center mt-8 gap-8">
-          {/* <div className="w-full sm:w-3/4 md:w-2/3 lg:w-3/4 xl:w-2/3 aspect-video rounded-lg overflow-hidden shadow-lg">
+          <h1 className="text-primary text-xl sm:text-2xl md:text-3xl font-semibold mt-6">
+            Digestive System Process
+          </h1>
+          <div className="w-full sm:w-3/4 md:w-2/3 lg:w-3/4 xl:w-2/3 aspect-video rounded-lg overflow-hidden shadow-lg">
             <iframe
               width="100%"
               height="100%"
@@ -122,16 +125,13 @@ const Module1 = ({ hideFloating }) => {
               title="Human digestive system - How it works! "
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             ></iframe>
-          </div> */}
+          </div>
 
-          <h1 className="text-primary text-xl sm:text-2xl md:text-3xl font-semibold mt-6">
-            Digestive System 3D Model
-          </h1>
           <div className="w-full h-auto rounded-lg">
             {/* <Render3d>
               <DigestiveSystem />
             </Render3d> */}
-            <DigestiveSystemAnimation />
+            {/* <DigestiveSystemAnimation /> */}
           </div>
           {/* <div className="min-h-scree flex flex-col items-center justify-center space-y-10">
             <h1 className="text-3xl font-bold text-center text-gray-800 py-6">
@@ -365,12 +365,10 @@ const Module1 = ({ hideFloating }) => {
       </Modal>
 
       <Modal
-
         open={evaluationOpen}
         onClose={toggleEvaluation}
         title={DigestiveWorksheetsLink.evaluation.title}
       >
-
         <Evaluation
           titles={
             "LESSON 1: STRUCTURES AND FUNCTIONS IN HUMAN FOCUS ON THE DIGESTIVE SYSTEM"
@@ -378,7 +376,6 @@ const Module1 = ({ hideFloating }) => {
           worksheet_no={0}
           setEvaluationOpen={setEvaluationOpen}
         />
-
       </Modal>
 
       {/* Footer */}
