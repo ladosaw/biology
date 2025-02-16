@@ -159,7 +159,8 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
 
         {/* Section D */}
         <Typography variant="h6" sx={{ mt: 3 }}>
-          D. Write the Genotype
+          For each of the phenotype below, write the genotype (remember that
+          capital letter for the dominant trait.
         </Typography>
         {["Short", "Long", "Long", "Fair", "Fair", "Brown"].map(
           (item, index) => (
