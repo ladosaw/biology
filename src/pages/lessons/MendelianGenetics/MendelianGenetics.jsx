@@ -22,6 +22,7 @@ import Modal from "../../../components/Modal/Modal";
 import Worksheet1 from "./Worksheet1";
 import Worksheet2 from "./Worksheet2";
 import Worksheet3 from "./Worksheet3";
+import Worksheet4 from "./Worksheet4";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Evaluation from "./Evaluation";
@@ -32,7 +33,8 @@ const MendelianGenetics = ({ hideFloating }) => {
     useState(false);
   const [isModalWorksheet3Open, setIsModalWorksheet3ModalOpen] =
     useState(false);
-
+  const [isModalWorksheet4Open, setIsModalWorksheet4ModalOpen] =
+    useState(false);
   const [evaluationOpen, setEvaluationOpen] = useState(false);
 
   const toggleModalWorksheet = () => {
@@ -43,6 +45,9 @@ const MendelianGenetics = ({ hideFloating }) => {
   };
   const toggleModalWorksheet3 = () => {
     setIsModalWorksheet3ModalOpen((prev) => !prev);
+  };
+  const toggleModalWorksheet4 = () => {
+    setIsModalWorksheet4ModalOpen((prev) => !prev);
   };
 
   const toggleEvaluation = () => {
@@ -668,6 +673,7 @@ const MendelianGenetics = ({ hideFloating }) => {
         toggleModalWorksheet={toggleModalWorksheet}
         toggleModalWorksheet2={toggleModalWorksheet2}
         toggleModalWorksheet3={toggleModalWorksheet3}
+        toggleModalWorksheet4={toggleModalWorksheet4}
         toggleEvaluation={toggleEvaluation}
       />
 
@@ -705,6 +711,20 @@ const MendelianGenetics = ({ hideFloating }) => {
             titles={"LESSON 4: PATTERNS OF MENDELIAN GENETICS"}
             worksheet_no={3}
             setIsModalWorksheet3ModalOpen={setIsModalWorksheet3ModalOpen}
+          />
+        </DndProvider>
+      </Modal>
+
+      <Modal
+        open={isModalWorksheet4Open}
+        onClose={toggleModalWorksheet4}
+        title={MendelianGeneticsWorksheetsLink.worksheet4.title}
+      >
+        <DndProvider backend={HTML5Backend}>
+          <Worksheet4
+            titles={"LESSON 4: PATTERNS OF MENDELIAN GENETICS"}
+            worksheet_no={4}
+            setIsModalWorksheet4ModalOpen={setIsModalWorksheet4ModalOpen}
           />
         </DndProvider>
       </Modal>

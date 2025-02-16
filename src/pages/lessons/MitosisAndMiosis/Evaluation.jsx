@@ -15,8 +15,9 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
   const [invalidQuestions, setInvalidQuestions] = useState([]);
 
   const handleChange = (id, value) => {
-    setAnswers({ ...answers, [id]: value });
-    setInvalidQuestions(invalidQuestions.filter((qid) => qid !== id));
+    setAnswers({ ...answers, [id]: value.toLowerCase() });
+    setInvalidQuestions(invalidQuestions.filter((qid) => qid !== id)); // Remove from invalid state if answered
+
   };
 
   const handleSubmit = async () => {
