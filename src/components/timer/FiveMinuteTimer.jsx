@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Typography, Box } from "@mui/material";
 
-const FiveMinuteTimer = ({ onSubmit }) => {
-  const [timeLeft, setTimeLeft] = useState(300); // 5 minutes in seconds
+const Timer = ({ initialTime = 300, onSubmit }) => {
+  const [timeLeft, setTimeLeft] = useState(initialTime);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -46,4 +46,4 @@ const FiveMinuteTimer = ({ onSubmit }) => {
   );
 };
 
-export default FiveMinuteTimer;
+export default Timer;

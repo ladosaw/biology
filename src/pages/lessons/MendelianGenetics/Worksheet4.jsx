@@ -23,6 +23,7 @@ import {
 import { LoadingButton } from "@mui/lab";
 import { formatDataForWorksheet4Lessons4 } from "../../../utils/helper.js";
 import API from "../../../utils/api/api.js";
+import FiveMinuteTimer from "../../../components/timer/FiveMinuteTimer.jsx";
 
 // Drag & Drop Configuration
 const HTML5toTouch = {
@@ -231,6 +232,7 @@ const Worksheet4 = ({
   return (
     <DndProvider backend={MultiBackend} options={HTML5toTouch}>
       <Container maxWidth="md" sx={{ mt: 4 }}>
+        <FiveMinuteTimer onSubmit={handleSubmit} initialTime={60} />
         <Typography
           variant="h4"
           fontWeight="bold"
