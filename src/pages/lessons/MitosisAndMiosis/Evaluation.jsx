@@ -119,7 +119,7 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
                         Number of Daughter Cells
                       </td>
                       <td className="px-6 py-3 border border-gray-300">2</td>
-                      <td className="px-6 py-3 border border-gray-300">4</td>
+                      <td className="px-6 py-3 border border-gray-300"></td>
                     </tr>
                     <tr className="bg-gray-100 hover:bg-blue-100 transition-all duration-200">
                       <td className="px-6 py-3 border border-gray-300">
@@ -128,9 +128,7 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
                       <td className="px-6 py-3 border border-gray-300">
                         2N (Diploid)
                       </td>
-                      <td className="px-6 py-3 border border-gray-300">
-                        N (Haploid)
-                      </td>
+                      <td className="px-6 py-3 border border-gray-300"></td>
                     </tr>
                   </tbody>
                 </table>
