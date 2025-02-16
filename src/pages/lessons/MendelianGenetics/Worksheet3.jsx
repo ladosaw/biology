@@ -4,11 +4,27 @@ import Swal from "sweetalert2";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
 import { MultiBackend, TouchTransition } from "react-dnd-multi-backend";
-import { Box, Typography, Paper, Grid, Divider } from "@mui/material";
+import {
+  Container,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+  Paper,
+  Box,
+  Divider,
+  TextField,
+  Grid,
+  Button,
+} from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import { MendelianGeneticsWorksheetsLink } from "./ConstantData.jsx";
-import three from "../../../assets/images/3x3.png";
+import { formatAssignedData } from "../../../utils/helper.js";
+import API from "../../../utils/api/api.js";
 
+// Drag & Drop Configuration
 const HTML5toTouch = {
   backends: [
     { backend: HTML5Backend },
@@ -20,234 +36,411 @@ const HTML5toTouch = {
   ],
 };
 
-const initialOrgans = [
-  { id: 1, name: "P" },
-  { id: 2, name: "P" },
-  { id: 3, name: "p" },
-  { id: 4, name: "Pp" },
-  { id: 5, name: "Pp" },
-  { id: 6, name: "p" },
-  { id: 7, name: "Pp" },
-  { id: 8, name: "Pp" },
+// Initial List of Genes Red
+const initialPunnettRed = [
+  { id: 1, name: "RR" },
+  { id: 2, name: "Rr" },
+  { id: 3, name: "rr" },
+  { id: 4, name: "Rr" },
+  { id: 5, name: "Rr" },
+  { id: 6, name: "RR" },
+  { id: 7, name: "rr" },
+  { id: 8, name: "Rr" },
 ];
 
-const Organ = ({ id, name, onSelect, isSelected }) => {
-  return (
-    <Box
-      sx={{
-        p: 2,
-        fontSize: "1rem",
-        fontWeight: "bold",
-        borderRadius: "12px",
-        cursor: "pointer",
-        bgcolor: isSelected ? "primary.main" : "background.paper",
-        color: isSelected ? "#fff" : "#353434",
-        border: "2px solid",
-        borderColor: isSelected ? "primary.dark" : "#ccc",
-        transition: "all 0.2s ease",
-        "&:hover": { bgcolor: "#E0E6F7" },
-      }}
-      onClick={() => onSelect(id)}
-    >
-      {name}
-    </Box>
-  );
-};
+// Initial List of Genes Purple
+const initialPunnettPurple = [
+  { id: 9, name: "P" },
+  { id: 10, name: "p" },
+  { id: 11, name: "Pp" },
+  { id: 12, name: "P" },
+  { id: 13, name: "p" },
+  { id: 14, name: "Pp" },
+  { id: 15, name: "Pp" },
+  { id: 16, name: "Pp" },
+];
 
-const DropBox = ({ id, organ, onTapDrop }) => {
-  return (
-    <Paper
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "100%",
-        height: "70px",
-        border: "2px dashed",
-        borderColor: organ ? "success.main" : "text.disabled",
-        bgcolor: organ ? "success.light" : "background.paper",
-        borderRadius: "12px",
-        transition: "all 0.2s ease",
-        fontWeight: "bold",
-        fontSize: "1.1rem",
-        cursor: "pointer",
-        textAlign: "center",
-        p: 2,
-      }}
-      onClick={() => onTapDrop(id)}
-    >
-      {organ ? organ.name : `Number ${id}`}
-    </Paper>
-  );
-};
+// Initial List of Genes Curly Hair
+const initialPunnettCurlyHair = [
+  { id: 17, name: "Cc" },
+  { id: 18, name: "Cc" },
+  { id: 19, name: "C" },
+  { id: 20, name: "c" },
+  { id: 21, name: "C" },
+  { id: 22, name: "c" },
+  { id: 23, name: "Cc" },
+  { id: 24, name: "Cc" },
+];
 
-const Worksheet3 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
+// Draggable Punnett Component
+const PunnettSquare = ({ id, name, onSelect, isSelected }) => (
+  <Box
+    sx={{
+      p: 2,
+      fontSize: "1rem",
+      fontWeight: "bold",
+      borderRadius: "12px",
+      cursor: "pointer",
+      bgcolor: isSelected ? "primary.main" : "background.paper",
+      color: isSelected ? "#fff" : "#353434",
+      border: "2px solid",
+      borderColor: isSelected ? "primary.dark" : "#ccc",
+      transition: "all 0.2s ease",
+      "&:hover": { bgcolor: "#E0E6F7" },
+    }}
+    onClick={() => onSelect(id)}
+  >
+    {name}
+  </Box>
+);
+
+// DropBox for Punnett Square Cells
+const DropBox = ({ id, punnett, onTapDrop }) => (
+  <Paper
+    sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      width: "100%",
+      height: "70px",
+      border: "2px dashed",
+      borderColor: punnett ? "success.main" : "text.disabled",
+      bgcolor: punnett ? "success.light" : "background.paper",
+      borderRadius: "12px",
+      transition: "all 0.2s ease",
+      fontWeight: "bold",
+      fontSize: "1.1rem",
+      cursor: "pointer",
+      textAlign: "center",
+      p: 2,
+    }}
+    onClick={() => onTapDrop(id)}
+  >
+    {punnett ? punnett.name : `Slot ${id + 1}`}
+  </Paper>
+);
+
+// Main Punnett Square Component with Drag & Drop
+const Worksheet3 = ({
+  titles,
+  worksheet_no,
+  setIsModalWorksheet3ModalOpen,
+}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [assigned, setAssigned] = useState({});
-  const [availableOrgans, setAvailableOrgans] = useState(initialOrgans);
-  const [selectedOrganId, setSelectedOrganId] = useState(null);
+  const [availablePunnettRed, setAvailablePunnettRed] =
+    useState(initialPunnettRed);
+  const [availablePunnettPurple, setAvailablePunnettPurple] =
+    useState(initialPunnettPurple);
+  const [availablePunnettCurlyHair, setAvailablePunnettCurlyHair] = useState(
+    initialPunnettCurlyHair
+  );
+  const [selectedPunnettId, setSelectedPunnettId] = useState(null);
+  const [genotypeRed, setGenotypeRed] = useState("");
+  const [phenotypeRed, setPhenotypeRed] = useState("");
+  const [genotypePurple, setGenotypePurple] = useState("");
+  const [phenotypePurple, setPhenotypePurple] = useState("");
+  const [genotypeCurlyHair, setGenotypeCurlyHair] = useState("");
+  const [phenotypeCurlyHair, setPhenotypeCurlyHair] = useState("");
 
-  const handleSelect = (id) => {
-    setSelectedOrganId(id);
+  const handleResetAll = () => {
+    setAvailablePunnettRed(initialPunnettRed);
+    setAvailablePunnettPurple(initialPunnettPurple);
+    setAvailablePunnettCurlyHair(initialPunnettCurlyHair);
+    setAssigned({});
+    setGenotypeRed("");
+    setPhenotypeRed("");
+    setGenotypePurple("");
+    setPhenotypePurple("");
+    setGenotypeCurlyHair("");
+    setPhenotypeCurlyHair("");
+    setSelectedPunnettId(null);
   };
 
+  // Selecting a Punnett
+  const handleSelect = (id) => setSelectedPunnettId(id);
+
+  // Dropping a Punnett into the Punnett Square
   const handleTapDrop = (dropId) => {
-    if (selectedOrganId !== null) {
-      const organ = availableOrgans.find((o) => o.id === selectedOrganId);
-      if (organ) {
-        setAssigned((prev) => ({ ...prev, [dropId]: organ }));
-        setAvailableOrgans((prev) =>
-          prev.filter((o) => o.id !== selectedOrganId)
-        );
-        setSelectedOrganId(null);
-      }
+    if (selectedPunnettId === null) return;
+
+    let punnett;
+    if (availablePunnettRed.some((o) => o.id === selectedPunnettId)) {
+      punnett = availablePunnettRed.find((o) => o.id === selectedPunnettId);
+      setAvailablePunnettRed((prev) =>
+        prev.filter((o) => o.id !== selectedPunnettId)
+      );
+    } else if (availablePunnettPurple.some((o) => o.id === selectedPunnettId)) {
+      punnett = availablePunnettPurple.find((o) => o.id === selectedPunnettId);
+      setAvailablePunnettPurple((prev) =>
+        prev.filter((o) => o.id !== selectedPunnettId)
+      );
+    } else if (
+      availablePunnettCurlyHair.some((o) => o.id === selectedPunnettId)
+    ) {
+      punnett = availablePunnettCurlyHair.find(
+        (o) => o.id === selectedPunnettId
+      );
+      setAvailablePunnettCurlyHair((prev) =>
+        prev.filter((o) => o.id !== selectedPunnettId)
+      );
+    }
+
+    if (punnett) {
+      setAssigned((prev) => ({ ...prev, [dropId]: punnett }));
+      setSelectedPunnettId(null);
     }
   };
 
-  const handleSubmit = () => {
-    console.log("Form submitted");
+  // Submitting the Worksheet
+  const handleSubmit = async () => {
+    try {
+      setIsLoading(true);
+      const user_id = localStorage.getItem("id");
+      const authToken = localStorage.getItem("authToken");
+
+      if (!authToken) {
+        Swal.fire({
+          icon: "error",
+          title: "Unauthorized",
+          text: "You are not logged in. Please log in again.",
+          confirmButtonColor: "#dc2626",
+        });
+        setIsLoading(false);
+        setIsModalWorksheet3ModalOpen(false);
+        return;
+      }
+
+      const formattedData = formatAssignedData(
+        assigned,
+        genotypeRed,
+        phenotypeRed,
+        genotypePurple,
+        phenotypePurple,
+        genotypeCurlyHair,
+        phenotypeCurlyHair
+      );
+
+      const payload = {
+        answer: [formattedData],
+        user_id,
+        titles,
+        worksheet_no,
+      };
+      const response = await API.post("/worksheets/checker", payload, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      // Extracting score and worksheet details
+      const { score, worksheet } = response.data;
+      Swal.fire({
+        icon: "success",
+        title: "Quiz Submitted!",
+        html: `<p><strong>Worksheet:</strong> ${worksheet.titles}</p>
+                            <p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>
+                            <p><strong>Your Score:</strong> ${score}</p>
+                          `,
+        confirmButtonColor: "#10B981",
+      }).then(() => {
+        navigate("/lessons");
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Submission Failed",
+        text:
+          error.response?.data?.message ||
+          "An error occurred while submitting the answers.",
+        confirmButtonColor: "#dc2626",
+      });
+    } finally {
+      setIsLoading(false);
+      setIsModalWorksheet3ModalOpen(false);
+    }
   };
-
-  // const handleSubmit = async () => {
-  //   try {
-  //     setIsLoading(true);
-  //     // Ensure all organs are placed
-  //     if (Object.keys(assigned).length !== 10) {
-  //       Swal.fire({
-  //         icon: "warning",
-  //         title: "Incomplete Answers",
-  //         text: "Please place all digestive organs before submitting.",
-  //         confirmButtonColor: "#f59e0b", // Yellow warning color
-  //       });
-  //       return;
-  //     }
-
-  //     // Ensure all text fields are filled
-  //     if (textFieldAnswers.some((answer) => answer.trim() === "")) {
-  //       Swal.fire({
-  //         icon: "warning",
-  //         title: "Incomplete Answers",
-  //         text: "Please answer all text fields before submitting.",
-  //         confirmButtonColor: "#f59e0b",
-  //       });
-  //       return;
-  //     }
-
-  //     // Combine drag-and-drop and text answers into a single object
-  //     const answers = {};
-
-  //     // Add drag-and-drop answers
-  //     Object.keys(assigned).forEach((key) => {
-  //       answers[key] = assigned[key]; // Assign organ name
-  //     });
-
-  //     // Add text-based answers
-  //     MendelianGeneticsWorksheetsLink.forEach((question, index) => {
-  //       const questionId = index + 1 + Object.keys(assigned).length; // Ensure unique ID
-  //       answers[questionId] = textFieldAnswers[index]; // Assign text answer
-  //     });
-
-  //     const user_id = localStorage.getItem("id");
-  //     const authToken = localStorage.getItem("authToken");
-
-  //     if (!authToken) {
-  //       Swal.fire({
-  //         icon: "error",
-  //         title: "Unauthorized",
-  //         text: "You are not logged in. Please log in again.",
-  //         confirmButtonColor: "#dc2626",
-  //       });
-  //       setIsLoading(false);
-  //       setIsModalWorksheetModalOpen(false);
-  //       return;
-  //     }
-
-  //     const payload = {
-  //       answer: [answers],
-  //       user_id,
-  //       titles,
-  //       worksheet_no,
-  //     };
-
-  //     const response = await API.post("/worksheets/checker", payload, {
-  //       headers: {
-  //         Authorization: `Bearer ${authToken}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-
-  //     // Extracting score and worksheet details
-  //     const { score, worksheet } = response.data;
-
-  //     setIsModalWorksheetModalOpen(false);
-  //     Swal.fire({
-  //       icon: "success",
-  //       title: "Quiz Submitted!",
-  //       html: `
-  //         <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
-  //         <p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>
-  //         <p><strong>Your Score:</strong> ${score}</p>
-  //       `,
-  //       confirmButtonColor: "#10B981",
-  //     }).then(() => {
-  //       navigate("/lessons");
-  //     });
-  //   } catch (error) {
-  //     setIsLoading(false);
-  //     setIsModalWorksheetModalOpen(false);
-  //     Swal.fire({
-  //       icon: "error",
-  //       title: "Submission Failed",
-  //       text:
-  //         error.response?.data?.message ||
-  //         "An error occurred while submitting the answers.",
-  //       confirmButtonColor: "#dc2626",
-  //     });
-  //   } finally {
-  //     setIsLoading(false);
-  //     setIsModalWorksheetModalOpen(false);
-  //   }
-  // };
 
   return (
     <DndProvider backend={MultiBackend} options={HTML5toTouch}>
-      <Box
-        sx={{
-          px: 4,
-          py: 5,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Typography variant="h4" fontWeight="bold" gutterBottom>
-          WORKSHEET # 1: FILL ME UP
-        </Typography>
+      <Container maxWidth="md" sx={{ mt: 4 }}>
         <Typography
-          variant="body1"
-          color="textSecondary"
+          variant="h4"
+          fontWeight="bold"
           textAlign="center"
-          paragraph
+          gutterBottom
         >
-          <strong>A. Directions:</strong> Below is the image of the Digestive
-          System. Write the names of the organs from the box below.
-          <p className="mt-5">
-            A purple (P) gene for the flower is dominant and is crossed over the
-            white flower (p). Determine the genotypic and phenotypic ratio of
-            the offspring. Use a punnet square to solve the problem.
-          </p>
+          Worksheet 3: Monohybrid Cross Using the Punnett Square
         </Typography>
 
-        <img
-          src={three}
-          alt="Worksheet"
-          style={{
-            width: "100%",
-            maxWidth: "300px",
-            height: "auto",
-            marginBottom: "20px",
+        <Typography
+          variant="caption"
+          textAlign="start"
+          fontWeight="bold"
+          mb={2}
+        >
+          Situation:
+        </Typography>
+        <Typography variant="body1" textAlign="start" mb={2}>
+          A homozygous red Santan flower (RR) is crossed with a homozygous pink
+          Santan flower (rr).
+        </Typography>
+
+        <Typography
+          variant="caption"
+          textAlign="start"
+          fontWeight="bold"
+          mb={2}
+        >
+          Task:
+        </Typography>
+        <Typography
+          variant="body2"
+          textAlign="start"
+          mb={2}
+          sx={{ display: "block" }}
+        >
+          1. Show the given cross using the Punnett square.
+        </Typography>
+        <Typography
+          variant="body2"
+          textAlign="start"
+          mb={2}
+          sx={{ display: "block" }}
+        >
+          2. Write the genotypes and phenotypes of the resulting offspring.
+        </Typography>
+
+        {/* Punnett Selection Red*/}
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 2,
+            justifyContent: "center",
+            mb: 4,
           }}
-        />
+        >
+          {availablePunnettRed.map((punnett) => (
+            <PunnettSquare
+              key={punnett.id}
+              id={punnett.id}
+              name={punnett.name}
+              onSelect={handleSelect}
+              isSelected={selectedPunnettId === punnett.id}
+            />
+          ))}
+        </Box>
+
+        <Grid container spacing={3}>
+          {/* Punnett Square Table */}
+          <Grid item xs={12} md={8}>
+            <TableContainer component={Paper}>
+              <Table dense size="small">
+                <TableHead>
+                  <TableRow>
+                    <TableCell></TableCell>
+                    <TableCell align="center">R</TableCell>
+                    <TableCell align="center">R</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    <TableCell align="center">r</TableCell>
+                    {[0, 1].map((index) => (
+                      <TableCell key={index} align="center">
+                        <DropBox
+                          id={index}
+                          punnett={assigned[index]}
+                          onTapDrop={handleTapDrop}
+                        />
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                  <TableRow>
+                    <TableCell align="center">r</TableCell>
+                    {[2, 3].map((index) => (
+                      <TableCell key={index} align="center">
+                        <DropBox
+                          id={index}
+                          punnett={assigned[index]}
+                          onTapDrop={handleTapDrop}
+                        />
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Grid>
+
+          {/* Genotype & Phenotype Inputs */}
+          <Grid item xs={12} md={4}>
+            <Typography variant="h6" fontWeight="bold" color="brown">
+              Genotype:
+            </Typography>
+            <TextField
+              fullWidth
+              placeholder="Enter genotype"
+              value={genotypeRed}
+              onChange={(e) => setGenotypeRed(e.target.value)}
+            />
+
+            <Typography variant="h6" fontWeight="bold" color="brown" mt={2}>
+              Phenotype:
+            </Typography>
+            <TextField
+              fullWidth
+              placeholder="Enter phenotype"
+              value={phenotypeRed}
+              onChange={(e) => setPhenotypeRed(e.target.value)}
+            />
+          </Grid>
+        </Grid>
+
+        <Divider sx={{ my: 4 }} />
+
+        {/* Punnett Selection Purple */}
+
+        <Typography
+          variant="caption"
+          textAlign="start"
+          fontWeight="bold"
+          mb={2}
+        >
+          Situation:
+        </Typography>
+        <Typography variant="body1" textAlign="start" mb={2}>
+          A purple (P) gene for flower is dominant and is crossed over the white
+          flower (p). Determine the genotypic and phenotypic ratio of the
+          offspring. Use a punnet square to solve the problem.
+        </Typography>
+
+        <Typography
+          variant="caption"
+          textAlign="start"
+          fontWeight="bold"
+          mb={2}
+        >
+          Task:
+        </Typography>
+        <Typography
+          variant="body2"
+          textAlign="start"
+          mb={2}
+          sx={{ display: "block" }}
+        >
+          1. Show the given cross using the Punnett square.
+        </Typography>
+        <Typography
+          variant="body2"
+          textAlign="start"
+          mb={2}
+          sx={{ display: "block" }}
+        >
+          2. Write the genotypes and phenotypes of the resulting offspring.
+        </Typography>
 
         <Box
           sx={{
@@ -258,49 +451,236 @@ const Worksheet3 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
             mb: 4,
           }}
         >
-          {availableOrgans.map((organ) => (
-            <Organ
-              key={organ.id}
-              id={organ.id}
-              name={organ.name}
+          {availablePunnettPurple.map((punnett) => (
+            <PunnettSquare
+              key={punnett.id}
+              id={punnett.id}
+              name={punnett.name}
               onSelect={handleSelect}
-              isSelected={selectedOrganId === organ.id}
+              isSelected={selectedPunnettId === punnett.id}
             />
           ))}
         </Box>
 
-        <Grid container spacing={2} sx={{ justifyContent: "center", mt: 2 }}>
-          {Array.from({ length: 8 }).map((_, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <DropBox
-                id={index + 1}
-                organ={assigned[index + 1]}
-                onTapDrop={handleTapDrop}
-              />
-            </Grid>
-          ))}
+        <Grid container spacing={3}>
+          {/* Punnett Square Table */}
+          <Grid item xs={12} md={8}>
+            <TableContainer component={Paper}>
+              <Table dense size="small">
+                <TableHead>
+                  <TableRow>
+                    <TableCell></TableCell>
+                    {[9, 10].map((index) => (
+                      <TableCell key={index} align="center">
+                        <DropBox
+                          id={index}
+                          punnett={assigned[index]}
+                          onTapDrop={handleTapDrop}
+                        />
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    {[11, 12, 13].map((index) => (
+                      <TableCell key={index} align="center">
+                        <DropBox
+                          id={index}
+                          punnett={assigned[index]}
+                          onTapDrop={handleTapDrop}
+                        />
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                  <TableRow>
+                    {[14, 15, 16].map((index) => (
+                      <TableCell key={index} align="center">
+                        <DropBox
+                          id={index}
+                          punnett={assigned[index]}
+                          onTapDrop={handleTapDrop}
+                        />
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Grid>
+
+          {/* Genotype & Phenotype Inputs */}
+          <Grid item xs={12} md={4}>
+            <Typography variant="h6" fontWeight="bold" color="brown">
+              Genotype:
+            </Typography>
+            <TextField
+              fullWidth
+              placeholder="Enter genotype"
+              value={genotypePurple}
+              onChange={(e) => setGenotypePurple(e.target.value)}
+            />
+
+            <Typography variant="h6" fontWeight="bold" color="brown" mt={2}>
+              Phenotype:
+            </Typography>
+            <TextField
+              fullWidth
+              placeholder="Enter phenotype"
+              value={phenotypePurple}
+              onChange={(e) => setPhenotypePurple(e.target.value)}
+            />
+          </Grid>
         </Grid>
-      </Box>
+        <Divider sx={{ my: 4 }} />
 
-      <Divider sx={{ mt: 4 }} />
+        {/* Punnett Selection Curly Hair */}
 
-      <LoadingButton
-        sx={{
-          mt: 4,
-          display: "block",
-          mx: "auto",
-          px: 4,
-          py: 1.5,
-          fontSize: "1rem",
-          fontWeight: "bold",
-        }}
-        variant="contained"
-        color="primary"
-        loading={isLoading}
-        onClick={handleSubmit}
-      >
-        Submit
-      </LoadingButton>
+        <Typography
+          variant="caption"
+          textAlign="start"
+          fontWeight="bold"
+          mb={2}
+        >
+          Situation:
+        </Typography>
+        <Typography variant="body1" textAlign="start" mb={2}>
+          A homozygous Curly hair (C) is crossed with a recessive straight hair
+          (c).
+        </Typography>
+
+        <Typography
+          variant="caption"
+          textAlign="start"
+          fontWeight="bold"
+          mb={2}
+        >
+          Task:
+        </Typography>
+        <Typography
+          variant="body2"
+          textAlign="start"
+          mb={2}
+          sx={{ display: "block" }}
+        >
+          1. Show the given cross using the Punnett square.
+        </Typography>
+        <Typography
+          variant="body2"
+          textAlign="start"
+          mb={2}
+          sx={{ display: "block" }}
+        >
+          2. Write the genotypes and phenotypes of the resulting offspring.
+        </Typography>
+
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 2,
+            justifyContent: "center",
+            mb: 4,
+          }}
+        >
+          {availablePunnettCurlyHair.map((punnett) => (
+            <PunnettSquare
+              key={punnett.id}
+              id={punnett.id}
+              name={punnett.name}
+              onSelect={handleSelect}
+              isSelected={selectedPunnettId === punnett.id}
+            />
+          ))}
+        </Box>
+
+        <Grid container spacing={3}>
+          {/* Punnett Square Table */}
+          <Grid item xs={12} md={8}>
+            <TableContainer component={Paper}>
+              <Table dense size="small">
+                <TableHead>
+                  <TableRow>
+                    <TableCell></TableCell>
+                    {[17, 18].map((index) => (
+                      <TableCell key={index} align="center">
+                        <DropBox
+                          id={index}
+                          punnett={assigned[index]}
+                          onTapDrop={handleTapDrop}
+                        />
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    {[19, 20, 21].map((index) => (
+                      <TableCell key={index} align="center">
+                        <DropBox
+                          id={index}
+                          punnett={assigned[index]}
+                          onTapDrop={handleTapDrop}
+                        />
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                  <TableRow>
+                    {[22, 23, 24].map((index) => (
+                      <TableCell key={index} align="center">
+                        <DropBox
+                          id={index}
+                          punnett={assigned[index]}
+                          onTapDrop={handleTapDrop}
+                        />
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Grid>
+
+          {/* Genotype & Phenotype Inputs */}
+          <Grid item xs={12} md={4}>
+            <Typography variant="h6" fontWeight="bold" color="brown">
+              Genotype:
+            </Typography>
+            <TextField
+              fullWidth
+              placeholder="Enter genotype"
+              value={genotypeCurlyHair}
+              onChange={(e) => setGenotypeCurlyHair(e.target.value)}
+            />
+
+            <Typography variant="h6" fontWeight="bold" color="brown" mt={2}>
+              Phenotype:
+            </Typography>
+            <TextField
+              fullWidth
+              placeholder="Enter phenotype"
+              value={phenotypeCurlyHair}
+              onChange={(e) => setPhenotypeCurlyHair(e.target.value)}
+            />
+          </Grid>
+        </Grid>
+
+        <Divider sx={{ my: 4 }} />
+
+        <Box sx={{ display: "flex", justifyContent: "end", gap: 2, mt: 2 }}>
+          <Button variant="outlined" color="primary" onClick={handleResetAll}>
+            Reset
+          </Button>
+          <LoadingButton
+            variant="contained"
+            color="primary"
+            loading={isLoading}
+            onClick={handleSubmit}
+          >
+            Submit
+          </LoadingButton>
+        </Box>
+      </Container>
     </DndProvider>
   );
 };
