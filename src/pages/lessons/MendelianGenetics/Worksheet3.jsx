@@ -268,7 +268,7 @@ const Worksheet3 = ({
     <DndProvider backend={MultiBackend} options={HTML5toTouch}>
       <Container maxWidth="md" sx={{ mt: 4 }}>
         <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
-          <FiveMinuteTimer onSubmit={handleSubmit} />
+          <FiveMinuteTimer onSubmit={handleSubmit} initialTime={420} />
         </Box>
         <Typography
           variant="h4"
