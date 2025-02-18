@@ -8,6 +8,7 @@ import letterA from "../../../assets/images/letterA.png";
 import letterB from "../../../assets/images/letterB.png";
 import letterC from "../../../assets/images/letterC.png";
 import letterD from "../../../assets/images/letterD.png";
+import FiveMinuteTimer from "../../../components/timer/FiveMinuteTimer.jsx";
 
 const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -17,7 +18,6 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
   const handleChange = (id, value) => {
     setAnswers({ ...answers, [id]: value.toLowerCase() });
     setInvalidQuestions(invalidQuestions.filter((qid) => qid !== id)); // Remove from invalid state if answered
-
   };
 
   const handleSubmit = async () => {
@@ -85,6 +85,7 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto space-y-8">
       <h1 className="text-3xl font-bold text-center">Meiosis</h1>
+      <FiveMinuteTimer onSubmit={handleSubmit} initialTime={600} />
       <p>
         Direction: Read and understand each question, then choose the correct
         answer. Write the letter of your choice in the box before each number.

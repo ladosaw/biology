@@ -3,6 +3,7 @@ import { EvaluationQuestion } from "./ConstantDigestive";
 import { LoadingButton } from "@mui/lab";
 import Swal from "sweetalert2";
 import API from "../../../../utils/api/api";
+import FiveMinuteTimer from "../../../../components/timer/FiveMinuteTimer.jsx";
 
 const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -86,6 +87,7 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto space-y-8">
       <h1 className="text-3xl font-bold text-center">Digestive System Quiz</h1>
+      <FiveMinuteTimer onSubmit={handleSubmit} initialTime={600} />
       {EvaluationQuestion.map((q) => (
         <div key={q.id} className="mb-6 bg-white p-4 rounded-lg shadow-md">
           <div className="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-4">

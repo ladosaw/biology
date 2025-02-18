@@ -232,7 +232,7 @@ const Worksheet4 = ({
   return (
     <DndProvider backend={MultiBackend} options={HTML5toTouch}>
       <Container maxWidth="md" sx={{ mt: 4 }}>
-        <FiveMinuteTimer onSubmit={handleSubmit} initialTime={60} />
+        <FiveMinuteTimer onSubmit={handleSubmit} initialTime={180} />
         <Typography
           variant="h4"
           fontWeight="bold"
