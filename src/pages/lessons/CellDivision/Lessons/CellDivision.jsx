@@ -106,14 +106,14 @@ const Module1 = ({ hideFloating }) => {
           </p>
         </div>
 
-        <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-semibold my-6">
+        {/* <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-semibold my-6">
           Mitosis 3D Model
-        </h1>
-        <div className="w-full h-auto rounded-lg">
+        </h1> */}
+        {/* <div className="w-full h-auto rounded-lg">
           <MitosisAnimation />
-        </div>
+        </div> */}
         <div className="flex flex-col justify-center items-center mt-8z gap-8 my-8">
-          {/* <div className="w-full sm:w-3/4 md:w-2/3 lg:w-3/4 xl:w-2/3 aspect-video rounded-lg overflow-hidden shadow-lg">
+          <div className="w-full sm:w-3/4 md:w-2/3 lg:w-3/4 xl:w-2/3 aspect-video rounded-lg overflow-hidden shadow-lg">
             <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
               The Process of Mitosis
             </h1>
@@ -123,7 +123,7 @@ const Module1 = ({ hideFloating }) => {
               title="Mitosis"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             ></iframe>
-          </div> */}
+          </div>
 
           <img
             src={cellCycle}
