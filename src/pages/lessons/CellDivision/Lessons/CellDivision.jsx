@@ -115,11 +115,11 @@ const Module1 = ({ hideFloating }) => {
         <div className="flex flex-col justify-center items-center mt-8z gap-8 my-8">
           <div className="w-full sm:w-3/4 md:w-2/3 lg:w-3/4 xl:w-2/3 aspect-video rounded-lg overflow-hidden shadow-lg">
             <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
-              The Process of Mitosis
+              How Do Cells Divide - Phases Of Mitosis
             </h1>
             <iframe
               className="w-full h-full"
-              src="https://www.youtube.com/embed/f-ldPgEfAHI?si=mdFsWp5wOdf5Jb2m&amp;start=6"
+              src="https://www.youtube.com/embed/-PfVNZedmGA?si=EnYhqLxcvoSvrMNR"
               title="Mitosis"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             ></iframe>
