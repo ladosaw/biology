@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TextField, Container, Typography, Box } from "@mui/material";
+import { TextField, Container, Typography, Box, Grid } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import Swal from "sweetalert2";
 import API from "../../../utils/api/api.js";
@@ -36,6 +36,8 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         titles,
         worksheet_no,
       };
+
+      console.log(payload);
 
       const response = await API.post("/worksheets/checker", payload, {
         headers: {
@@ -93,9 +95,26 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
       <Box>
         {/* Section A */}
         <Typography variant="h6" sx={{ mt: 3 }}>
-          A. Homozygous, Heterozygous
+          A. Homozygous Dominant or Recessive/ Heterozygous
         </Typography>
-        {["YY", "yyss", "RrYY", "SSss", "ttRy"].map((item, index) => (
+        <Grid container spacing={2}>
+          {["YY", "yyss", "RrYY", "SSss", "ttRv"].map((item, index) => (
+            <Grid container item xs={12} key={index} alignItems="center">
+              <Grid item xs={2}>
+                <Typography>{item}</Typography>
+              </Grid>
+              <Grid item xs={10}>
+                <TextField
+                  size="small"
+                  fullWidth
+                  name={`A${index}`}
+                  onChange={handleChange}
+                />
+              </Grid>
+            </Grid>
+          ))}
+        </Grid>
+        {/* {["YY", "yyss", "RrYY", "SSss", "ttRy"].map((item, index) => (
           <TextField
             fullWidth
             key={index}
@@ -106,13 +125,33 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
             name={`A${index}`}
             onChange={handleChange}
           />
-        ))}
+        ))} */}
 
         {/* Section B */}
         <Typography variant="h6" sx={{ mt: 3 }}>
           B. Phenotype vs. Genotype
         </Typography>
-        {["Tall", "RRss", "Long and axial", "CC", "short and green"].map(
+        <Grid container spacing={2}>
+          {["Tall", "RRss", "Long and axial", "CC", "short and green"].map(
+            (item, index) => (
+              <Grid container item xs={12} key={index} alignItems="center">
+                <Grid item xs={3}>
+                  <Typography>{item}</Typography>
+                </Grid>
+                <Grid item xs={9}>
+                  <TextField
+                    size="small"
+                    fullWidth
+                    name={`B${index}`}
+                    onChange={handleChange}
+                  />
+                </Grid>
+              </Grid>
+            )
+          )}
+        </Grid>
+
+        {/* {["Tall", "RRss", "Long and axial", "CC", "short and green"].map(
           (item, index) => (
             <TextField
               fullWidth
@@ -125,13 +164,86 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
               onChange={handleChange}
             />
           )
-        )}
+        )} */}
 
         {/* Section C */}
         <Typography variant="h6" sx={{ mt: 3 }}>
-          C. Determine the Phenotype
+          C. For each of the genotype below, determine what phenotype were
+          possible to produce.
         </Typography>
-        {[
+
+        <Grid container spacing={2} mt={2}>
+          {/* First Section */}
+          <Grid item xs={12} md={6}>
+            <Typography variant="subtitle1" fontWeight="bold">
+              Yellow (<b>YY</b>) Flower are dominant to white (<b>yy</b>)
+            </Typography>
+            {["YY", "Yy", "yy"].map((genotype, index) => (
+              <Box key={genotype} display="flex" alignItems="center" mt={1}>
+                <Typography sx={{ width: 40 }}>{genotype}</Typography>
+                <TextField
+                  size="small"
+                  fullWidth
+                  name={`CF${index}`}
+                  onChange={handleChange}
+                />
+              </Box>
+            ))}
+          </Grid>
+
+          {/* Second Section */}
+          <Grid item xs={12} md={6}>
+            <Typography variant="subtitle1" fontWeight="bold">
+              Brown eyes are dominant to blue
+            </Typography>
+            {["BB", "Bb", "bb"].map((genotype, index) => (
+              <Box key={genotype} display="flex" alignItems="center" mt={1}>
+                <Typography sx={{ width: 40 }}>{genotype}</Typography>
+                <TextField size="small" fullWidth />
+              </Box>
+            ))}
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={2} mt={3}>
+          {/* Third Section */}
+          <Grid item xs={12} md={6}>
+            <Typography variant="subtitle1" fontWeight="bold">
+              Round seeds are dominant to wrinkled
+            </Typography>
+            {["RR", "Rr", "Rr"].map((genotype, index) => (
+              <Box key={genotype} display="flex" alignItems="center" mt={1}>
+                <Typography sx={{ width: 40 }}>{genotype}</Typography>
+                <TextField
+                  size="small"
+                  fullWidth
+                  name={`CS${index}`}
+                  onChange={handleChange}
+                />
+              </Box>
+            ))}
+          </Grid>
+
+          {/* Fourth Section */}
+          <Grid item xs={12} md={6}>
+            <Typography variant="subtitle1" fontWeight="bold">
+              Curly are recessive to straight hair
+            </Typography>
+            {["CC", "Cc", "cc"].map((genotype, index) => (
+              <Box key={genotype} display="flex" alignItems="center" mt={1}>
+                <Typography sx={{ width: 40 }}>{genotype}</Typography>
+                <TextField
+                  size="small"
+                  fullWidth
+                  name={`CT${index}`}
+                  onChange={handleChange}
+                />
+              </Box>
+            ))}
+          </Grid>
+        </Grid>
+
+        {/* {[
           "YY",
           "Yy",
           "Yy",
@@ -155,14 +267,53 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
             name={`C${index}`}
             onChange={handleChange}
           />
-        ))}
+        ))} */}
 
         {/* Section D */}
         <Typography variant="h6" sx={{ mt: 3 }}>
-          For each of the phenotype below, write the genotype (remember that
+          D. For each of the phenotype below, write the genotype (remember that
           capital letter for the dominant trait.
         </Typography>
-        {["Short", "Long", "Long", "Fair", "Fair", "Brown"].map(
+
+        <Grid container spacing={2} mt={2}>
+          {/* First Section */}
+          <Grid item xs={12} md={6}>
+            <Typography variant="subtitle1" fontWeight="bold">
+              Long hair is dominant to short hair
+            </Typography>
+            {["Short", "Long", "Long"].map((genotype, index) => (
+              <Box key={genotype} display="flex" alignItems="center" mt={1}>
+                <Typography sx={{ width: 40, mr: 2 }}>{genotype}</Typography>
+                <TextField
+                  size="small"
+                  fullWidth
+                  name={`DF${index}`}
+                  onChange={handleChange}
+                />
+              </Box>
+            ))}
+          </Grid>
+
+          {/* Second Section */}
+          <Grid item xs={12} md={6}>
+            <Typography variant="subtitle1" fontWeight="bold">
+              Fair complexion is dominant over brown
+            </Typography>
+            {["Fair", "Fair", "Brown"].map((genotype, index) => (
+              <Box key={genotype} display="flex" alignItems="center" mt={1}>
+                <Typography sx={{ width: 40, mr: 2 }}>{genotype}</Typography>
+                <TextField
+                  size="small"
+                  fullWidth
+                  name={`DS${index}`}
+                  onChange={handleChange}
+                />
+              </Box>
+            ))}
+          </Grid>
+        </Grid>
+
+        {/* {["Short", "Long", "Long", "Fair", "Fair", "Brown"].map(
           (item, index) => (
             <TextField
               fullWidth
@@ -175,7 +326,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
               onChange={handleChange}
             />
           )
-        )}
+        )} */}
       </Box>
 
       <LoadingButton
