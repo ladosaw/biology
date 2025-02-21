@@ -29,8 +29,7 @@ const About = () => {
           variant="body1"
           sx={{ maxWidth: "600px", mx: "auto", mb: 4 }}
         >
-          Scan and Learn: A Supplementary Materials in Quarter 4 For Grade 8
-          Linked on Internet Using QR Codes
+          Electronic Supplementary Learning Materials in Grade 8 Biology
         </Typography>
         <Box>
           {/* <Button
