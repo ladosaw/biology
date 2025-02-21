@@ -126,7 +126,6 @@ const Worksheet3 = ({
           <thead>
             <tr className="bg-gray-100">
               <th className="border border-gray-300 p-2">Column A</th>
-              <th className="border border-gray-300 p-2">Column B</th>
               <th className="border border-gray-300 p-2">Column C</th>
             </tr>
           </thead>
@@ -136,9 +135,7 @@ const Worksheet3 = ({
                 <td className="border border-gray-300 p-2 whitespace-nowrap">
                   {cross}
                 </td>
-                <td className="border border-gray-300 p-2 whitespace-nowrap">
-                  {crossess[i]}
-                </td>
+
                 <td className="border border-gray-300 p-2">
                   <input
                     type="text"
