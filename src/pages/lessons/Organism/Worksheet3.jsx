@@ -116,29 +116,26 @@ const Worksheet3 = ({
     <div className="p-4">
       <h1 className="font-bold text-2xl mb-4">Worksheet No. 3: Who Am I?</h1>
       <p className="mb-6">
-        Direction :Write the role or organism in a trophic level kc pag match
-        column A to B. Example: Bacteria - Decomposer
+        Direction: Determine the role of organism in the trophic level. Write
+        your answer on the second column ex. Decomposer
       </p>
 
       {/* Table for larger screens */}
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto mb-6">
         <table className="w-full border-collapse border border-gray-300 hidden sm:table">
           <thead>
             <tr className="bg-gray-100">
               <th className="border border-gray-300 p-2">Column A</th>
               <th className="border border-gray-300 p-2">Column B</th>
-              <th className="border border-gray-300 p-2">Column C</th>
             </tr>
           </thead>
           <tbody>
-            {crosses.map((cross, i) => (
+            {crossess.map((cross, i) => (
               <tr key={i} className="odd:bg-white even:bg-gray-50">
                 <td className="border border-gray-300 p-2 whitespace-nowrap">
                   {cross}
                 </td>
-                <td className="border border-gray-300 p-2 whitespace-nowrap">
-                  {crossess[i]}
-                </td>
+
                 <td className="border border-gray-300 p-2">
                   <input
                     type="text"
@@ -165,11 +162,9 @@ const Worksheet3 = ({
       <div className="sm:hidden">
         {crosses.map((cross, i) => (
           <div key={i} className="mb-4 p-3 border rounded-lg bg-gray-50">
-            <p className="font-medium text-lg">{cross}</p>
             <p className="font-medium text-lg">{crossess[i]}</p>
 
             <div className="mt-2">
-              <label className="block text-sm font-semibold">Column C</label>
               <input
                 type="text"
                 onChange={(e) =>
@@ -180,11 +175,62 @@ const Worksheet3 = ({
                   )
                 }
                 className="w-full p-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter Answer eg. 1-A"
+                placeholder="Enter Answer"
               />
             </div>
           </div>
         ))}
+      </div>
+      <div className="p-6 bg-gray-100 rounded-lg shadow-md mx-auto">
+        <div className="bg-white p-4 rounded-lg shadow-sm">
+          <h2 className="font-bold text-xl text-gray-700 mb-4">
+            Guide Questions
+          </h2>
+          <ol className="list-decimal pl-6 text-gray-800">
+            <li className="mt-2">
+              Which organism has the:
+              <ol className="list-lower-alpha md:pl-6">
+                {[
+                  "greatestBiomass",
+                  "greatestEnergy",
+                  "leastBiomass",
+                  "energyGainedByOwl",
+                  "biomassReceivedByEagle",
+                ].map((key, index) => (
+                  <li key={index} className="flex items-center gap-2 mt-2">
+                    <span className="capitalize">
+                      {key.replace(/([A-Z])/g, " $1").toLowerCase()}:
+                    </span>
+                    <input
+                      type="text"
+                      onChange={(e) =>
+                        handleInputChange("guideQuestions", key, e.target.value)
+                      }
+                      className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+                      placeholder="Enter answer"
+                    />
+                  </li>
+                ))}
+              </ol>
+            </li>
+            <li className="mt-4">
+              What happens to the biomass amount from the bottom to the top of
+              the pyramid?
+              <input
+                type="text"
+                onChange={(e) =>
+                  handleInputChange(
+                    "guideQuestions",
+                    "biomassChange",
+                    e.target.value
+                  )
+                }
+                className="mt-2 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+                placeholder="Enter answer"
+              />
+            </li>
+          </ol>
+        </div>
       </div>
 
       <div className="mt-4 flex justify-end">
