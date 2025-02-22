@@ -181,57 +181,6 @@ const Worksheet3 = ({
           </div>
         ))}
       </div>
-      <div className="p-6 bg-gray-100 rounded-lg shadow-md mx-auto">
-        <div className="bg-white p-4 rounded-lg shadow-sm">
-          <h2 className="font-bold text-xl text-gray-700 mb-4">
-            Guide Questions
-          </h2>
-          <ol className="list-decimal pl-6 text-gray-800">
-            <li className="mt-2">
-              Which organism has the:
-              <ol className="list-lower-alpha md:pl-6">
-                {[
-                  "greatestBiomass",
-                  "greatestEnergy",
-                  "leastBiomass",
-                  "energyGainedByOwl",
-                  "biomassReceivedByEagle",
-                ].map((key, index) => (
-                  <li key={index} className="flex items-center gap-2 mt-2">
-                    <span className="capitalize">
-                      {key.replace(/([A-Z])/g, " $1").toLowerCase()}:
-                    </span>
-                    <input
-                      type="text"
-                      onChange={(e) =>
-                        handleInputChange("guideQuestions", key, e.target.value)
-                      }
-                      className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
-                      placeholder="Enter answer"
-                    />
-                  </li>
-                ))}
-              </ol>
-            </li>
-            <li className="mt-4">
-              What happens to the biomass amount from the bottom to the top of
-              the pyramid?
-              <input
-                type="text"
-                onChange={(e) =>
-                  handleInputChange(
-                    "guideQuestions",
-                    "biomassChange",
-                    e.target.value
-                  )
-                }
-                className="mt-2 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
-                placeholder="Enter answer"
-              />
-            </li>
-          </ol>
-        </div>
-      </div>
 
       <div className="mt-4 flex justify-end">
         <LoadingButton
