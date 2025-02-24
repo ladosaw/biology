@@ -192,7 +192,7 @@ const Worksheet4 = ({
         </div>
       </div>
 
-      <div className="p-6 bg-gray-100 rounded-lg shadow-md mx-auto mt-6 w-full max-w-4xl">
+      <div className="p-6 mx-auto mt-6 w-full max-w-4xl">
         <div className="bg-white p-4 rounded-lg shadow-sm">
           <h2 className="font-bold text-xl text-gray-700 mb-4">
             Guide Questions
@@ -208,7 +208,7 @@ const Worksheet4 = ({
                   "energyGainedByOwl",
                   "biomassReceivedByEagle",
                 ].map((key) => (
-                  <li key={key} className="flex items-center gap-2">
+                  <li key={key} className="lg:flex lg:items-center lg:gap-2">
                     <span className="capitalize whitespace-nowrap">
                       {key.replace(/([A-Z])/g, " $1").toLowerCase()}:
                     </span>
