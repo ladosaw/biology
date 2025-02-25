@@ -71,44 +71,44 @@ export const Worksheets3Question = [
     question:
       "2. What are the four main processes of the digestive system? Briefly describe each",
   },
-  {
-    id: 3,
-    question:
-      "3. Explain the role of the small intestine in the digestive process.",
-  },
+  // {
+  //   id: 3,
+  //   question:
+  //     "3. Explain the role of the small intestine in the digestive process.",
+  // },
   {
     id: 4,
-    question: "4. What is egestion, and how does it differ from digestion?",
+    question: "3. What is egestion, and how does it differ from digestion?",
   },
-  {
-    id: 5,
-    question:
-      "5. Describe the process of absorption in the context of the digestive system.",
-  },
-  {
-    id: 6,
-    question:
-      "6. Identify the enzymes involved in carbohydrate digestion and state their specific functions.",
-  },
+  // {
+  //   id: 5,
+  //   question:
+  //     "5. Describe the process of absorption in the context of the digestive system.",
+  // },
+  // {
+  //   id: 6,
+  //   question:
+  //     "6. Identify the enzymes involved in carbohydrate digestion and state their specific functions.",
+  // },
   {
     id: 7,
     question:
-      "7. What is the primary function of the large intestine in the digestive system?",
+      "4. What is the primary function of the large intestine in the digestive system?",
   },
-  {
-    id: 8,
-    question:
-      "8. Discuss the importance of ingestion in the overall digestive process.",
-  },
-  {
-    id: 9,
-    question:
-      "9. Name the organs involved in the digestive system and describe the function of each.",
-  },
+  // {
+  //   id: 8,
+  //   question:
+  //     "8. Discuss the importance of ingestion in the overall digestive process.",
+  // },
+  // {
+  //   id: 9,
+  //   question:
+  //     "9. Name the organs involved in the digestive system and describe the function of each.",
+  // },
   {
     id: 10,
     question:
-      "10. Explain how the liver contributes to digestion and metabolism.",
+      "5. Explain how the liver contributes to digestion and metabolism.",
   },
 ];
 
