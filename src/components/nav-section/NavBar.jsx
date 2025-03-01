@@ -73,7 +73,10 @@ const Navbar = () => {
           {menuItems.map(
             (item) =>
               (item.id !== "admin" || userRole === "admin") &&
-              (item.id !== "student" || userRole === "student") && (
+              (item.id !== "student" || userRole === "student") &&
+              (item.id !== "ranking" ||
+                userRole === "student" ||
+                userRole === "admin") && (
                 <motion.div
                   key={item.id}
                   whileHover={{ scale: 1.1 }}
@@ -151,7 +154,10 @@ const Navbar = () => {
                   {menuItems.map(
                     (item) =>
                       (item.id !== "admin" || userRole === "admin") &&
-                      (item.id !== "student" || userRole === "student") && (
+                      (item.id !== "student" || userRole === "student") &&
+                      (item.id !== "ranking" ||
+                        userRole === "student" ||
+                        userRole === "admin") && (
                         <MenuItem
                           key={item.id}
                           onClick={() => handleNavigation(item.path)}
