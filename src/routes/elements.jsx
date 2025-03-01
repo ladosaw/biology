@@ -17,3 +17,4 @@ export const Login = Loadable(lazy(() => import("../pages/Login")));
 export const Register = Loadable(lazy(() => import("../pages/SignUp")));
 export const AdminDash = Loadable(lazy(() => import("../pages/AdminDash")));
 export const UserScore = Loadable(lazy(() => import("../pages/UserScore")));
+export const Ranking = Loadable(lazy(() => import("../pages/Ranking")));

@@ -7,6 +7,7 @@ import {
   Register,
   AdminDash,
   UserScore,
+  Ranking,
 } from "./elements";
 
 const Router = () =>
@@ -18,6 +19,7 @@ const Router = () =>
     { path: "/register", element: <Register /> },
     { path: "/admin", element: <AdminDash /> },
     { path: "/user-score", element: <UserScore /> },
+    { path: "/ranking", element: <Ranking /> },
     { path: "*", element: <Navigate to="/" /> },
   ]);
 

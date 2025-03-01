@@ -14,4 +14,5 @@ export const menuItems = [
   { id: "about", label: "About", path: "/about" },
   { id: "admin", label: "Admin", path: "/admin" },
   { id: "student", label: "Score", path: "/user-score" },
+  { id: "ranking", label: "Ranking", path: "/ranking" },
 ];
