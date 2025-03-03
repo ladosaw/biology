@@ -89,7 +89,7 @@ const AdminDash = () => {
         variant="h5"
         sx={{ mb: 2, textAlign: "center", fontWeight: "bold" }}
       >
-        Stude Score
+        Student Score
       </Typography>
 
       <TextField
