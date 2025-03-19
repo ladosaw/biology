@@ -16,6 +16,7 @@ import {
   Button,
   Tabs,
   Tab,
+  TableSortLabel,
 } from "@mui/material";
 import API from "../utils/api/api.js";
 import Modal from "../components/Modal/Modal.jsx";
@@ -31,7 +32,7 @@ const AdminDash = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
-  const [tabIndex, setTabIndex] = useState(0); // Track active tab
+  const [tabLesson, setTabLesson] = useState("lesson1");
   const [selectedRow, setSelectedRow] = useState(null);
   const toggleCheckModal = () => setIsCheckModalOpen((prev) => !prev);
   const toggleModal = () => setIsModalOpen((prev) => !prev);
@@ -57,6 +58,14 @@ const AdminDash = () => {
     }
   };
 
+  const handleSort = (key) => {
+    let direction = "asc";
+    if (sortConfig.key === key && sortConfig.direction === "asc") {
+      direction = "desc";
+    }
+    setSortConfig({ key, direction });
+  };
+
   useEffect(() => {
     if (!authToken) {
       navigate("/login");
@@ -65,33 +74,34 @@ const AdminDash = () => {
     fetchData();
   }, []);
 
-  const handleSort = (column) => {
-    let direction = "asc";
-    if (sortConfig.key === column && sortConfig.direction === "asc") {
-      direction = "desc";
-    }
-    setSortConfig({ key: column, direction });
+  const sortedData = (data) => {
+    return [...data].sort((a, b) => {
+      let valA = a[sortConfig.key];
+      let valB = b[sortConfig.key];
+
+      if (sortConfig.key === "score") {
+        valA = parseFloat(valA);
+        valB = parseFloat(valB);
+      } else if (
+        sortConfig.key === "created_at" ||
+        sortConfig.key === "updated_at"
+      ) {
+        valA = new Date(valA);
+        valB = new Date(valB);
+      }
+
+      if (valA < valB) return sortConfig.direction === "asc" ? -1 : 1;
+      if (valA > valB) return sortConfig.direction === "asc" ? 1 : -1;
+      return 0;
+    });
   };
-
-  const filteredRows = rows.filter((row) => {
-    const fullName = `${row.user.lname}, ${row.user.fname} ${
-      row.user.mname || ""
-    }`.toLowerCase();
-    return fullName.includes(searchQuery.toLowerCase());
-  });
-
-  const sortedRows = [...filteredRows].sort((a, b) =>
-    sortConfig.direction === "asc"
-      ? a[sortConfig.key] > b[sortConfig.key]
-        ? 1
-        : -1
-      : a[sortConfig.key] < b[sortConfig.key]
-      ? 1
-      : -1
-  );
-
-  const manualRows = sortedRows.filter((row) => row.is_manually === 1);
-  const autoRows = sortedRows.filter((row) => row.is_manually === 0);
+  const filteredData = (data) => {
+    return data.filter((row) =>
+      `${row.user.lname} ${row.user.fname} ${row.user?.mname || ""}`
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase())
+    );
+  };
 
   const renderTable = (data) => (
     <TableContainer component={Paper} elevation={2} sx={{ borderRadius: 2 }}>
@@ -101,25 +111,40 @@ const AdminDash = () => {
             <TableCell>Title</TableCell>
             <TableCell>Name</TableCell>
             <TableCell>Worksheet No</TableCell>
-            <TableCell
-              onClick={() => handleSort("score")}
-              sx={{ cursor: "pointer", whiteSpace: "nowrap" }}
-            >
-              Score
+            <TableCell>
+              {" "}
+              <TableSortLabel
+                active={sortConfig.key === "score"}
+                direction={sortConfig.direction}
+                onClick={() => handleSort("score")}
+              >
+                Score
+              </TableSortLabel>
             </TableCell>
-            <TableCell
-              onClick={() => handleSort("created_at")}
-              sx={{ cursor: "pointer", whiteSpace: "nowrap" }}
-            >
-              Date Added
+            <TableCell>
+              <TableSortLabel
+                active={sortConfig.key === "created_at"}
+                direction={sortConfig.direction}
+                onClick={() => handleSort("created_at")}
+              >
+                Date Added
+              </TableSortLabel>
             </TableCell>
-            {tabIndex === 1 && <TableCell>Check Date</TableCell>}
-            {tabIndex === 1 && <TableCell>Actions</TableCell>}
+            <TableCell>
+              <TableSortLabel
+                active={sortConfig.key === "updated_at"}
+                direction={sortConfig.direction}
+                onClick={() => handleSort("updated_at")}
+              >
+                Check Date
+              </TableSortLabel>
+            </TableCell>
+            <TableCell>Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {data.length > 0 ? (
-            data
+            sortedData(data)
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => (
                 <TableRow key={row.worksheet_id}>
@@ -136,12 +161,12 @@ const AdminDash = () => {
                   <TableCell>
                     {new Date(row.created_at).toLocaleDateString()}
                   </TableCell>
-                  {tabIndex === 1 && (
-                    <TableCell>
-                      {new Date(row.updated_at).toLocaleDateString()}
-                    </TableCell>
-                  )}
-                  {tabIndex === 1 && (
+
+                  <TableCell>
+                    {new Date(row.updated_at).toLocaleDateString()}
+                  </TableCell>
+
+                  {row.is_manually === 1 && (
                     <TableCell>
                       <Button
                         onClick={() => {
@@ -164,6 +189,15 @@ const AdminDash = () => {
           )}
         </TableBody>
       </Table>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 50]}
+        component="div"
+        count={rows[tabLesson] ? rows[tabLesson].length : 0}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={(event, newPage) => setPage(newPage)}
+        onRowsPerPageChange={(event) => setRowsPerPage(+event.target.value)}
+      />
     </TableContainer>
   );
 
@@ -202,30 +236,27 @@ const AdminDash = () => {
       ) : (
         <>
           <Tabs
-            value={tabIndex}
-            onChange={(e, newValue) => setTabIndex(newValue)}
+            value={tabLesson}
+            onChange={(e, newValue) => setTabLesson(newValue)}
           >
-            <Tab label="Automatically Checked" />
-            <Tab label="Manually Checked" />
+            {Object.keys(rows).map((lessonKey) => (
+              <Tab
+                key={lessonKey}
+                value={lessonKey}
+                label={lessonKey.replace("lesson", "Lesson ")}
+              />
+            ))}
           </Tabs>
 
           <Box sx={{ mt: 2 }}>
-            {tabIndex === 0 ? renderTable(autoRows) : renderTable(manualRows)}
+            {rows[tabLesson] ? (
+              renderTable(filteredData(rows[tabLesson]))
+            ) : (
+              <Typography align="center">No data available</Typography>
+            )}
           </Box>
         </>
       )}
-
-      <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 50]}
-          component="div"
-          count={tabIndex === 0 ? autoRows.length : manualRows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={(event, newPage) => setPage(newPage)}
-          onRowsPerPageChange={(event) => setRowsPerPage(+event.target.value)}
-        />
-      </Box>
 
       <Modal open={isModalOpen} onClose={toggleModal} title="Add Student">
         <SignUp onClose={toggleModal} />

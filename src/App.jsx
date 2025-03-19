@@ -21,7 +21,7 @@ const App = () => {
       <Navbar />
       <Container maxWidth="xl" sx={{ flex: 1 }}>
         <Box className="my-4">
-          <Analytics />
+          {/* <Analytics /> */}
           <Router />
         </Box>
       </Container>
