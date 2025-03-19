@@ -48,7 +48,7 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
       });
 
       // Extracting score and worksheet details
-      const { score, worksheet } = response.data;
+      const { score, worksheet, detailed_results } = response.data;
 
       setEvaluationOpen(false);
 
@@ -56,13 +56,22 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
         icon: "success",
         title: "Quiz Submitted!",
         html: `
-                          <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
-                          <p><strong>Worksheet No:</strong> Evaluation</p>
-                          <p><strong>Your Score:</strong> ${score}</p>
-                        `,
+             <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
+             <p><strong>Worksheet No:</strong> Evaluation</p>
+             <p><strong>Your Score:</strong> ${score}</p>
+             <ul>
+             <p><strong> Your Answer: </strong></p>
+               ${detailed_results
+                 .map(
+                   (result) =>
+                     `<li>${result.user_answer.toUpperCase()} is ${
+                       result.is_correct ? "correct ✔️" : "incorrect ❌"
+                     }</li>`
+                 )
+                 .join("")}
+             </ul>
+           `,
         confirmButtonColor: "#10B981",
-      }).then(() => {
-        navigate("/lessons");
       });
     } catch (error) {
       console.error(error);
