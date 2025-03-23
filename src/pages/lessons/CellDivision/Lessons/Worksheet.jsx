@@ -113,9 +113,8 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
             Worksheet 1a: Label the Cell Cycle
           </h1>
           <p className="text-gray-700 mb-8">
-            Label the parts of the cell cycle by filling out the fields below.
-            Use the arrows to match the fields with the respective parts of the
-            diagram.
+            Label the parts of the cell cycle by filling out the box below using
+            the description from above.
           </p>
         </div>
 
