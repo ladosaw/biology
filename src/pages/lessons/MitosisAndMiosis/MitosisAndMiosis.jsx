@@ -548,7 +548,7 @@ const MiosisAndMitosis = ({ hideFloating }) => {
         <Worksheet1
           titles={"LESSON 3: Cell Cycle: COMPARING MITOSIS AND MEIOSIS"}
           worksheet_no={1}
-          isModalWorksheetOpen={isModalWorksheetOpen}
+          setIsModalWorksheetModalOpen={setIsModalWorksheetModalOpen}
         />
       </Modal>
 

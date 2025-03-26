@@ -13,9 +13,7 @@ import {
   TextField,
   CircularProgress,
   Box,
-  Button,
-  Tabs,
-  Tab,
+  Chip,
 } from "@mui/material";
 import API from "../utils/api/api.js";
 
@@ -158,7 +156,11 @@ const AdminDash = () => {
                         {new Date(row.created_at).toLocaleDateString()}
                       </TableCell>
                       <TableCell>
-                        {new Date(row.updated_at).toLocaleDateString()}
+                        {row.updated_at === null ? (
+                          <Chip label="For Checking" color="warning" />
+                        ) : (
+                          new Date(row.updated_at).toLocaleDateString()
+                        )}
                       </TableCell>
                     </TableRow>
                   ))
