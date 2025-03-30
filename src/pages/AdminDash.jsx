@@ -17,6 +17,7 @@ import {
   Tabs,
   Tab,
   TableSortLabel,
+  Chip,
 } from "@mui/material";
 import API from "../utils/api/api.js";
 import Modal from "../components/Modal/Modal.jsx";
@@ -163,7 +164,11 @@ const AdminDash = () => {
                   </TableCell>
 
                   <TableCell>
-                    {new Date(row.updated_at).toLocaleDateString()}
+                    {row.updated_at === null ? (
+                      <Chip label="For Checking" color="warning" />
+                    ) : (
+                      new Date(row.updated_at).toLocaleDateString()
+                    )}
                   </TableCell>
 
                   {row.is_manually === 1 && (
@@ -237,7 +242,9 @@ const AdminDash = () => {
         <>
           <Tabs
             value={tabLesson}
-            onChange={(e, newValue) => setTabLesson(newValue)}
+            onChange={(e, newValue) => (
+              setTabLesson(newValue), setPage(0), setSearchQuery("")
+            )}
           >
             {Object.keys(rows).map((lessonKey) => (
               <Tab
