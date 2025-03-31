@@ -17,12 +17,12 @@ import Learn12 from "../../../assets/images/Worksheet1Lesson3/iLearn12.png";
 import API from "../../../utils/api/api.js";
 
 const images = [
-  Learn1,
+  newPicture,
   Learn2,
   Learn3,
   Learn4,
   Learn5,
-  newPicture,
+  Learn6,
   Learn7,
   Learn8,
   Learn9,
