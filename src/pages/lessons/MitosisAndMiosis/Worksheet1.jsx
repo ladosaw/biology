@@ -7,6 +7,7 @@ import Learn3 from "../../../assets/images/Worksheet1Lesson3/iLearn3.png";
 import Learn4 from "../../../assets/images/Worksheet1Lesson3/iLearn4.png";
 import Learn5 from "../../../assets/images/Worksheet1Lesson3/iLearn5.png";
 import Learn6 from "../../../assets/images/Worksheet1Lesson3/iLearn6.png";
+import newPicture from "../../../assets/images/Worksheet1Lesson3/newPic.png";
 import Learn7 from "../../../assets/images/Worksheet1Lesson3/iLearn7.png";
 import Learn8 from "../../../assets/images/Worksheet1Lesson3/iLearn8.png";
 import Learn9 from "../../../assets/images/Worksheet1Lesson3/iLearn9.png";
@@ -16,7 +17,7 @@ import Learn12 from "../../../assets/images/Worksheet1Lesson3/iLearn12.png";
 import API from "../../../utils/api/api.js";
 
 const images = [
-  Learn1,
+  newPicture,
   Learn2,
   Learn3,
   Learn4,
