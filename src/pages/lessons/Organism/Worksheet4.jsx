@@ -41,19 +41,6 @@ const Worksheet4 = ({
     });
   };
 
-  const normalizeOrganisms = (organisms) => {
-    return organisms
-      ?.split(", ")
-      .map((org) => {
-        const lowerOrg = org.toLowerCase();
-        if (["corn", "carrots"].includes(lowerOrg)) return "grass";
-        if (["rabbits", "grasshopper"].includes(lowerOrg)) return "rat";
-        if (["fox", "python"].includes(lowerOrg)) return "owl";
-        return lowerOrg;
-      })
-      .join(", ");
-  };
-
   const handleSubmit = async () => {
     try {
       setIsLoading(true);
@@ -61,7 +48,7 @@ const Worksheet4 = ({
       const combinedData = formData.tableData.reduce(
         (acc, row, index) => {
           acc[`trophicLevel${index}`] = row.trophicLevel?.toLowerCase();
-          acc[`organisms${index}`] = normalizeOrganisms(row.organisms);
+          acc[`organisms${index}`] = row.organisms?.toLowerCase();
           return acc;
         },
         { ...formData.guideQuestions }
@@ -88,6 +75,8 @@ const Worksheet4 = ({
         titles,
         worksheet_no,
       };
+
+      console.log("Payload:", payload);
 
       const response = await API.post("/worksheets/checker", payload, {
         headers: {
@@ -173,7 +162,7 @@ const Worksheet4 = ({
                         handleInputChange(
                           "tableData",
                           "trophicLevel",
-                          e.target.value,
+                          e.target.value?.toLowerCase(),
                           index
                         )
                       }
@@ -189,7 +178,7 @@ const Worksheet4 = ({
                         handleInputChange(
                           "tableData",
                           "organisms",
-                          e.target.value,
+                          e.target.value?.toLowerCase(),
                           index
                         )
                       }
@@ -227,7 +216,11 @@ const Worksheet4 = ({
                       type="text"
                       value={formData.guideQuestions[key]}
                       onChange={(e) =>
-                        handleInputChange("guideQuestions", key, e.target.value)
+                        handleInputChange(
+                          "guideQuestions",
+                          key,
+                          e.target.value?.toLowerCase()
+                        )
                       }
                       className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
                       placeholder="Enter answer"
@@ -246,7 +239,7 @@ const Worksheet4 = ({
                   handleInputChange(
                     "guideQuestions",
                     "biomassChange",
-                    e.target.value
+                    e.target.value?.toLowerCase().trim()
                   )
                 }
                 className="mt-2 w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
