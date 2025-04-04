@@ -8,35 +8,24 @@ const Worksheet3 = ({
   worksheet_no,
   setIsModalWorksheet3ModalOpen,
 }) => {
-  const [answers, setAnswers] = useState({
-    genotypic: {},
-    phenotypic: {},
-  });
+  const [answers, setAnswers] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  // const [answers, setAnswers] = useState(
-  //   Array(6).fill({ genotypic: "", phenotypic: "" })
-  // );
 
-  // const handleInputChange = (index, type, value) => {
-  //   const updatedAnswers = answers.map((answer, i) =>
-  //     i === index ? { ...answer, [type]: value } : answer
-  //   );
-  //   setAnswers(updatedAnswers);
-  // };
-
-  const handleInputChange = (section, key, value) => {
-    setAnswers((prev) => ({
-      ...prev,
-      [section]: {
-        ...prev[section],
-        [key]: value,
-      },
+  const handleAnswerChange = (index, value) => {
+    setAnswers((prevAnswers) => ({
+      ...prevAnswers,
+      [index]: value.toLowerCase(),
     }));
   };
 
   const handleSubmit = async () => {
     try {
-      const combinedAnswers = [{ ...answers.genotypic, ...answers.phenotypic }];
+      const combinedAnswers = [
+        crossess.reduce((acc, item, index) => {
+          acc[`${item[0].toLowerCase()}`] = answers[index].toLowerCase();
+          return acc;
+        }, {}),
+      ];
       setIsLoading(true);
       const user_id = localStorage.getItem("id");
       const authToken = localStorage.getItem("authToken");
@@ -59,6 +48,8 @@ const Worksheet3 = ({
         titles,
         worksheet_no,
       };
+
+      console.log("Payload:", payload);
       const response = await API.post("/worksheets/checker", payload, {
         headers: {
           Authorization: `Bearer ${authToken}`,
@@ -107,15 +98,6 @@ const Worksheet3 = ({
     }
   };
 
-  const crosses = [
-    "1. Decomposer",
-    "2. Energy Source",
-    "3. Primary Consumer",
-    "4. Producer",
-    "5. Secondary Consumer",
-    "6. Tertiary Consumer",
-  ];
-
   const crossess = [
     "A. Bacteria",
     "B. Hawk",
@@ -152,17 +134,10 @@ const Worksheet3 = ({
                 <td className="border border-gray-300 p-2">
                   <input
                     type="text"
-                    // value={answers[i].phenotypic}
-                    onChange={(e) =>
-                      // handleInputChange(i, "phenotypic", e.target.value)
-                      handleInputChange(
-                        "phenotypic",
-                        "phenotypic" + i,
-                        e.target.value?.toLowerCase()
-                      )
-                    }
                     className="w-full p-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Enter Answer"
+                    value={answers[i] || ""}
+                    onChange={(e) => handleAnswerChange(i, e.target.value)}
                   />
                 </td>
               </tr>
@@ -173,22 +148,17 @@ const Worksheet3 = ({
 
       {/* Responsive layout for small screens */}
       <div className="sm:hidden">
-        {crosses.map((cross, i) => (
+        {crossess.map((cross, i) => (
           <div key={i} className="mb-4 p-3 border rounded-lg bg-gray-50">
-            <p className="font-medium text-lg">{crossess[i]}</p>
+            <p className="font-medium text-lg">{cross}</p>
 
             <div className="mt-2">
               <input
                 type="text"
-                onChange={(e) =>
-                  handleInputChange(
-                    "phenotypic",
-                    "phenotypic" + i,
-                    e.target.value?.toLowerCase()
-                  )
-                }
                 className="w-full p-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter Answer"
+                value={answers[i] || ""}
+                onChange={(e) => handleAnswerChange(i, e.target.value)}
               />
             </div>
           </div>
