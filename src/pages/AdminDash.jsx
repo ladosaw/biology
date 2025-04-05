@@ -18,7 +18,11 @@ import {
   Tab,
   TableSortLabel,
   Chip,
+  Stack,
 } from "@mui/material";
+import Swal from "sweetalert2";
+import { Task, DeleteForever } from "@mui/icons-material";
+// import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import API from "../utils/api/api.js";
 import Modal from "../components/Modal/Modal.jsx";
 import SignUp from "./SignUp.jsx";
@@ -104,6 +108,36 @@ const AdminDash = () => {
     );
   };
 
+  const deleteRow = async (id) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to undo this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        await API.delete(`/worksheets/${id}`, {
+          headers: { Authorization: `Bearer ${authToken}` },
+        });
+        setRows((prevRows) =>
+          Array.isArray(prevRows) ? prevRows.filter((row) => row.id !== id) : []
+        );
+
+        fetchData();
+        Swal.fire("Deleted!", "The worksheet has been removed.", "success");
+        fetchData();
+      } catch (err) {
+        setError(err.message);
+        Swal.fire("Error!", "Failed to delete the worksheet.", "error");
+      }
+    }
+  };
+
   const renderTable = (data) => (
     <TableContainer component={Paper} elevation={2} sx={{ borderRadius: 2 }}>
       <Table>
@@ -162,7 +196,6 @@ const AdminDash = () => {
                   <TableCell>
                     {new Date(row.created_at).toLocaleDateString()}
                   </TableCell>
-
                   <TableCell>
                     {row.updated_at === null ? (
                       <Chip label="For Checking" color="warning" />
@@ -171,18 +204,32 @@ const AdminDash = () => {
                     )}
                   </TableCell>
 
-                  {row.is_manually === 1 && (
-                    <TableCell>
+                  <TableCell>
+                    <Stack
+                      direction="row"
+                      sx={{ gap: "1px" }}
+                      alignItems="center"
+                    >
+                      {row.is_manually === 1 && (
+                        <Button
+                          onClick={() => {
+                            setSelectedRow(row);
+                            toggleCheckModal();
+                          }}
+                        >
+                          <Task color="primary" />
+                        </Button>
+                      )}
+
                       <Button
                         onClick={() => {
-                          setSelectedRow(row);
-                          toggleCheckModal();
+                          deleteRow(row.worksheet_id);
                         }}
                       >
-                        Check Manually
+                        <DeleteForever color="error" />
                       </Button>
-                    </TableCell>
-                  )}
+                    </Stack>
+                  </TableCell>
                 </TableRow>
               ))
           ) : (
