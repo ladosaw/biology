@@ -211,7 +211,7 @@ const AdminDash = () => {
                       sx={{ gap: "1px" }}
                       alignItems="center"
                     >
-                      {/* {row.is_manually === 1 && ( */}
+                      {row.is_manually === 1 && (
                       <Button
                         onClick={() => {
                           setSelectedRow(row);
@@ -220,7 +220,7 @@ const AdminDash = () => {
                       >
                         <Task color="primary" />
                       </Button>
-                      {/* )} */}
+                      )}
 
                       <Button
                         onClick={() => {
