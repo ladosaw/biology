@@ -190,13 +190,6 @@ const User = () => {
 
   return (
     <Container maxWidth="lg" sx={{ mt: { xs: 2, md: 4 } }}>
-      <Typography
-        variant="h5"
-        sx={{ mb: 2, textAlign: "center", fontWeight: "bold" }}
-      >
-        Admin Dashboard
-      </Typography>
-
       <TextField
         label="Search by Name"
         variant="outlined"
