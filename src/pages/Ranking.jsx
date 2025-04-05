@@ -117,7 +117,7 @@ const Ranking = () => {
                 <Typography variant="caption" fontWeight="bold" mt={4}>
                   {podiumLabels[index]}
                 </Typography>
-                <Typography fontWeight="bold" fontSize="0.95rem" noWrap>
+                <Typography fontWeight="bold" fontSize="0.95rem">
                   {student.name}
                 </Typography>
                 <Typography fontSize="0.85rem">
