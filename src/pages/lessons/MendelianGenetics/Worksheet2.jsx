@@ -132,8 +132,12 @@ const Worksheet2 = ({
           <thead>
             <tr className="bg-gray-100">
               <th className="border border-gray-300 p-2">Cross</th>
-              <th className="border border-gray-300 p-2">Genotypic Ratio</th>
-              <th className="border border-gray-300 p-2">Phenotypic Ratio</th>
+              <th className="border border-gray-300 p-2">
+                Genotypic Percentage
+              </th>
+              <th className="border border-gray-300 p-2">
+                Phenotypic Percentage
+              </th>
             </tr>
           </thead>
           <tbody>

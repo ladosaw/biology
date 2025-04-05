@@ -211,10 +211,9 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
           boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <strong>Direction:</strong> Use the correct word from the word bank to
-        tell the correct stages of cell division shown below. Each word should
-        be used only once. Write the letter of your answers on a separate sheet
-        of paper. <br />
+        <strong>Direction:</strong> Write the letter of the correct answer on
+        the box below the pictre.
+        <br />
         <em>
           (Hint: Notice the traces of synapsis and crossing over in the
           chromosomes during meiosis.)
