@@ -8,6 +8,9 @@ const ManualCheck = ({ worksheet, fetchData, onClose }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [score, setScore] = useState(worksheet.score || "0");
 
+  console.log(worksheet); // Log the worksheet data for debugging
+  //console.log(fetchData); // Log the score for debugging
+
   // Helper function to show Swal alerts
   const showAlert = (icon, title, text) => {
     Swal.fire({
