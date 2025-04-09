@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Container,
   Box,
@@ -11,118 +12,41 @@ import {
   Stack,
 } from "@mui/material";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import API from "../utils/api/api.js";
 
 const Ranking = () => {
+  const navigate = useNavigate();
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error] = useState(null);
+  const [error, setError] = useState(null);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
-  const data = [
-    {
-      user_id: 10,
-      name: "Omis, Jay K",
-      email: "jay@example.com",
-      total_score: 30,
-      latest_updated_at: "2025-03-19",
-    },
-    {
-      user_id: 3,
-      name: "Lee, Garry K",
-      email: "garry@example.com",
-      total_score: 20,
-      latest_updated_at: "2025-03-01",
-    },
-    {
-      user_id: 6,
-      name: "Park, Jet P",
-      email: "jet@example.com",
-      total_score: 10,
-      latest_updated_at: "2025-02-08",
-    },
-    {
-      user_id: 1,
-      name: "Doe, John D",
-      email: "john@example.com",
-      total_score: 9,
-      latest_updated_at: "2025-03-19",
-    },
-    {
-      user_id: 1,
-      name: "Doe, John D",
-      email: "john@example.com",
-      total_score: 9,
-      latest_updated_at: "2025-03-19",
-    },
-    {
-      user_id: 1,
-      name: "Doe, John D",
-      email: "john@example.com",
-      total_score: 9,
-      latest_updated_at: "2025-03-19",
-    },
-    {
-      user_id: 1,
-      name: "Doe, John D",
-      email: "john@example.com",
-      total_score: 9,
-      latest_updated_at: "2025-03-19",
-    },
-    {
-      user_id: 1,
-      name: "Doe, John D",
-      email: "john@example.com",
-      total_score: 9,
-      latest_updated_at: "2025-03-19",
-    },
-    {
-      user_id: 1,
-      name: "Doe, John D",
-      email: "john@example.com",
-      total_score: 9,
-      latest_updated_at: "2025-03-19",
-    },
-    {
-      user_id: 1,
-      name: "Doe, John D",
-      email: "john@example.com",
-      total_score: 9,
-      latest_updated_at: "2025-03-19",
-    },
-    {
-      user_id: 1,
-      name: "Doe, John D",
-      email: "john@example.com",
-      total_score: 9,
-      latest_updated_at: "2025-03-19",
-    },
-  ];
+  const authToken = localStorage.getItem("authToken");
 
   useEffect(() => {
-    // const fetchData = async () => {
-    //   try {
-    //     const response = await API.get(`/worksheets/ranking`, {
-    //       headers: { Authorization: `Bearer ${authToken}` },
-    //     });
-    //     if (response.status !== 200) throw new Error("Failed to fetch data");
-    //     console.log(response.data?.rankings);
-    //     setStudents(response.data?.rankings);
-    //   } catch (err) {
-    //     setError(err.message);
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    // };
+    const fetchData = async () => {
+      try {
+        const response = await API.get(`/worksheets/ranking`, {
+          headers: { Authorization: `Bearer ${authToken}` },
+        });
+        if (response.status !== 200) throw new Error("Failed to fetch data");
+        console.log(response.data?.rankings);
+        setStudents(response.data?.rankings);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    // if (!authToken) {
-    //   navigate("/login");
-    //   return;
-    // }
-    // fetchData();
-    setStudents(data);
-    setLoading(false);
+    if (!authToken) {
+      navigate("/login");
+      return;
+    }
+    fetchData();
+    // setStudents(data);
+    // setLoading(false);
   }, []);
 
   const sortedStudents = [...students].sort(
@@ -193,7 +117,7 @@ const Ranking = () => {
                 <Typography variant="caption" fontWeight="bold" mt={4}>
                   {podiumLabels[index]}
                 </Typography>
-                <Typography fontWeight="bold" fontSize="0.95rem" noWrap>
+                <Typography fontWeight="bold" fontSize="0.95rem">
                   {student.name}
                 </Typography>
                 <Typography fontSize="0.85rem">

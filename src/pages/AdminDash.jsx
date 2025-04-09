@@ -27,6 +27,7 @@ import API from "../utils/api/api.js";
 import Modal from "../components/Modal/Modal.jsx";
 import SignUp from "./SignUp.jsx";
 import ManualCheck from "./ManualCheck.jsx";
+import User from "./User.jsx";
 
 const AdminDash = () => {
   const [rows, setRows] = useState([]);
@@ -211,14 +212,14 @@ const AdminDash = () => {
                       alignItems="center"
                     >
                       {row.is_manually === 1 && (
-                        <Button
-                          onClick={() => {
-                            setSelectedRow(row);
-                            toggleCheckModal();
-                          }}
-                        >
-                          <Task color="primary" />
-                        </Button>
+                      <Button
+                        onClick={() => {
+                          setSelectedRow(row);
+                          toggleCheckModal();
+                        }}
+                      >
+                        <Task color="primary" />
+                      </Button>
                       )}
 
                       <Button
@@ -308,6 +309,8 @@ const AdminDash = () => {
             ) : (
               <Typography align="center">No data available</Typography>
             )}
+
+            <User />
           </Box>
         </>
       )}
