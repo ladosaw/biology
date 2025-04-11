@@ -107,13 +107,41 @@ const Worksheet3 = ({
     "F. Sunlight ",
   ];
 
+  const choices = [
+    "Decomposer",
+    "Tertiary Consumer",
+    "Primary Consumer",
+    "Secondary Consumer",
+    "Energy Source",
+  ];
+
   return (
     <div className="p-4">
       <h1 className="font-bold text-2xl mb-4">Worksheet No. 3: Who Am I?</h1>
       <p className="mb-6">
-        Direction: Determine the role of organism in the trophic level. Write
-        your answer on the second column ex. Decomposer
+        Determine the role of the organism in the trophic level. Write your
+        answer from.the given choices.
       </p>
+
+      <div
+        style={{
+          padding: "10px",
+          border: "1px solid #ccc",
+          borderRadius: "10px",
+          marginBottom: "20px",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+          gap: "10px",
+          background: "#f9f9f9",
+          textAlign: "center",
+        }}
+      >
+        {choices.map((choice, index) => (
+          <div key={index} style={{ fontSize: "16px", fontWeight: "bold" }}>
+            {choice}
+          </div>
+        ))}
+      </div>
 
       {/* Table for larger screens */}
       <div className="overflow-x-auto mb-6">
