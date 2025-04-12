@@ -150,6 +150,7 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
           variant="contained"
           color="error"
           onClick={handleReset}
+          disabled={isLoading}
           sx={{
             px: 4,
             py: 1,

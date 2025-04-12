@@ -392,6 +392,7 @@ const ActionButtons = ({ isLoading, onReset, onSubmit }) => (
       color="error"
       onClick={onReset}
       sx={buttonStyles}
+      disabled={isLoading}
     >
       Reset
     </Button>

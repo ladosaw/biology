@@ -345,6 +345,7 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
             variant="outlined"
             color="error"
             onClick={handleReset}
+            disabled={isLoading}
             sx={{ textTransform: "none" }}
           >
             Reset
