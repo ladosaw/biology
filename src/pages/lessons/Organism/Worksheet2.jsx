@@ -38,7 +38,7 @@ const Organism = ({ name, onSelect, isSelected }) => (
   </Paper>
 );
 
-const DropZone = ({ id, assignedOrganism, onDrop }) => (
+const DropZone = ({ number, id, assignedOrganism, onDrop }) => (
   <Paper
     sx={{
       height: 70,
@@ -57,7 +57,7 @@ const DropZone = ({ id, assignedOrganism, onDrop }) => (
     }}
     onClick={() => onDrop(id)}
   >
-    {assignedOrganism || `Drop here`}
+    {assignedOrganism || `${number}. Drop here`}
   </Paper>
 );
 
@@ -122,8 +122,45 @@ const Worksheet2 = ({
         });
         return;
       }
+
+      const chainAOrder = ["Grass", "Grasshopper", "Rat"];
+      const chainBOrder = ["Carrots", "Rabbit", "Fox", "Lion"];
+
+      const orderedDropValues = Array.from(
+        { length: 7 },
+        (_, i) => assigned[i + 1]
+      ).filter(Boolean);
+
+      // Split the drops into two chains (based on contents)
+      const chainA = orderedDropValues.filter((item) =>
+        chainAOrder.includes(item)
+      );
+      const chainB = orderedDropValues.filter((item) =>
+        chainBOrder.includes(item)
+      );
+
+      // Sort them according to your defined path
+      const sortedChainA = chainA.sort(
+        (a, b) => chainAOrder.indexOf(a) - chainAOrder.indexOf(b)
+      );
+      const sortedChainB = chainB.sort(
+        (a, b) => chainBOrder.indexOf(a) - chainBOrder.indexOf(b)
+      );
+
+      const inputAnswer = [
+        {
+          question: "Arrange the following organisms to form two food chains.",
+          answer: `First chain: ${sortedChainA.join("→  ")}`,
+        },
+        {
+          question: "Arrange the following organisms to form two food chains.",
+          answer: `Second chain: ${sortedChainB.join("→  ")}`,
+        },
+      ];
+
       const payload = {
         answer: [assigned],
+        inputAnswer,
         user_id,
         titles,
         worksheet_no,
@@ -201,10 +238,11 @@ const Worksheet2 = ({
       </Grid>
 
       <Grid container spacing={3} alignItems="center" justifyContent="center">
-        {[1, 2, 3].map((id) => (
+        {[1, 2, 3].map((id, index) => (
           <React.Fragment key={id}>
             <Grid item xs={4} sm={2}>
               <DropZone
+                number={index + 1}
                 id={id}
                 assignedOrganism={assigned[id]}
                 onDrop={handleDrop}
@@ -222,10 +260,11 @@ const Worksheet2 = ({
       <Divider sx={{ marginY: "25px" }} />
 
       <Grid container spacing={3} alignItems="center" justifyContent="center">
-        {[4, 5, 6, 7].map((id) => (
+        {[4, 5, 6, 7].map((id, index) => (
           <React.Fragment key={id}>
             <Grid item xs={4} sm={2}>
               <DropZone
+                number={index + 1}
                 id={id}
                 assignedOrganism={assigned[id]}
                 onDrop={handleDrop}
@@ -240,11 +279,12 @@ const Worksheet2 = ({
         ))}
       </Grid>
 
-      <Box sx={{ marginTop: 8, textAlign: "center" }}>
+      <Box sx={{ display: "flex", justifyContent: "flex-end", marginTop: 4 }}>
         <Button
-          variant="contained"
+          variant="outlined"
           color="error"
           onClick={handleReset}
+          disabled={isLoading}
           sx={{ marginRight: 2 }}
         >
           Reset

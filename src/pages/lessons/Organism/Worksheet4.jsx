@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { LoadingButton } from "@mui/lab";
+import { Button } from "@mui/material";
 import Swal from "sweetalert2";
 import API from "../../../utils/api/api.js";
 import pyramid from "../../../assets/images/pyramid.png";
@@ -41,6 +42,20 @@ const Worksheet4 = ({
     });
   };
 
+  const handleReset = () => {
+    setFormData({
+      tableData: Array(4).fill({ trophicLevel: "", organisms: "" }),
+      guideQuestions: {
+        greatestBiomass: "",
+        greatestEnergy: "",
+        leastBiomass: "",
+        energyGainedByOwl: "",
+        biomassReceivedByEagle: "",
+        biomassChange: "",
+      },
+    });
+  };
+
   const handleSubmit = async () => {
     try {
       setIsLoading(true);
@@ -69,14 +84,44 @@ const Worksheet4 = ({
         return;
       }
 
+      const inputAnswer = [];
+
+      // Format table data answers
+      formData.tableData.forEach((row, index) => {
+        inputAnswer.push({
+          question: `Trophic Level ${index + 1}`,
+          answer: row.trophicLevel,
+        });
+        inputAnswer.push({
+          question: `Organisms ${index + 1}`,
+          answer: row.organisms,
+        });
+      });
+
+      // Format guide question answers
+      const guideQuestionLabels = {
+        greatestBiomass: "Organism with greatest biomass",
+        greatestEnergy: "Organism with greatest energy",
+        leastBiomass: "Organism with least biomass",
+        energyGainedByOwl: "Energy gained by owl",
+        biomassReceivedByEagle: "Biomass received by eagle",
+        biomassChange: "Biomass change from bottom to top of pyramid",
+      };
+
+      Object.entries(formData.guideQuestions).forEach(([key, value]) => {
+        inputAnswer.push({
+          question: guideQuestionLabels[key] || key,
+          answer: value,
+        });
+      });
+
       const payload = {
         answer: [combinedData],
+        inputAnswer,
         user_id,
         titles,
         worksheet_no,
       };
-
-      console.log("Payload:", payload);
 
       const response = await API.post("/worksheets/checker", payload, {
         headers: {
@@ -127,11 +172,11 @@ const Worksheet4 = ({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center px-4 py-6">
+    <div className="flex flex-col px-4 py-6">
       <h1 className="text-2xl font-bold text-center mb-2">
         Worksheet No. 4: FOOD PYRAMID
       </h1>
-      <p className="text-center text-gray-700 mb-4 max-w-lg">
+      <p className="text-center text-gray-700 mb-4 max-w-lg mx-auto">
         Direction: Identify the trophic level of the given organisms. Write your
         answer in the text fields.
       </p>
@@ -250,15 +295,24 @@ const Worksheet4 = ({
         </div>
       </div>
 
-      <LoadingButton
-        variant="contained"
-        color="primary"
-        sx={{ mt: 6, width: "100%", maxWidth: "200px" }}
-        loading={isLoading}
-        onClick={handleSubmit}
-      >
-        Submit
-      </LoadingButton>
+      <div className="flex justify-end gap-4 mt-6">
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={handleReset}
+          disabled={isLoading}
+        >
+          Reset
+        </Button>
+        <LoadingButton
+          variant="contained"
+          color="primary"
+          loading={isLoading}
+          onClick={handleSubmit}
+        >
+          Submit
+        </LoadingButton>
+      </div>
     </div>
   );
 };
