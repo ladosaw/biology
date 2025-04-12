@@ -117,7 +117,7 @@ const DropBox = ({ id, punnett, onTapDrop }) => (
     }}
     onClick={() => onTapDrop(id)}
   >
-    {punnett ? punnett.name : `Slot ${id + 1}`}
+    {punnett ? punnett.name : `Slot ${id}`}
   </Paper>
 );
 
@@ -213,17 +213,58 @@ const Worksheet3 = ({
         return;
       }
 
-      const inputAnswer = {
-        punnettRed: assigned,
-        genotypeRed,
-        phenotypeRed,
-        punnettPurple: assigned,
-        genotypePurple,
-        phenotypePurple,
-        punnettCurlyHair: assigned,
-        genotypeCurlyHair,
-        phenotypeCurlyHair,
-      };
+      const inputAnswer = [
+        {
+          question:
+            "A homozygous red Santan flower (RR) is crossed with a homozygous pink Santan flower (rr).",
+          answer: Object.values(assigned)
+            .slice(0, 4)
+            .map((item) => `Slot ${item.id}: ${item.name}`)
+            .join(", "),
+        },
+        {
+          question: "Genotype",
+          answer: genotypeRed,
+        },
+        {
+          question: "Phenotype",
+          answer: phenotypeRed,
+        },
+        {
+          question:
+            "A purple (P) gene for flower is dominant and is crossed over the white flower (p). Determine the genotypic and phenotypic ratio of the offspring. Use a punnet square to solve the problem.",
+          answer: Object.values(assigned)
+            .slice(4, 12)
+            .map((item) => `Slot ${item.id}: ${item.name}`)
+            .join(", "),
+        },
+        {
+          question: "Genotype",
+          answer: genotypePurple,
+        },
+        {
+          question: "Phenotype",
+          answer: phenotypePurple,
+        },
+        {
+          question:
+            "A homozygous Curly hair (C) is crossed with a recessive straight hair (c).",
+          answer: Object.values(assigned)
+            .slice(12, 20)
+            .map((item) => `Slot ${item.id}:  ${item.name}`)
+            .join(", "),
+        },
+        {
+          question: "Genotype",
+          answer: genotypeCurlyHair,
+        },
+        {
+          question: "Phenotype",
+          answer: phenotypeCurlyHair,
+        },
+      ];
+
+      console.log("Assigned Data:", Object.values(assigned));
 
       const formattedData = formatAssignedData(
         assigned,

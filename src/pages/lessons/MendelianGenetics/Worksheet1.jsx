@@ -183,6 +183,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
                   size="small"
                   fullWidth
                   name={`A${index}`}
+                  value={answers[`A${index}`] || ""}
                   onChange={handleChange}
                 />
               </Grid>
@@ -206,6 +207,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
                     size="small"
                     fullWidth
                     name={`B${index}`}
+                    value={answers[`B${index}`] || ""}
                     onChange={handleChange}
                   />
                 </Grid>
@@ -233,6 +235,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
                   size="small"
                   fullWidth
                   name={`CF${index}`}
+                  value={answers[`CF${index}`] || ""}
                   onChange={handleChange}
                 />
               </Box>
@@ -247,7 +250,13 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
             {["BB", "Bb", "bb"].map((genotype, index) => (
               <Box key={genotype} display="flex" alignItems="center" mt={1}>
                 <Typography sx={{ width: 40 }}>{genotype}</Typography>
-                <TextField size="small" fullWidth />
+                <TextField
+                  size="small"
+                  fullWidth
+                  name={`CE${index}`}
+                  value={answers[`CE${index}`] || ""}
+                  onChange={handleChange}
+                />
               </Box>
             ))}
           </Grid>
@@ -266,6 +275,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
                   size="small"
                   fullWidth
                   name={`CS${index}`}
+                  value={answers[`CS${index}`] || ""}
                   onChange={handleChange}
                 />
               </Box>
@@ -284,6 +294,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
                   size="small"
                   fullWidth
                   name={`CT${index}`}
+                  value={answers[`CT${index}`] || ""}
                   onChange={handleChange}
                 />
               </Box>
@@ -310,6 +321,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
                   size="small"
                   fullWidth
                   name={`DF${index}`}
+                  value={answers[`DF${index}`] || ""}
                   onChange={handleChange}
                 />
               </Box>
@@ -328,6 +340,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
                   size="small"
                   fullWidth
                   name={`DS${index}`}
+                  value={answers[`DS${index}`] || ""}
                   onChange={handleChange}
                 />
               </Box>
@@ -337,14 +350,14 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
       </Box>
 
       <Box display="flex" justifyContent="flex-end" gap={2} mt={2}>
-        {/* <Button
+        <Button
           variant="outlined"
           color="error"
           onClick={handleReset}
           disabled={isLoading}
         >
           Reset
-        </Button> */}
+        </Button>
 
         <LoadingButton
           variant="contained"

@@ -187,9 +187,43 @@ const Worksheet4 = ({
         Q3: checkForQ3,
       });
 
+      const inputAnswer = [
+        {
+          question: "Given the cross RrYy x RrYy",
+          answer: Object.values(assigned)
+            ?.map((item) => `${item.id}. ${item.color} - (${item.name})`)
+            .join(", "),
+        },
+        {
+          question: "1. Count the number of: Round yellow seeds",
+          answer: SubQ1,
+        },
+        {
+          question: "1. Count the number of: Round green seeds",
+          answer: SubQ2,
+        },
+        {
+          question: "1. Count the number of: Wrinkled yellow seeds",
+          answer: SubQ3,
+        },
+        {
+          question: "1. Count the number of: Wrinkled green seeds",
+          answer: SubQ4,
+        },
+        {
+          question:
+            "2. What proportion of the offspring will have the following genotype: RY, Ry, rY, ry?",
+          answer: Q2,
+        },
+        {
+          question: "3. How many kinds of genotypes will the offspring have?",
+          answer: Q3,
+        },
+      ];
+
       const payload = {
         answer: [formattedData],
-        inputAnswer: [formattedData],
+        inputAnswer,
         user_id,
         titles,
         worksheet_no,
@@ -233,7 +267,7 @@ const Worksheet4 = ({
         title: "Submission Failed",
         text:
           error.response?.data?.message ||
-          "An error occurred while submitting the answers.",
+          "An error occurred while submitting the answers. " + error.message,
         confirmButtonColor: "#dc2626",
       });
     } finally {

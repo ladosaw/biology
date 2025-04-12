@@ -156,6 +156,7 @@ const Worksheet2 = ({
                   <input
                     type="text"
                     // value={answers[i].genotypic}
+                    value={answers.genotypic[`genotypic${i}`] || ""}
                     onChange={(e) =>
                       // handleInputChange(i, "genotypic", e.target.value)
                       handleInputChange(
@@ -172,6 +173,7 @@ const Worksheet2 = ({
                   <input
                     type="text"
                     // value={answers[i].phenotypic}
+                    value={answers.phenotypic[`phenotypic${i}`] || ""}
                     onChange={(e) =>
                       // handleInputChange(i, "phenotypic", e.target.value)
                       handleInputChange(
@@ -202,6 +204,7 @@ const Worksheet2 = ({
               <input
                 type="text"
                 // value={answers[i].genotypic}
+                value={answers.genotypic[`genotypic${i}`] || ""}
                 onChange={(e) =>
                   handleInputChange(
                     "genotypic",
@@ -220,6 +223,7 @@ const Worksheet2 = ({
               <input
                 type="text"
                 // value={answers[i].phenotypic}
+                value={answers.phenotypic[`phenotypic${i}`] || ""}
                 onChange={(e) =>
                   handleInputChange(
                     "phenotypic",
@@ -236,22 +240,17 @@ const Worksheet2 = ({
       </div>
 
       <div className="flex justify-end gap-4 mt-4">
-        {/* <Button
+        <Button
           variant="outlined"
           color="error"
           onClick={handleReset}
           disabled={isLoading}
         >
           Reset
-        </Button> */}
+        </Button>
         <LoadingButton
           variant="contained"
           color="primary"
-          sx={{
-            mt: 4,
-            ml: "auto", // This will push the button to the right
-            display: "block", // Ensures the button takes up its own line
-          }}
           loading={isLoading}
           onClick={handleSubmit}
         >
