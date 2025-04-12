@@ -202,7 +202,7 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
       if (!validateSubmission()) return;
 
       const payload = preparePayload();
-      console.log("Payload:", payload);
+
       const response = await API.post("/worksheets/checker", payload, {
         headers: { Authorization: `Bearer ${authToken}` },
       });

@@ -92,7 +92,6 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
         confirmButtonColor: "#10B981",
       });
     } catch (error) {
-      console.error(error);
       Swal.fire({
         icon: "error",
         title: "Submission Failed",

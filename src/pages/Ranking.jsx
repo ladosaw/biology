@@ -31,7 +31,7 @@ const Ranking = () => {
           headers: { Authorization: `Bearer ${authToken}` },
         });
         if (response.status !== 200) throw new Error("Failed to fetch data");
-        console.log(response.data?.rankings);
+
         setStudents(response.data?.rankings);
       } catch (err) {
         setError(err.message);

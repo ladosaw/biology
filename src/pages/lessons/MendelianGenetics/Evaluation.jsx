@@ -96,7 +96,6 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
 
       setEvaluationOpen(false);
     } catch (error) {
-      console.error(error);
       Swal.fire({
         icon: "error",
         title: "Submission Failed",

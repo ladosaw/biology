@@ -126,8 +126,6 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         tertiaryConsumers3: correctedAnswers.tertiaryConsumers[3], // (empty)
       };
 
-      console.log(sortedObject);
-
       if (Object.keys(correctedAnswers).length === 0) {
         Swal.fire({
           icon: "warning",

@@ -64,7 +64,7 @@ const Worksheet3 = ({
       const { message } = response.data;
 
       setIsModalWorksheet3ModalOpen(false);
-      console.log("Submitted Answers:", payload);
+
       Swal.fire({
         title: "Submission Successful",
         text: message || "Your answers have been recorded!",

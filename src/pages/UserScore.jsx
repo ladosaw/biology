@@ -39,7 +39,7 @@ const AdminDash = () => {
         headers: { Authorization: `Bearer ${authToken}` },
       });
       if (response.status !== 200) throw new Error("Failed to fetch data");
-      console.log(response.data);
+
       setRows(response.data);
     } catch (err) {
       setError(err.message);

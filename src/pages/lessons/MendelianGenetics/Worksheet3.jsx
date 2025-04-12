@@ -264,8 +264,6 @@ const Worksheet3 = ({
         },
       ];
 
-      console.log("Assigned Data:", Object.values(assigned));
-
       const formattedData = formatAssignedData(
         assigned,
         genotypeRed,

@@ -60,7 +60,6 @@ const Worksheet3 = ({
         worksheet_no,
       };
 
-      console.log("Payload:", payload);
       const response = await API.post("/worksheets/checker", payload, {
         headers: {
           Authorization: `Bearer ${authToken}`,
