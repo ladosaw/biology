@@ -213,6 +213,18 @@ const Worksheet3 = ({
         return;
       }
 
+      const inputAnswer = {
+        punnettRed: assigned,
+        genotypeRed,
+        phenotypeRed,
+        punnettPurple: assigned,
+        genotypePurple,
+        phenotypePurple,
+        punnettCurlyHair: assigned,
+        genotypeCurlyHair,
+        phenotypeCurlyHair,
+      };
+
       const formattedData = formatAssignedData(
         assigned,
         genotypeRed,
@@ -225,6 +237,7 @@ const Worksheet3 = ({
 
       const payload = {
         answer: [formattedData],
+        inputAnswer,
         user_id,
         titles,
         worksheet_no,

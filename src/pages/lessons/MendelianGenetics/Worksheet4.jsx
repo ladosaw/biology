@@ -189,6 +189,7 @@ const Worksheet4 = ({
 
       const payload = {
         answer: [formattedData],
+        inputAnswer: [formattedData],
         user_id,
         titles,
         worksheet_no,
