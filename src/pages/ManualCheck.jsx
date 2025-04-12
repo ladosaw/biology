@@ -3,6 +3,7 @@ import { TextField, Box, Button, Typography, Grid, Paper } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import Swal from "sweetalert2";
 import API from "../utils/api/api.js";
+import image from "../../src/assets/images/DigestiveWorksheet.png";
 
 const ManualCheck = ({ worksheet, fetchData, onClose }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -116,6 +117,16 @@ const ManualCheck = ({ worksheet, fetchData, onClose }) => {
           worksheet.user?.mname || ""
         }`}
       </Typography>
+
+      {worksheet.lesson_key === "lesson1" && worksheet.worksheet_no === 1 && (
+        <Box sx={{ position: "relative", width: "100%", maxWidth: "960px" }}>
+          <img
+            src={image}
+            alt="Digestive System"
+            style={{ width: "100%", height: "auto" }}
+          />
+        </Box>
+      )}
 
       {/* Display the worksheet questions with answers */}
       <Grid container spacing={2}>

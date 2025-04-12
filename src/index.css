@@ -16,3 +16,11 @@
 .slick-dots li.slick-active button:before {
   color: #4caf50;
 }
+/* In your global CSS file */
+.swal-overlay {
+  z-index: 1400 !important;
+}
+
+.swal2-container {
+  z-index: 1400 !important;
+}

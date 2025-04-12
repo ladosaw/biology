@@ -4,21 +4,22 @@ import Swal from "sweetalert2";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
 import { MultiBackend, TouchTransition } from "react-dnd-multi-backend";
-import image from "../../../../assets/images/DigestiveWorksheet.png";
 import {
   Box,
   Typography,
   Paper,
   Grid,
-  Button,
   Divider,
   TextField,
+  Button,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { WorksheetsQuestion1 } from "./ConstantDigestive.jsx";
 import API from "../../../../utils/api/api.js";
+import image from "../../../../assets/images/DigestiveWorksheet.png";
 
-const HTML5toTouch = {
+// Constants
+const HTML5_TO_TOUCH = {
   backends: [
     { backend: HTML5Backend },
     {
@@ -29,7 +30,7 @@ const HTML5toTouch = {
   ],
 };
 
-const initialOrgans = [
+const INITIAL_ORGANS = [
   "Mouth",
   "Esophagus",
   "Stomach",
@@ -42,198 +43,229 @@ const initialOrgans = [
   "Gallbladder",
 ];
 
-const Organ = ({ name, onSelect, isSelected }) => {
-  return (
-    <Box
-      sx={{
-        p: 1.5,
-        color: "#353434",
-        fontWeight: "bold",
-        borderRadius: "8px",
-        cursor: "pointer",
-        "&:hover": { bgcolor: "#E0E6F7" },
-        transition: "all 0.2s ease",
-        border: isSelected ? "2px solid #353434" : "none",
-      }}
-      onClick={() => onSelect(name)} // Tap to select
-    >
-      {name}
-    </Box>
-  );
-};
+// Sub-components
+const Organ = ({ name, onSelect, isSelected }) => (
+  <Box
+    sx={{
+      p: 1.5,
+      color: "#353434",
+      fontWeight: "bold",
+      borderRadius: "8px",
+      cursor: "pointer",
+      "&:hover": { bgcolor: "#E0E6F7" },
+      transition: "all 0.2s ease",
+      border: isSelected ? "2px solid #353434" : "none",
+    }}
+    onClick={() => onSelect(name)}
+  >
+    {name}
+  </Box>
+);
 
-const DropBox = ({ id, onDrop, organ, onTapDrop }) => {
-  return (
-    <Paper
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "100%",
-        height: "60px",
-        border: "2px dashed",
-        borderColor: organ ? "success.main" : "text.disabled",
-        bgcolor: organ ? "success.light" : "background.paper",
-        borderRadius: "8px",
-        transition: "all 0.2s ease",
-        fontWeight: "medium",
-        cursor: "pointer",
-      }}
-      onClick={() => onTapDrop(id)} // Tap to drop
-    >
-      {organ === undefined ? `${id}. Drop here` : `${id}. ${organ}`}
-    </Paper>
-  );
-};
+const DropBox = ({ id, organ, onTapDrop }) => (
+  <Paper
+    sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      width: "100%",
+      height: "60px",
+      border: "2px dashed",
+      borderColor: organ ? "success.main" : "text.disabled",
+      bgcolor: organ ? "success.light" : "background.paper",
+      borderRadius: "8px",
+      transition: "all 0.2s ease",
+      fontWeight: "medium",
+      cursor: "pointer",
+    }}
+    onClick={() => onTapDrop(id)}
+  >
+    {organ ? `${id}. ${organ}` : `${id}. Drop here`}
+  </Paper>
+);
 
+const QuestionSection = ({ questions, answers, onChange }) => (
+  <Box sx={{ p: 3, textAlign: "center", maxWidth: 600, mx: "auto" }}>
+    <Typography variant="body1" color="textSecondary" paragraph>
+      B. Direction: Read the sentences below, then write the number of events in
+      the digestion process. Write numbers 1-8 before the sentences.
+    </Typography>
+    {questions.map((data, index) => (
+      <Box key={data.id} sx={{ textAlign: "left", mb: 2 }}>
+        <Typography variant="body2" fontWeight="bold" gutterBottom>
+          {data.question}
+        </Typography>
+        <TextField
+          value={answers[index]}
+          onChange={(e) => onChange(index, e.target.value)}
+          fullWidth
+          multiline
+          rows={3}
+          margin="normal"
+          variant="outlined"
+        />
+      </Box>
+    ))}
+  </Box>
+);
+
+// Main Component
 const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [assigned, setAssigned] = useState({});
-  const [availableOrgans, setAvailableOrgans] = useState(initialOrgans);
+  const [availableOrgans, setAvailableOrgans] = useState(INITIAL_ORGANS);
   const [selectedOrgan, setSelectedOrgan] = useState(null);
-  const [textFieldAnswers, setTextFieldAnswers] = useState(
+  const [textAnswers, setTextAnswers] = useState(
     new Array(WorksheetsQuestion1.length).fill("")
   );
 
-  const handleDrop = (id, organName) => {
+  const handleReset = () => {
+    setAssigned({});
+    setAvailableOrgans(INITIAL_ORGANS);
+    setSelectedOrgan(null);
+    setTextAnswers(new Array(WorksheetsQuestion1.length).fill(""));
+  };
+
+  const handleOrganDrop = (id, organName) => {
     const previousOrgan = assigned[id];
-    if (previousOrgan) {
-      setAvailableOrgans((prev) => [...prev, previousOrgan]);
-    }
-
     setAssigned((prev) => ({ ...prev, [id]: organName }));
-    setAvailableOrgans((prev) => prev.filter((organ) => organ !== organName));
+
+    setAvailableOrgans((prev) => {
+      const updated = previousOrgan
+        ? [...prev, previousOrgan].filter((organ) => organ !== organName)
+        : prev.filter((organ) => organ !== organName);
+      return updated;
+    });
   };
 
-  const handleSelect = (name) => {
-    setSelectedOrgan(name); // Set the selected organ
-  };
-
-  const handleTapDrop = (id) => {
-    if (selectedOrgan) {
-      handleDrop(id, selectedOrgan); // Drop the selected organ into the drop zone
-      setSelectedOrgan(null); // Reset selected organ after drop
-    }
-  };
-
-  const handleTextFieldChange = (index, value) => {
-    const updatedAnswers = [...textFieldAnswers];
+  const handleTextAnswerChange = (index, value) => {
+    const updatedAnswers = [...textAnswers];
     updatedAnswers[index] = value;
-    setTextFieldAnswers(updatedAnswers);
+    setTextAnswers(updatedAnswers);
   };
 
-  const handleSubmit = async () => {
+  const validateSubmission = () => {
+    if (Object.keys(assigned).length !== INITIAL_ORGANS.length) {
+      showAlert(
+        "warning",
+        "Please place all digestive organs before submitting."
+      );
+      return false;
+    }
+
+    if (textAnswers.some((answer) => answer.trim() === "")) {
+      showAlert("warning", "Please answer all text fields before submitting.");
+      return false;
+    }
+
+    return true;
+  };
+
+  const preparePayload = () => {
+    let count = Object.keys(assigned).length;
+    const answers = { ...assigned };
+    WorksheetsQuestion1.forEach((_, index) => {
+      count += 1;
+      answers[`${count}`] = textAnswers[index];
+    });
+
+    // Process Part A (Drag-and-drop answers)
+    const partAAnswers = Object.entries(assigned).map(([id, organ]) => ({
+      id: parseInt(id),
+      answer: organ,
+    }));
+
+    // Process Part B (Text answers)
+    const partBAnswers = WorksheetsQuestion1.map((question, index) => ({
+      id: question.id,
+      question: question.question,
+      answer: textAnswers[index],
+    }));
+
+    // Combine both parts into a single array
+    const combinedAnswers = [...partAAnswers, ...partBAnswers];
+
+    return {
+      answer: [answers],
+      inputAnswer: combinedAnswers,
+      user_id: localStorage.getItem("id"),
+      titles,
+      worksheet_no,
+    };
+  };
+
+  const handleSubmission = async () => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
-      // Ensure all organs are placed
-      if (Object.keys(assigned).length !== 10) {
-        Swal.fire({
-          icon: "warning",
-          title: "Incomplete Answers",
-          text: "Please place all digestive organs before submitting.",
-          confirmButtonColor: "#f59e0b", // Yellow warning color
-        });
-        return;
-      }
-
-      // Ensure all text fields are filled
-      if (textFieldAnswers.some((answer) => answer.trim() === "")) {
-        Swal.fire({
-          icon: "warning",
-          title: "Incomplete Answers",
-          text: "Please answer all text fields before submitting.",
-          confirmButtonColor: "#f59e0b",
-        });
-        return;
-      }
-
-      // Combine drag-and-drop and text answers into a single object
-      const answers = {};
-
-      // Add drag-and-drop answers
-      Object.keys(assigned).forEach((key) => {
-        answers[key] = assigned[key]; // Assign organ name
-      });
-
-      // Add text-based answers
-      WorksheetsQuestion1.forEach((question, index) => {
-        const questionId = index + 1 + Object.keys(assigned).length; // Ensure unique ID
-        answers[questionId] = textFieldAnswers[index]; // Assign text answer
-      });
-
-      const user_id = localStorage.getItem("id");
       const authToken = localStorage.getItem("authToken");
+      if (!authToken) throw new Error("Unauthorized");
+      if (!validateSubmission()) return;
 
-      if (!authToken) {
-        Swal.fire({
-          icon: "error",
-          title: "Unauthorized",
-          text: "You are not logged in. Please log in again.",
-          confirmButtonColor: "#dc2626",
-        });
-        setIsLoading(false);
-        setIsModalWorksheetModalOpen(false);
-        return;
-      }
-
-      const payload = {
-        answer: [answers],
-        user_id,
-        titles,
-        worksheet_no,
-      };
-
+      const payload = preparePayload();
+      console.log("Payload:", payload);
       const response = await API.post("/worksheets/checker", payload, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-          "Content-Type": "application/json",
-        },
+        headers: { Authorization: `Bearer ${authToken}` },
       });
+
+      showSubmissionResults(response.data);
       setIsModalWorksheetModalOpen(false);
-
-      // Extracting score and worksheet details
-      const { score, worksheet, detailed_results } = response.data;
-
-      Swal.fire({
-        icon: "success",
-        title: "Quiz Submitted!",
-        html: `
-          <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
-                 <p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>
-           <p><strong>Your Score:</strong> ${score}</p>
-           <ul>
-           <p><strong> Your Answer: </strong></p>
-             ${detailed_results
-               .map(
-                 (result) =>
-                   `<li>${result.user_answer.toUpperCase()} is ${
-                     result.is_correct ? "correct ✔️" : "incorrect ❌"
-                   }</li>`
-               )
-               .join("")}
-           </ul>
-         `,
-        confirmButtonColor: "#10B981",
-      });
     } catch (error) {
-      setIsLoading(false);
-      setIsModalWorksheetModalOpen(false);
-      Swal.fire({
-        icon: "error",
-        title: "Submission Failed",
-        text:
-          error.response?.data?.message ||
-          "An error occurred while submitting the answers.",
-        confirmButtonColor: "#dc2626",
-      });
+      handleSubmissionError(error);
     } finally {
       setIsLoading(false);
-      setIsModalWorksheetModalOpen(false);
     }
+  };
+
+  const Alert = Swal.mixin({
+    customClass: { container: "swal-overlay" },
+    zIndex: 1400,
+  });
+
+  const showAlert = (icon, text) => {
+    Alert.fire({
+      icon,
+      title: "Incomplete Answers",
+      text,
+      confirmButtonColor: icon === "warning" ? "#f59e0b" : "#dc2626",
+    });
+  };
+
+  const showSubmissionResults = ({ score, worksheet, detailed_results }) => {
+    Alert.fire({
+      icon: "success",
+      title: "Quiz Submitted!",
+      html: `
+        <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
+        <p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>
+        <p><strong>Your Score:</strong> ${score}</p>
+        <ul>
+          <p><strong>Your Answers:</strong></p>
+          ${detailed_results
+            .map(
+              (result) => `
+            <li>${result.user_answer.toUpperCase()} is 
+              ${result.is_correct ? "correct ✔️" : "incorrect ❌"}
+            </li>`
+            )
+            .join("")}
+        </ul>
+      `,
+      confirmButtonColor: "#10B981",
+    });
+  };
+
+  const handleSubmissionError = (error) => {
+    Alert.fire({
+      icon: "error",
+      title: "Submission Failed",
+      text: error.response?.data?.message || error.message,
+      confirmButtonColor: "#dc2626",
+    });
+    setIsModalWorksheetModalOpen(false);
   };
 
   return (
-    <DndProvider backend={MultiBackend} options={HTML5toTouch}>
+    <DndProvider backend={MultiBackend} options={HTML5_TO_TOUCH}>
       <Box
         sx={{
           padding: 3,
@@ -245,6 +277,7 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         <Typography variant="h4" component="h1" gutterBottom>
           WORKSHEET # 1: FILL ME UP
         </Typography>
+
         <Typography variant="body1" color="textSecondary" paragraph>
           <strong>A. Directions:</strong> Below is the image of the Digestive
           System. Write the names of the organs from the box below.
@@ -263,8 +296,8 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
             <Organ
               key={organ}
               name={organ}
-              onSelect={handleSelect}
-              isSelected={selectedOrgan === organ} // Highlight selected organ
+              onSelect={setSelectedOrgan}
+              isSelected={selectedOrgan === organ}
             />
           ))}
         </Box>
@@ -282,58 +315,52 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
             <Grid item xs={12} sm={6} key={index}>
               <DropBox
                 id={index + 1}
-                onDrop={handleDrop}
                 organ={assigned[index + 1]}
-                onTapDrop={handleTapDrop} // Handle tap to drop
+                onTapDrop={(id) =>
+                  selectedOrgan && handleOrganDrop(id, selectedOrgan)
+                }
               />
             </Grid>
           ))}
         </Grid>
+
+        <QuestionSection
+          questions={WorksheetsQuestion1}
+          answers={textAnswers}
+          onChange={handleTextAnswerChange}
+        />
+
+        <Divider sx={{ mt: 4, width: "100%" }} />
+
+        <Box
+          sx={{
+            mt: 4,
+            display: "flex",
+            gap: 2,
+            justifyContent: "flex-end",
+            width: "100%",
+          }}
+        >
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={handleReset}
+            sx={{ textTransform: "none" }}
+          >
+            Reset
+          </Button>
+
+          <LoadingButton
+            variant="contained"
+            color="primary"
+            loading={isLoading}
+            onClick={handleSubmission}
+            sx={{ textTransform: "none" }}
+          >
+            Submit
+          </LoadingButton>
+        </Box>
       </Box>
-
-      <Box sx={{ p: 3, textAlign: "center", maxWidth: 600, mx: "auto" }}>
-        <Typography variant="h6" color="primary" gutterBottom>
-          Worksheet {worksheet_no}: {titles}
-        </Typography>
-        <Typography variant="body1" color="textSecondary" paragraph>
-          B. Direction: Read the sentences below, then write the number of
-          events in the digestion process. Write numbers 1-8 before the
-          sentences.
-        </Typography>
-        {WorksheetsQuestion1.map((data, index) => (
-          <Box key={data.id} sx={{ textAlign: "left", mb: 2 }}>
-            <Typography variant="body2" fontWeight="bold" gutterBottom>
-              {data.question}
-            </Typography>
-            <TextField
-              value={textFieldAnswers[index]}
-              onChange={(e) => handleTextFieldChange(index, e.target.value)}
-              fullWidth
-              multiline
-              rows={3}
-              margin="normal"
-              variant="outlined"
-              sx={{ minWidth: "100%" }}
-            />
-          </Box>
-        ))}
-      </Box>
-
-      <Divider sx={{ mt: 4 }} />
-
-      <LoadingButton
-        sx={{
-          mt: 4,
-          ml: "auto", // This will push the button to the right
-          display: "block", // Ensures the button takes up its own line
-        }}
-        variant="contained"
-        color="primary"
-        loading={isLoading}
-        onClick={handleSubmit}
-      >
-        Submit
-      </LoadingButton>
     </DndProvider>
   );
 };
