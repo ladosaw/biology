@@ -343,7 +343,7 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         >
           <Button
             variant="outlined"
-            color="secondary"
+            color="error"
             onClick={handleReset}
             sx={{ textTransform: "none" }}
           >

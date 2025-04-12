@@ -389,7 +389,7 @@ const ActionButtons = ({ isLoading, onReset, onSubmit }) => (
   <Box sx={actionButtonStyles}>
     <Button
       variant="outlined"
-      color="secondary"
+      color="error"
       onClick={onReset}
       sx={buttonStyles}
     >
