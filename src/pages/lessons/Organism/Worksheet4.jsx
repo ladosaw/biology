@@ -103,7 +103,7 @@ const Worksheet4 = ({
         greatestBiomass: "Organism with greatest biomass",
         greatestEnergy: "Organism with greatest energy",
         leastBiomass: "Organism with least biomass",
-        energyGainedByOwl: "Energy gained by owl",
+        energyGainedByOwl: "% Energy gained by owl",
         biomassReceivedByEagle: "Biomass received by eagle",
         biomassChange: "Biomass change from bottom to top of pyramid",
       };
