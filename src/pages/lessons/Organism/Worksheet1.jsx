@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { LoadingButton } from "@mui/lab";
+import { Button } from "@mui/material";
 import Swal from "sweetalert2";
 import API from "../../../utils/api/api";
 import Pencil from "../../../assets/images/Pencil.png";
@@ -46,15 +47,44 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
     python,
   ];
 
+  const handleReset = () => {
+    setAnswers({
+      producers: Array(4).fill(""),
+      primaryConsumers: Array(4).fill(""),
+      secondaryConsumers: Array(4).fill(""),
+      tertiaryConsumers: Array(4).fill(""),
+    });
+  };
+
   const handleSubmit = async (e) => {
     try {
       setIsLoading(true);
+
       let correctedAnswers = {
         producers: [...answers.producers],
         primaryConsumers: [...answers.primaryConsumers],
         secondaryConsumers: [...answers.secondaryConsumers],
         tertiaryConsumers: [...answers.tertiaryConsumers],
       };
+
+      const inputAnswer = [
+        {
+          question: "Producers",
+          answer: `${answers.producers.join(", ")}`,
+        },
+        {
+          question: "Primary Consumers",
+          answer: `${answers.primaryConsumers.join(", ")}`,
+        },
+        {
+          question: "Secondary Consumers",
+          answer: `${answers.secondaryConsumers.join(", ")}`,
+        },
+        {
+          question: "Tertiary Consumers",
+          answer: `${answers.tertiaryConsumers.join(", ")}`,
+        },
+      ];
 
       // Enforce Correct Producers
       correctedAnswers.producers = ["grass", "carrots", "corn", ""];
@@ -96,8 +126,6 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         tertiaryConsumers3: correctedAnswers.tertiaryConsumers[3], // (empty)
       };
 
-      console.log(sortedObject);
-
       if (Object.keys(correctedAnswers).length === 0) {
         Swal.fire({
           icon: "warning",
@@ -123,6 +151,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
 
       const payload = {
         answer: [sortedObject],
+        inputAnswer,
         user_id,
         titles,
         worksheet_no,
@@ -142,23 +171,37 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         icon: "success",
         title: "Quiz Submitted!",
         html: `
-                   <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
-                          <p><strong>Worksheet No:</strong> ${
-                            worksheet.worksheet_no
-                          }</p>
-                    <p><strong>Your Score:</strong> ${score}</p>
-                    <ul>
-                    <p><strong> Your Answer: </strong></p>
-                      ${detailed_results
-                        .map(
-                          (result) =>
-                            `<li>${result.user_answer.toUpperCase()} is ${
-                              result.is_correct ? "correct ✔️" : "incorrect ❌"
-                            }</li>`
-                        )
-                        .join("")}
-                    </ul>
-                  `,
+  ${
+    worksheet.titles
+      ? `<p><strong>Worksheet:</strong> ${worksheet.titles}</p>`
+      : ""
+  }
+  ${
+    worksheet.worksheet_no
+      ? `<p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>`
+      : ""
+  }
+  ${
+    score !== undefined && score !== null
+      ? `<p><strong>Your Score:</strong> ${score}</p>`
+      : ""
+  }
+  ${
+    detailed_results && detailed_results.length
+      ? `<ul>
+          <p><strong>Your Answer:</strong></p>
+          ${detailed_results
+            .map((result) => {
+              if (!result.user_answer) return ""; // skip if empty/undefined
+              return `<li>${result.user_answer.toUpperCase()} is ${
+                result.is_correct ? "correct ✔️" : "incorrect ❌"
+              }</li>`;
+            })
+            .join("")}
+        </ul>`
+      : ""
+  }
+`,
         confirmButtonColor: "#10B981",
       });
     } catch (error) {
@@ -167,7 +210,8 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         title: "Submission Failed",
         text:
           error.response?.data?.message ||
-          "An error occurred while submitting the answers.",
+          "An error occurred while submitting the answers. Error: " +
+            error.message,
         confirmButtonColor: "#dc2626",
       });
     } finally {
@@ -244,19 +288,25 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
           </table>
         </div>
 
-        <LoadingButton
-          variant="contained"
-          color="primary"
-          sx={{
-            mt: 4,
-            ml: "auto", // This will push the button to the right
-            display: "block", // Ensures the button takes up its own line
-          }}
-          loading={isLoading}
-          onClick={handleSubmit}
-        >
-          Submit
-        </LoadingButton>
+        <div className="flex justify-end gap-2 mt-4">
+          <Button
+            variant="outlined"
+            color="error"
+            onClick={handleReset}
+            disabled={isLoading}
+            sx={{ marginRight: 2 }}
+          >
+            Reset
+          </Button>
+          <LoadingButton
+            variant="contained"
+            color="primary"
+            loading={isLoading}
+            onClick={handleSubmit}
+          >
+            Submit
+          </LoadingButton>
+        </div>
       </form>
     </div>
   );

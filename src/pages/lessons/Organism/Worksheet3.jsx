@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { LoadingButton } from "@mui/lab";
+import { Button } from "@mui/material";
 import Swal from "sweetalert2";
 import API from "../../../utils/api/api.js";
 
@@ -18,8 +19,17 @@ const Worksheet3 = ({
     }));
   };
 
+  const handleReset = () => {
+    setAnswers({});
+  };
+
   const handleSubmit = async () => {
     try {
+      const inputAnswer = crossess.map((item, index) => ({
+        question: item,
+        answer: answers[index] || "",
+      }));
+
       const combinedAnswers = [
         crossess.reduce((acc, item, index) => {
           acc[`${item[0].toLowerCase()}`] = answers[index].toLowerCase();
@@ -44,12 +54,12 @@ const Worksheet3 = ({
 
       const payload = {
         answer: combinedAnswers,
+        inputAnswer,
         user_id,
         titles,
         worksheet_no,
       };
 
-      console.log("Payload:", payload);
       const response = await API.post("/worksheets/checker", payload, {
         headers: {
           Authorization: `Bearer ${authToken}`,
@@ -194,15 +204,19 @@ const Worksheet3 = ({
         ))}
       </div>
 
-      <div className="mt-4 flex justify-end">
+      <div className="flex justify-end gap-4 mt-6">
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={handleReset}
+          disabled={isLoading}
+        >
+          Reset
+        </Button>
+
         <LoadingButton
           variant="contained"
           color="primary"
-          sx={{
-            mt: 4,
-            ml: "auto", // This will push the button to the right
-            display: "block", // Ensures the button takes up its own line
-          }}
           loading={isLoading}
           onClick={handleSubmit}
         >

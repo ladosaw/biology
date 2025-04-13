@@ -22,7 +22,6 @@ import {
 } from "@mui/material";
 import Swal from "sweetalert2";
 import { Task, DeleteForever } from "@mui/icons-material";
-// import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import API from "../utils/api/api.js";
 import Modal from "../components/Modal/Modal.jsx";
 import SignUp from "./SignUp.jsx";
@@ -38,7 +37,7 @@ const AdminDash = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
-  const [tabLesson, setTabLesson] = useState("lesson1");
+  const [tabLesson, setTabLesson] = useState(null);
   const [selectedRow, setSelectedRow] = useState(null);
   const toggleCheckModal = () => setIsCheckModalOpen((prev) => !prev);
   const toggleModal = () => setIsModalOpen((prev) => !prev);
@@ -63,6 +62,17 @@ const AdminDash = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (Object.keys(rows).length > 0 && !tabLesson) {
+      const sortedKeys = Object.keys(rows).sort((a, b) => {
+        const numA = parseInt(a.match(/\d+/)[0]);
+        const numB = parseInt(b.match(/\d+/)[0]);
+        return numA - numB;
+      });
+      setTabLesson(sortedKeys[0]);
+    }
+  }, [rows]);
 
   const handleSort = (key) => {
     let direction = "asc";
@@ -101,6 +111,7 @@ const AdminDash = () => {
       return 0;
     });
   };
+
   const filteredData = (data) => {
     return data.filter((row) =>
       `${row.user.lname} ${row.user.fname} ${row.user?.mname || ""}`
@@ -128,8 +139,6 @@ const AdminDash = () => {
         setRows((prevRows) =>
           Array.isArray(prevRows) ? prevRows.filter((row) => row.id !== id) : []
         );
-
-        fetchData();
         Swal.fire("Deleted!", "The worksheet has been removed.", "success");
         fetchData();
       } catch (err) {
@@ -148,7 +157,6 @@ const AdminDash = () => {
             <TableCell>Name</TableCell>
             <TableCell>Worksheet No</TableCell>
             <TableCell>
-              {" "}
               <TableSortLabel
                 active={sortConfig.key === "score"}
                 direction={sortConfig.direction}
@@ -204,14 +212,12 @@ const AdminDash = () => {
                       new Date(row.updated_at).toLocaleDateString()
                     )}
                   </TableCell>
-
                   <TableCell>
                     <Stack
                       direction="row"
                       sx={{ gap: "1px" }}
                       alignItems="center"
                     >
-                      {row.is_manually === 1 && (
                       <Button
                         onClick={() => {
                           setSelectedRow(row);
@@ -220,13 +226,7 @@ const AdminDash = () => {
                       >
                         <Task color="primary" />
                       </Button>
-                      )}
-
-                      <Button
-                        onClick={() => {
-                          deleteRow(row.worksheet_id);
-                        }}
-                      >
+                      <Button onClick={() => deleteRow(row.worksheet_id)}>
                         <DeleteForever color="error" />
                       </Button>
                     </Stack>
@@ -235,7 +235,7 @@ const AdminDash = () => {
               ))
           ) : (
             <TableRow>
-              <TableCell colSpan={5} align="center">
+              <TableCell colSpan={7} align="center">
                 No data available
               </TableCell>
             </TableRow>
@@ -288,28 +288,40 @@ const AdminDash = () => {
         </Typography>
       ) : (
         <>
-          <Tabs
-            value={tabLesson}
-            onChange={(e, newValue) => (
-              setTabLesson(newValue), setPage(0), setSearchQuery("")
-            )}
-          >
-            {Object.keys(rows).map((lessonKey) => (
-              <Tab
-                key={lessonKey}
-                value={lessonKey}
-                label={lessonKey.replace("lesson", "Lesson ")}
-              />
-            ))}
-          </Tabs>
+          {Object.keys(rows).length > 0 && (
+            <Tabs
+              value={tabLesson || ""}
+              onChange={(e, newValue) => {
+                setTabLesson(newValue);
+                setPage(0);
+                setSearchQuery("");
+              }}
+            >
+              {Object.keys(rows)
+                .sort((a, b) => {
+                  const numA = parseInt(a.match(/\d+/)[0]);
+                  const numB = parseInt(b.match(/\d+/)[0]);
+                  return numA - numB;
+                })
+                .map((lessonKey) => {
+                  const lessonNumber = lessonKey.match(/\d+/)[0];
+                  return (
+                    <Tab
+                      key={lessonKey}
+                      value={lessonKey}
+                      label={`Lesson ${lessonNumber}`}
+                    />
+                  );
+                })}
+            </Tabs>
+          )}
 
           <Box sx={{ mt: 2 }}>
-            {rows[tabLesson] ? (
+            {tabLesson && rows[tabLesson] ? (
               renderTable(filteredData(rows[tabLesson]))
             ) : (
               <Typography align="center">No data available</Typography>
             )}
-
             <User />
           </Box>
         </>

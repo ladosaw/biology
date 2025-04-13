@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { LoadingButton } from "@mui/lab";
+import { Button } from "@mui/material";
 import Swal from "sweetalert2";
 import API from "../../../utils/api/api";
 import { mendelianGeneticsQuestions } from "./ConstantData";
@@ -8,24 +9,45 @@ import FiveMinuteTimer from "../../../components/timer/FiveMinuteTimer.jsx";
 const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [answers, setAnswers] = useState({});
-
-  const [invalidQuestions, setInvalidQuestions] = useState([]); // Track unanswered questions
+  const [invalidQuestions, setInvalidQuestions] = useState([]);
 
   const handleChange = (id, value) => {
-    setAnswers({ ...answers, [id]: value.toLowerCase() });
-    setInvalidQuestions(invalidQuestions.filter((qid) => qid !== id)); // Remove from invalid state if answered
+    setAnswers({ ...answers, [id]: value.toLowerCase().trim() });
+    setInvalidQuestions(invalidQuestions.filter((qid) => qid !== id));
+  };
+
+  const handleReset = () => {
+    setAnswers({});
+    setInvalidQuestions([]);
+  };
+
+  const inputAnswersData = () => {
+    return mendelianGeneticsQuestions.map((q) => ({
+      id: q.id,
+      question: q.question,
+      answer: answers[q.id] || "",
+    }));
   };
 
   const handleSubmit = async () => {
     try {
       setIsLoading(true);
-      // Ensure all organs are placed
-      if (Object.keys(answers).length !== 10) {
+
+      // Validate all answers
+      const unanswered = mendelianGeneticsQuestions
+        .filter((q) => {
+          const answer = answers[q.id];
+          return !answer || answer.trim() === "";
+        })
+        .map((q) => q.id);
+
+      if (unanswered.length > 0) {
+        setInvalidQuestions(unanswered);
         Swal.fire({
           icon: "warning",
           title: "Incomplete Answers",
-          text: "Please Answer all questions before submitting.",
-          confirmButtonColor: "#f59e0b", // Yellow warning color
+          html: `Missing answers for questions: ${unanswered.join(", ")}`,
+          confirmButtonColor: "#f59e0b",
         });
         return;
       }
@@ -35,6 +57,7 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
 
       const payload = {
         answer: [answers],
+        inputAnswer: inputAnswersData(),
         user_id,
         titles,
         worksheet_no,
@@ -47,34 +70,32 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
         },
       });
 
-      // Extracting score and worksheet details
       const { score, worksheet, detailed_results } = response.data;
 
-      setEvaluationOpen(false);
-
-      Swal.fire({
+      await Swal.fire({
         icon: "success",
         title: "Quiz Submitted!",
         html: `
-             <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
-             <p><strong>Worksheet No:</strong> Evaluation</p>
-             <p><strong>Your Score:</strong> ${score}</p>
-             <ul>
-             <p><strong> Your Answer: </strong></p>
-               ${detailed_results
-                 .map(
-                   (result) =>
-                     `<li>${result.user_answer.toUpperCase()} is ${
-                       result.is_correct ? "correct ✔️" : "incorrect ❌"
-                     }</li>`
-                 )
-                 .join("")}
-             </ul>
-           `,
+          <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
+          <p><strong>Worksheet No:</strong> Evaluation</p>
+          <p><strong>Your Score:</strong> ${score}</p>
+          <ul>
+          <p><strong> Your Answer: </strong></p>
+            ${detailed_results
+              .map(
+                (result) =>
+                  `<li>${result.user_answer.toUpperCase()} is ${
+                    result.is_correct ? "correct ✔️" : "incorrect ❌"
+                  }</li>`
+              )
+              .join("")}
+          </ul>
+        `,
         confirmButtonColor: "#10B981",
       });
+
+      setEvaluationOpen(false);
     } catch (error) {
-      console.error(error);
       Swal.fire({
         icon: "error",
         title: "Submission Failed",
@@ -85,7 +106,6 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
       });
     } finally {
       setIsLoading(false);
-      setEvaluationOpen(false);
     }
   };
 
@@ -94,7 +114,7 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto space-y-8">
       <h1 className="text-3xl font-bold text-center">
-        Mandellian Genetics Evaluation
+        Mendelian Genetics Evaluation
       </h1>
       <FiveMinuteTimer onSubmit={handleSubmit} initialTime={600} />
       {mendelianGeneticsQuestions.map((q) => (
@@ -124,19 +144,33 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
         </div>
       ))}
 
-      <LoadingButton
-        variant="contained"
-        color="primary"
-        sx={{
-          mt: 4,
-          ml: "auto", // This will push the button to the right
-          display: "block", // Ensures the button takes up its own line
-        }}
-        loading={isLoading}
-        onClick={handleSubmit}
-      >
-        Submit
-      </LoadingButton>
+      <div className="flex justify-end gap-4 mt-4">
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={handleReset}
+          disabled={isLoading}
+          sx={{
+            px: 4,
+            py: 1,
+          }}
+        >
+          Reset
+        </Button>
+
+        <LoadingButton
+          variant="contained"
+          color="primary"
+          loading={isLoading}
+          onClick={handleSubmit}
+          sx={{
+            px: 4,
+            py: 1,
+          }}
+        >
+          Submit
+        </LoadingButton>
+      </div>
     </div>
   );
 };

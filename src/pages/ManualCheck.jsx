@@ -3,13 +3,26 @@ import { TextField, Box, Button, Typography, Grid, Paper } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import Swal from "sweetalert2";
 import API from "../utils/api/api.js";
+import image from "../../src/assets/images/DigestiveWorksheet.png";
+// Image imports
+import Worksheet1A from "../../src/assets/images/WorksheetA1A.png";
+import worksheetImageQuestion from "../../src/assets/images/Worksheet1b/mitosis_worksheet2.png";
+import num1 from "../../src/assets/images/Worksheet1b/num1.png";
+import num2 from "../../src/assets/images/Worksheet1b/num2.png";
+import num3 from "../../src/assets/images/Worksheet1b/num3.png";
+import num4 from "../../src/assets/images/Worksheet1b/num4.png";
+import num5 from "../../src/assets/images/Worksheet1b/num5.png";
+import num6 from "../../src/assets/images/Worksheet1b/num6.png";
+
+const IMAGES = {
+  worksheet1A: Worksheet1A,
+  worksheetQuestion: worksheetImageQuestion,
+  phases: [num1, num2, num3, num4, num5, num6],
+};
 
 const ManualCheck = ({ worksheet, fetchData, onClose }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [score, setScore] = useState(worksheet.score || "0");
-
-  console.log(worksheet); // Log the worksheet data for debugging
-  //console.log(fetchData); // Log the score for debugging
 
   // Helper function to show Swal alerts
   const showAlert = (icon, title, text) => {
@@ -62,7 +75,6 @@ const ManualCheck = ({ worksheet, fetchData, onClose }) => {
       });
       fetchData(); // Fetch updated data
     } catch (error) {
-      console.error(error);
       showAlert("error", "Error", "An error occurred while saving the score.");
     } finally {
       setIsLoading(false);
@@ -116,6 +128,48 @@ const ManualCheck = ({ worksheet, fetchData, onClose }) => {
           worksheet.user?.mname || ""
         }`}
       </Typography>
+
+      {worksheet.lesson_key === "lesson1" && worksheet.worksheet_no === 1 && (
+        <Box sx={{ position: "relative", width: "100%", maxWidth: "960px" }}>
+          <img
+            src={image}
+            alt="Digestive System"
+            style={{ width: "100%", height: "auto" }}
+          />
+        </Box>
+      )}
+
+      {worksheet.lesson_key === "lesson2" && worksheet.worksheet_no === 1 && (
+        <>
+          <Box sx={{ position: "relative", width: "100%", mt: 2 }}>
+            <div className="flex flex-col lg:flex-row gap-8">
+              <img
+                src={IMAGES.worksheet1A}
+                alt="Cell Cycle Diagram"
+                className="w-auto rounded-lg shadow-md"
+              />
+              <img
+                src={IMAGES.worksheetQuestion}
+                alt="Cell Cycle Diagram"
+                className="w-auto mt-4 rounded-lg shadow-md"
+              />
+            </div>
+          </Box>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 my-5">
+            {IMAGES.phases.map((src, index) => (
+              <div key={index} className="bg-white p-4 rounded-lg shadow-md">
+                <img
+                  src={src}
+                  alt={`Mitosis phase ${index + 1}`}
+                  className="w-full h-32 object-contain mb-4"
+                />
+                <p>{`Phase ${index + 1}`}</p>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
 
       {/* Display the worksheet questions with answers */}
       <Grid container spacing={2}>

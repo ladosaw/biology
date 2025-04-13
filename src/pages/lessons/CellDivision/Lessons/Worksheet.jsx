@@ -1,104 +1,173 @@
 import React, { useState } from "react";
 import { LoadingButton } from "@mui/lab";
+import { Button } from "@mui/material";
 import Swal from "sweetalert2";
+import API from "../../../../utils/api/api.js";
+
+// Image imports
 import Worksheet1A from "../../../../assets/images/WorksheetA1A.png";
+import worksheetImageQuestion from "../../../../assets/images/Worksheet1b/mitosis_worksheet2.png";
 import num1 from "../../../../assets/images/Worksheet1b/num1.png";
 import num2 from "../../../../assets/images/Worksheet1b/num2.png";
 import num3 from "../../../../assets/images/Worksheet1b/num3.png";
 import num4 from "../../../../assets/images/Worksheet1b/num4.png";
 import num5 from "../../../../assets/images/Worksheet1b/num5.png";
 import num6 from "../../../../assets/images/Worksheet1b/num6.png";
-import worksheetImageQuestion from "../../../../assets/images/Worksheet1b/mitosis_worksheet2.png";
-import API from "../../../../utils/api/api.js";
+
+const IMAGES = {
+  worksheet1A: Worksheet1A,
+  worksheetQuestion: worksheetImageQuestion,
+  phases: [num1, num2, num3, num4, num5, num6],
+};
+
+const QUESTIONS = [
+  "What stage of mitosis when chromosomes move to the middle of the cell?",
+  "When are chromosomes separate?",
+  "How many daughter cells are produced during mitosis division?",
+];
 
 const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [answers, setAnswers] = useState({
-    labels: {},
-    phases: {},
-    questions: {},
+    labels: Array(10).fill(""),
+    phases: Array(6).fill(""),
+    questions: Array(3).fill(""),
   });
 
-  const handleInputChange = (section, key, value) => {
+  const handleInputChange = (section, index, value) => {
     setAnswers((prev) => ({
       ...prev,
-      [section]: {
-        ...prev[section],
-        [key]: value,
-      },
+      [section]: prev[section].map((item, i) =>
+        i === index ? value.toLowerCase() : item
+      ),
     }));
+  };
+  const handleReset = () => {
+    setAnswers({
+      labels: Array(10).fill(""),
+      phases: Array(6).fill(""),
+      questions: Array(3).fill(""),
+    });
+  };
+
+  const constructPayload = () => {
+    const labelAnswers = answers.labels.map((answer, index) => ({
+      id: String.fromCharCode(65 + index),
+      question: `Label the cell cycle part: Label ${String.fromCharCode(
+        65 + index
+      )}`,
+      answer,
+    }));
+
+    const phaseAnswers = answers.phases.map((answer, index) => ({
+      id: `Phase${index + 1}`,
+      question: `Identify mitosis phase: Phase${index + 1}`,
+      answer,
+    }));
+
+    const questionAnswers = answers.questions.map((answer, index) => ({
+      id: `Q${index + 1}`,
+      question: QUESTIONS[index],
+      answer,
+    }));
+
+    return [...labelAnswers, ...phaseAnswers, ...questionAnswers];
+  };
+
+  const createLegacyAnswerObject = () => {
+    const labelsObject = answers.labels.reduce((acc, answer, index) => {
+      acc[String.fromCharCode(65 + index)] = answer;
+      return acc;
+    }, {});
+
+    const phasesObject = answers.phases.reduce((acc, answer, index) => {
+      acc[`Phase${index + 1}`] = answer;
+      return acc;
+    }, {});
+
+    const questionsObject = answers.questions.reduce((acc, answer, index) => {
+      acc[`question${index + 1}`] = answer;
+      return acc;
+    }, {});
+
+    return [
+      {
+        ...labelsObject,
+        ...phasesObject,
+        ...questionsObject,
+      },
+    ];
+  };
+
+  const showErrorAlert = (message) => {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: message,
+      confirmButtonColor: "#dc2626",
+    });
   };
 
   const handleSubmit = async () => {
     try {
-      const combinedAnswers = [
-        { ...answers.labels, ...answers.phases, ...answers.questions },
-      ];
-
       setIsLoading(true);
-
-      const user_id = localStorage.getItem("id");
       const authToken = localStorage.getItem("authToken");
 
       if (!authToken) {
-        Swal.fire({
-          icon: "error",
-          title: "Unauthorized",
-          text: "You are not logged in. Please log in again.",
-          confirmButtonColor: "#dc2626",
-        });
-        setIsLoading(false);
-        setIsModalWorksheetModalOpen(false);
+        showErrorAlert("You are not logged in. Please log in again.");
         return;
       }
 
-      const payload = {
-        answer: combinedAnswers,
-        user_id,
-        titles,
-        worksheet_no,
-      };
-
-      const response = await API.post("/worksheets/checker", payload, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-          "Content-Type": "application/json",
+      const response = await API.post(
+        "/worksheets/checker",
+        {
+          answer: createLegacyAnswerObject(),
+          inputAnswer: constructPayload(),
+          user_id: localStorage.getItem("id"),
+          titles,
+          worksheet_no,
         },
-      });
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-      // Extracting score and worksheet details
       const { score, worksheet, detailed_results } = response.data;
 
       Swal.fire({
         icon: "success",
         title: "Quiz Submitted!",
         html: `
-         <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
-                <p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>
-          <p><strong>Your Score:</strong> ${score}</p>
-          <ul>
-          <p><strong> Your Answer: </strong></p>
+          <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
+          <p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>
+          <p><strong>Score:</strong> ${score}</p>
+          <div class="results-list">
             ${detailed_results
               .map(
-                (result) =>
-                  `<li>${result.user_answer.toUpperCase()} is ${
-                    result.is_correct ? "correct ✔️" : "incorrect ❌"
-                  }</li>`
+                (result, index) => `
+              <div class="result-item">
+                <span class="result-index">${index + 1}.</span>
+                <span class="result ${
+                  result.is_correct ? "correct" : "incorrect"
+                }">
+                  ${result.user_answer.toUpperCase()} - 
+                  ${result.is_correct ? "Correct ✔️" : "Incorrect ❌"}
+                </span>
+              </div>
+            `
               )
               .join("")}
-          </ul>
+          </div>
         `,
         confirmButtonColor: "#10B981",
       });
     } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Submission Failed",
-        text:
-          error.response?.data?.message ||
-          "An error occurred while submitting the answers.",
-        confirmButtonColor: "#dc2626",
-      });
+      showErrorAlert(
+        error.response?.data?.message || "Submission failed. Please try again."
+      );
     } finally {
       setIsLoading(false);
       setIsModalWorksheetModalOpen(false);
@@ -106,187 +175,120 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
   };
 
   return (
-    <div>
-      <div className="p-4">
-        <div>
-          <h1 className="text-2xl font-bold mb-4">
-            Worksheet 1a: Label the Cell Cycle
-          </h1>
-          <p className="text-gray-700 mb-8">
-            Label the parts of the cell cycle by filling out the box below using
-            the description from above.
-          </p>
-        </div>
+    <div className="container mx-auto p-4">
+      {/* Labeling Section */}
+      <section className="mb-12">
+        <h1 className="text-2xl font-bold mb-4">
+          Worksheet 1a: Label the Cell Cycle
+        </h1>
+        <p className="text-gray-600 mb-6">
+          Label the parts of the cell cycle using the description from above.
+        </p>
 
-        <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
-          <div className="relative w-full lg:w-1/2">
+        <div className="flex flex-col lg:flex-row gap-8">
+          <div className="lg:w-1/2">
             <img
-              src={Worksheet1A}
+              src={IMAGES.worksheet1A}
               alt="Cell Cycle Diagram"
-              className="w-full max-w-lg h-auto border shadow-lg rounded"
+              className="w-full rounded-lg shadow-md"
             />
             <img
-              src={worksheetImageQuestion}
+              src={IMAGES.worksheetQuestion}
               alt="Cell Cycle Diagram"
-              className="w-full max-w-lg h-auto border shadow-lg rounded mt-4"
+              className="w-full mt-4 rounded-lg shadow-md"
             />
           </div>
 
-          <div className="w-full lg:w-1/2 space-y-4">
-            {["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"].map((label) => (
-              <div key={label} className="flex items-center gap-4">
-                <label className="font-semibold text-lg w-8">{label}:</label>
+          <div className="lg:w-1/2 space-y-4">
+            {answers.labels.map((_, index) => (
+              <div key={index} className="flex items-center gap-4">
+                <label className="font-semibold w-8">
+                  {String.fromCharCode(65 + index)}:
+                </label>
                 <input
                   type="text"
-                  placeholder={`Enter description for ${label}`}
-                  className="flex-grow border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  placeholder={`Enter label ${String.fromCharCode(65 + index)}`}
+                  className="flex-grow p-2 border rounded focus:ring-2 focus:ring-blue-400"
                   onChange={(e) =>
-                    handleInputChange(
-                      "labels",
-                      label,
-                      e.target.value?.toLowerCase()
-                    )
+                    handleInputChange("labels", index, e.target.value)
                   }
                 />
               </div>
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="p-4 mt-11">
-        <div>
-          <h1 className="text-2xl font-bold mb-4">WORKSHEET # 1.b: Name Me</h1>
-          <p className="text-gray-700 mb-8">
-            Direction: The diagram shows the stages of mitosis in an animal
-            cell. Label each stage/phase by writing the name and number. Write
-            your answer in the box provided. (Ex. Prophase- 1)
-          </p>
-        </div>
+      {/* Mitosis Phases Section */}
+      <section className="mb-12">
+        <h1 className="text-2xl font-bold mb-4">Worksheet 1b: Name Me</h1>
+        <p className="text-gray-600 mb-6">
+          Label each stage/phase of mitosis in the animal cell.
+        </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-          {[num1, num2, num3].map((num, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center p-4 border rounded-lg shadow-md bg-white"
-            >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {IMAGES.phases.map((src, index) => (
+            <div key={index} className="bg-white p-4 rounded-lg shadow-md">
               <img
-                src={num}
+                src={src}
                 alt={`Mitosis phase ${index + 1}`}
-                className="mb-4 w-full h-32 object-contain"
+                className="w-full h-32 object-contain mb-4"
               />
               <input
                 type="text"
-                placeholder={`Label ${index + 1}`}
-                className="border rounded p-2 w-full focus:ring-2 focus:ring-blue-400"
+                placeholder={`Phase ${index + 1}`}
+                className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-400"
                 onChange={(e) =>
-                  handleInputChange(
-                    "phases",
-                    `Phase${index + 1}`,
-                    e.target.value?.toLowerCase()
-                  )
+                  handleInputChange("phases", index, e.target.value)
                 }
               />
             </div>
           ))}
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {[num4, num5, num6].map((num, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center p-4 border rounded-lg shadow-md bg-white"
-            >
-              <img
-                src={num}
-                alt={`Mitosis phase ${index + 4}`}
-                className="mb-4 w-full h-32 object-contain"
-              />
-              <input
-                type="text"
-                placeholder={`Label ${index + 4}`}
-                className="border rounded p-2 w-full focus:ring-2 focus:ring-blue-400"
-                onChange={(e) =>
-                  handleInputChange(
-                    "phases",
-                    `Phase${index + 4}`,
-                    e.target.value?.toLowerCase()
-                  )
-                }
-              />
-            </div>
-          ))}
+      {/* Questions Section */}
+      <section className="bg-gray-50 p-6 rounded-xl">
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h2 className="text-xl font-bold mb-6">Guide Questions</h2>
+          <div className="space-y-6">
+            {answers.questions.map((_, index) => (
+              <div key={index}>
+                <label className="block font-medium mb-2">
+                  {index + 1}. {QUESTIONS[index]}
+                </label>
+                <input
+                  type="text"
+                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  placeholder="Your answer"
+                  onChange={(e) =>
+                    handleInputChange("questions", index, e.target.value)
+                  }
+                />
+              </div>
+            ))}
+          </div>
         </div>
+      </section>
+
+      <div className="mt-8 flex justify-end gap-4">
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={handleReset}
+          disabled={isLoading}
+        >
+          Reset
+        </Button>
+        <LoadingButton
+          variant="contained"
+          color="primary"
+          loading={isLoading}
+          onClick={handleSubmit}
+        >
+          Submit
+        </LoadingButton>
       </div>
-
-      <div className="bg-gray-50 flex items-center justify-center p-4">
-        <div className="bg-white p-8 rounded-2xl shadow-lg max-w-lg w-full">
-          <h1 className="text-2xl font-bold text-gray-800 mb-6">
-            Guide Questions
-          </h1>
-          <form className="space-y-6">
-            <div>
-              <label htmlFor="question1" className="block font-medium mb-2">
-                1. What stage of mitosis when chromosomes move to the middle of
-                the cell?
-              </label>
-              <input
-                type="text"
-                id="question1"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Your answer"
-                onChange={(e) =>
-                  handleInputChange("questions", "question1", e.target.value)
-                }
-              />
-            </div>
-
-            <div>
-              <label htmlFor="question2" className="block font-medium mb-2">
-                2. When are chromosomes separate?
-              </label>
-              <input
-                type="text"
-                id="question2"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Your answer"
-                onChange={(e) =>
-                  handleInputChange("questions", "question2", e.target.value)
-                }
-              />
-            </div>
-
-            <div>
-              <label htmlFor="question3" className="block font-medium mb-2">
-                3. How many daughter cells are produced during mitosis division?
-              </label>
-              <input
-                type="text"
-                id="question3"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Your answer"
-                onChange={(e) =>
-                  handleInputChange("questions", "question3", e.target.value)
-                }
-              />
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <LoadingButton
-        variant="contained"
-        color="primary"
-        sx={{
-          mt: 4,
-          ml: "auto", // This will push the button to the right
-          display: "block", // Ensures the button takes up its own line
-        }}
-        loading={isLoading}
-        onClick={handleSubmit}
-      >
-        Submit
-      </LoadingButton>
     </div>
   );
 };

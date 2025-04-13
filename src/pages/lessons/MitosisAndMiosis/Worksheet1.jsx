@@ -135,6 +135,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
 
       const payload = {
         answer: combinedAnswers,
+        inputAnswer: combinedAnswers,
         user_id,
         titles: `${titles} - iLearn Questions`,
         worksheet_no,

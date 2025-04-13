@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { LoadingButton } from "@mui/lab";
+import { Button } from "@mui/material";
 import Swal from "sweetalert2";
 import API from "../../../utils/api/api.js";
 
@@ -13,16 +14,6 @@ const Worksheet2 = ({
     phenotypic: {},
   });
   const [isLoading, setIsLoading] = useState(false);
-  // const [answers, setAnswers] = useState(
-  //   Array(6).fill({ genotypic: "", phenotypic: "" })
-  // );
-
-  // const handleInputChange = (index, type, value) => {
-  //   const updatedAnswers = answers.map((answer, i) =>
-  //     i === index ? { ...answer, [type]: value } : answer
-  //   );
-  //   setAnswers(updatedAnswers);
-  // };
 
   const handleInputChange = (section, key, value) => {
     setAnswers((prev) => ({
@@ -32,6 +23,13 @@ const Worksheet2 = ({
         [key]: value,
       },
     }));
+  };
+
+  const handleReset = () => {
+    setAnswers({
+      genotypic: {},
+      phenotypic: {},
+    });
   };
 
   const handleSubmit = async () => {
@@ -53,8 +51,16 @@ const Worksheet2 = ({
         return;
       }
 
+      const inputAnswer = crosses.map((cross, i) => ({
+        question: cross,
+        answer: `Genotypic: ${
+          answers.genotypic[`genotypic${i}`] || ""
+        }, Phenotypic: ${answers.phenotypic[`phenotypic${i}`] || ""}`,
+      }));
+
       const payload = {
         answer: combinedAnswers,
+        inputAnswer,
         user_id,
         titles,
         worksheet_no,
@@ -150,6 +156,7 @@ const Worksheet2 = ({
                   <input
                     type="text"
                     // value={answers[i].genotypic}
+                    value={answers.genotypic[`genotypic${i}`] || ""}
                     onChange={(e) =>
                       // handleInputChange(i, "genotypic", e.target.value)
                       handleInputChange(
@@ -166,6 +173,7 @@ const Worksheet2 = ({
                   <input
                     type="text"
                     // value={answers[i].phenotypic}
+                    value={answers.phenotypic[`phenotypic${i}`] || ""}
                     onChange={(e) =>
                       // handleInputChange(i, "phenotypic", e.target.value)
                       handleInputChange(
@@ -196,6 +204,7 @@ const Worksheet2 = ({
               <input
                 type="text"
                 // value={answers[i].genotypic}
+                value={answers.genotypic[`genotypic${i}`] || ""}
                 onChange={(e) =>
                   handleInputChange(
                     "genotypic",
@@ -214,6 +223,7 @@ const Worksheet2 = ({
               <input
                 type="text"
                 // value={answers[i].phenotypic}
+                value={answers.phenotypic[`phenotypic${i}`] || ""}
                 onChange={(e) =>
                   handleInputChange(
                     "phenotypic",
@@ -229,15 +239,18 @@ const Worksheet2 = ({
         ))}
       </div>
 
-      <div className="mt-4 flex justify-end">
+      <div className="flex justify-end gap-4 mt-4">
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={handleReset}
+          disabled={isLoading}
+        >
+          Reset
+        </Button>
         <LoadingButton
           variant="contained"
           color="primary"
-          sx={{
-            mt: 4,
-            ml: "auto", // This will push the button to the right
-            display: "block", // Ensures the button takes up its own line
-          }}
           loading={isLoading}
           onClick={handleSubmit}
         >

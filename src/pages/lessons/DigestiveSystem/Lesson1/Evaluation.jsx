@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { EvaluationQuestion } from "./ConstantDigestive";
 import { LoadingButton } from "@mui/lab";
+import { Button } from "@mui/material";
 import Swal from "sweetalert2";
 import API from "../../../../utils/api/api";
 import FiveMinuteTimer from "../../../../components/timer/FiveMinuteTimer.jsx";
@@ -15,6 +16,21 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
   const handleChange = (id, value) => {
     setAnswers({ ...answers, [id]: value.toLowerCase() });
     setInvalidQuestions(invalidQuestions.filter((qid) => qid !== id)); // Remove from invalid state if answered
+  };
+
+  const handleReset = () => {
+    setAnswers({});
+    setSubmitted(false);
+    setScore(0);
+    setInvalidQuestions([]);
+  };
+
+  const inputAnswersData = () => {
+    return EvaluationQuestion.map((q) => ({
+      id: q.id,
+      question: q.question,
+      answer: answers[q.id]?.trim() || "",
+    }));
   };
 
   const handleSubmit = async () => {
@@ -36,6 +52,7 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
 
       const payload = {
         answer: [answers],
+        inputAnswer: inputAnswersData(),
         user_id,
         titles,
         worksheet_no,
@@ -75,7 +92,6 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
         confirmButtonColor: "#10B981",
       });
     } catch (error) {
-      console.error(error);
       Swal.fire({
         icon: "error",
         title: "Submission Failed",
@@ -128,19 +144,33 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
         </p>
       )}
 
-      <LoadingButton
-        variant="contained"
-        color="primary"
-        sx={{
-          mt: 4,
-          ml: "auto", // This will push the button to the right
-          display: "block", // Ensures the button takes up its own line
-        }}
-        loading={isLoading}
-        onClick={handleSubmit}
-      >
-        Submit
-      </LoadingButton>
+      <div className="flex justify-end gap-4 mt-4">
+        <Button
+          variant="contained"
+          color="error"
+          onClick={handleReset}
+          disabled={isLoading}
+          sx={{
+            px: 4,
+            py: 1,
+          }}
+        >
+          Reset
+        </Button>
+
+        <LoadingButton
+          variant="contained"
+          color="primary"
+          loading={isLoading}
+          onClick={handleSubmit}
+          sx={{
+            px: 4,
+            py: 1,
+          }}
+        >
+          Submit
+        </LoadingButton>
+      </div>
     </div>
   );
 };

@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { TextField, Container, Typography, Box, Grid } from "@mui/material";
+import {
+  TextField,
+  Container,
+  Typography,
+  Box,
+  Grid,
+  Button,
+} from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import Swal from "sweetalert2";
 import API from "../../../utils/api/api.js";
@@ -8,9 +15,65 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
   const [answers, setAnswers] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
+  const questionMap = {
+    // Section A
+    A0: "YY",
+    A1: "yyss",
+    A2: "RrYY",
+    A3: "SSss",
+    A4: "ttRv",
+
+    // Section B
+    B0: "Tall",
+    B1: "RRss",
+    B2: "Long and axial",
+    B3: "CC",
+    B4: "short and green",
+
+    // Section C - Flower
+    CF0: "YY",
+    CF1: "Yy",
+    CF2: "yy",
+
+    // Section C - Eyes (no input name was defined originally for this!)
+    // You should add `name={`CE${index}`}` in your input fields
+    CE0: "BB",
+    CE1: "Bb",
+    CE2: "bb",
+
+    // Section C - Seeds
+    CS0: "RR",
+    CS1: "Rr",
+    CS2: "Rr",
+
+    // Section C - Hair
+    CT0: "CC",
+    CT1: "Cc",
+    CT2: "cc",
+
+    // Section D - Hair length
+    DF0: "Short",
+    DF1: "Long",
+    DF2: "Long",
+
+    // Section D - Complexion
+    DS0: "Fair",
+    DS1: "Fair",
+    DS2: "Brown",
+  };
+
   const handleChange = (e) => {
     setAnswers({ ...answers, [e.target.name]: e.target.value });
   };
+
+  const handleReset = () => {
+    setAnswers({});
+  };
+
+  const inputAnswer = Object.keys(answers).map((key) => ({
+    question: questionMap[key] || "",
+    answer: answers[key],
+  }));
 
   const handleSubmit = async () => {
     try {
@@ -32,12 +95,11 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
 
       const payload = {
         answer: [answers],
+        inputAnswer,
         user_id,
         titles,
         worksheet_no,
       };
-
-      console.log(payload);
 
       const response = await API.post("/worksheets/checker", payload, {
         headers: {
@@ -121,24 +183,13 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
                   size="small"
                   fullWidth
                   name={`A${index}`}
+                  value={answers[`A${index}`] || ""}
                   onChange={handleChange}
                 />
               </Grid>
             </Grid>
           ))}
         </Grid>
-        {/* {["YY", "yyss", "RrYY", "SSss", "ttRy"].map((item, index) => (
-          <TextField
-            fullWidth
-            key={index}
-            label={`${index + 1}. ${item}`}
-            variant="outlined"
-            size="small"
-            margin="dense"
-            name={`A${index}`}
-            onChange={handleChange}
-          />
-        ))} */}
 
         {/* Section B */}
         <Typography variant="h6" sx={{ mt: 3 }}>
@@ -156,6 +207,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
                     size="small"
                     fullWidth
                     name={`B${index}`}
+                    value={answers[`B${index}`] || ""}
                     onChange={handleChange}
                   />
                 </Grid>
@@ -163,21 +215,6 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
             )
           )}
         </Grid>
-
-        {/* {["Tall", "RRss", "Long and axial", "CC", "short and green"].map(
-          (item, index) => (
-            <TextField
-              fullWidth
-              key={index}
-              label={`${index + 1}. ${item}`}
-              variant="outlined"
-              size="small"
-              margin="dense"
-              name={`B${index}`}
-              onChange={handleChange}
-            />
-          )
-        )} */}
 
         {/* Section C */}
         <Typography variant="h6" sx={{ mt: 3 }}>
@@ -198,6 +235,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
                   size="small"
                   fullWidth
                   name={`CF${index}`}
+                  value={answers[`CF${index}`] || ""}
                   onChange={handleChange}
                 />
               </Box>
@@ -212,7 +250,13 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
             {["BB", "Bb", "bb"].map((genotype, index) => (
               <Box key={genotype} display="flex" alignItems="center" mt={1}>
                 <Typography sx={{ width: 40 }}>{genotype}</Typography>
-                <TextField size="small" fullWidth />
+                <TextField
+                  size="small"
+                  fullWidth
+                  name={`CE${index}`}
+                  value={answers[`CE${index}`] || ""}
+                  onChange={handleChange}
+                />
               </Box>
             ))}
           </Grid>
@@ -231,6 +275,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
                   size="small"
                   fullWidth
                   name={`CS${index}`}
+                  value={answers[`CS${index}`] || ""}
                   onChange={handleChange}
                 />
               </Box>
@@ -249,38 +294,13 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
                   size="small"
                   fullWidth
                   name={`CT${index}`}
+                  value={answers[`CT${index}`] || ""}
                   onChange={handleChange}
                 />
               </Box>
             ))}
           </Grid>
         </Grid>
-
-        {/* {[
-          "YY",
-          "Yy",
-          "Yy",
-          "BB",
-          "Bb",
-          "bb",
-          "RR",
-          "Rr",
-          "Rr",
-          "CC",
-          "Cc",
-          "cc",
-        ].map((item, index) => (
-          <TextField
-            fullWidth
-            key={index}
-            label={item}
-            variant="outlined"
-            size="small"
-            margin="dense"
-            name={`C${index}`}
-            onChange={handleChange}
-          />
-        ))} */}
 
         {/* Section D */}
         <Typography variant="h6" sx={{ mt: 3 }}>
@@ -301,6 +321,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
                   size="small"
                   fullWidth
                   name={`DF${index}`}
+                  value={answers[`DF${index}`] || ""}
                   onChange={handleChange}
                 />
               </Box>
@@ -319,42 +340,34 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
                   size="small"
                   fullWidth
                   name={`DS${index}`}
+                  value={answers[`DS${index}`] || ""}
                   onChange={handleChange}
                 />
               </Box>
             ))}
           </Grid>
         </Grid>
-
-        {/* {["Short", "Long", "Long", "Fair", "Fair", "Brown"].map(
-          (item, index) => (
-            <TextField
-              fullWidth
-              key={index}
-              label={item}
-              variant="outlined"
-              size="small"
-              margin="dense"
-              name={`D${index}`}
-              onChange={handleChange}
-            />
-          )
-        )} */}
       </Box>
 
-      <LoadingButton
-        variant="contained"
-        color="primary"
-        sx={{
-          mt: 4,
-          ml: "auto", // This will push the button to the right
-          display: "block", // Ensures the button takes up its own line
-        }}
-        loading={isLoading}
-        onClick={handleSubmit}
-      >
-        Submit
-      </LoadingButton>
+      <Box display="flex" justifyContent="flex-end" gap={2} mt={2}>
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={handleReset}
+          disabled={isLoading}
+        >
+          Reset
+        </Button>
+
+        <LoadingButton
+          variant="contained"
+          color="primary"
+          loading={isLoading}
+          onClick={handleSubmit}
+        >
+          Submit
+        </LoadingButton>
+      </Box>
     </Container>
   );
 };

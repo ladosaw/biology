@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { LoadingButton } from "@mui/lab";
+import { Button } from "@mui/material";
 import Swal from "sweetalert2";
 import API from "../../../utils/api/api";
 import { MiosisWorksheetsEvaluationQuestions } from "./ConstantData";
@@ -20,6 +21,19 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
     setInvalidQuestions(invalidQuestions.filter((qid) => qid !== id)); // Remove from invalid state if answered
   };
 
+  const inputAnswersData = () => {
+    return MiosisWorksheetsEvaluationQuestions.map((q) => ({
+      id: q.id,
+      question: q.question,
+      answer: answers[q.id] || "", // Now using untrimmed value since we trim on change
+    }));
+  };
+
+  const handleReset = () => {
+    setAnswers({});
+    setInvalidQuestions([]);
+  };
+
   const handleSubmit = async () => {
     try {
       setIsLoading(true);
@@ -38,6 +52,7 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
 
       const payload = {
         answer: [answers],
+        inputAnswer: inputAnswersData(),
         user_id,
         titles,
         worksheet_no,
@@ -77,7 +92,6 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
         confirmButtonColor: "#10B981",
       });
     } catch (error) {
-      console.error(error);
       Swal.fire({
         icon: "error",
         title: "Submission Failed",
@@ -222,14 +236,33 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
           )}
         </div>
       ))}
-      <LoadingButton
-        variant="contained"
-        color="primary"
-        loading={isLoading}
-        onClick={handleSubmit}
-      >
-        Submit
-      </LoadingButton>
+      <div className="flex justify-end gap-4 mt-4">
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={handleReset}
+          disabled={isLoading}
+          sx={{
+            px: 4,
+            py: 1,
+          }}
+        >
+          Reset
+        </Button>
+
+        <LoadingButton
+          variant="contained"
+          color="primary"
+          loading={isLoading}
+          onClick={handleSubmit}
+          sx={{
+            px: 4,
+            py: 1,
+          }}
+        >
+          Submit
+        </LoadingButton>
+      </div>
     </div>
   );
 };

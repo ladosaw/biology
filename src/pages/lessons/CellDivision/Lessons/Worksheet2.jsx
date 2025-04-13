@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { LoadingButton } from "@mui/lab";
+import { Button } from "@mui/material";
 import Swal from "sweetalert2";
 import API from "../../../../utils/api/api.js";
 
@@ -8,7 +9,7 @@ const Worksheet2 = ({
   worksheet_no,
   setIsModalWorksheet2ModalOpen,
 }) => {
-  const activities = [
+  const ACTIVITIES = [
     "Cytokinesis and karyokinesis occur",
     "Cells grow, and organelles increase in number",
     "Chromosomes align at the equatorial plane",
@@ -22,100 +23,110 @@ const Worksheet2 = ({
   ];
 
   const [isLoading, setIsLoading] = useState(false);
-  const [answers, setAnswers] = useState(
-    Array(activities.length).fill({ interphase: false, mitosis: false })
+  const [selections, setSelections] = useState(
+    Array(ACTIVITIES.length).fill("")
   );
 
-  const handleCheckboxChange = (index, phase) => {
-    setAnswers((prevAnswers) => {
-      const updatedAnswers = [...prevAnswers];
-      updatedAnswers[index] = {
-        interphase:
-          phase === "interphase" ? !prevAnswers[index].interphase : false,
-        mitosis: phase === "mitosis" ? !prevAnswers[index].mitosis : false,
-      };
-      return updatedAnswers;
+  const handleRadioChange = (index, phase) => {
+    setSelections((prev) => {
+      const newSelections = [...prev];
+      newSelections[index] = newSelections[index] === phase ? "" : phase;
+      return newSelections;
     });
+  };
+
+  const showErrorAlert = (message) => {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: message,
+      confirmButtonColor: "#dc2626",
+    });
+  };
+
+  const handleReset = () => {
+    setSelections(Array(ACTIVITIES.length).fill(""));
+  };
+
+  const constructPayload = () => {
+    return ACTIVITIES.map((activity, index) => ({
+      id: (index + 1).toString(),
+      question: `${index + 1}. ${activity}`,
+      answer: selections[index] || "",
+    }));
   };
 
   const handleSubmit = async () => {
     try {
       setIsLoading(true);
-
-      const user_id = localStorage.getItem("id");
       const authToken = localStorage.getItem("authToken");
+      const userId = localStorage.getItem("id");
 
       if (!authToken) {
-        Swal.fire({
-          icon: "error",
-          title: "Unauthorized",
-          text: "You are not logged in. Please log in again.",
-          confirmButtonColor: "#dc2626",
-        });
-        setIsLoading(false);
-        setIsModalWorksheet2ModalOpen(false);
+        showErrorAlert("You are not logged in. Please log in again.");
         return;
       }
 
       const payloadObject = {};
 
-      activities.forEach((_, index) => {
-        if (answers[index].interphase) {
+      selections.forEach((phase, index) => {
+        if (phase === "interphase") {
           payloadObject[index + 1] = "interphase";
-        } else if (answers[index].mitosis) {
+        } else if (phase === "mitosis") {
           payloadObject[index + 1] = "mitosis";
         }
       });
 
-      const payload = {
-        answer: [payloadObject],
-        user_id,
-        titles,
-        worksheet_no,
-      };
-
-      const response = await API.post("/worksheets/checker", payload, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-          "Content-Type": "application/json",
+      const response = await API.post(
+        "/worksheets/checker",
+        {
+          answer: [payloadObject],
+          inputAnswer: constructPayload(),
+          user_id: userId,
+          titles,
+          worksheet_no,
         },
-      });
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-      // Extracting score and worksheet details
       const { score, worksheet, detailed_results } = response.data;
 
       Swal.fire({
         icon: "success",
         title: "Quiz Submitted!",
         html: `
-              <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
-                     <p><strong>Worksheet No:</strong> ${
-                       worksheet.worksheet_no
-                     }</p>
-               <p><strong>Your Score:</strong> ${score}</p>
-               <ul>
-               <p><strong> Your Answer: </strong></p>
-                 ${detailed_results
-                   .map(
-                     (result) =>
-                       `<li>${result.user_answer.toUpperCase()} is ${
-                         result.is_correct ? "correct ✔️" : "incorrect ❌"
-                       }</li>`
-                   )
-                   .join("")}
-               </ul>
-             `,
+          <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
+          <p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>
+          <p><strong>Score:</strong> ${score}</p>
+          <div class="results-grid">
+            ${detailed_results
+              .map(
+                (result, index) => `
+              <div class="result-item">
+                <span class="question-index">${index + 1}.</span>
+                <span class="result ${
+                  result.is_correct ? "correct" : "incorrect"
+                }">
+                  ${result.user_answer.toUpperCase()} - 
+                  ${result.is_correct ? "Correct ✔️" : "Incorrect ❌"}
+                </span>
+              </div>
+            `
+              )
+              .join("")}
+          </div>
+        `,
         confirmButtonColor: "#10B981",
       });
     } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Submission Failed",
-        text:
-          error.response?.data?.message ||
-          "An error occurred while submitting the answers.",
-        confirmButtonColor: "#dc2626",
-      });
+      showErrorAlert(
+        error.response?.data?.message || "Submission failed. Please try again."
+      );
     } finally {
       setIsLoading(false);
       setIsModalWorksheet2ModalOpen(false);
@@ -123,43 +134,42 @@ const Worksheet2 = ({
   };
 
   return (
-    <div className="p-6">
-      <h1 className="text-xl font-bold mb-4">Worksheet 2</h1>
-      <p className="mb-4">
-        Complete the table by checking the correct column for each description
+    <div className="p-6 max-w-4xl mx-auto">
+      <h1 className="text-2xl font-bold mb-4">Worksheet 2</h1>
+      <p className="mb-6 text-gray-600">
+        Complete the table by selecting the correct phase for each description
         of the cell cycle.
       </p>
-      <div className="overflow-x-auto">
-        <table className="w-full border border-gray-300">
-          <thead>
+
+      <div className="overflow-x-auto rounded-lg shadow-md">
+        <table className="w-full border-collapse">
+          <thead className="bg-gray-50">
             <tr>
-              <th className="p-2 border border-gray-300">
-                Activity in the Cell
-              </th>
-              <th className="p-2 border border-gray-300">Interphase</th>
-              <th className="p-2 border border-gray-300">Mitosis</th>
+              <th className="p-3 text-left border-b">Activity in the Cell</th>
+              <th className="p-3 text-center border-b">Interphase</th>
+              <th className="p-3 text-center border-b">Mitosis</th>
             </tr>
           </thead>
           <tbody>
-            {activities.map((activity, index) => (
-              <tr key={index}>
-                <td className="p-2 border border-gray-300">{`${
-                  index + 1
-                }. ${activity}`}</td>
-                <td className="p-2 border border-gray-300 text-center">
+            {ACTIVITIES.map((activity, index) => (
+              <tr key={index} className="even:bg-gray-50 hover:bg-gray-100">
+                <td className="p-3 border-b">{`${index + 1}. ${activity}`}</td>
+                <td className="p-3 border-b text-center">
                   <input
-                    type="checkbox"
-                    style={{ width: "20px", height: "20px" }}
-                    checked={answers[index].interphase}
-                    onChange={() => handleCheckboxChange(index, "interphase")}
+                    type="radio"
+                    name={`phase-${index}`}
+                    className="w-5 h-5 accent-blue-500"
+                    checked={selections[index] === "interphase"}
+                    onChange={() => handleRadioChange(index, "interphase")}
                   />
                 </td>
-                <td className="p-2 border border-gray-300 text-center">
+                <td className="p-3 border-b text-center">
                   <input
-                    type="checkbox"
-                    style={{ width: "20px", height: "20px" }}
-                    checked={answers[index].mitosis}
-                    onChange={() => handleCheckboxChange(index, "mitosis")}
+                    type="radio"
+                    name={`phase-${index}`}
+                    className="w-5 h-5 accent-blue-500"
+                    checked={selections[index] === "mitosis"}
+                    onChange={() => handleRadioChange(index, "mitosis")}
                   />
                 </td>
               </tr>
@@ -167,25 +177,24 @@ const Worksheet2 = ({
           </tbody>
         </table>
       </div>
-      <div className="flex justify-end mt-4">
-        <button
+      <div className="mt-8 flex justify-end gap-4">
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={handleReset}
+          disabled={isLoading}
+        >
+          Reset
+        </Button>
+        <LoadingButton
+          variant="contained"
+          color="primary"
+          loading={isLoading}
           onClick={handleSubmit}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         >
           Submit
-        </button>
+        </LoadingButton>
       </div>
-      <style jsx>{`
-        @media (max-width: 768px) {
-          table {
-            font-size: 14px;
-          }
-          input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-          }
-        }
-      `}</style>
     </div>
   );
 };
