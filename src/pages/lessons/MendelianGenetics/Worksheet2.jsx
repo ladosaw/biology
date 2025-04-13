@@ -199,7 +199,7 @@ const Worksheet2 = ({
             <p className="font-medium text-lg">{cross}</p>
             <div className="mt-2">
               <label className="block text-sm font-semibold">
-                Genotypic Ratio
+                Genotypic Percentage
               </label>
               <input
                 type="text"
@@ -218,7 +218,7 @@ const Worksheet2 = ({
             </div>
             <div className="mt-2">
               <label className="block text-sm font-semibold">
-                Phenotypic Ratio
+                Phenotypic Percentage
               </label>
               <input
                 type="text"

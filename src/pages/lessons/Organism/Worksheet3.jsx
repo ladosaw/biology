@@ -123,6 +123,7 @@ const Worksheet3 = ({
     "Primary Consumer",
     "Secondary Consumer",
     "Energy Source",
+    "Producers",
   ];
 
   return (
