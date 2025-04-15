@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Box, Typography, TextField } from "@mui/material";
+import { Box, Typography, TextField, Divider, Button } from "@mui/material";
 import { Worksheets3Question } from "./ConstantDigestive.jsx";
 import Swal from "sweetalert2";
 import { LoadingButton } from "@mui/lab";
 import API from "../../../../utils/api/api.js";
+import SubmitDatePicker from "../../../../components/date-input/SubmitDatePicker.jsx";
 
 const Worksheet3 = ({
   titles,
@@ -11,6 +12,7 @@ const Worksheet3 = ({
   setIsModalWorksheet3ModalOpen,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [submitDate, setSubmitDate] = useState(null);
   const [textFieldAnswers, setTextFieldAnswers] = useState(
     new Array(Worksheets3Question.length).fill("")
   );
@@ -19,6 +21,11 @@ const Worksheet3 = ({
     const updatedAnswers = [...textFieldAnswers];
     updatedAnswers[index] = value;
     setTextFieldAnswers(updatedAnswers);
+  };
+
+  const handleReset = () => {
+    setTextFieldAnswers(new Array(Worksheets3Question.length).fill(""));
+    setSubmitDate(null);
   };
 
   const handleSubmit = async () => {
@@ -50,7 +57,8 @@ const Worksheet3 = ({
         user_id,
         titles,
         worksheet_no: worksheet_no.toString(),
-        answer: formattedAnswers, // Updated payload
+        answer: formattedAnswers,
+        submit_date: submitDate?.toISOString(),
       };
 
       const response = await API.post("/worksheets", payload, {
@@ -112,19 +120,36 @@ const Worksheet3 = ({
           />
         </Box>
       ))}
-      <LoadingButton
-        variant="contained"
-        color="primary"
+
+      <Divider sx={{ mt: 4, width: "100%" }} />
+
+      <Box
         sx={{
           mt: 4,
-          ml: "auto", // This will push the button to the right
-          display: "block", // Ensures the button takes up its own line
+          display: "flex",
+          gap: 2,
+          justifyContent: "flex-end",
+          width: "100%",
         }}
-        loading={isLoading}
-        onClick={handleSubmit}
       >
-        Submit
-      </LoadingButton>
+        <SubmitDatePicker value={submitDate} onChange={setSubmitDate} />
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={handleReset}
+          disabled={isLoading}
+        >
+          Reset
+        </Button>
+        <LoadingButton
+          variant="contained"
+          color="primary"
+          loading={isLoading}
+          onClick={handleSubmit}
+        >
+          Submit
+        </LoadingButton>
+      </Box>
     </Box>
   );
 };

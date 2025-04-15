@@ -3,6 +3,7 @@ import { LoadingButton } from "@mui/lab";
 import { Button } from "@mui/material";
 import Swal from "sweetalert2";
 import API from "../../../utils/api/api.js";
+import SubmitDatePicker from "../../../components/date-input/SubmitDatePicker.jsx";
 
 const QUESTIONS = [
   "Produce body cell",
@@ -29,6 +30,7 @@ const Worksheet2 = ({
 }) => {
   const [answers, setAnswers] = useState(Array(QUESTIONS.length).fill(""));
   const [isLoading, setIsLoading] = useState(false);
+  const [submitDate, setSubmitDate] = useState(null);
 
   const handleInputChange = (index, value) => {
     const updatedAnswers = [...answers];
@@ -38,6 +40,7 @@ const Worksheet2 = ({
 
   const handleReset = () => {
     setAnswers(Array(QUESTIONS.length).fill(""));
+    setSubmitDate(null);
   };
 
   const constructPayload = () => {
@@ -70,6 +73,7 @@ const Worksheet2 = ({
         user_id,
         titles,
         worksheet_no,
+        submit_date: submitDate?.toISOString(),
       };
 
       const response = await API.post("/worksheets/checker", payload, {
@@ -170,6 +174,7 @@ const Worksheet2 = ({
       </div>
 
       <div className="mt-6 flex justify-end gap-4">
+        <SubmitDatePicker value={submitDate} onChange={setSubmitDate} />
         <Button
           variant="outlined"
           color="error"

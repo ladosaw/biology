@@ -15,6 +15,7 @@ import Learn10 from "../../../assets/images/Worksheet1Lesson3/iLearn10.png";
 import Learn11 from "../../../assets/images/Worksheet1Lesson3/iLearn11.png";
 import Learn12 from "../../../assets/images/Worksheet1Lesson3/iLearn12.png";
 import API from "../../../utils/api/api.js";
+import SubmitDatePicker from "../../../components/date-input/SubmitDatePicker.jsx";
 
 const images = [
   newPicture,
@@ -74,6 +75,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
     guide: {},
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [submitDate, setSubmitDate] = useState(null);
 
   const handleInputChange = (section, key, value) => {
     setAnswers((prev) => ({
@@ -124,6 +126,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         titles: `${titles} - Guide Questions`,
         worksheet_no: worksheet_no.toString(),
         answer: formattedAnswers,
+        submit_date: submitDate?.toISOString(),
       };
 
       await API.post("/worksheets", ManualCheckPayload, {
@@ -139,6 +142,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         user_id,
         titles: `${titles} - iLearn Questions`,
         worksheet_no,
+        submit_date: submitDate?.toISOString(),
       };
 
       const response = await API.post("/worksheets/checker", payload, {
@@ -319,20 +323,17 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
           </div>
         ))}
       </div>
-
-      <LoadingButton
-        variant="contained"
-        color="primary"
-        sx={{
-          mt: 4,
-          ml: "auto", // This will push the button to the right
-          display: "block", // Ensures the button takes up its own line
-        }}
-        loading={isLoading}
-        onClick={handleSubmit}
-      >
-        Submit
-      </LoadingButton>
+      <div className="flex justify-end gap-4 mt-4">
+        <SubmitDatePicker value={submitDate} onChange={setSubmitDate} />
+        <LoadingButton
+          variant="contained"
+          color="primary"
+          loading={isLoading}
+          onClick={handleSubmit}
+        >
+          Submit
+        </LoadingButton>
+      </div>
     </div>
   );
 };

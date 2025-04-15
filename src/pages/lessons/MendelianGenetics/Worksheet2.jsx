@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { LoadingButton } from "@mui/lab";
-import { Button } from "@mui/material";
+import { Button, Divider } from "@mui/material";
 import Swal from "sweetalert2";
 import API from "../../../utils/api/api.js";
+import SubmitDatePicker from "../../../components/date-input/SubmitDatePicker.jsx";
 
 const Worksheet2 = ({
   titles,
@@ -14,6 +15,7 @@ const Worksheet2 = ({
     phenotypic: {},
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [submitDate, setSubmitDate] = useState(null);
 
   const handleInputChange = (section, key, value) => {
     setAnswers((prev) => ({
@@ -30,6 +32,7 @@ const Worksheet2 = ({
       genotypic: {},
       phenotypic: {},
     });
+    setSubmitDate(null);
   };
 
   const handleSubmit = async () => {
@@ -64,6 +67,7 @@ const Worksheet2 = ({
         user_id,
         titles,
         worksheet_no,
+        submit_date: submitDate?.toISOString(),
       };
       const response = await API.post("/worksheets/checker", payload, {
         headers: {
@@ -238,8 +242,10 @@ const Worksheet2 = ({
           </div>
         ))}
       </div>
+      <Divider sx={{ mt: 4, width: "100%" }} />
 
       <div className="flex justify-end gap-4 mt-4">
+        <SubmitDatePicker value={submitDate} onChange={setSubmitDate} />
         <Button
           variant="outlined"
           color="error"

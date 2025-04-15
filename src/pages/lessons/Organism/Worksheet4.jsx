@@ -4,6 +4,7 @@ import { Button } from "@mui/material";
 import Swal from "sweetalert2";
 import API from "../../../utils/api/api.js";
 import pyramid from "../../../assets/images/pyramid.png";
+import SubmitDatePicker from "../../../components/date-input/SubmitDatePicker.jsx";
 
 const Worksheet4 = ({
   titles,
@@ -11,6 +12,7 @@ const Worksheet4 = ({
   setIsModalWorksheet4ModalOpen,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [submitDate, setSubmitDate] = useState(null);
   const [formData, setFormData] = useState({
     tableData: Array(4).fill({ trophicLevel: "", organisms: "" }),
     guideQuestions: {
@@ -54,6 +56,7 @@ const Worksheet4 = ({
         biomassChange: "",
       },
     });
+    setSubmitDate(null);
   };
 
   const handleSubmit = async () => {
@@ -121,6 +124,7 @@ const Worksheet4 = ({
         user_id,
         titles,
         worksheet_no,
+        submit_date: submitDate?.toISOString(),
       };
 
       const response = await API.post("/worksheets/checker", payload, {
@@ -296,6 +300,7 @@ const Worksheet4 = ({
       </div>
 
       <div className="flex justify-end gap-4 mt-6">
+        <SubmitDatePicker value={submitDate} onChange={setSubmitDate} />
         <Button
           variant="outlined"
           color="error"

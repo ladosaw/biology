@@ -17,6 +17,7 @@ import { LoadingButton } from "@mui/lab";
 import { WorksheetsQuestion1 } from "./ConstantDigestive.jsx";
 import API from "../../../../utils/api/api.js";
 import image from "../../../../assets/images/DigestiveWorksheet.png";
+import SubmitDatePicker from "../../../../components/date-input/SubmitDatePicker.jsx";
 
 // Constants
 const HTML5_TO_TOUCH = {
@@ -115,6 +116,7 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
   const [assigned, setAssigned] = useState({});
   const [availableOrgans, setAvailableOrgans] = useState(INITIAL_ORGANS);
   const [selectedOrgan, setSelectedOrgan] = useState(null);
+  const [submitDate, setSubmitDate] = useState(null);
   const [textAnswers, setTextAnswers] = useState(
     new Array(WorksheetsQuestion1.length).fill("")
   );
@@ -123,6 +125,7 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
     setAssigned({});
     setAvailableOrgans(INITIAL_ORGANS);
     setSelectedOrgan(null);
+    setSubmitDate(null);
     setTextAnswers(new Array(WorksheetsQuestion1.length).fill(""));
   };
 
@@ -191,6 +194,7 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
       user_id: localStorage.getItem("id"),
       titles,
       worksheet_no,
+      submit_date: submitDate?.toISOString(),
     };
   };
 
@@ -341,6 +345,7 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
             width: "100%",
           }}
         >
+          <SubmitDatePicker value={submitDate} onChange={setSubmitDate} />
           <Button
             variant="outlined"
             color="error"

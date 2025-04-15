@@ -5,11 +5,13 @@ import Swal from "sweetalert2";
 import API from "../../../../utils/api/api";
 import { MitosisQuestions } from "../ConstantMitosis";
 import FiveMinuteTimer from "../../../../components/timer/FiveMinuteTimer.jsx";
+import SubmitDatePicker from "../../../../components/date-input/SubmitDatePicker.jsx";
 
 const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [answers, setAnswers] = useState({});
   const [invalidQuestions, setInvalidQuestions] = useState([]);
+  const [submitDate, setSubmitDate] = useState(null);
 
   const handleChange = (id, value) => {
     setAnswers({ ...answers, [id]: value.toLowerCase() });
@@ -27,6 +29,7 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
   const handleReset = () => {
     setAnswers({});
     setInvalidQuestions([]);
+    setSubmitDate(null);
   };
 
   const handleSubmit = async () => {
@@ -59,6 +62,7 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
         user_id,
         titles,
         worksheet_no,
+        submit_date: submitDate?.toISOString(),
       };
 
       const response = await API.post("/worksheets/checker", payload, {
@@ -143,6 +147,7 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
       ))}
 
       <div className="flex justify-end gap-4 mt-4">
+        <SubmitDatePicker value={submitDate} onChange={setSubmitDate} />
         <Button
           variant="outlined"
           color="error"

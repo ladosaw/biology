@@ -6,14 +6,17 @@ import {
   Box,
   Grid,
   Button,
+  Divider,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import Swal from "sweetalert2";
 import API from "../../../utils/api/api.js";
+import SubmitDatePicker from "../../../components/date-input/SubmitDatePicker.jsx";
 
 const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
   const [answers, setAnswers] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [submitDate, setSubmitDate] = useState(null);
 
   const questionMap = {
     // Section A
@@ -68,6 +71,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
 
   const handleReset = () => {
     setAnswers({});
+    setSubmitDate(null);
   };
 
   const inputAnswer = Object.keys(answers).map((key) => ({
@@ -99,6 +103,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         user_id,
         titles,
         worksheet_no,
+        submit_date: submitDate?.toISOString(),
       };
 
       const response = await API.post("/worksheets/checker", payload, {
@@ -349,7 +354,10 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         </Grid>
       </Box>
 
+      <Divider sx={{ mt: 4, width: "100%" }} />
+
       <Box display="flex" justifyContent="flex-end" gap={2} mt={2}>
+        <SubmitDatePicker value={submitDate} onChange={setSubmitDate} />
         <Button
           variant="outlined"
           color="error"

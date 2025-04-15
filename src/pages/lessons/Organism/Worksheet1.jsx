@@ -15,9 +15,11 @@ import owl from "../../../assets/images/OrganismWorksheet1/owl.png";
 import python from "../../../assets/images/OrganismWorksheet1/python.png";
 import rabbits from "../../../assets/images/OrganismWorksheet1/rabbits.png";
 import rat from "../../../assets/images/OrganismWorksheet1/rat.png";
+import SubmitDatePicker from "../../../components/date-input/SubmitDatePicker.jsx";
 
 const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [submitDate, setSubmitDate] = useState(null);
   const [answers, setAnswers] = useState({
     producers: Array(4).fill(""),
     primaryConsumers: Array(4).fill(""),
@@ -54,6 +56,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
       secondaryConsumers: Array(4).fill(""),
       tertiaryConsumers: Array(4).fill(""),
     });
+    setSubmitDate(null);
   };
 
   const handleSubmit = async (e) => {
@@ -155,6 +158,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         user_id,
         titles,
         worksheet_no,
+        submit_date: submitDate?.toISOString(),
       };
 
       const response = await API.post("/worksheets/checker", payload, {
@@ -289,6 +293,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         </div>
 
         <div className="flex justify-end gap-2 mt-4">
+          <SubmitDatePicker value={submitDate} onChange={setSubmitDate} />
           <Button
             variant="outlined"
             color="error"

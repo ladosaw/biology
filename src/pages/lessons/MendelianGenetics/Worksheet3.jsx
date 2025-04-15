@@ -24,6 +24,7 @@ import { LoadingButton } from "@mui/lab";
 import { formatAssignedData } from "../../../utils/helper.js";
 import API from "../../../utils/api/api.js";
 import FiveMinuteTimer from "../../../components/timer/FiveMinuteTimer.jsx";
+import SubmitDatePicker from "../../../components/date-input/SubmitDatePicker.jsx";
 
 // Drag & Drop Configuration
 const HTML5toTouch = {
@@ -144,6 +145,7 @@ const Worksheet3 = ({
   const [phenotypePurple, setPhenotypePurple] = useState("");
   const [genotypeCurlyHair, setGenotypeCurlyHair] = useState("");
   const [phenotypeCurlyHair, setPhenotypeCurlyHair] = useState("");
+  const [submitDate, setSubmitDate] = useState(null);
 
   const handleResetAll = () => {
     setAvailablePunnettRed(initialPunnettRed);
@@ -157,6 +159,7 @@ const Worksheet3 = ({
     setGenotypeCurlyHair("");
     setPhenotypeCurlyHair("");
     setSelectedPunnettId(null);
+    setSubmitDate(null);
   };
 
   // Selecting a Punnett
@@ -280,6 +283,7 @@ const Worksheet3 = ({
         user_id,
         titles,
         worksheet_no,
+        submit_date: submitDate?.toISOString(),
       };
       const response = await API.post("/worksheets/checker", payload, {
         headers: {
@@ -738,7 +742,8 @@ const Worksheet3 = ({
         <Divider sx={{ my: 4 }} />
 
         <Box sx={{ display: "flex", justifyContent: "end", gap: 2, mt: 2 }}>
-          <Button variant="outlined" color="primary" onClick={handleResetAll}>
+          <SubmitDatePicker value={submitDate} onChange={setSubmitDate} />
+          <Button variant="outlined" color="error" onClick={handleResetAll}>
             Reset
           </Button>
           <LoadingButton

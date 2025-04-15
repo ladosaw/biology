@@ -4,6 +4,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { LoadingButton } from "@mui/lab";
 import Swal from "sweetalert2";
 import API from "../../../utils/api/api";
+import SubmitDatePicker from "../../../components/date-input/SubmitDatePicker.jsx";
 
 const initialOrganisms = [
   "Grass",
@@ -71,6 +72,7 @@ const Worksheet2 = ({
   const [availableOrganisms, setAvailableOrganisms] =
     useState(initialOrganisms);
   const [selectedOrganism, setSelectedOrganism] = useState(null);
+  const [submitDate, setSubmitDate] = useState(null);
 
   const handleSelectOrganism = (organism) => {
     setSelectedOrganism(organism);
@@ -94,6 +96,7 @@ const Worksheet2 = ({
     setAssigned({});
     setAvailableOrganisms(initialOrganisms);
     setSelectedOrganism(null);
+    setSubmitDate(null);
   };
 
   const handleSubmit = async () => {
@@ -164,6 +167,7 @@ const Worksheet2 = ({
         user_id,
         titles,
         worksheet_no,
+        submit_date: submitDate?.toISOString(),
       };
 
       const response = await API.post("/worksheets/checker", payload, {
@@ -278,8 +282,10 @@ const Worksheet2 = ({
           </React.Fragment>
         ))}
       </Grid>
+      <Divider sx={{ mt: 4, width: "100%" }} />
 
       <Box sx={{ display: "flex", justifyContent: "flex-end", marginTop: 4 }}>
+        <SubmitDatePicker value={submitDate} onChange={setSubmitDate} />
         <Button
           variant="outlined"
           color="error"

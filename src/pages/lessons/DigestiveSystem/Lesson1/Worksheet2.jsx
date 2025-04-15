@@ -18,6 +18,7 @@ import {
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import API from "../../../../utils/api/api.js";
+import SubmitDatePicker from "../../../../components/date-input/SubmitDatePicker.jsx";
 import A from "../../../../assets/images/Lesson1Worksheet2/A.png";
 import B from "../../../../assets/images/Lesson1Worksheet2/B.png";
 import C from "../../../../assets/images/Lesson1Worksheet2/C.png";
@@ -188,6 +189,7 @@ const Worksheet2 = ({
   const [isLoading, setIsLoading] = useState(false);
   const [assignedImages, setAssignedImages] = useState({});
   const [selectedImage, setSelectedImage] = useState(null);
+  const [submitDate, setSubmitDate] = useState(null);
 
   const handleImageSelect = (image) => {
     setSelectedImage(image);
@@ -204,6 +206,7 @@ const Worksheet2 = ({
   const handleReset = () => {
     setAssignedImages({});
     setSelectedImage(null);
+    setSubmitDate(null);
   };
 
   const validateSubmission = () => {
@@ -257,6 +260,7 @@ const Worksheet2 = ({
           user_id: localStorage.getItem("id"),
           titles,
           worksheet_no,
+          submit_date: submitDate?.toISOString(),
         },
         {
           headers: { Authorization: `Bearer ${authToken}` },
@@ -330,11 +334,27 @@ const Worksheet2 = ({
           onDrop={handleDrop}
         />
 
-        <ActionButtons
-          isLoading={isLoading}
-          onReset={handleReset}
-          onSubmit={handleSubmit}
-        />
+        <Box sx={actionButtonStyles}>
+          <SubmitDatePicker value={submitDate} onChange={setSubmitDate} />
+          <Button
+            variant="outlined"
+            color="error"
+            onClick={handleReset}
+            sx={buttonStyles}
+            disabled={isLoading}
+          >
+            Reset
+          </Button>
+          <LoadingButton
+            variant="contained"
+            color="primary"
+            loading={isLoading}
+            onClick={handleSubmit}
+            sx={buttonStyles}
+          >
+            Submit
+          </LoadingButton>
+        </Box>
       </Box>
     </DndProvider>
   );
@@ -383,29 +403,6 @@ const SubmissionTable = ({ data, assignedImages, onDrop, selectedImage }) => (
       </TableBody>
     </Table>
   </TableContainer>
-);
-
-const ActionButtons = ({ isLoading, onReset, onSubmit }) => (
-  <Box sx={actionButtonStyles}>
-    <Button
-      variant="outlined"
-      color="error"
-      onClick={onReset}
-      sx={buttonStyles}
-      disabled={isLoading}
-    >
-      Reset
-    </Button>
-    <LoadingButton
-      variant="contained"
-      color="primary"
-      loading={isLoading}
-      onClick={onSubmit}
-      sx={buttonStyles}
-    >
-      Submit
-    </LoadingButton>
-  </Box>
 );
 
 // Styles

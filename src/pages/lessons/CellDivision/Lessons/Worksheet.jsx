@@ -3,6 +3,7 @@ import { LoadingButton } from "@mui/lab";
 import { Button } from "@mui/material";
 import Swal from "sweetalert2";
 import API from "../../../../utils/api/api.js";
+import SubmitDatePicker from "../../../../components/date-input/SubmitDatePicker.jsx";
 
 // Image imports
 import Worksheet1A from "../../../../assets/images/WorksheetA1A.png";
@@ -28,6 +29,7 @@ const QUESTIONS = [
 
 const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [submitDate, setSubmitDate] = useState(null);
   const [answers, setAnswers] = useState({
     labels: Array(10).fill(""),
     phases: Array(6).fill(""),
@@ -48,6 +50,7 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
       phases: Array(6).fill(""),
       questions: Array(3).fill(""),
     });
+    setSubmitDate(null);
   };
 
   const constructPayload = () => {
@@ -126,6 +129,7 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
           user_id: localStorage.getItem("id"),
           titles,
           worksheet_no,
+          submit_date: submitDate?.toISOString(),
         },
         {
           headers: {
@@ -272,6 +276,7 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
       </section>
 
       <div className="mt-8 flex justify-end gap-4">
+        <SubmitDatePicker value={submitDate} onChange={setSubmitDate} />
         <Button
           variant="outlined"
           color="error"
