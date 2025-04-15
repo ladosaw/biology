@@ -81,7 +81,6 @@ const Ranking = () => {
         <Typography color="error">{error}</Typography>
       ) : (
         <>
-          {/* Podium Section */}
           <Box
             display="flex"
             flexDirection={isMobile ? "column" : "row"}
@@ -96,28 +95,38 @@ const Ranking = () => {
                 elevation={6}
                 sx={{
                   backgroundColor: trophyColors[index],
-                  width: isMobile ? "100%" : 120,
-                  height: podiumHeights[index],
+                  width: isMobile ? "100%" : 140,
+                  minHeight: podiumHeights[index],
                   borderRadius: 3,
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "flex-end",
+                  justifyContent: "flex-start",
                   alignItems: "center",
                   px: 1.5,
-                  py: 2,
+                  pt: 5,
+                  pb: 2,
                   color: "#fff",
                   position: "relative",
                   textAlign: "center",
                 }}
               >
                 <EmojiEventsIcon
-                  fontSize="large"
-                  sx={{ position: "absolute", top: 10 }}
+                  fontSize={index === 0 ? "large" : "medium"}
+                  sx={{
+                    position: "absolute",
+                    top: index === 0 ? 10 : 14,
+                    fontSize: index === 0 ? 40 : 28,
+                  }}
                 />
-                <Typography variant="caption" fontWeight="bold" mt={4}>
+
+                <Typography variant="caption" fontWeight="bold" mb={0.5}>
                   {podiumLabels[index]}
                 </Typography>
-                <Typography fontWeight="bold" fontSize="0.95rem">
+                <Typography
+                  fontWeight="bold"
+                  fontSize="0.95rem"
+                  lineHeight={1.3}
+                >
                   {student.name}
                 </Typography>
                 <Typography fontSize="0.85rem">
