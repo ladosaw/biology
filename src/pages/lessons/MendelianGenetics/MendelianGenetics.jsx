@@ -705,6 +705,8 @@ const MendelianGenetics = ({ hideFloating }) => {
         open={isModalWorksheet3Open}
         onClose={toggleModalWorksheet3}
         title={MendelianGeneticsWorksheetsLink.worksheet3.title}
+
+        //!TODO change the title in worksheet3
       >
         <DndProvider backend={HTML5Backend}>
           <Worksheet3
