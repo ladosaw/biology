@@ -77,6 +77,22 @@ const Module1 = ({ hideFloating }) => {
             <span className="font-bold">LESSON 2:</span> CELL CYCLE: Interphase
             and cell Division
           </h1>
+          <div>
+            <h1 className="font-bold">Objectives:</h1>
+            <p>
+              <span className="font-bold">LESSON 3:</span> CELL CYCLE:
+              Interphase and Cell Division
+              <p> 1. Define cell cycle, interphase and mitosis.</p>
+              <p>
+                2. Explain the processes taking place in each stage of the cell
+                during the stages of interphase and mitosis cell division
+              </p>
+              <p>
+                3. Appreciate the importance of the occurrence of mitosis
+                organisms (MELC Week 1 S8LT-Iva-13)
+              </p>
+            </p>
+          </div>
           <p className="text-sm sm:text-base md:text-lg leading-relaxed">
             Living organisms grow. Growth is a permanent increase in size
             resulting from cell division and cell differentiation to form

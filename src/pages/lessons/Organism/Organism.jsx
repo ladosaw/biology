@@ -89,6 +89,26 @@ const Organism = ({ hideFloating }) => {
           <span className="font-bold">LESSON 5:</span> TRANSFER OF ENERGY IN THE
           TROPHIC LEVEL
         </h1>
+        <div>
+          <h1 className="font-bold">Objectives:</h1>
+          <p>
+            {" "}
+            1. To identify the organisms comprising the food chain and food web.
+          </p>
+          <p>
+            2. Construct a food chain and food web to show the transfer of
+            energy from one trophic level to next.
+          </p>
+          <p>
+            3. describe a food pyramid and the amount of biomass at energy
+            level.
+          </p>
+          <p>
+            4. Compute for the amount of energy being transferred from one
+            trophic level to the next
+          </p>
+          <p>5. Appreciate the role of organisms in the ecosystem.</p>
+        </div>
       </div>
 
       <div className=" py-8 px-8  space-y-6  lg:mt-8">

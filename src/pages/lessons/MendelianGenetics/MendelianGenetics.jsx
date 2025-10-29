@@ -90,6 +90,26 @@ const MendelianGenetics = ({ hideFloating }) => {
             <span className="font-bold">LESSON 4:</span> PATTERNS OF MENDELIAN
             GENETICS
           </h1>
+          <div>
+            <h1 className="font-bold">Objectives:</h1>
+            <p>
+              <span className="font-bold">LESSON 4:</span> PATTERNS OF MENDELIAN
+              GENETICS
+              <p> 1. Cite the three Laws of Genetics made by Gregor Mendel.</p>
+              <p>
+                2. Solve the problem involving the inheritance of contrasting
+                traits
+              </p>
+              <p>
+                3. Express the genotypic and phenotypic ratios of the offspring
+                formed by crossing contrasting traits
+              </p>
+              <p>
+                4. Show appreciation for Mendel’s contribution to the field of
+                Genetics
+              </p>
+            </p>
+          </div>
           <div className="space-y-6">
             <h2 className="font-semibold text-lg text-center sm:text-xl md:text-2xl">
               Vocabulary Words
