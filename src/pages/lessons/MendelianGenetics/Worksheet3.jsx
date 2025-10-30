@@ -354,11 +354,18 @@ const Worksheet3 = ({
           fontWeight="bold"
           mb={2}
         >
-          Situation:
+          Directions:
         </Typography>
+        <Typography variant="caption" textAlign="start" mb={4}>
+          {" "}
+          Complete each box by dragging the parent allele on top to determine
+          the possible combination of genes using a Punnet Square. (Note work
+          with your seatmate)
+        </Typography>
+
         <Typography variant="body1" textAlign="start" mb={2}>
-          A homozygous red Santan flower (RR) is crossed with a homozygous pink
-          Santan flower (rr).
+          Situation: A homozygous red Santan flower (RR) is crossed with a
+          homozygous pink Santan flower (rr).
         </Typography>
 
         <Typography

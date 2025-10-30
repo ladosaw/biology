@@ -283,8 +283,9 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         </Typography>
 
         <Typography variant="body1" color="textSecondary" paragraph>
-          <strong>A. Directions:</strong> Below is the image of the Digestive
-          System. Write the names of the organs from the box below.
+          <strong>A. Directions:</strong> Refer to the illustration of Digestive
+          System Directio: From the above choices of the organs of digestion,
+          drop each name of the organ on the correct box below.
         </Typography>
 
         <Box

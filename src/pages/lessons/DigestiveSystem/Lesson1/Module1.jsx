@@ -78,6 +78,21 @@ const Module1 = ({ hideFloating }) => {
             <span className="font-bold">LESSON 1:</span> STRUCTURES AND
             FUNCTIONS IN HUMAN FOCUS ON THE DIGESTIVE SYSTEM
           </h1>
+          <div>
+            <h1 className="font-bold">Objectives:</h1>
+            <p>
+              <p>
+                {" "}
+                1. Identify the parts and function of the organs of digestion.
+              </p>
+              <p>
+                2. Explain the process of ingestion, digestion, absorption,
+                assimilation and excretion involved in the human digestive
+                system
+              </p>
+              <p>3. Cite the importance of the healthy digestive system.</p>
+            </p>
+          </div>
           <p className="text-sm sm:text-base md:text-lg leading-relaxed">
             The <b>food</b> that we eat plays a central role in the survival of
             species. It provides energy that enables us to carry out many
