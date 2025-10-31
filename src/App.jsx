@@ -25,7 +25,7 @@ const App = () => {
           <Router />
         </Box>
       </Container>
-      {location.pathname !== "/lessons" && <Footer />}
+      <Footer />
     </Box>
   );
 };
