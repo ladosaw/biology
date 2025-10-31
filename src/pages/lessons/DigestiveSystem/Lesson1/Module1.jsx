@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import FloatingButton from "../../../../components/FloatingButton/FloatingButton.jsx";
 import { FaArrowRight } from "react-icons/fa";
+import FloatingButton from "../../../../components/FloatingButton/FloatingButton.jsx";
 import Indigestion from "../../../../assets/images/indigestion.svg";
 import Digestion from "../../../../assets/images/digestion.svg";
 import Absorption from "../../../../assets/images/absorption.jpg";
@@ -9,7 +9,6 @@ import Egestion from "../../../../assets/images/egestion.jpg";
 import Render3d from "../../../../components/renderer/Render3d";
 import DigestiveSystem from "../../../../components/model/DigestiveSystem";
 import pdfDgestive from "../../../../assets/pdf/humanDigestiveSystem.pdf";
-import { Link } from "react-router-dom";
 import { DigestiveWorksheetsLink } from "./ConstantDigestive.jsx";
 import Worksheets from "../../../../components/Worksheets/Worksheets.jsx";
 import DigestiveSystemAnimation from "../DigestiveSystemAnimation.jsx";
@@ -19,7 +18,7 @@ import Worksheet2 from "./Worksheet2.jsx";
 import Worksheets3 from "./Worksheet3.jsx";
 import Evaluation from "./Evaluation.jsx";
 
-const Module1 = ({ hideFloating }) => {
+const Module1 = ({ hideFloating, hideAdditionalButtons = false }) => {
   const [isModalWorksheetOpen, setIsModalWorksheetModalOpen] = useState(false);
   const [isModalWorksheet2Open, setIsModalWorksheet2ModalOpen] =
     useState(false);
@@ -39,6 +38,11 @@ const Module1 = ({ hideFloating }) => {
 
   const toggleEvaluation = () => {
     setEvaluationOpen((prev) => !prev);
+  };
+
+  const handleNextLesson = () => {
+    window.location.href = "/lessons#mitosis";
+    window.location.reload();
   };
 
   const handleDownload = () => {
@@ -400,21 +404,22 @@ const Module1 = ({ hideFloating }) => {
       </Modal>
 
       {/* Footer */}
-      <div className="flex flex-col items-end mt-10 space-y-4">
-        <div className="bg-gray-200 w-full h-[1px]"></div>
+      {!hideAdditionalButtons && (
+        <div className="flex flex-col items-end mt-10 space-y-4">
+          <div className="bg-gray-200 w-full h-[1px]" />
 
-        {/* <Link to="#meiosis">
+          {/* Next Button */}
           <button
-            className="flex items-center gap-2 bg-primary text-white py-2 px-4 rounded shadow hover:bg-primary-dark transition"
-            onClick={handleNextClick}
+            onClick={handleNextLesson}
+            className="flex items-center gap-2 bg-primary text-white px-5 py-2 rounded-xl shadow hover:bg-primary-dark transition duration-200"
           >
-            <p className="font-semibold text-lg">Lesson 2: Meiosis</p>
-            <FaArrowRight />
+            <span className="font-semibold text-lg">Lesson 2: Mitosis</span>
+            <FaArrowRight className="w-5 h-5" />
           </button>
-        </Link> */}
 
-        <div className="bg-gray-200 w-full h-[1px]"></div>
-      </div>
+          <div className="bg-gray-200 w-full h-[1px]" />
+        </div>
+      )}
 
       {/* Floating Button */}
 

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import FloatingButton from "../../../../components/FloatingButton/FloatingButton.jsx";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import cellCycle from "../../../../assets/images/NewCellCycle.jpg";
 import stagesOfMitosis from "../../../../assets/pdf/stagesOfMitosis.pdf";
 import {
@@ -16,7 +16,7 @@ import Worksheet2 from "./Worksheet2.jsx";
 import Worksheet3 from "./Worksheet3.jsx";
 import Modal from "../../../../components/Modal/Modal.jsx";
 
-const Module1 = ({ hideFloating }) => {
+const CellDivision = ({ hideFloating, hideAdditionalButtons = false }) => {
   const [isModalWorksheetOpen, setIsModalWorksheetModalOpen] = useState(false);
   const [isModalWorksheet2Open, setIsModalWorksheet2ModalOpen] =
     useState(false);
@@ -39,7 +39,14 @@ const Module1 = ({ hideFloating }) => {
     setEvaluationOpen((prev) => !prev);
   };
 
-  const handleNextClick = () => {};
+  const handleNextLesson = () => {
+    window.location.href = "/lessons#meiosis";
+    window.location.reload();
+  };
+  const handlePreviousLesson = () => {
+    window.location.href = "/lessons#digestive-system";
+    window.location.reload();
+  };
 
   const handleDownload = () => {
     const pdfUrl = stagesOfMitosis;
@@ -337,17 +344,33 @@ const Module1 = ({ hideFloating }) => {
       </Modal>
 
       {/* Footer */}
-      <div className="flex flex-col items-end mt-10 space-y-4">
-        <div className="bg-gray-200 w-full h-[1px]"></div>
-        {/* <button
-          className="flex items-center gap-2 bg-primary text-white py-2 px-4 rounded shadow hover:bg-primary-dark transition"
-          onClick={handleNextClick}
-        >
-          <p className="font-semibold text-lg">Lesson 2: Mendelian Genetics</p>
-          <FaArrowRight />
-        </button> */}
-        <div className="bg-gray-200 w-full h-[1px]"></div>
-      </div>
+      {!hideAdditionalButtons && (
+        <div className="flex flex-col items-end mt-10 space-y-4">
+          <div className="bg-gray-200 w-full h-[1px]" />
+          <div className="flex justify-between items-center w-full mt-8">
+            {/* Previous Button */}
+            <button
+              onClick={handlePreviousLesson}
+              className="flex items-center gap-2 bg-gray-200 text-gray-800 px-5 py-2 rounded-xl shadow hover:bg-gray-300 transition duration-200"
+            >
+              <FaArrowLeft className="w-5 h-5" />
+              <span className="font-semibold text-lg">
+                Lesson 1: Digestive System
+              </span>
+            </button>
+
+            {/* Next Button */}
+            <button
+              onClick={handleNextLesson}
+              className="flex items-center gap-2 bg-primary text-white px-5 py-2 rounded-xl shadow hover:bg-primary-dark transition duration-200"
+            >
+              <span className="font-semibold text-lg">Lesson 3: Meiosis</span>
+              <FaArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+          <div className="bg-gray-200 w-full h-[1px]" />
+        </div>
+      )}
 
       {/* Floating Button */}
       <div className={`fixed bottom-4 right-4 ${hideFloating ? "hidden" : ""}`}>
@@ -362,4 +385,4 @@ const Module1 = ({ hideFloating }) => {
   );
 };
 
-export default Module1;
+export default CellDivision;

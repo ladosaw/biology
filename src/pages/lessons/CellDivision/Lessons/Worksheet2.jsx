@@ -184,8 +184,8 @@ const Worksheet2 = ({
     <div className="p-6 max-w-4xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">Worksheet 2</h1>
       <p className="mb-6 text-gray-600">
-        Complete the table by selecting the correct phase for each description
-        of the cell cycle.
+        Direction: Tap the circle on the appropriate column for Interphase and
+        Mitosis that describes the process.
       </p>
 
       <div className="overflow-x-auto rounded-lg shadow-md">

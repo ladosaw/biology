@@ -1,4 +1,5 @@
 import { React, useState } from "react";
+import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import FloatingButton from "../../../components/FloatingButton/FloatingButton";
 import MendelianGeneticsPdf from "../../../assets/pdf/MendelianGenetics.pdf";
 import {
@@ -27,7 +28,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Evaluation from "./Evaluation";
 
-const MendelianGenetics = ({ hideFloating }) => {
+const MendelianGenetics = ({ hideFloating, hideAdditionalButtons = false }) => {
   const [isModalWorksheetOpen, setIsModalWorksheetModalOpen] = useState(false);
   const [isModalWorksheet2Open, setIsModalWorksheet2ModalOpen] =
     useState(false);
@@ -79,6 +80,15 @@ const MendelianGenetics = ({ hideFloating }) => {
         "Failed to open the PDF. Please check your pop-up blocker settings."
       );
     }
+  };
+
+  const handleNextLesson = () => {
+    window.location.href = "/lessons#organism";
+    window.location.reload();
+  };
+  const handlePreviousLesson = () => {
+    window.location.href = "/lessons#meiosis";
+    window.location.reload();
   };
 
   return (
@@ -774,6 +784,32 @@ const MendelianGenetics = ({ hideFloating }) => {
           setIsModalWorksheet4ModalOpenPrevious={setIsModalWorksheet4ModalOpen}
         />
       </Modal>
+
+      {!hideAdditionalButtons && (
+        <div className="flex flex-col items-end mt-10 space-y-4">
+          <div className="bg-gray-200 w-full h-[1px]" />
+          <div className="flex justify-between items-center w-full mt-8">
+            {/* Previous Button */}
+            <button
+              onClick={handlePreviousLesson}
+              className="flex items-center gap-2 bg-gray-200 text-gray-800 px-5 py-2 rounded-xl shadow hover:bg-gray-300 transition duration-200"
+            >
+              <FaArrowLeft className="w-5 h-5" />
+              <span className="font-semibold text-lg">Lesson 3: Meiosis</span>
+            </button>
+
+            {/* Next Button */}
+            <button
+              onClick={handleNextLesson}
+              className="flex items-center gap-2 bg-primary text-white px-5 py-2 rounded-xl shadow hover:bg-primary-dark transition duration-200"
+            >
+              <span className="font-semibold text-lg">Lesson 5: Organism</span>
+              <FaArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+          <div className="bg-gray-200 w-full h-[1px]" />
+        </div>
+      )}
 
       {/* Floating Button */}
       <div className={`fixed bottom-4 right-4 ${hideFloating ? "hidden" : ""}`}>

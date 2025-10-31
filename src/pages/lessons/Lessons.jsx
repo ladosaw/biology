@@ -19,6 +19,10 @@ const Lessons = () => {
     subsubtitle: "Overall",
   });
 
+  <LeftNavigationLesson
+    onModuleClick={{ sectionTitle: "Overall", subsubtitle: "Overall" }}
+  />;
+
   const navigate = useNavigate();
 
   useEffect(() => {
