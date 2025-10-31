@@ -145,8 +145,10 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         icon: "success",
         title: "Quiz Submitted!",
         html: `
-          <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
-          <p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>
+           <p><strong>Worksheet:</strong> ${worksheet.titles || titles}</p>
+          <p><strong>Worksheet No:</strong> ${
+            worksheet.worksheet_no || worksheet_no
+          }</p>
           <p><strong>Score:</strong> ${score}</p>
           <div class="results-list">
             ${detailed_results
@@ -276,7 +278,7 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
       </section>
 
       <div className="mt-8 flex justify-end gap-4">
-        <SubmitDatePicker value={submitDate} onChange={setSubmitDate} />
+        {/* <SubmitDatePicker value={submitDate} onChange={setSubmitDate} /> */}
         <Button
           variant="outlined"
           color="error"

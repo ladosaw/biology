@@ -178,11 +178,15 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
   ${
     worksheet.titles
       ? `<p><strong>Worksheet:</strong> ${worksheet.titles}</p>`
+      : titles
+      ? `<p><strong>Worksheet:</strong> ${titles}</p>`
       : ""
   }
   ${
     worksheet.worksheet_no
       ? `<p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>`
+      : worksheet_no
+      ? `<p><strong>Worksheet No:</strong> ${worksheet_no}</p>`
       : ""
   }
   ${
@@ -293,7 +297,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         </div>
 
         <div className="flex justify-end gap-2 mt-4">
-          <SubmitDatePicker value={submitDate} onChange={setSubmitDate} />
+          {/* <SubmitDatePicker value={submitDate} onChange={setSubmitDate} /> */}
           <Button
             variant="outlined"
             color="error"

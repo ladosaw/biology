@@ -184,10 +184,12 @@ const Worksheet2 = ({
         icon: "success",
         title: "Quiz Submitted!",
         html: `
-                  <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
-                         <p><strong>Worksheet No:</strong> ${
-                           worksheet.worksheet_no
-                         }</p>
+                   <p><strong>Worksheet:</strong> ${
+                     worksheet.titles || titles
+                   }</p>
+          <p><strong>Worksheet No:</strong> ${
+            worksheet.worksheet_no || worksheet_no
+          }</p>
                    <p><strong>Your Score:</strong> ${score}</p>
                    <ul>
                    <p><strong> Your Answer: </strong></p>
@@ -285,7 +287,7 @@ const Worksheet2 = ({
       <Divider sx={{ mt: 4, width: "100%" }} />
 
       <Box sx={{ display: "flex", justifyContent: "flex-end", marginTop: 4 }}>
-        <SubmitDatePicker value={submitDate} onChange={setSubmitDate} />
+        {/* <SubmitDatePicker value={submitDate} onChange={setSubmitDate} /> */}
         <Button
           variant="outlined"
           color="error"

@@ -159,8 +159,10 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         icon: "success",
         title: "Quiz Submitted!",
         html: `
-          <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
-          <p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>
+            <p><strong>Worksheet:</strong> ${worksheet.titles || titles}</p>
+          <p><strong>Worksheet No:</strong> ${
+            worksheet.worksheet_no || worksheet_no
+          }</p>
           <p><strong>Your Score:</strong> ${score}</p>
           <p><strong>Your guide questions have been recorded. Please Wait for the teacher to check your answers.</strong></p>
           <ul>
@@ -324,7 +326,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         ))}
       </div>
       <div className="flex justify-end gap-4 mt-4">
-        <SubmitDatePicker value={submitDate} onChange={setSubmitDate} />
+        {/* <SubmitDatePicker value={submitDate} onChange={setSubmitDate} /> */}
         <LoadingButton
           variant="contained"
           color="primary"

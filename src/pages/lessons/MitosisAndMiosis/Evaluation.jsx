@@ -78,7 +78,9 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
         icon: "success",
         title: "Quiz Submitted!",
         html: `
-                  <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
+                  <p><strong>Worksheet:</strong> ${
+                    worksheet.titles || titles
+                  }</p>
                   <p><strong>Worksheet No:</strong> Evaluation</p>
                   <p><strong>Your Score:</strong> ${score}</p>
                   <ul>
@@ -241,7 +243,7 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
         </div>
       ))}
       <div className="flex justify-end gap-4 mt-4">
-        <SubmitDatePicker value={submitDate} onChange={setSubmitDate} />
+        {/* <SubmitDatePicker value={submitDate} onChange={setSubmitDate} /> */}
         <Button
           variant="outlined"
           color="error"

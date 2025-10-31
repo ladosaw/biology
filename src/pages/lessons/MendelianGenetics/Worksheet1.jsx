@@ -120,10 +120,10 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
         icon: "success",
         title: "Quiz Submitted!",
         html: `
-              <p><strong>Worksheet:</strong> ${worksheet.titles}</p>
-                     <p><strong>Worksheet No:</strong> ${
-                       worksheet.worksheet_no
-                     }</p>
+                <p><strong>Worksheet:</strong> ${worksheet.titles || titles}</p>
+          <p><strong>Worksheet No:</strong> ${
+            worksheet.worksheet_no || worksheet_no
+          }</p>
                <p><strong>Your Score:</strong> ${score}</p>
                <ul>
                <p><strong> Your Answer: </strong></p>
@@ -357,7 +357,7 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
       <Divider sx={{ mt: 4, width: "100%" }} />
 
       <Box display="flex" justifyContent="flex-end" gap={2} mt={2}>
-        <SubmitDatePicker value={submitDate} onChange={setSubmitDate} />
+        {/* <SubmitDatePicker value={submitDate} onChange={setSubmitDate} /> */}
         <Button
           variant="outlined"
           color="error"
