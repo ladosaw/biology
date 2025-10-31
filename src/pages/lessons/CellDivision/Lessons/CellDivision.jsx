@@ -297,6 +297,7 @@ const Module1 = ({ hideFloating }) => {
           titles={"LESSON 2: CELL CYCLE: Interphase and Cell Division"}
           worksheet_no={1}
           setIsModalWorksheetModalOpen={setIsModalWorksheetModalOpen}
+          setIsModalWorksheet2ModalOpenNext={setIsModalWorksheet2ModalOpen}
         />
       </Modal>
 
@@ -309,6 +310,8 @@ const Module1 = ({ hideFloating }) => {
           titles={"LESSON 2: CELL CYCLE: Interphase and Cell Division"}
           worksheet_no={2}
           setIsModalWorksheet2ModalOpen={setIsModalWorksheet2ModalOpen}
+          setEvaluationOpenPrevious={setIsModalWorksheetModalOpen}
+          setEvaluationOpenNext={setEvaluationOpen}
         />
       </Modal>
 
@@ -329,6 +332,7 @@ const Module1 = ({ hideFloating }) => {
           titles={"LESSON 2: CELL CYCLE: Interphase and Cell Division"}
           worksheet_no={0}
           setEvaluationOpen={setEvaluationOpen}
+          setIsModalWorksheet2ModalOpenPrevious={setIsModalWorksheet2ModalOpen}
         />
       </Modal>
 

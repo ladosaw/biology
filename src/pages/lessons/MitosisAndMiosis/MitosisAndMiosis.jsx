@@ -549,6 +549,7 @@ const MiosisAndMitosis = ({ hideFloating }) => {
           titles={"LESSON 3: Cell Cycle: COMPARING MITOSIS AND MEIOSIS"}
           worksheet_no={1}
           setIsModalWorksheetModalOpen={setIsModalWorksheetModalOpen}
+          setIsModalWorksheet2ModalOpenNext={setIsModalWorksheet2ModalOpen}
         />
       </Modal>
 
@@ -561,6 +562,8 @@ const MiosisAndMitosis = ({ hideFloating }) => {
           titles={"LESSON 3: Cell Cycle: COMPARING MITOSIS AND MEIOSIS"}
           worksheet_no={2}
           setIsModalWorksheet2ModalOpen={setIsModalWorksheet2ModalOpen}
+          setIsModalWorksheetModalOpenPrevious={setIsModalWorksheetModalOpen}
+          setEvaluationOpenNext={setEvaluationOpen}
         />
       </Modal>
 
@@ -581,6 +584,7 @@ const MiosisAndMitosis = ({ hideFloating }) => {
           titles={"LESSON 3: Cell Cycle: COMPARING MITOSIS AND MEIOSIS"}
           worksheet_no={0}
           setEvaluationOpen={setEvaluationOpen}
+          setIsModalWorksheet2ModalOpenPrevious={setIsModalWorksheet2ModalOpen}
         />
       </Modal>
 

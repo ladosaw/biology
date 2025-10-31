@@ -10,6 +10,8 @@ const Worksheet3 = ({
   titles,
   worksheet_no,
   setIsModalWorksheet3ModalOpen,
+  setIsModalWorksheet2ModalOpenPrevious,
+  setEvaluationOpenNext,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [submitDate, setSubmitDate] = useState(null);
@@ -75,8 +77,53 @@ const Worksheet3 = ({
 
       Swal.fire({
         title: "Submission Successful",
-        text: message || "Your answers have been recorded!",
         icon: "success",
+        showConfirmButton: false,
+        showCloseButton: true,
+        html: `
+        <p>${message || "Your answers have been recorded!"}</p>
+         <div style="margin-top:20px; display:flex-direction:column; justify-content:center; gap:10px;">
+            <button 
+                id="previousBtn" 
+                class="swal2-confirm swal2-styled" 
+                style="
+                  background-color: transparent;
+                  color: #3B82F6;
+                  border: 1.5px solid #3B82F6;
+                  font-size:16px;
+                  border-radius:6px;
+                  min-width:auto;">
+                  Previous
+              </button>
+
+              <button 
+                id="nextBtn" 
+                class="swal2-confirm swal2-styled" 
+                style="
+                  background-color:#3B82F6;
+                  font-size:16px;
+                  border-radius:6px;
+                  min-width:auto; ">
+                  Next
+              </button>
+         </div>
+        `,
+        didRender: () => {
+          const nextBtn = document.getElementById("nextBtn");
+          const previousBtn = document.getElementById("previousBtn");
+          if (nextBtn) {
+            nextBtn.addEventListener("click", () => {
+              Swal.close();
+              setEvaluationOpenNext(true);
+            });
+          }
+          if (previousBtn) {
+            previousBtn.addEventListener("click", () => {
+              Swal.close();
+              setIsModalWorksheet2ModalOpenPrevious(true);
+            });
+          }
+        },
       });
     } catch (error) {
       Swal.fire({

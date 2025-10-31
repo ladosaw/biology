@@ -410,6 +410,7 @@ const Organism = ({ hideFloating }) => {
           titles={"LESSON 5: TRANSFER OF ENERGY IN THE TROPHIC LEVEL"}
           worksheet_no={1}
           setIsModalWorksheetModalOpen={setIsModalWorksheetModalOpen}
+          setIsModalWorksheet2ModalOpenNext={setIsModalWorksheet2ModalOpen}
         />
       </WorksheetModal>
 
@@ -422,6 +423,8 @@ const Organism = ({ hideFloating }) => {
           titles={"LESSON 5: TRANSFER OF ENERGY IN THE TROPHIC LEVEL"}
           worksheet_no={2}
           setIsModalWorksheet2ModalOpen={setIsModalWorksheet2ModalOpen}
+          setIsModalWorksheetModalOpenPrevious={setIsModalWorksheetModalOpen}
+          setIsModalWorksheet3ModalOpenNext={setIsModalWorksheet3ModalOpen}
         />
       </WorksheetModal>
 
@@ -435,6 +438,10 @@ const Organism = ({ hideFloating }) => {
             titles={"LESSON 5: TRANSFER OF ENERGY IN THE TROPHIC LEVEL"}
             worksheet_no={3}
             setIsModalWorksheet3ModalOpen={setIsModalWorksheet3ModalOpen}
+            setIsModalWorksheet2ModalOpenPrevious={
+              setIsModalWorksheet2ModalOpen
+            }
+            setIsModalWorksheet4ModalOpenNext={setIsModalWorksheet4ModalOpen}
           />
         </DndProvider>
       </WorksheetModal>
@@ -448,6 +455,8 @@ const Organism = ({ hideFloating }) => {
           titles={"LESSON 5: TRANSFER OF ENERGY IN THE TROPHIC LEVEL"}
           worksheet_no={4}
           setIsModalWorksheet4ModalOpen={setIsModalWorksheet4ModalOpen}
+          setIsModalWorksheet3ModalOpenPrevious={setIsModalWorksheet3ModalOpen}
+          setEvaluationOpenNext={setEvaluationOpen}
         />
       </WorksheetModal>
 
@@ -460,6 +469,7 @@ const Organism = ({ hideFloating }) => {
           titles={"LESSON 5: TRANSFER OF ENERGY IN THE TROPHIC LEVEL"}
           worksheet_no={0}
           setEvaluationOpen={setEvaluationOpen}
+          setIsModalWorksheet4ModalOpenPrevious={setIsModalWorksheet4ModalOpen}
         />
       </WorksheetModal>
 

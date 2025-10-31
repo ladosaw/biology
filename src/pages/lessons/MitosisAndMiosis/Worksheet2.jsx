@@ -27,6 +27,8 @@ const Worksheet2 = ({
   titles,
   worksheet_no,
   setIsModalWorksheet2ModalOpen,
+  setIsModalWorksheetModalOpenPrevious,
+  setEvaluationOpenNext,
 }) => {
   const [answers, setAnswers] = useState(Array(QUESTIONS.length).fill(""));
   const [isLoading, setIsLoading] = useState(false);
@@ -88,31 +90,70 @@ const Worksheet2 = ({
       Swal.fire({
         icon: "success",
         title: "Quiz Submitted!",
+        showConfirmButton: false,
+        showCloseButton: true,
         html: `
-            <p><strong>Worksheet:</strong> ${worksheet.titles || titles}</p>
-          <p><strong>Worksheet No:</strong> ${
-            worksheet.worksheet_no || worksheet_no
-          }</p>
-          <p>Score: ${score}/100</p>
-          <div class="results-grid">
-            ${detailed_results
-              .map(
-                (result, index) => `
-              <div class="result-item">
-                <span>Q${index + 1}:</span>
-                <span class="${
-                  result.is_correct ? "text-green-600" : "text-red-600"
-                }">
-                  ${result.user_answer || "N/A"} - 
-                  ${result.is_correct ? "✓" : "✗"}
-                </span>
-              </div>
-            `
-              )
-              .join("")}
-          </div>
-        `,
-        confirmButtonColor: "#10B981",
+    <p><strong>Worksheet:</strong> ${worksheet.titles || titles}</p>
+    <p><strong>Worksheet No:</strong> ${
+      worksheet.worksheet_no || worksheet_no
+    }</p>
+    <p><strong>Score:</strong> ${score}</p>
+    <div style="margin-top:20px; display:flex-direction:column; justify-content:center; gap:10px;">
+      ${detailed_results
+        .map(
+          (result, index) => `
+        <div class="result-item">
+          <span class="question-index">${index + 1}.</span>
+          <span class="result ${result.is_correct ? "correct" : "incorrect"}">
+            ${result.user_answer.toUpperCase()} -
+            ${result.is_correct ? "Correct ✔️" : "Incorrect ❌"}
+          </span>
+        </div>
+      `
+        )
+        .join("")}
+       
+         <button 
+        id="previousBtn" 
+        class="swal2-confirm swal2-styled" 
+        style="
+          background-color: transparent;
+          color: #3B82F6;
+          border: 1.5px solid #3B82F6;
+          font-size:16px;
+          border-radius:6px;
+          min-width:auto;">
+          Previous
+      </button>
+
+      <button 
+        id="nextBtn" 
+        class="swal2-confirm swal2-styled" 
+        style="
+          background-color:#3B82F6;
+          font-size:16px;
+          border-radius:6px;
+          min-width:auto; ">
+          Next
+      </button>
+    </div>
+  `,
+        didRender: () => {
+          const nextBtn = document.getElementById("nextBtn");
+          const previousBtn = document.getElementById("previousBtn");
+          if (nextBtn) {
+            nextBtn.addEventListener("click", () => {
+              Swal.close();
+              setEvaluationOpenNext(true);
+            });
+          }
+          if (previousBtn) {
+            previousBtn.addEventListener("click", () => {
+              Swal.close();
+              setIsModalWorksheetModalOpenPrevious(true);
+            });
+          }
+        },
       });
     } catch (error) {
       Swal.fire({

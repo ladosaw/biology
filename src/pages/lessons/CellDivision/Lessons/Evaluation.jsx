@@ -7,7 +7,12 @@ import { MitosisQuestions } from "../ConstantMitosis";
 import FiveMinuteTimer from "../../../../components/timer/FiveMinuteTimer.jsx";
 import SubmitDatePicker from "../../../../components/date-input/SubmitDatePicker.jsx";
 
-const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
+const Evaluation = ({
+  titles,
+  worksheet_no,
+  setEvaluationOpen,
+  setIsModalWorksheet2ModalOpenPrevious,
+}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [answers, setAnswers] = useState({});
   const [invalidQuestions, setInvalidQuestions] = useState([]);
@@ -75,26 +80,55 @@ const Evaluation = ({ titles, worksheet_no, setEvaluationOpen }) => {
       const { score, worksheet, detailed_results } = response.data;
 
       // Show success before closing
-      await Swal.fire({
+      Swal.fire({
         icon: "success",
         title: "Quiz Submitted!",
+        showConfirmButton: false,
+        showCloseButton: true,
         html: `
-          <p><strong>Worksheet:</strong> ${worksheet.titles || titles}</p>
-          <p><strong>Worksheet No:</strong> Evaluation</p>
-          <p><strong>Your Score:</strong> ${score}</p>
-          <ul>
-          <p><strong> Your Answer: </strong></p>
-            ${detailed_results
-              .map(
-                (result) =>
-                  `<li>${result.user_answer.toUpperCase()} is ${
-                    result.is_correct ? "correct ✔️" : "incorrect ❌"
-                  }</li>`
-              )
-              .join("")}
-          </ul>
-        `,
-        confirmButtonColor: "#10B981",
+             <p><strong>Worksheet:</strong> ${worksheet.titles || titles}</p>
+              <p><strong>Worksheet No:</strong> Evaluation</p>
+             <p><strong>Score:</strong> ${score}</p>
+             <div style="margin-top:20px; display:flex-direction:column; justify-content:center; gap:10px;">
+               ${detailed_results
+                 .map(
+                   (result, index) => `
+                 <div class="result-item">
+                   <span class="question-index">${index + 1}.</span>
+                   <span class="result ${
+                     result.is_correct ? "correct" : "incorrect"
+                   }">
+                     ${result.user_answer.toUpperCase()} -
+                     ${result.is_correct ? "Correct ✔️" : "Incorrect ❌"}
+                   </span>
+                 </div>
+               `
+                 )
+                 .join("")}
+         
+               <button 
+                id="previousBtn" 
+                class="swal2-confirm swal2-styled" 
+                style="
+                  background-color: transparent;
+                  color: #3B82F6;
+                  border: 1.5px solid #3B82F6;
+                  font-size:16px;
+                  border-radius:6px;
+                  min-width:auto;">
+                  Previous
+              </button>
+             </div>
+           `,
+        didRender: () => {
+          const previousBtn = document.getElementById("previousBtn");
+          if (previousBtn) {
+            previousBtn.addEventListener("click", () => {
+              Swal.close();
+              setIsModalWorksheet2ModalOpenPrevious(true);
+            });
+          }
+        },
       });
 
       setEvaluationOpen(false);

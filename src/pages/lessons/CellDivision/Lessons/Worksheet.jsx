@@ -27,7 +27,12 @@ const QUESTIONS = [
   "How many daughter cells are produced during mitosis division?",
 ];
 
-const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
+const Worksheet = ({
+  titles,
+  worksheet_no,
+  setIsModalWorksheetModalOpen,
+  setIsModalWorksheet2ModalOpenNext,
+}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [submitDate, setSubmitDate] = useState(null);
   const [answers, setAnswers] = useState({
@@ -144,31 +149,52 @@ const Worksheet = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
       Swal.fire({
         icon: "success",
         title: "Quiz Submitted!",
+        showConfirmButton: false,
+        showCloseButton: true,
         html: `
-           <p><strong>Worksheet:</strong> ${worksheet.titles || titles}</p>
-          <p><strong>Worksheet No:</strong> ${
-            worksheet.worksheet_no || worksheet_no
-          }</p>
-          <p><strong>Score:</strong> ${score}</p>
-          <div class="results-list">
-            ${detailed_results
-              .map(
-                (result, index) => `
-              <div class="result-item">
-                <span class="result-index">${index + 1}.</span>
-                <span class="result ${
-                  result.is_correct ? "correct" : "incorrect"
-                }">
-                  ${result.user_answer.toUpperCase()} - 
-                  ${result.is_correct ? "Correct ✔️" : "Incorrect ❌"}
-                </span>
-              </div>
-            `
-              )
-              .join("")}
-          </div>
-        `,
-        confirmButtonColor: "#10B981",
+        <p><strong>Worksheet:</strong> ${worksheet.titles || titles}</p>
+        <p><strong>Worksheet No:</strong> ${
+          worksheet.worksheet_no || worksheet_no
+        }</p>
+        <p><strong>Score:</strong> ${score}</p>
+        <div style="margin-top:20px; display:flex-direction:column; justify-content:center; gap:10px;">
+          ${detailed_results
+            .map(
+              (result, index) => `
+            <div class="result-item">
+              <span class="question-index">${index + 1}.</span>
+              <span class="result ${
+                result.is_correct ? "correct" : "incorrect"
+              }">
+                ${result.user_answer.toUpperCase()} -
+                ${result.is_correct ? "Correct ✔️" : "Incorrect ❌"}
+              </span>
+            </div>
+          `
+            )
+            .join("")}
+    
+          <button 
+            id="nextBtn" 
+            class="swal2-confirm swal2-styled" 
+            style="
+              background-color:#3B82F6;
+              font-size:16px;
+              border-radius:6px;
+              min-width:auto; ">
+              Next
+          </button>
+        </div>
+      `,
+        didRender: () => {
+          const nextBtn = document.getElementById("nextBtn");
+          if (nextBtn) {
+            nextBtn.addEventListener("click", () => {
+              Swal.close();
+              setIsModalWorksheet2ModalOpenNext(true);
+            });
+          }
+        },
       });
     } catch (error) {
       showErrorAlert(

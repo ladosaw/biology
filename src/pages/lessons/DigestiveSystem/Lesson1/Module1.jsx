@@ -348,6 +348,7 @@ const Module1 = ({ hideFloating }) => {
           }
           worksheet_no={1}
           setIsModalWorksheetModalOpen={setIsModalWorksheetModalOpen}
+          setIsModalWorksheet2ModalOpenNext={setIsModalWorksheet2ModalOpen}
         />
       </Modal>
 
@@ -362,6 +363,8 @@ const Module1 = ({ hideFloating }) => {
           }
           worksheet_no={2}
           setIsModalWorksheet2ModalOpen={setIsModalWorksheet2ModalOpen}
+          setIsModalWorksheetModalOpenPrevious={setIsModalWorksheetModalOpen}
+          setIsModalWorksheet3ModalOpenNext={setIsModalWorksheet3ModalOpen}
         />
       </Modal>
 
@@ -376,6 +379,8 @@ const Module1 = ({ hideFloating }) => {
           }
           worksheet_no={3}
           setIsModalWorksheet3ModalOpen={setIsModalWorksheet3ModalOpen}
+          setIsModalWorksheet2ModalOpenPrevious={setIsModalWorksheet2ModalOpen}
+          setEvaluationOpenNext={setEvaluationOpen}
         />
       </Modal>
 
@@ -390,6 +395,7 @@ const Module1 = ({ hideFloating }) => {
           }
           worksheet_no={0}
           setEvaluationOpen={setEvaluationOpen}
+          setIsModalWorksheet3ModalOpenPrevious={setIsModalWorksheet3ModalOpen}
         />
       </Modal>
 

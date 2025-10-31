@@ -17,7 +17,12 @@ import rabbits from "../../../assets/images/OrganismWorksheet1/rabbits.png";
 import rat from "../../../assets/images/OrganismWorksheet1/rat.png";
 import SubmitDatePicker from "../../../components/date-input/SubmitDatePicker.jsx";
 
-const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
+const Worksheet1 = ({
+  titles,
+  worksheet_no,
+  setIsModalWorksheetModalOpen,
+  setIsModalWorksheet2ModalOpenNext,
+}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [submitDate, setSubmitDate] = useState(null);
   const [answers, setAnswers] = useState({
@@ -174,43 +179,56 @@ const Worksheet1 = ({ titles, worksheet_no, setIsModalWorksheetModalOpen }) => {
       Swal.fire({
         icon: "success",
         title: "Quiz Submitted!",
+        showConfirmButton: false,
+        showCloseButton: true,
         html: `
-  ${
-    worksheet.titles
-      ? `<p><strong>Worksheet:</strong> ${worksheet.titles}</p>`
-      : titles
-      ? `<p><strong>Worksheet:</strong> ${titles}</p>`
-      : ""
-  }
-  ${
-    worksheet.worksheet_no
-      ? `<p><strong>Worksheet No:</strong> ${worksheet.worksheet_no}</p>`
-      : worksheet_no
-      ? `<p><strong>Worksheet No:</strong> ${worksheet_no}</p>`
-      : ""
-  }
-  ${
-    score !== undefined && score !== null
-      ? `<p><strong>Your Score:</strong> ${score}</p>`
-      : ""
-  }
-  ${
-    detailed_results && detailed_results.length
-      ? `<ul>
-          <p><strong>Your Answer:</strong></p>
-          ${detailed_results
-            .map((result) => {
-              if (!result.user_answer) return ""; // skip if empty/undefined
-              return `<li>${result.user_answer.toUpperCase()} is ${
-                result.is_correct ? "correct ✔️" : "incorrect ❌"
-              }</li>`;
-            })
-            .join("")}
-        </ul>`
-      : ""
-  }
-`,
-        confirmButtonColor: "#10B981",
+         <p><strong>Worksheet:</strong> ${worksheet.titles || titles}</p>
+         <p><strong>Worksheet No:</strong> ${
+           worksheet.worksheet_no || worksheet_no
+         }</p>
+         <p><strong>Score:</strong> ${score}</p>
+         <div style="margin-top:20px; display:flex-direction:column; justify-content:center; gap:10px;">
+           ${detailed_results
+             .filter(
+               (result) =>
+                 result.user_answer !== undefined && result.user_answer !== null
+             )
+             .map(
+               (result, index) => `
+               <div class="result-item">
+               <span class="question-index">${index + 1}.</span>
+               <span class="result ${
+                 result.is_correct ? "correct" : "incorrect"
+               }">
+                 ${result.user_answer} -
+                 ${result.is_correct ? "Correct ✔️" : "Incorrect ❌"}
+               </span>
+             </div>
+           `
+             )
+             .join("")}
+     
+           <button 
+             id="nextBtn" 
+             class="swal2-confirm swal2-styled" 
+             style="
+               background-color:#3B82F6;
+               font-size:16px;
+               border-radius:6px;
+               min-width:auto; ">
+               Next
+           </button>
+         </div>
+       `,
+        didRender: () => {
+          const nextBtn = document.getElementById("nextBtn");
+          if (nextBtn) {
+            nextBtn.addEventListener("click", () => {
+              Swal.close();
+              setIsModalWorksheet2ModalOpenNext(true);
+            });
+          }
+        },
       });
     } catch (error) {
       Swal.fire({

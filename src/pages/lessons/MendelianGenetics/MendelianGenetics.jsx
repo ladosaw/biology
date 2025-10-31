@@ -706,6 +706,7 @@ const MendelianGenetics = ({ hideFloating }) => {
           titles={"LESSON 4: PATTERNS OF MENDELIAN GENETICS"}
           worksheet_no={1}
           setIsModalWorksheetModalOpen={setIsModalWorksheetModalOpen}
+          setIsModalWorksheet2ModalOpenNext={setIsModalWorksheet2ModalOpen}
         />
       </Modal>
 
@@ -718,6 +719,8 @@ const MendelianGenetics = ({ hideFloating }) => {
           titles={"LESSON 4: PATTERNS OF MENDELIAN GENETICS"}
           worksheet_no={2}
           setIsModalWorksheet2ModalOpen={setIsModalWorksheet2ModalOpen}
+          setIsModalWorksheet3ModalOpenNext={setIsModalWorksheet3ModalOpen}
+          setIsModalWorksheetModalOpenPrevious={setIsModalWorksheetModalOpen}
         />
       </Modal>
 
@@ -733,6 +736,10 @@ const MendelianGenetics = ({ hideFloating }) => {
             titles={"LESSON 4: PATTERNS OF MENDELIAN GENETICS"}
             worksheet_no={3}
             setIsModalWorksheet3ModalOpen={setIsModalWorksheet3ModalOpen}
+            setIsModalWorksheet4ModalOpenNext={setIsModalWorksheet4ModalOpen}
+            setIsModalWorksheet2ModalOpenPrevious={
+              setIsModalWorksheet2ModalOpen
+            }
           />
         </DndProvider>
       </Modal>
@@ -747,6 +754,10 @@ const MendelianGenetics = ({ hideFloating }) => {
             titles={"LESSON 4: PATTERNS OF MENDELIAN GENETICS"}
             worksheet_no={4}
             setIsModalWorksheet4ModalOpen={setIsModalWorksheet4ModalOpen}
+            setEvaluationOpenNext={setEvaluationOpen}
+            setIsModalWorksheet3ModalOpenPrevious={
+              setIsModalWorksheet3ModalOpen
+            }
           />
         </DndProvider>
       </Modal>
@@ -760,6 +771,7 @@ const MendelianGenetics = ({ hideFloating }) => {
           titles={"LESSON 4: PATTERNS OF MENDELIAN GENETICS"}
           worksheet_no={0}
           setEvaluationOpen={setEvaluationOpen}
+          setIsModalWorksheet4ModalOpenPrevious={setIsModalWorksheet4ModalOpen}
         />
       </Modal>
 
