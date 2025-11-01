@@ -17,9 +17,8 @@ import Figure4 from "../../../assets/images/Figure4.png";
 import PunnettSquare from "../../../assets/images/PunnettSquares.jpg";
 import DihybridCrossExample from "../../../assets/images/DihybridCrossExample.jpg";
 import Worksheets from "../../../components/Worksheets/Worksheets";
-
 import Modal from "../../../components/Modal/Modal";
-
+import BtnNextPrev from "../../../components/buttons/BtnNextPrev";
 import Worksheet1 from "./Worksheet1";
 import Worksheet2 from "./Worksheet2";
 import Worksheet3 from "./Worksheet3";
@@ -784,28 +783,23 @@ const MendelianGenetics = ({ hideFloating, hideAdditionalButtons = false }) => {
           setIsModalWorksheet4ModalOpenPrevious={setIsModalWorksheet4ModalOpen}
         />
       </Modal>
-
+      {/* Footer Navigation */}
       {!hideAdditionalButtons && (
         <div className="flex flex-col items-end mt-10 space-y-4">
           <div className="bg-gray-200 w-full h-[1px]" />
-          <div className="flex justify-between items-center w-full mt-8">
-            {/* Previous Button */}
-            <button
-              onClick={handlePreviousLesson}
-              className="flex items-center gap-2 bg-gray-200 text-gray-800 px-5 py-2 rounded-xl shadow hover:bg-gray-300 transition duration-200"
-            >
-              <FaArrowLeft className="w-5 h-5" />
-              <span className="font-semibold text-lg">Lesson 3: Meiosis</span>
-            </button>
-
-            {/* Next Button */}
-            <button
-              onClick={handleNextLesson}
-              className="flex items-center gap-2 bg-primary text-white px-5 py-2 rounded-xl shadow hover:bg-primary-dark transition duration-200"
-            >
-              <span className="font-semibold text-lg">Lesson 5: Organism</span>
-              <FaArrowRight className="w-5 h-5" />
-            </button>
+          <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-4 sm:gap-8 mt-8">
+            <BtnNextPrev
+              name="Lesson 3: Meiosis"
+              handleNextPrevLesson={handlePreviousLesson}
+              isNext={false}
+              className="w-full sm:w-auto"
+            />
+            <BtnNextPrev
+              name="Lesson 5: Organism"
+              handleNextPrevLesson={handleNextLesson}
+              isNext={true}
+              className="w-full sm:w-auto"
+            />
           </div>
           <div className="bg-gray-200 w-full h-[1px]" />
         </div>

@@ -22,6 +22,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import Worksheet3 from "./Worksheet3";
 import Evaluation from "./Evaluation";
 import Worksheet4 from "./Worksheet4.jsx";
+import BtnNextPrev from "../../../components/buttons/BtnNextPrev.jsx";
 
 const Organism = ({ hideFloating, hideAdditionalButtons = false }) => {
   const [isModalWorksheetOpen, setIsModalWorksheetModalOpen] = useState(false);
@@ -479,21 +480,19 @@ const Organism = ({ hideFloating, hideAdditionalButtons = false }) => {
       </WorksheetModal>
 
       {!hideAdditionalButtons && (
-        <div className="flex flex-col items-end mt-10 space-y-4">
-          <div className="bg-gray-200 w-full h-[1px]" />
-          <div className="flex justify-between items-center w-full mt-8">
-            {/* Previous Button */}
-            <button
-              onClick={handlePreviousLesson}
-              className="flex items-center gap-2 bg-gray-200 text-gray-800 px-5 py-2 rounded-xl shadow hover:bg-gray-300 transition duration-200"
-            >
-              <FaArrowLeft className="w-5 h-5" />
-              <span className="font-semibold text-lg">
-                Lesson 4: Mendelian Genetics
-              </span>
-            </button>
+        <div className="mt-10 w-full px-4 sm:px-6 md:px-8">
+          <div className="flex flex-col space-y-4">
+            <div className="h-[1px] bg-gray-200" />
+            <div className="flex justify-center sm:justify-end">
+              <BtnNextPrev
+                name="Lesson 4: Mendelian Genetics"
+                handleNextPrevLesson={handlePreviousLesson}
+                isNext={true}
+                className="w-full sm:w-auto"
+              />
+            </div>
+            <div className="h-[1px] bg-gray-200" />
           </div>
-          <div className="bg-gray-200 w-full h-[1px]" />
         </div>
       )}
 
