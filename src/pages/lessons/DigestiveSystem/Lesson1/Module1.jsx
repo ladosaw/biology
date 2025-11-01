@@ -17,6 +17,7 @@ import Worksheet from "./Worksheet.jsx";
 import Worksheet2 from "./Worksheet2.jsx";
 import Worksheets3 from "./Worksheet3.jsx";
 import Evaluation from "./Evaluation.jsx";
+import iamhealthy from "../../../../assets/iamhealthy.png";
 
 const Module1 = ({ hideFloating, hideAdditionalButtons = false }) => {
   const [isModalWorksheetOpen, setIsModalWorksheetModalOpen] = useState(false);
@@ -72,6 +73,42 @@ const Module1 = ({ hideFloating, hideAdditionalButtons = false }) => {
       );
     }
   };
+
+  const healthyGut = [
+    "Eat a diverse range of foods",
+    "Include plenty of fiber in your diet",
+    "Stay hydrated",
+    "Incorporate fermented foods",
+    "Limit processed foods and sugars",
+    "Exercise regularly",
+    "Manage stress effectively",
+    "Get enough sleep",
+    "Avoid unnecessary antibiotics",
+    "Regular health check-ups",
+  ];
+
+  const gutFacts = [
+    {
+      title: "30 Feet Long",
+      fact: "The digestive system starts at the mouth and ends at the anus, spanning about 30 feet in length.",
+    },
+    {
+      title: "Nutrient Hub",
+      fact: "The small intestine is about 20 feet long and is where most nutrient absorption occurs.",
+    },
+    {
+      title: "Acid Shield",
+      fact: "The stomach lining regenerates every few days to protect against the highly acidic environment.",
+    },
+    {
+      title: "Saliva Production",
+      fact: "The average person produces about 1.5 liters of saliva each day.",
+    },
+    {
+      title: "Full Cycle",
+      fact: "The entire digestive process, from eating to elimination, can take anywhere from 24 to 72 hours.",
+    },
+  ];
 
   return (
     <div className="px-4 lg:px-4 text-justify text-sm sm:text-base md:text-lg">
@@ -329,6 +366,81 @@ const Module1 = ({ hideFloating, hideAdditionalButtons = false }) => {
           </div>
         </div>
       </div>
+
+      <section className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-12 font-sans">
+        <div className="flex flex-col md:flex-row items-stretch gap-8 lg:gap-12">
+          <div className="order-2 md:order-1">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-emerald-600 mb-2">
+              I AM Healthy
+            </h1>
+
+            <h3 className="mt-4 text-xl sm:text-2xl font-bold text-slate-800 border-b pb-2 border-emerald-100">
+              Healthy Habits Lead to a Healthy Lifestyle:
+            </h3>
+
+            <p className="mt-6 text-slate-700 leading-relaxed text-base lg:text-lg">
+              Digestive health is the cornerstone of overall well-being. It's
+              not just about how your stomach feels after a meal; it's about the
+              foundation of how your body extracts nutrients, energy, and
+              sustenance from the foods you consume. Maintaining a healthy
+              digestive system can lead to better absorption of nutrients,
+              improved energy levels, and a reduced risk of digestive disorders.
+            </p>
+
+            <div className="flex items-center justify-center mt-4">
+              <img
+                src={iamhealthy || placeholder}
+                alt="I am healthy - digestive health illustration"
+                className="w-96"
+              />
+            </div>
+
+            <div className="mt-8 p-4 sm:p-6 bg-emerald-50 rounded-lg shadow-inner">
+              <h4 className="text-lg font-bold text-emerald-700 mb-4 border-b border-emerald-200 pb-2">
+                ✅ Top 10 Habits for a Healthy Gut
+              </h4>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
+                {/* Left column (1–5) */}
+                <ol className="list-decimal list-inside space-y-2 text-slate-700 marker:font-semibold marker:text-emerald-500 pl-4">
+                  {healthyGut.slice(0, 5).map((habit, index) => (
+                    <li key={index}>{habit}</li>
+                  ))}
+                </ol>
+
+                {/* Right column (6–10) */}
+                <ol
+                  start={6}
+                  className="list-decimal list-inside space-y-2 text-slate-700 marker:font-semibold marker:text-emerald-500 pl-4"
+                >
+                  {healthyGut.slice(5).map((habit, index) => (
+                    <li key={index + 5}>{habit}</li>
+                  ))}
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-12 pt-8 border-t border-slate-200">
+          <h4 className="text-xl font-bold text-slate-800 mb-4">
+            🧠 Did You Know? Fascinating Facts About Your Gut
+          </h4>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-slate-700">
+            {gutFacts.map((item, index) => (
+              <li
+                key={index}
+                className="bg-white p-4 rounded-xl shadow-md transition-all duration-300 hover:shadow-lg border-l-4 border-emerald-400"
+              >
+                <strong className="text-emerald-600 block mb-1">
+                  {item.title}:
+                </strong>
+                {item.fact}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
       {/* <Worksheet /> */}
 
