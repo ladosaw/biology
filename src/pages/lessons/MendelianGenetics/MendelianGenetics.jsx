@@ -90,6 +90,19 @@ const MendelianGenetics = ({ hideFloating, hideAdditionalButtons = false }) => {
     window.location.reload();
   };
 
+  const mendelsLawsInAgricultire = [
+    {
+      title: "Selective Breeding for High-Yield Crops",
+      description:
+        "Selective breeding techniques guided by Mendelian genetics help increase crop yields.",
+    },
+    {
+      title: "Developing Disease-Resistant Crops",
+      description:
+        "Breeding for traits like disease resistance in wheat and rice follows Mendelian inheritance.",
+    },
+  ];
+
   return (
     <div className="px-4 lg:px-4 text-justify text-sm sm:text-base md:text-lg">
       {/* Header Section */}
@@ -696,6 +709,99 @@ const MendelianGenetics = ({ hideFloating, hideAdditionalButtons = false }) => {
         Phenotypic ratio:
         <span className="font-semibold"> 9:3:3:1</span>
       </p>
+
+      <div className="max-w-5xl mx-auto p-6 md:p-10 bg-white rounded-2xl shadow-lg">
+        <h1 className="text-2xl md:text-3xl font-bold text-slate-800 mb-4">
+          Applications of Mendel’s Laws: The Foundation of Modern Genetics
+        </h1>
+        <p className="text-slate-600 leading-relaxed mb-6">
+          Gregor Mendel, often called the “Father of Genetics,” formulated the
+          fundamental principles of heredity through his experiments with pea
+          plants (Pisum sativum). His discoveries now known as Mendel’s Laws of
+          Inheritance laid the groundwork for understanding genetic inheritance
+          in all living organisms. These laws include:
+        </p>
+
+        <ul className="list-decimal list-inside bg-emerald-50 border border-emerald-100 rounded-lg p-5 mb-6 text-slate-700 space-y-2">
+          <li>
+            <strong>The Law of Segregation</strong> – Each individual carries
+            two alleles for a trait, but only one is passed to offspring.
+          </li>
+          <li>
+            <strong>The Law of Independent Assortment</strong> – Genes for
+            different traits assort independently during gamete formation.
+          </li>
+          <li>
+            <strong>The Law of Dominance</strong> – Some alleles are dominant
+            and mask the expression of recessive alleles.
+          </li>
+        </ul>
+
+        <p className="text-slate-600 leading-relaxed mb-8">
+          Mendel’s laws have far-reaching applications in agriculture, medicine,
+          biotechnology, and evolutionary studies. This article explores these
+          applications with real-world examples that demonstrate their
+          significance.
+        </p>
+
+        <h1 className="text-xl md:text-2xl font-bold text-slate-800 mb-4">
+          Mendel’s Laws in Agriculture and Plant Breeding
+        </h1>
+        <ol className="list-decimal list-inside bg-slate-50 border border-slate-200 rounded-lg p-5 mb-6 space-y-3 text-slate-700">
+          {mendelsLawsInAgricultire.map((item, index) => (
+            <li>
+              <strong>{item.title}</strong>– {item.description}
+            </li>
+          ))}
+        </ol>
+
+        <h1 className="text-xl md:text-2xl font-bold text-slate-800 mb-4">
+          Mendel’s Laws in Animal Breeding
+        </h1>
+        <ol className="list-decimal list-inside bg-slate-50 border border-slate-200 rounded-lg p-5 mb-6 space-y-3 text-slate-700">
+          <li>
+            <strong>Improving Dairy Cattle Breeds</strong> – Example: Black and
+            white coat color in cattle illustrates dominance and segregation
+            principles.
+          </li>
+        </ol>
+
+        <h1 className="text-xl md:text-2xl font-bold text-slate-800 mb-4">
+          Mendel’s Laws in Medicine and Human Genetics
+        </h1>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          <div className="bg-white border border-slate-200 p-5 rounded-lg shadow-sm">
+            <h2 className="font-semibold text-slate-800 mb-2">
+              Understanding Genetic Disorders
+            </h2>
+            <p className="text-slate-600">
+              <span className="font-medium">Example:</span> Cystic Fibrosis
+              (Autosomal Recessive Disorder)
+            </p>
+          </div>
+
+          <div className="bg-white border border-slate-200 p-5 rounded-lg shadow-sm">
+            <h2 className="font-semibold text-slate-800 mb-2">
+              Genetic Counseling for Hereditary Diseases
+            </h2>
+            <p className="text-slate-600">
+              <span className="font-medium">Example:</span> Sickle Cell Anemia
+              and Carrier Screening
+            </p>
+          </div>
+
+          <div className="bg-white border border-slate-200 p-5 rounded-lg shadow-sm">
+            <h2 className="font-semibold text-slate-800 mb-2">
+              Gene Therapy and Personalized Medicine
+            </h2>
+            <p className="text-slate-600">
+              <span className="font-medium">Example:</span> Hemophilia Treatment
+              Using Gene Therapy
+            </p>
+          </div>
+        </div>
+      </div>
 
       <Worksheets
         WorksheetData={MendelianGeneticsWorksheetsLink}

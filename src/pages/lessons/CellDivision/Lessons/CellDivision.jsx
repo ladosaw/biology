@@ -15,6 +15,7 @@ import Worksheet from "./Worksheet.jsx";
 import Worksheet2 from "./Worksheet2.jsx";
 import Worksheet3 from "./Worksheet3.jsx";
 import Modal from "../../../../components/Modal/Modal.jsx";
+import cytokenesis from "../../../../assets/cytokinesis.jpg";
 import BtnNextPrev from "../../../../components/buttons/BtnNextPrev.jsx";
 
 const CellDivision = ({ hideFloating, hideAdditionalButtons = false }) => {
@@ -75,6 +76,14 @@ const CellDivision = ({ hideFloating, hideAdditionalButtons = false }) => {
       );
     }
   };
+
+  const importanceOfMitosis = [
+    "•	Providing new cells for growth and replacement of worn-out cells.",
+    "•	Passing a consistent genetic identity to a new generation of cells.",
+    "•	Maintaining an equal number of chromosomes in each separated daughter cell.",
+    "•	Repairing damaged tissues and organs.",
+    "•	Helping in the growth and reproduction of new individual cells or organisms.",
+  ];
 
   return (
     <div className="px-4 lg:px-4 text-justify text-sm sm:text-base md:text-lg">
@@ -287,6 +296,115 @@ const CellDivision = ({ hideFloating, hideAdditionalButtons = false }) => {
           produced from one dividing parent cell. Thus, mitosis h as come to an
           end.
         </h2>
+      </div>
+
+      <div className="max-w-5xl mx-auto p-6 md:p-10 bg-white rounded-2xl shadow-lg leading-relaxed">
+        {/* Title */}
+        <h1 className="text-2xl md:text-3xl font-bold text-slate-800 mb-4 text-center">
+          COMPARISON OF MITOSIS IN PLANT AND ANIMAL CELLS
+        </h1>
+
+        <div className="flex flex-col items-center justify-center my-8 text-center">
+          <img
+            src={cytokenesis}
+            alt="Cytokinesis of Plants and Animals"
+            className="w-80 md:w-96 rounded-lg shadow-md border border-slate-200 mb-4"
+          />
+          <p className="text-slate-700 font-medium">
+            Figure 4: Cytokinesis of Plants and Animals
+          </p>
+          <p className="text-slate-500 text-sm mt-1">
+            Source:{" "}
+            <a
+              href="https://sciencefacts.net/wp-content/upload/2022/01/Cytokinesis.jpg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-emerald-700 hover:underline hover:text-emerald-900"
+            >
+              https://sciencefacts.net/wp-content/upload/2022/01/Cytokinesis.jpg
+            </a>
+          </p>
+        </div>
+
+        {/* Comparison */}
+        <div className="bg-emerald-50 border border-emerald-100 rounded-lg p-5 mb-6">
+          <p className="text-slate-700 mb-3">
+            In animal cells, the cell membrane is drawn inward (
+            <span className="italic">cleavage furrow</span>) and the cytoplasm
+            is pinched and forms the two new daughter cells. As seen in{" "}
+            <strong>Figure 4</strong>: cytokinesis of animal and plant cell.
+          </p>
+          <p className="text-slate-700">
+            In plants, a <strong>cell plate</strong> forms between the new
+            nuclei and gradually develops into a new membrane. The cell wall
+            then begins to appear.
+          </p>
+        </div>
+
+        {/* Importance of Mitosis */}
+        <section className="mb-8">
+          <h3 className="text-xl font-semibold text-slate-800 mb-3">
+            IMPORTANCE OF MITOSIS
+          </h3>
+          <ul className="list-disc list-inside space-y-2 bg-slate-50 border border-slate-200 rounded-lg p-5 text-slate-700">
+            {importanceOfMitosis.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Cell Division as Reproduction */}
+        <section className="mb-8">
+          <h1 className="text-xl md:text-2xl font-bold text-slate-800 mb-3">
+            CELL DIVISION AS MEANS OF REPRODUCTION
+          </h1>
+          <p className="text-slate-700">
+            The end of mitosis is the formation of two new daughter cells. The
+            daughter cells have the same chromosome number as the parent cell.
+            Among unicellular organisms such as{" "}
+            <span className="italic">amoeba, paramecium, yeast,</span> and
+            <span className="italic"> bacteria</span>, mitosis is a mode of
+            asexual reproduction. However, in multicellular organisms like{" "}
+            <span className="italic">dogs, cats, frogs,</span> and
+            <span className="italic"> ants</span>, mitosis does not result in
+            the production of new individuals but simply results in the growth
+            and repair of damaged tissues.
+          </p>
+        </section>
+
+        {/* Errors in Mitosis */}
+        <section className="mb-8">
+          <h2 className="text-xl md:text-2xl font-bold text-slate-800 mb-3">
+            Errors in Mitosis
+          </h2>
+          <p className="text-slate-700 mb-3">
+            The phase in which mitosis typically goes wrong is called the{" "}
+            <strong>metaphase</strong>, when the chromosomes align at the
+            metaphase plate. If the duplicate chromosomes do not pair properly,
+            they will not move properly to each pole during anaphase. This
+            results in one cell having two copies of the chromosome, while the
+            other cell has none. This type of error is usually fatal to the
+            daughter cell.
+          </p>
+          <p className="text-slate-700 mb-3">
+            Cells receiving two copies of a chromosome will have an increase in
+            gene expression. This can be harmful if the genes influence
+            heritable diseases like <strong>Down syndrome</strong>. If these
+            genes promote growth, uncontrolled division may lead to{" "}
+            <strong>cancer</strong>.
+          </p>
+          <p className="text-slate-600 text-sm">
+            <span className="font-semibold">Read More:</span>{" "}
+            <a
+              href="https://www.sciencing.com/happens-mitosis-goes-wrong-phase-wrong-8723/"
+              className="text-emerald-700 hover:text-emerald-900 underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              https://www.sciencing.com/happens-mitosis-goes-wrong-phase-wrong-8723/
+            </a>
+          </p>
+        </section>
       </div>
 
       <Worksheets

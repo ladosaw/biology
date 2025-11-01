@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { Container, Box } from "@mui/material";
 import { BrowserRouter } from "react-router-dom";
-import { Analytics } from "@vercel/analytics/react";
 import Router from "./routes/index";
 import Navbar from "./components/nav-section/NavBar";
 import Footer from "./components/footer/Footer";
