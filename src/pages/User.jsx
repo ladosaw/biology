@@ -16,6 +16,7 @@ import {
   Box,
   Button,
   Stack,
+  Tooltip,
   TableSortLabel,
 } from "@mui/material";
 import Swal from "sweetalert2";
@@ -125,7 +126,7 @@ const User = () => {
             <TableCell>Name</TableCell>
             <TableCell>Email</TableCell>
             <TableCell>Role</TableCell>
-            <TableCell>
+            {/* <TableCell>
               <TableSortLabel
                 active={sortConfig.key === "created_at"}
                 direction={sortConfig.direction}
@@ -133,7 +134,7 @@ const User = () => {
               >
                 Date Added
               </TableSortLabel>
-            </TableCell>
+            </TableCell> */}
             <TableCell>Actions</TableCell>
           </TableRow>
         </TableHead>
@@ -148,9 +149,9 @@ const User = () => {
                   </TableCell>
                   <TableCell>{row.email}</TableCell>
                   <TableCell>{row.role}</TableCell>
-                  <TableCell>
+                  {/* <TableCell>
                     {new Date(row.created_at).toLocaleDateString()}
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell>
                     <Stack
                       direction="row"
@@ -158,7 +159,9 @@ const User = () => {
                       alignItems="center"
                     >
                       <Button onClick={() => deleteRow(row.id)}>
-                        <DeleteForever color="error" />
+                        <Tooltip title="Delete" placement="top-start">
+                          <DeleteForever color="error" />
+                        </Tooltip>
                       </Button>
                     </Stack>
                   </TableCell>

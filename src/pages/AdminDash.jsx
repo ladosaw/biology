@@ -17,7 +17,7 @@ import {
   Tabs,
   Tab,
   TableSortLabel,
-  Chip,
+  Tooltip,
   Stack,
 } from "@mui/material";
 import Swal from "sweetalert2";
@@ -165,7 +165,7 @@ const AdminDash = () => {
                 Score
               </TableSortLabel>
             </TableCell>
-            <TableCell>
+            {/* <TableCell>
               <TableSortLabel
                 active={sortConfig.key === "created_at"}
                 direction={sortConfig.direction}
@@ -182,7 +182,7 @@ const AdminDash = () => {
               >
                 Check Date
               </TableSortLabel>
-            </TableCell>
+            </TableCell> */}
             <TableCell>Actions</TableCell>
           </TableRow>
         </TableHead>
@@ -202,7 +202,7 @@ const AdminDash = () => {
                     {row.worksheet_no === 0 ? "Evaluation" : row.worksheet_no}
                   </TableCell>
                   <TableCell>{row.score}</TableCell>
-                  <TableCell>
+                  {/* <TableCell>
                     {new Date(row.created_at).toLocaleDateString()}
                   </TableCell>
                   <TableCell>
@@ -211,7 +211,7 @@ const AdminDash = () => {
                     ) : (
                       new Date(row.updated_at).toLocaleDateString()
                     )}
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell>
                     <Stack
                       direction="row"
@@ -224,10 +224,14 @@ const AdminDash = () => {
                           toggleCheckModal();
                         }}
                       >
-                        <Task color="primary" />
+                        <Tooltip title="Check Manually" placement="top-start">
+                          <Task color="primary" />
+                        </Tooltip>
                       </Button>
                       <Button onClick={() => deleteRow(row.worksheet_id)}>
-                        <DeleteForever color="error" />
+                        <Tooltip title="Delete" placement="top-start">
+                          <DeleteForever color="error" />
+                        </Tooltip>
                       </Button>
                     </Stack>
                   </TableCell>
