@@ -286,6 +286,7 @@ const Worksheet3 = ({
         titles,
         worksheet_no,
         submit_date: submitDate?.toISOString(),
+        isLowerCase: false,
       };
       const response = await API.post("/worksheets/checker", payload, {
         headers: {
