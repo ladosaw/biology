@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import API from "../utils/api/api.js";
 
-const AdminDash = () => {
+const UserScore = () => {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -125,13 +125,13 @@ const AdminDash = () => {
                 >
                   Score
                 </TableCell>
-                <TableCell
+                {/* <TableCell
                   onClick={() => handleSort("created_at")}
                   sx={{ cursor: "pointer", whiteSpace: "nowrap" }}
                 >
                   Date Added
                 </TableCell>
-                <TableCell>Check Date</TableCell>
+                <TableCell>Check Date</TableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -152,7 +152,7 @@ const AdminDash = () => {
                           : row.worksheet_no}
                       </TableCell>
                       <TableCell>{row.score}</TableCell>
-                      <TableCell>
+                      {/* <TableCell>
                         {new Date(row.created_at).toLocaleDateString()}
                       </TableCell>
                       <TableCell>
@@ -161,7 +161,7 @@ const AdminDash = () => {
                         ) : (
                           new Date(row.updated_at).toLocaleDateString()
                         )}
-                      </TableCell>
+                      </TableCell> */}
                     </TableRow>
                   ))
               ) : (
@@ -191,4 +191,4 @@ const AdminDash = () => {
   );
 };
 
-export default AdminDash;
+export default UserScore;
