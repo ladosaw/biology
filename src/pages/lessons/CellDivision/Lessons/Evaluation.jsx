@@ -5,7 +5,6 @@ import Swal from "sweetalert2";
 import API from "../../../../utils/api/api";
 import { MitosisQuestions } from "../ConstantMitosis";
 import FiveMinuteTimer from "../../../../components/timer/FiveMinuteTimer.jsx";
-import SubmitDatePicker from "../../../../components/date-input/SubmitDatePicker.jsx";
 
 const Evaluation = ({
   titles,
@@ -63,7 +62,7 @@ const Evaluation = ({
 
       const payload = {
         answer: [answers],
-        inputAnswer: inputAnswersData(), // Added inputAnswer field
+        inputAnswer: inputAnswersData(),
         user_id,
         titles,
         worksheet_no,
@@ -79,7 +78,6 @@ const Evaluation = ({
 
       const { score, worksheet, detailed_results } = response.data;
 
-      // Show success before closing
       Swal.fire({
         icon: "success",
         title: "Quiz Submitted!",
@@ -98,8 +96,9 @@ const Evaluation = ({
                    <span class="result ${
                      result.is_correct ? "correct" : "incorrect"
                    }">
-                     ${result.user_answer.toUpperCase()} -
-                     ${result.is_correct ? "Correct ✔️" : "Incorrect ❌"}
+                     ${result.user_answer.toUpperCase()} - ${
+                     result.is_correct ? "Correct ✔️" : "Incorrect ❌"
+                   }
                    </span>
                  </div>
                `
@@ -143,7 +142,6 @@ const Evaluation = ({
       });
     } finally {
       setIsLoading(false);
-      // Don't close on error - let user try again
     }
   };
 
@@ -153,44 +151,57 @@ const Evaluation = ({
     <div className="p-4 md:p-8 max-w-4xl mx-auto space-y-8">
       <FiveMinuteTimer onSubmit={handleSubmit} initialTime={600} />
       <h1 className="text-3xl font-bold text-center">Mitosis</h1>
+
       {MitosisQuestions.map((q) => (
         <div key={q.id} className="mb-6 bg-white p-4 rounded-lg shadow-md">
-          <div className="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-4">
-            <input
-              type="text"
-              value={answers[q.id] || ""}
-              onChange={(e) => handleChange(q.id, e.target.value)}
-              placeholder="Answer"
-              className={`border p-2 rounded-md w-full md:w-48 focus:outline-none uppercase ${
-                invalidQuestions.includes(q.id)
-                  ? "border-red-500 focus:border-red-500"
-                  : "focus:ring focus:border-blue-300"
-              }`}
-            />
-            <p className="font-medium flex-1">{`${q.id}. ${q.question}`}</p>
-          </div>
-          <ul className="mt-2 pl-6">
-            {q.choices.map((choice, index) => (
-              <li key={index} className="flex items-start">
-                <span className="mr-2 font-bold">{choiceLetters[index]}.</span>
-                <span>{choice}</span>
-              </li>
-            ))}
+          <p
+            className={`font-medium mb-2 ${
+              invalidQuestions.includes(q.id) ? "text-red-500" : ""
+            }`}
+          >
+            {`${q.id}. ${q.question}`}
+          </p>
+
+          <ul className="space-y-2">
+            {q.choices.map((choice, index) => {
+              const letter = choiceLetters[index];
+              return (
+                <li
+                  key={index}
+                  className={`flex items-center p-2 rounded-md ${
+                    answers[q.id] === letter.toLowerCase() ? "" : ""
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    id={`${q.id}-${letter}`}
+                    name={`question-${q.id}`}
+                    value={letter.toLowerCase()}
+                    checked={answers[q.id] === letter.toLowerCase()}
+                    onChange={(e) => handleChange(q.id, e.target.value)}
+                    className="mr-2 cursor-pointer"
+                  />
+                  <label
+                    htmlFor={`${q.id}-${letter}`}
+                    className="cursor-pointer flex items-center"
+                  >
+                    <span className="font-bold mr-2">{letter}.</span>
+                    {choice}
+                  </label>
+                </li>
+              );
+            })}
           </ul>
         </div>
       ))}
 
       <div className="flex justify-end gap-4 mt-4">
-        {/* <SubmitDatePicker value={submitDate} onChange={setSubmitDate} /> */}
         <Button
           variant="outlined"
           color="error"
           onClick={handleReset}
           disabled={isLoading}
-          sx={{
-            px: 4,
-            py: 1,
-          }}
+          sx={{ px: 4, py: 1 }}
         >
           Reset
         </Button>
@@ -198,12 +209,9 @@ const Evaluation = ({
         <LoadingButton
           variant="contained"
           color="primary"
-          sx={{
-            px: 4,
-            py: 1,
-          }}
           loading={isLoading}
           onClick={handleSubmit}
+          sx={{ px: 4, py: 1 }}
         >
           Submit
         </LoadingButton>

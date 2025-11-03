@@ -10,7 +10,6 @@ import letterB from "../../../assets/images/letterB.png";
 import letterC from "../../../assets/images/letterC.png";
 import letterD from "../../../assets/images/letterD.png";
 import FiveMinuteTimer from "../../../components/timer/FiveMinuteTimer.jsx";
-import SubmitDatePicker from "../../../components/date-input/SubmitDatePicker.jsx";
 
 const Evaluation = ({
   titles,
@@ -24,17 +23,16 @@ const Evaluation = ({
   const [submitDate, setSubmitDate] = useState(null);
 
   const handleChange = (id, value) => {
-    setAnswers({ ...answers, [id]: value.toLowerCase() });
-    setInvalidQuestions(invalidQuestions.filter((qid) => qid !== id)); // Remove from invalid state if answered
+    setAnswers({ ...answers, [id]: value });
+    setInvalidQuestions(invalidQuestions.filter((qid) => qid !== id));
   };
 
-  const inputAnswersData = () => {
-    return MiosisWorksheetsEvaluationQuestions.map((q) => ({
+  const inputAnswersData = () =>
+    MiosisWorksheetsEvaluationQuestions.map((q) => ({
       id: q.id,
       question: q.question,
-      answer: answers[q.id] || "", // Now using untrimmed value since we trim on change
+      answer: answers[q.id] || "",
     }));
-  };
 
   const handleReset = () => {
     setAnswers({});
@@ -45,11 +43,16 @@ const Evaluation = ({
   const handleSubmit = async () => {
     try {
       setIsLoading(true);
-      if (Object.keys(answers).length !== 10) {
+
+      const unanswered = MiosisWorksheetsEvaluationQuestions.filter(
+        (q) => !answers[q.id]
+      ).map((q) => q.id);
+
+      if (unanswered.length > 0) {
         Swal.fire({
           icon: "warning",
           title: "Incomplete Answers",
-          text: "Please Answer all questions before submitting.",
+          html: `Missing answers for questions: ${unanswered.join(", ")}`,
           confirmButtonColor: "#f59e0b",
         });
         return;
@@ -74,7 +77,6 @@ const Evaluation = ({
         },
       });
 
-      // Extracting score and worksheet details
       const { score, worksheet, detailed_results } = response.data;
 
       setEvaluationOpen(false);
@@ -85,40 +87,40 @@ const Evaluation = ({
         showConfirmButton: false,
         showCloseButton: true,
         html: `
-             <p><strong>Worksheet:</strong> ${worksheet.titles || titles}</p>
-              <p><strong>Worksheet No:</strong> Evaluation</p>
-             <p><strong>Score:</strong> ${score}</p>
-             <div style="margin-top:20px; display:flex-direction:column; justify-content:center; gap:10px;">
-               ${detailed_results
-                 .map(
-                   (result, index) => `
-                 <div class="result-item">
-                   <span class="question-index">${index + 1}.</span>
-                   <span class="result ${
-                     result.is_correct ? "correct" : "incorrect"
-                   }">
-                     ${result.user_answer.toUpperCase()} -
-                     ${result.is_correct ? "Correct ✔️" : "Incorrect ❌"}
-                   </span>
-                 </div>
-               `
-                 )
-                 .join("")}
-         
-               <button 
-                id="previousBtn" 
-                class="swal2-confirm swal2-styled" 
-                style="
-                  background-color: transparent;
-                  color: #3B82F6;
-                  border: 1.5px solid #3B82F6;
-                  font-size:16px;
-                  border-radius:6px;
-                  min-width:auto;">
-                  Previous
-              </button>
-             </div>
-           `,
+          <p><strong>Worksheet:</strong> ${worksheet.titles || titles}</p>
+          <p><strong>Worksheet No:</strong> Evaluation</p>
+          <p><strong>Score:</strong> ${score}</p>
+          <div style="margin-top:20px; display:flex-direction:column; justify-content:center; gap:10px;">
+            ${detailed_results
+              .map(
+                (result, index) => `
+              <div class="result-item">
+                <span class="question-index">${index + 1}.</span>
+                <span class="result ${
+                  result.is_correct ? "correct" : "incorrect"
+                }">
+                  ${result.user_answer.toUpperCase()} - ${
+                  result.is_correct ? "Correct ✔️" : "Incorrect ❌"
+                }
+                </span>
+              </div>
+            `
+              )
+              .join("")}
+            <button 
+              id="previousBtn" 
+              class="swal2-confirm swal2-styled" 
+              style="
+                background-color: transparent;
+                color: #3B82F6;
+                border: 1.5px solid #3B82F6;
+                font-size:16px;
+                border-radius:6px;
+                min-width:auto;">
+              Previous
+            </button>
+          </div>
+        `,
         didRender: () => {
           const previousBtn = document.getElementById("previousBtn");
           if (previousBtn) {
@@ -140,9 +142,10 @@ const Evaluation = ({
       });
     } finally {
       setIsLoading(false);
-      setEvaluationOpen(false);
     }
   };
+
+  const choiceLetters = ["A", "B", "C", "D"];
 
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto space-y-8">
@@ -150,8 +153,9 @@ const Evaluation = ({
       <FiveMinuteTimer onSubmit={handleSubmit} initialTime={600} />
       <p>
         Direction: Read and understand each question, then choose the correct
-        answer. Write the letter of your choice in the box before each number.
+        answer by selecting one of the options.
       </p>
+
       {MiosisWorksheetsEvaluationQuestions.map((q) => (
         <div key={q.id} className="mb-6 bg-white p-4 rounded-lg shadow-md">
           {q.id === 8 && (
@@ -159,132 +163,62 @@ const Evaluation = ({
               <h1 className="text-lg font-bold mb-4 text-gray-700">
                 For item 8, refer to the table below.
               </h1>
-              <div className="overflow-x-auto mb-9">
-                <table className="w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
-                  <thead>
-                    <tr className="bg-blue-500 text-white text-left">
-                      <th className="px-6 py-3 border border-blue-600">
-                        Basis for Comparison
-                      </th>
-                      <th className="px-6 py-3 border border-blue-600">
-                        Mitosis
-                      </th>
-                      <th className="px-6 py-3 border border-blue-600">
-                        Meiosis
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="text-gray-700">
-                    <tr className="hover:bg-blue-100 transition-all duration-200">
-                      <td className="px-6 py-3 border border-gray-300">
-                        Number of Daughter Cells
-                      </td>
-                      <td className="px-6 py-3 border border-gray-300">2</td>
-                      <td className="px-6 py-3 border border-gray-300"></td>
-                    </tr>
-                    <tr className="bg-gray-100 hover:bg-blue-100 transition-all duration-200">
-                      <td className="px-6 py-3 border border-gray-300">
-                        Chromosome Number
-                      </td>
-                      <td className="px-6 py-3 border border-gray-300">
-                        2N (Diploid)
-                      </td>
-                      <td className="px-6 py-3 border border-gray-300"></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              {/* You can add your table here */}
             </>
           )}
 
-          <div className="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-4">
-            <input
-              type="text"
-              value={answers[q.id] || ""}
-              onChange={(e) => handleChange(q.id, e.target.value)}
-              placeholder="Answer"
-              className={`border p-2 rounded-md w-full md:w-48 focus:outline-none uppercase ${
-                invalidQuestions.includes(q.id)
-                  ? "border-red-500 focus:border-red-500"
-                  : "focus:ring focus:border-blue-300"
-              }`}
-            />
-            <p className="font-medium flex-1">{`${q.id}. ${q.question}`}</p>
-          </div>
+          <p className="font-medium mb-3">{`${q.id}. ${q.question}`}</p>
 
           {q.id === 7 && (
-            <div className="flex justify-center mt-4">
+            <div className="flex justify-center mb-4">
               <img
                 src={numberSeven}
-                alt="Seven"
-                className="w-52 h-20 md:w-96 md:h-24 p-2 rounded-lg shadow-lg border border-gray-200"
+                alt="Question 7 Illustration"
+                className="w-72 md:w-96 h-auto rounded-lg shadow"
               />
             </div>
           )}
 
-          {q.id === 10 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-              {[
-                {
-                  img: letterA,
-                  letter: "A",
-                  width: "w-100 md:w-[240px]",
-                  height: "h-13 md:h-[90px]",
-                },
-                {
-                  img: letterB,
-                  letter: "B",
-                  width: "w-100 md:w-[240px]",
-                  height: "h-15 md:h-[90px]",
-                },
-                {
-                  img: letterC,
-                  letter: "C",
-                  width: "w-100 md:w-56",
-                  height: "h-28 md:h-40",
-                },
-                {
-                  img: letterD,
-                  letter: "D",
-                  width: "w-100 md:w-[240px]",
-                  height: "h-45 md:h-[300px]",
-                },
-              ].map((item, index) => (
-                <div key={index} className="flex items-center">
-                  <p className="text-lg font-bold">{item.letter}</p>
-                  <img
-                    src={item.img}
-                    alt={`Choice ${item.letter}`}
-                    className={`${item.width} ${item.height}`}
-                  />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <ul className="mt-2 pl-6">
-              {q.choices.map((choice, index) => (
-                <li key={index} className="flex items-start">
-                  <span className="mr-2 font-bold">
-                    {String.fromCharCode(65 + index)}.
-                  </span>
-                  <span>{choice}</span>
+          {/* Radio button choices */}
+          <ul className="space-y-2">
+            {q.choices.map((choice, index) => {
+              const letter = choiceLetters[index];
+              return (
+                <li key={index}>
+                  <label
+                    htmlFor={`question-${q.id}-${letter}`}
+                    className={`flex items-center gap-3 p-2 rounded-md cursor-pointer ${
+                      answers[q.id] === letter.toLowerCase()
+                        ? ""
+                        : "bg-transparent"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      id={`question-${q.id}-${letter}`}
+                      name={`question-${q.id}`}
+                      value={letter.toLowerCase()}
+                      checked={answers[q.id] === letter.toLowerCase()}
+                      onChange={() => handleChange(q.id, letter.toLowerCase())}
+                      className="accent-blue-600 cursor-pointer w-5 h-5"
+                    />
+                    <span className="font-bold">{letter}.</span>
+                    <span>{choice}</span>
+                  </label>
                 </li>
-              ))}
-            </ul>
-          )}
+              );
+            })}
+          </ul>
         </div>
       ))}
+
       <div className="flex justify-end gap-4 mt-4">
-        {/* <SubmitDatePicker value={submitDate} onChange={setSubmitDate} /> */}
         <Button
           variant="outlined"
           color="error"
           onClick={handleReset}
           disabled={isLoading}
-          sx={{
-            px: 4,
-            py: 1,
-          }}
+          sx={{ px: 4, py: 1 }}
         >
           Reset
         </Button>
@@ -294,10 +228,7 @@ const Evaluation = ({
           color="primary"
           loading={isLoading}
           onClick={handleSubmit}
-          sx={{
-            px: 4,
-            py: 1,
-          }}
+          sx={{ px: 4, py: 1 }}
         >
           Submit
         </LoadingButton>
