@@ -18,6 +18,7 @@ import Worksheet2 from "./Worksheet2.jsx";
 import Worksheets3 from "./Worksheet3.jsx";
 import Evaluation from "./Evaluation.jsx";
 import iamhealthy from "../../../../assets/iamhealthy.png";
+import BtnNextPrev from "../../../../components/buttons/BtnNextPrev.jsx";
 
 const Module1 = ({ hideFloating, hideAdditionalButtons = false }) => {
   const [isModalWorksheetOpen, setIsModalWorksheetModalOpen] = useState(false);
@@ -517,19 +518,19 @@ const Module1 = ({ hideFloating, hideAdditionalButtons = false }) => {
 
       {/* Footer */}
       {!hideAdditionalButtons && (
-        <div className="flex flex-col items-end mt-10 space-y-4">
-          <div className="bg-gray-200 w-full h-[1px]" />
-
-          {/* Next Button */}
-          <button
-            onClick={handleNextLesson}
-            className="flex items-center gap-2 bg-primary text-white px-5 py-2 rounded-xl shadow hover:bg-primary-dark transition duration-200"
-          >
-            <span className="font-semibold text-lg">Lesson 2: Mitosis</span>
-            <FaArrowRight className="w-5 h-5" />
-          </button>
-
-          <div className="bg-gray-200 w-full h-[1px]" />
+        <div className="mt-10 w-full px-4 sm:px-6 md:px-8">
+          <div className="flex flex-col space-y-4">
+            <div className="h-[1px] bg-gray-200" />
+            <div className="flex justify-center sm:justify-end">
+              <BtnNextPrev
+                name="Lesson 2: Mitosis"
+                handleNextPrevLesson={handleNextLesson}
+                isNext={true}
+                className="w-full sm:w-auto"
+              />
+            </div>
+            <div className="h-[1px] bg-gray-200" />
+          </div>
         </div>
       )}
 

@@ -105,10 +105,16 @@ const Footer = () => {
         }}
       >
         <Typography variant="body2" sx={{ color: "#555", fontSize: "0.85rem" }}>
-          © 2024 BioVerse. All rights reserved.
+          © {new Date().getFullYear()} BioVerse. All rights reserved.
         </Typography>
         <Box sx={{ display: "flex", gap: 3 }}>
-          <Link
+          <Typography
+            variant="body2"
+            sx={{ color: "#555", fontSize: "0.85rem" }}
+          >
+            Preferred by Magdalena Fremista
+          </Typography>
+          {/* <Link
             href="#"
             underline="hover"
             sx={{
@@ -127,7 +133,7 @@ const Footer = () => {
             }}
           >
             Privacy Policy
-          </Link>
+          </Link> */}
         </Box>
       </Box>
     </Box>

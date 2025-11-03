@@ -16,6 +16,7 @@ import Worksheet1 from "./Worksheet1.jsx";
 import Worksheet3 from "./Worksheet3.jsx";
 import Evaluation from "./Evaluation.jsx";
 import Modal from "../../../components/Modal/Modal.jsx";
+import BtnNextPrev from "../../../components/buttons/BtnNextPrev.jsx";
 
 const MiosisAndMitosis = ({ hideFloating, hideAdditionalButtons = false }) => {
   const [isModalWorksheetOpen, setIsModalWorksheetModalOpen] = useState(false);
@@ -598,30 +599,23 @@ const MiosisAndMitosis = ({ hideFloating, hideAdditionalButtons = false }) => {
         />
       </Modal>
 
-      {/* Footer */}
+      {/* Footer Navigation */}
       {!hideAdditionalButtons && (
         <div className="flex flex-col items-end mt-10 space-y-4">
           <div className="bg-gray-200 w-full h-[1px]" />
-          <div className="flex justify-between items-center w-full mt-8">
-            {/* Previous Button */}
-            <button
-              onClick={handlePreviousLesson}
-              className="flex items-center gap-2 bg-gray-200 text-gray-800 px-5 py-2 rounded-xl shadow hover:bg-gray-300 transition duration-200"
-            >
-              <FaArrowLeft className="w-5 h-5" />
-              <span className="font-semibold text-lg">Lesson 2: mitosis</span>
-            </button>
-
-            {/* Next Button */}
-            <button
-              onClick={handleNextLesson}
-              className="flex items-center gap-2 bg-primary text-white px-5 py-2 rounded-xl shadow hover:bg-primary-dark transition duration-200"
-            >
-              <span className="font-semibold text-lg">
-                Lesson 4: Mendelian Genetics
-              </span>
-              <FaArrowRight className="w-5 h-5" />
-            </button>
+          <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-4 sm:gap-8 mt-8">
+            <BtnNextPrev
+              name="Lesson 2: mitosis"
+              handleNextPrevLesson={handlePreviousLesson}
+              isNext={false}
+              className="w-full sm:w-auto"
+            />
+            <BtnNextPrev
+              name=" Lesson 4: Mendelian Genetics"
+              handleNextPrevLesson={handleNextLesson}
+              isNext={true}
+              className="w-full sm:w-auto"
+            />
           </div>
           <div className="bg-gray-200 w-full h-[1px]" />
         </div>
