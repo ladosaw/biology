@@ -5,10 +5,6 @@ import Swal from "sweetalert2";
 import API from "../../../utils/api/api";
 import { MiosisWorksheetsEvaluationQuestions } from "./ConstantData";
 import numberSeven from "../../../assets/images/numberSeven.png";
-import letterA from "../../../assets/images/letterA.png";
-import letterB from "../../../assets/images/letterB.png";
-import letterC from "../../../assets/images/letterC.png";
-import letterD from "../../../assets/images/letterD.png";
 import FiveMinuteTimer from "../../../components/timer/FiveMinuteTimer.jsx";
 
 const Evaluation = ({

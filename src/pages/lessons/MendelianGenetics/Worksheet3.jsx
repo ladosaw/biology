@@ -40,9 +40,9 @@ const HTML5toTouch = {
 
 // Initial List of Genes Red
 const initialPunnettRed = [
-  { id: 1, name: "RR" },
+  // { id: 1, name: "RR" },
   { id: 2, name: "Rr" },
-  { id: 3, name: "rr" },
+  // { id: 3, name: "rr" },
   { id: 4, name: "Rr" },
   { id: 5, name: "Rr" },
   { id: 6, name: "RR" },
