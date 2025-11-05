@@ -216,7 +216,7 @@ const Worksheet2 = ({
                       handleInputChange(
                         "genotypic",
                         "genotypic" + i,
-                        e.target.value?.toLowerCase()
+                        e.target.value
                       )
                     }
                     className="w-full p-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -233,7 +233,7 @@ const Worksheet2 = ({
                       handleInputChange(
                         "phenotypic",
                         "phenotypic" + i,
-                        e.target.value?.toLowerCase()
+                        e.target.value
                       )
                     }
                     className="w-full p-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -263,7 +263,7 @@ const Worksheet2 = ({
                   handleInputChange(
                     "genotypic",
                     "genotypic" + i,
-                    e.target.value?.toLowerCase()
+                    e.target.value
                   )
                 }
                 className="w-full p-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -282,7 +282,7 @@ const Worksheet2 = ({
                   handleInputChange(
                     "phenotypic",
                     "phenotypic" + i,
-                    e.target.value?.toLowerCase()
+                    e.target.value
                   )
                 }
                 className="w-full p-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
