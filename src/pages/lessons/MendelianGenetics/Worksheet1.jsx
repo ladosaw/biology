@@ -109,6 +109,7 @@ const Worksheet1 = ({
         titles,
         worksheet_no,
         submit_date: submitDate?.toISOString(),
+        isLowerCase: false,
       };
 
       const response = await API.post("/worksheets/checker", payload, {
@@ -141,7 +142,7 @@ const Worksheet1 = ({
                <span class="result ${
                  result.is_correct ? "correct" : "incorrect"
                }">
-                 ${result.user_answer.toUpperCase()} -
+                 ${result.user_answer} -
                  ${result.is_correct ? "Correct ✔️" : "Incorrect ❌"}
                </span>
              </div>
