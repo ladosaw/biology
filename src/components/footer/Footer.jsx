@@ -1,31 +1,47 @@
 import * as React from "react";
 import { Box, Typography, Link, Grid, Divider } from "@mui/material";
-import { ConstantFooter } from "./ConstantFooter"; // Assuming lesson data is here
+import { ConstantFooter } from "./ConstantFooter";
+import QRCodeSVG from "../../assets/qrlink.svg";
 
 const Footer = () => {
   return (
     <Box
       component="footer"
       sx={{
-        backgroundColor: "#E0E6F7", // Original light blue background
-        py: 6,
-        px: { xs: 4, lg: 20 },
+        backgroundColor: "#E0E6F7",
+        py: { xs: 4, sm: 6 },
+        px: { xs: 3, sm: 6, lg: 20 },
         mt: "auto",
       }}
     >
-      <Grid container spacing={4}>
+      {/* Top Section */}
+      <Grid
+        container
+        spacing={{ xs: 3, md: 4 }}
+        alignItems="flex-start"
+        justifyContent="space-between"
+      >
         {/* Left Section: Logo and About */}
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={3}>
           <Typography
             variant="h5"
             component="h2"
-            sx={{ color: "#88C273", fontWeight: "bold", letterSpacing: 1 }}
+            sx={{
+              color: "#88C273",
+              fontWeight: "bold",
+              letterSpacing: 1,
+              mb: 1,
+              textAlign: { xs: "center", md: "left" },
+            }}
           >
             BIO
             <Typography
               variant="h5"
               component="span"
-              sx={{ color: "#353434", fontWeight: "bold" }}
+              sx={{
+                color: "#353434",
+                fontWeight: "bold",
+              }}
             >
               Verse
             </Typography>
@@ -36,6 +52,8 @@ const Footer = () => {
               mt: 2,
               color: "#555",
               lineHeight: 1.6,
+              textAlign: { xs: "center", md: "left" },
+              px: { xs: 2, md: 0 },
             }}
           >
             BioVerse is an educational theme crafted for teaching centers,
@@ -44,18 +62,19 @@ const Footer = () => {
         </Grid>
 
         {/* Right Section: Lesson Links */}
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={6}>
           <Typography
             variant="subtitle1"
             sx={{
               fontWeight: "bold",
               color: "#353434",
               mb: 2,
+              textAlign: { xs: "center", md: "left" },
             }}
           >
             Lessons
           </Typography>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 1.5, sm: 2 }}>
             {ConstantFooter.map((item) => (
               <Grid
                 item
@@ -67,11 +86,17 @@ const Footer = () => {
                   display: "flex",
                   flexDirection: "column",
                   gap: 0.5,
+                  alignItems: { xs: "center", md: "flex-start" },
+                  textAlign: { xs: "center", md: "left" },
                 }}
               >
                 <Typography
                   variant="body1"
-                  sx={{ fontWeight: "500", color: "#353434" }}
+                  sx={{
+                    fontWeight: 500,
+                    color: "#353434",
+                    fontSize: { xs: "0.95rem", sm: "1rem" },
+                  }}
                 >
                   {item.title}
                 </Typography>
@@ -90,6 +115,53 @@ const Footer = () => {
             ))}
           </Grid>
         </Grid>
+
+        {/* QR Code Section */}
+        <Grid
+          item
+          xs={12}
+          md={3}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            mt: { xs: 3, md: 4 },
+          }}
+        >
+          <Box
+            component="a"
+            href="https://pnhsgrade8biology.online"
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: { xs: 130, sm: 140, md: 150, lg: 180 },
+              height: { xs: 130, sm: 140, md: 150, lg: 180 },
+              backgroundColor: "#fff",
+              borderRadius: 3,
+              p: 2,
+              boxShadow: "0 3px 10px rgba(0,0,0,0.15)",
+              transition: "transform 0.25s ease, box-shadow 0.25s ease",
+              "&:hover": {
+                transform: "scale(1.08)",
+                boxShadow: "0 6px 18px rgba(0,0,0,0.25)",
+              },
+            }}
+          >
+            <Box
+              component="img"
+              src={QRCodeSVG}
+              alt="BioVerse QR Code"
+              sx={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+              }}
+            />
+          </Box>
+        </Grid>
       </Grid>
 
       {/* Divider */}
@@ -99,41 +171,44 @@ const Footer = () => {
       <Box
         sx={{
           display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
           justifyContent: "space-between",
-          flexWrap: "wrap",
           alignItems: "center",
+          textAlign: { xs: "center", sm: "left" },
+          gap: 3,
         }}
       >
-        <Typography variant="body2" sx={{ color: "#555", fontSize: "0.85rem" }}>
+        <Typography
+          variant="body2"
+          sx={{
+            color: "#555",
+            fontSize: "0.85rem",
+            order: { xs: 2, sm: 1 },
+          }}
+        >
           © {new Date().getFullYear()} BioVerse. All rights reserved.
         </Typography>
-        <Box sx={{ display: "flex", gap: 3 }}>
+
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: { xs: 2, sm: 3 },
+            flexWrap: "wrap",
+            justifyContent: { xs: "center", sm: "flex-end" },
+            order: { xs: 1, sm: 2 },
+          }}
+        >
           <Typography
             variant="body2"
-            sx={{ color: "#555", fontSize: "0.85rem" }}
+            sx={{
+              color: "#555",
+              fontSize: "0.85rem",
+              textAlign: "center",
+            }}
           >
             Prepared by Magdalena Fremista
           </Typography>
-          {/* <Link
-            href="#"
-            underline="hover"
-            sx={{
-              color: "#555",
-              fontSize: "0.85rem",
-            }}
-          >
-            Terms of Use
-          </Link>
-          <Link
-            href="#"
-            underline="hover"
-            sx={{
-              color: "#555",
-              fontSize: "0.85rem",
-            }}
-          >
-            Privacy Policy
-          </Link> */}
         </Box>
       </Box>
     </Box>
