@@ -310,7 +310,7 @@ const Worksheet4 = ({
                     <span className="capitalize whitespace-nowrap">
                       {key.replace(/([A-Z])/g, " $1").toLowerCase()}:
                     </span>
-                    <input
+                    <textarea
                       type="text"
                       value={formData.guideQuestions[key]}
                       onChange={(e) =>
@@ -320,7 +320,7 @@ const Worksheet4 = ({
                           e.target.value?.toLowerCase()
                         )
                       }
-                      className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
+                      className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 sm:w-full"
                       placeholder="Enter answer"
                     />
                   </li>
@@ -330,8 +330,7 @@ const Worksheet4 = ({
             <li>
               What happens to the biomass amount from the bottom to the top of
               the pyramid?
-              <input
-                type="text"
+              <textarea
                 value={formData.guideQuestions.biomassChange}
                 onChange={(e) =>
                   handleInputChange(
@@ -342,6 +341,7 @@ const Worksheet4 = ({
                 }
                 className="mt-2 w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter answer"
+                rows="2"
               />
             </li>
           </ol>
