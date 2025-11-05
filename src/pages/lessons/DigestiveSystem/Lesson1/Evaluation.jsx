@@ -21,7 +21,7 @@ const Evaluation = ({
 
   const handleChange = (id, value) => {
     // Store A/B/C/D (uppercase)
-    setAnswers({ ...answers, [id]: value.toUpperCase() });
+    setAnswers({ ...answers, [id]: value });
     setInvalidQuestions(invalidQuestions.filter((qid) => qid !== id));
   };
 

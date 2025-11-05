@@ -20,7 +20,7 @@ const Evaluation = ({
 
   const handleChange = (id, value) => {
     // Save as uppercase A/B/C/D
-    setAnswers({ ...answers, [id]: value.toUpperCase() });
+    setAnswers({ ...answers, [id]: value });
     setInvalidQuestions(invalidQuestions.filter((qid) => qid !== id));
   };
 

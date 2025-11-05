@@ -202,7 +202,7 @@ const Worksheet2 = ({
                <span class="result ${
                  result.is_correct ? "correct" : "incorrect"
                }">
-                 ${result.user_answer.toUpperCase()} -
+                 ${result.user_answer} -
                  ${result.is_correct ? "Correct ✔️" : "Incorrect ❌"}
                </span>
              </div>
