@@ -36,7 +36,7 @@ export const MiosisWorksheetsLink = {
   // },
 
   evaluation: {
-    title: "Written Evaluation Form",
+    title: "Evaluation",
     link: "https://forms.gle/g983B6tKtmvWaUkJ7",
   },
 };

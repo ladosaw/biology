@@ -18,7 +18,7 @@ const Worksheet = ({
   return (
     <div className="w-full flex flex-col items-start gap-6 p-4">
       <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl leading-snug text-gray-800">
-        WORKSHEET
+        LEARNING ACTIVITIES
       </h1>
       <ul className="list-disc pl-6 text-lg text-gray-700 flex flex-col gap-5">
         <li className="hover:text-blue-600">

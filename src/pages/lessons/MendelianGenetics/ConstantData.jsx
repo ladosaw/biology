@@ -222,7 +222,7 @@ export const MendelianGeneticsWorksheetsLink = {
     link: "https://forms.gle/zzaw3EPAhoGqvdAD8",
   },
   evaluation: {
-    title: "Written Evaluation Form",
+    title: "Evaluation",
     link: "https://forms.gle/uNWvyQrbfAr45gXVA",
   },
 };

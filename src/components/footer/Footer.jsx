@@ -112,7 +112,7 @@ const Footer = () => {
             variant="body2"
             sx={{ color: "#555", fontSize: "0.85rem" }}
           >
-            Preferred by Magdalena Fremista
+            Prepared by Magdalena Fremista
           </Typography>
           {/* <Link
             href="#"

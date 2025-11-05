@@ -18,7 +18,7 @@ export const OrganismWorksheetsLink = {
   },
 
   evaluation: {
-    title: "Written Evaluation Form",
+    title: "Evaluation",
     link: "#",
   },
 };

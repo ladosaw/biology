@@ -91,7 +91,7 @@ export const MitosisWorksheetsLink = {
   // },
 
   evaluation: {
-    title: "Written Evaluation Form",
+    title: "Evaluation",
     link: "https://forms.gle/EDugtXsY2RXkBFFr5",
   },
 };
