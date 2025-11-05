@@ -367,7 +367,9 @@ const Worksheet2 = ({
         </Typography>
 
         <Typography variant="body2" paragraph>
-          Tap an image to select it, then tap or drag to a drop zone.
+          Read the description carefully. Then, tap the correct organ image that
+          matches the description. Drag the selected image into the “Drop Here”
+          zone. When you're done, click Submit to check your answer.
         </Typography>
 
         <OrganSelectionArea

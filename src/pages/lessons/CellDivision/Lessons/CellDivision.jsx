@@ -105,8 +105,8 @@ const CellDivision = ({ hideFloating, hideAdditionalButtons = false }) => {
                 during the stages of interphase and mitosis cell division
               </p>
               <p>
-                3. Appreciate the importance of the occurrence of mitosis
-                organisms (MELC Week 1 S8LT-IVd-16)
+                3. Appreciate the importance of the occurrence of meiosis in
+                humans. (S8LT-IVd-16)
               </p>
             </p>
           </div>

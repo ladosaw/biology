@@ -190,6 +190,11 @@ const Worksheet2 = ({
         <p className="text-gray-600">
           Direction: Compare mitosis and meiosis by writing:
         </p>
+        <p>Read each item under “Basis for Comparison.”</p>
+        <p>
+          Decide if the statement applies to Mitosis, Meiosis, or Both. Type the
+          correct code in the answer box:
+        </p>
         <ul className="list-disc pl-6">
           <li>
             <strong>M1</strong> for Mitosis

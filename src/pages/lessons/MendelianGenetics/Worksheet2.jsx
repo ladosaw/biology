@@ -181,9 +181,28 @@ const Worksheet2 = ({
       <h1 className="font-bold text-2xl mb-4">
         Activity 2: Mendelian Genetics
       </h1>
+      <p className="mb-4">
+        Look at each genetic cross in the table (e.g.,{" "}
+        <span className="font-medium">DD × Dd</span>,{" "}
+        <span className="font-medium">Dd × dd</span>).
+      </p>
+
+      <p className="mb-4">
+        For each row, fill in the{" "}
+        <span className="font-semibold text-green-600">
+          Genotypic Percentage
+        </span>{" "}
+        and{" "}
+        <span className="font-semibold text-purple-600">
+          Phenotypic Percentage
+        </span>{" "}
+        based on the expected offspring.
+      </p>
+
       <p className="mb-6">
-        Fill in the Genotypic and Phenotypic Ratios for each cross based on the
-        given table.
+        Once you’ve completed all rows, click{" "}
+        <span className="font-semibold text-blue-600">Submit</span> to check
+        your answers and review your work.
       </p>
 
       {/* Table for larger screens */}

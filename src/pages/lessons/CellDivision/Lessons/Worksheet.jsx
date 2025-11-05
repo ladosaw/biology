@@ -213,11 +213,22 @@ const Worksheet = ({
         <h1 className="text-2xl font-bold mb-4">
           Activity 1a: Label the Cell Cycle
         </h1>
+        <p className="text-gray-600 mb-3">
+          Look at the cell cycle diagram. Each section is labeled with a letter
+          (A to I).
+        </p>
+
+        <p className="text-gray-600 mb-3">
+          Read the descriptions provided and type the correct phase or event
+          that matches each letter in the answer boxes.
+        </p>
+
+        <p className="text-gray-600 mb-3">
+          Follow the sequence of arrows to understand the flow of the cycle.
+        </p>
+
         <p className="text-gray-600 mb-6">
-          Label the sequence of events in cell cycle represented by letters.
-          Write only the name of event on the box. (Please refer to the table
-          below containing letters that correspond to the events and
-          description)
+          When you're done, click Submit to check your answers.
         </p>
 
         <div className="flex flex-col lg:flex-row gap-8">
@@ -258,7 +269,13 @@ const Worksheet = ({
       <section className="mb-12">
         <h1 className="text-2xl font-bold mb-4">Activity 1b: Name Me</h1>
         <p className="text-gray-600 mb-6">
-          Label each stage/phase of mitosis in the animal cell.
+          Look at the diagrams showing different phases of mitosis. Identify the
+          correct name of each phase, and type your answer in the space
+          provided.
+        </p>
+
+        <p className="text-gray-600 mb-6">
+          When you're done, you can click Submit to check your answers.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

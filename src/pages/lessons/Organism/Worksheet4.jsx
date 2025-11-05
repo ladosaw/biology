@@ -230,8 +230,9 @@ const Worksheet4 = ({
         Activity 4: FOOD PYRAMID
       </h1>
       <p className="text-center text-gray-700 mb-4 max-w-lg mx-auto">
-        Direction: Identify the trophic level of the given organisms. Write your
-        answer in the text fields.
+        Direction: Look at food pyramid diagram. For each level identify the
+        trophic level, the list the organisms from left to right as they appear
+        in diagram. Type your answer in text field, then click submit.
       </p>
 
       <div className="flex flex-wrap items-center justify-center gap-6 w-full max-w-4xl">

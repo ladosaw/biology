@@ -398,20 +398,43 @@ const Worksheet3 = ({
           Activity 3: Monohybrid Cross Using the Punnett Square
         </Typography>
 
-        <Typography
-          variant="caption"
-          textAlign="start"
-          fontWeight="bold"
-          mb={2}
-        >
-          Directions:
-        </Typography>
-        <Typography variant="caption" textAlign="start" mb={4}>
-          {" "}
-          Complete each box by dragging the parent allele on top to determine
-          the possible combination of genes using a Punnet Square. (Note work
-          with your seatmate)
-        </Typography>
+        <div className="bg-white p-6 rounded-2xl shadow-md mx-auto text-gray-800">
+          <p className="text-sm font-bold mb-2 text-left text-gray-700">
+            Directions:
+          </p>
+
+          <p className="text-sm mb-4 text-left">
+            Complete each slot box by dragging the parent traits into the top
+            and side rows of the{" "}
+            <span className="font-semibold text-blue-600">Punnett Square</span>.
+          </p>
+
+          <p className="text-sm mb-3 text-left">
+            Then, drag the offspring combinations into the four boxes of the
+            square to show the possible results of the cross.
+          </p>
+
+          <p className="text-sm mb-3 text-left">
+            After that, type the{" "}
+            <span className="font-semibold text-green-600">
+              genotype percentage
+            </span>{" "}
+            and{" "}
+            <span className="font-semibold text-purple-600">
+              phenotype percentage
+            </span>{" "}
+            of the offspring in the spaces provided.
+          </p>
+
+          <p className="text-sm text-left">
+            Click <span className="font-semibold text-blue-600">Submit</span>{" "}
+            when you're done.
+          </p>
+        </div>
+
+        <Divider sx={{ my: 4 }} />
+
+        {/* Punnett Selection Red */}
 
         <Typography variant="body1" textAlign="start" mb={2}>
           Situation: A homozygous red Santan flower (RR) is crossed with a

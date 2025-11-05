@@ -201,8 +201,20 @@ const Worksheet1 = ({
         color="textSecondary"
         gutterBottom
       >
-        Identify whether Genotype: Homozygous Dominant or Recessive, Genotype or
-        Phenotype the following items. Write your answer in the blank provided.
+        Look at each genetic combination. Decide if it shows a Genotype or
+        Phenotype, and whether it is Homozygous Dominant, Homozygous Recessive,
+        or Heterozygous.
+      </Typography>
+
+      <Typography>Type your answer in the blank beside each item.</Typography>
+
+      <Typography
+        variant="body2"
+        align="center"
+        color="textSecondary"
+        gutterBottom
+      >
+        When you're done, click Submit to check your answers.
       </Typography>
 
       <Box>
