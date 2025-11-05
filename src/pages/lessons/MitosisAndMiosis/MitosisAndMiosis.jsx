@@ -83,9 +83,33 @@ const MiosisAndMitosis = ({ hideFloating, hideAdditionalButtons = false }) => {
       <div>
         <div className="flex flex-col gap-8">
           <h1 className="font-semibold text-2xl sm:text-3xl md:text-4xl leading-snug">
-            <span className="font-bold">LESSON 3:</span> Cell Cycle: COMPARING
-            MITOSIS AND MEIOSIS
+            <span className="font-bold">LESSON 4:</span> Cell Division: MEOISIS
           </h1>
+          <div>
+            <h1 className="font-bold">Objectives:</h1>
+            <p>
+              <span className="font-bold">LESSON 3:</span> CELL CYCLE:
+              Interphase and Cell Division
+              <p>
+                {" "}
+                1. Explain the significance of meiosis in maintaining the
+                chromosome number in an organism and its significance among
+                sexually reproducing organisms;
+              </p>
+              <p>
+                2. Compare mitosis and meiosis and their roles in the cell
+                division;
+              </p>
+              <p>
+                3. Discuss how the union of the egg and sperm cell results in
+                the variation of the organism:
+              </p>
+              <p>
+                3. Appreciate the importance of the occurrence of meiosis in
+                humans. (MELC Week 1 S8LT-IVa-13)
+              </p>
+            </p>
+          </div>
           <div className="space-y-6">
             <h2 className="font-semibold text-lg text-center sm:text-xl md:text-2xl">
               Vocabulary Words
