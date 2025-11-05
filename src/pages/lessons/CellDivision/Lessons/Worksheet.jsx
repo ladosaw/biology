@@ -268,15 +268,31 @@ const Worksheet = ({
       {/* Mitosis Phases Section */}
       <section className="mb-12">
         <h1 className="text-2xl font-bold mb-4">Activity 1b: Name Me</h1>
-        <p className="text-gray-600 mb-6">
-          Look at the diagrams showing different phases of mitosis. Identify the
-          correct name of each phase, and type your answer in the space
-          provided.
-        </p>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
+          <div className="flex flex-col w-full">
+            {/* Directions Card */}
+            <div className="bg-white p-6 rounded-2xl shadow-md w-full text-gray-800">
+              <p className="text-sm font-bold mb-2 text-left text-gray-700">
+                Directions:
+              </p>
 
-        <p className="text-gray-600 mb-6">
-          When you're done, you can click Submit to check your answers.
-        </p>
+              <p className="text-sm mb-4 text-left text-gray-800">
+                Look at the diagrams showing different{" "}
+                <span className="font-semibold text-green-600">
+                  phases of mitosis
+                </span>
+                . Identify the correct name of each phase, and type your answer
+                in the space provided.
+              </p>
+
+              <p className="text-sm text-left text-gray-800">
+                When you're done, click{" "}
+                <span className="font-semibold text-blue-600">Submit</span> to
+                check your answers.
+              </p>
+            </div>
+          </div>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {IMAGES.phases.map((src, index) => (

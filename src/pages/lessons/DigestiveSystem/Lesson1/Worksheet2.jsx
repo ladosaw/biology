@@ -366,11 +366,38 @@ const Worksheet2 = ({
           Activity 2: WHO AM I?
         </Typography>
 
-        <Typography variant="body2" paragraph>
-          Read the description carefully. Then, tap the correct organ image that
-          matches the description. Drag the selected image into the “Drop Here”
-          zone. When you're done, click Submit to check your answer.
-        </Typography>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
+          <div className="flex flex-col w-full">
+            <div className="bg-white p-6 rounded-2xl shadow-md w-full text-gray-800">
+              <p className="text-sm font-bold mb-2 text-left text-gray-700">
+                Directions:
+              </p>
+
+              <p className="text-sm mb-4 text-left text-gray-800">
+                Read the description carefully. Then, tap the{" "}
+                <span className="font-semibold text-green-600">
+                  correct organ image
+                </span>{" "}
+                that matches the description.
+              </p>
+
+              <p className="text-sm mb-4 text-left text-gray-800">
+                <span className="font-semibold text-blue-600">Drag</span> the
+                selected image into the{" "}
+                <span className="font-semibold text-purple-600">
+                  “Drop Here”
+                </span>{" "}
+                zone.
+              </p>
+
+              <p className="text-sm text-left text-gray-800">
+                When you're done, click{" "}
+                <span className="font-semibold text-blue-600">Submit</span> to
+                check your answer.
+              </p>
+            </div>
+          </div>
+        </div>
 
         <OrganSelectionArea
           organs={ORGAN_LIST}
