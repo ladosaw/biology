@@ -78,11 +78,11 @@ export const InterphaseStage = [
 
 export const MitosisWorksheetsLink = {
   worksheet1: {
-    title: "Mitosis Worksheets 1",
+    title: "Learning Activity 1",
     link: "https://forms.gle/hzpK34yVDWPb1PfT6",
   },
   worksheet2: {
-    title: "Mitosis Worksheets 2",
+    title: "Learning Activity 2",
     link: "https://forms.gle/YhSJ4rpcc3HfTKUG8",
   },
   // worksheet3: {

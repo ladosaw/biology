@@ -206,19 +206,19 @@ export const GenotypePhenotype = [
 
 export const MendelianGeneticsWorksheetsLink = {
   worksheet1: {
-    title: "Mendelian Genetics Worksheets 1",
+    title: "Learning Activity 1",
     link: "https://forms.gle/42vrUKfegM35FGce9",
   },
   worksheet2: {
-    title: "Mendelian Genetics Worksheets 2",
+    title: "Learning Activity 2",
     link: "https://forms.gle/o7zp9ReL82LUQUAi8",
   },
   worksheet3: {
-    title: "Mendelian Genetics Worksheets 3",
+    title: "Learning Activity 3",
     link: "https://forms.gle/zzaw3EPAhoGqvdAD8",
   },
   worksheet4: {
-    title: "Mendelian Genetics Worksheets 4",
+    title: "Learning Activity 4",
     link: "https://forms.gle/zzaw3EPAhoGqvdAD8",
   },
   evaluation: {

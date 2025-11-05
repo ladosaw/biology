@@ -1,19 +1,19 @@
 export const OrganismWorksheetsLink = {
   worksheet1: {
-    title: "Organism Worksheets 1",
+    title: "Learning Activity 1",
     link: "#",
   },
   worksheet2: {
-    title: "Organism Worksheets 2",
+    title: "Learning Activity 2",
     link: "#",
   },
   worksheet3: {
-    title: "Organism Worksheets 3",
+    title: "Learning Activity 3",
     link: "#",
   },
 
   worksheet4: {
-    title: "Organism Worksheets 4",
+    title: "Learning Activity 4",
     link: "#",
   },
 
