@@ -252,8 +252,7 @@ const Worksheet4 = ({
               {formData.tableData.map((row, index) => (
                 <tr key={index}>
                   <td className="border p-2">
-                    <input
-                      type="text"
+                    <textarea
                       className="w-full p-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-400"
                       value={row.trophicLevel}
                       onChange={(e) =>
@@ -265,11 +264,11 @@ const Worksheet4 = ({
                         )
                       }
                       placeholder="Enter Trophic Level"
+                      rows="3"
                     />
                   </td>
                   <td className="border p-2">
-                    <input
-                      type="text"
+                    <textarea
                       className="w-full p-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-400"
                       value={row.organisms}
                       onChange={(e) =>
@@ -281,6 +280,7 @@ const Worksheet4 = ({
                         )
                       }
                       placeholder="Enter Organisms"
+                      rows="3"
                     />
                   </td>
                 </tr>
@@ -311,7 +311,6 @@ const Worksheet4 = ({
                       {key.replace(/([A-Z])/g, " $1").toLowerCase()}:
                     </span>
                     <textarea
-                      type="text"
                       value={formData.guideQuestions[key]}
                       onChange={(e) =>
                         handleInputChange(
@@ -322,6 +321,7 @@ const Worksheet4 = ({
                       }
                       className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 sm:w-full"
                       placeholder="Enter answer"
+                      rows="4"
                     />
                   </li>
                 ))}
@@ -341,7 +341,7 @@ const Worksheet4 = ({
                 }
                 className="mt-2 w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter answer"
-                rows="2"
+                rows="4"
               />
             </li>
           </ol>
