@@ -88,7 +88,7 @@ const DropBox = ({ id, organ, onTapDrop }) => (
 const QuestionSection = ({ questions, answers, onChange }) => (
   <Box sx={{ p: 3, textAlign: "center", maxWidth: 600, mx: "auto" }}>
     <Typography variant="body1" color="textSecondary" paragraph>
-      <strong>Directions:</strong> Read the statement below on the process of
+      <strong>Direction:</strong> Read the statement below on the process of
       digestion. Write numbers from 1-8 on the box that sequence the event.
     </Typography>
     {questions.map((data, index) => (
@@ -315,9 +315,9 @@ const Worksheet = ({
         </Typography>
 
         <Typography variant="body1" color="textSecondary" paragraph>
-          <strong>Directions:</strong> Refer to the illustration of Digestive
-          System. From the above choices of the organs of digestion, drop each
-          name of the organ on the correct box below.
+          <strong>Direction:</strong> For each numbered part (1-10), select the
+          correct organ name from the drop-down menu. Use the organ list above
+          as your guide. Then click Submit to check your answer.
         </Typography>
 
         <Box
