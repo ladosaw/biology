@@ -88,8 +88,8 @@ const DropBox = ({ id, organ, onTapDrop }) => (
 const QuestionSection = ({ questions, answers, onChange }) => (
   <Box sx={{ p: 3, textAlign: "center", maxWidth: 600, mx: "auto" }}>
     <Typography variant="body1" color="textSecondary" paragraph>
-      B. Direction: Read the sentences below, then write the number of events in
-      the digestion process. Write numbers 1-8 before the sentences.
+      B. Read the statement below on the process of digestion. Write numbers
+      from 1-8 on the box that sequence the event.
     </Typography>
     {questions.map((data, index) => (
       <Box key={data.id} sx={{ textAlign: "left", mb: 2 }}>
@@ -316,8 +316,8 @@ const Worksheet = ({
 
         <Typography variant="body1" color="textSecondary" paragraph>
           <strong>A. Directions:</strong> Refer to the illustration of Digestive
-          System Directio: From the above choices of the organs of digestion,
-          drop each name of the organ on the correct box below.
+          System. From the above choices of the organs of digestion, drop each
+          name of the organ on the correct box below.
         </Typography>
 
         <Box

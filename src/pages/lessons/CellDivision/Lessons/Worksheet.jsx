@@ -214,7 +214,10 @@ const Worksheet = ({
           Worksheet 1a: Label the Cell Cycle
         </h1>
         <p className="text-gray-600 mb-6">
-          Label the parts of the cell cycle using the description from above.
+          Label the sequence of events in cell cycle represented by letters.
+          Write only the name of event on the box. (Please refer to the table
+          below containing letters that correspond to the events and
+          description)
         </p>
 
         <div className="flex flex-col lg:flex-row gap-8">
