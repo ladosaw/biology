@@ -340,7 +340,7 @@ const Worksheet4 = ({
           textAlign="center"
           gutterBottom
         >
-          Worksheet 4: Dihybrid Cross Using the Punnett Square
+          Activity 4: Dihybrid Cross Using the Punnett Square
         </Typography>
 
         <Typography variant="body2" textAlign="start" fontWeight="bold">

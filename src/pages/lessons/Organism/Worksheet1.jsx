@@ -253,7 +253,7 @@ const Worksheet1 = ({
         <img src={Pencil} alt="Pencil" className="w-12" />
         <div>
           <h1 className="font-bold text-xl sm:text-2xl text-center sm:text-left">
-            WORKSHEET No. 1: Understanding Food Chain
+            Activity 1: Understanding Food Chain
           </h1>
           <p className="text-sm sm:text-base text-center sm:text-left">
             Direction: Group the organisms according to their classification in

@@ -311,7 +311,7 @@ const Worksheet = ({
         }}
       >
         <Typography variant="h4" component="h1" gutterBottom>
-          WORKSHEET # 1: FILL ME UP
+          Activity 1: FILL ME UP
         </Typography>
 
         <Typography variant="body1" color="textSecondary" paragraph>

@@ -395,7 +395,7 @@ const Worksheet3 = ({
           textAlign="center"
           gutterBottom
         >
-          Worksheet 3: Monohybrid Cross Using the Punnett Square
+          Activity 3: Monohybrid Cross Using the Punnett Square
         </Typography>
 
         <Typography

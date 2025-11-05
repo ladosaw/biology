@@ -193,7 +193,7 @@ const Worksheet1 = ({
       sx={{ bgcolor: "white", p: 4, borderRadius: 2, mt: 5 }}
     >
       <Typography variant="h5" align="center" gutterBottom>
-        Genetics Worksheet
+        Activity 1: Mendelian Genetics
       </Typography>
       <Typography
         variant="body2"

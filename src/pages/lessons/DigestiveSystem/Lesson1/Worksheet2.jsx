@@ -363,7 +363,7 @@ const Worksheet2 = ({
     <DndProvider backend={MultiBackend} options={HTML5_TO_TOUCH}>
       <Box sx={worksheetContainerStyles}>
         <Typography variant="h5" gutterBottom>
-          Worksheet 2: WHO AM I?
+          Activity 2: WHO AM I?
         </Typography>
 
         <Typography variant="body2" paragraph>

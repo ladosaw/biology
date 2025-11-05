@@ -179,7 +179,7 @@ const Worksheet2 = ({
   return (
     <div className="p-4">
       <h1 className="font-bold text-2xl mb-4">
-        Mendelian Genetics Worksheet 2
+        Activity 2: Mendelian Genetics
       </h1>
       <p className="mb-6">
         Fill in the Genotypic and Phenotypic Ratios for each cross based on the

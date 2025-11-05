@@ -185,7 +185,7 @@ const Worksheet2 = ({
 
   return (
     <div className="p-4 max-w-4xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Worksheet 2: TELL ME MORE</h1>
+      <h1 className="text-2xl font-bold mb-4">Activity 2: TELL ME MORE</h1>
       <div className="mb-6 space-y-2">
         <p className="text-gray-600">
           Direction: Compare mitosis and meiosis by writing:

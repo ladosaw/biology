@@ -211,7 +211,7 @@ const Worksheet = ({
       {/* Labeling Section */}
       <section className="mb-12">
         <h1 className="text-2xl font-bold mb-4">
-          Worksheet 1a: Label the Cell Cycle
+          Activity 1a: Label the Cell Cycle
         </h1>
         <p className="text-gray-600 mb-6">
           Label the sequence of events in cell cycle represented by letters.
@@ -256,7 +256,7 @@ const Worksheet = ({
 
       {/* Mitosis Phases Section */}
       <section className="mb-12">
-        <h1 className="text-2xl font-bold mb-4">Worksheet 1b: Name Me</h1>
+        <h1 className="text-2xl font-bold mb-4">Activity 1b: Name Me</h1>
         <p className="text-gray-600 mb-6">
           Label each stage/phase of mitosis in the animal cell.
         </p>

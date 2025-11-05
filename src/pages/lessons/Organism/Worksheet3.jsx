@@ -181,7 +181,7 @@ const Worksheet3 = ({
 
   return (
     <div className="p-4">
-      <h1 className="font-bold text-2xl mb-4">Worksheet No. 3: Who Am I?</h1>
+      <h1 className="font-bold text-2xl mb-4">Activity 3: Who Am I?</h1>
       <p className="mb-6">
         Determine the role of the organism in the trophic level. Write your
         answer from.the given choices.

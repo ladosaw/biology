@@ -227,7 +227,7 @@ const Worksheet4 = ({
   return (
     <div className="flex flex-col px-4 py-6">
       <h1 className="text-2xl font-bold text-center mb-2">
-        Worksheet No. 4: FOOD PYRAMID
+        Activity 4: FOOD PYRAMID
       </h1>
       <p className="text-center text-gray-700 mb-4 max-w-lg mx-auto">
         Direction: Identify the trophic level of the given organisms. Write your

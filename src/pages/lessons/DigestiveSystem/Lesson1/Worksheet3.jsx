@@ -142,8 +142,8 @@ const Worksheet3 = ({
 
   return (
     <Box sx={{ p: 3, textAlign: "center", maxWidth: "600px", mx: "auto" }}>
-      <Typography variant="h6" color="primary" gutterBottom>
-        Worksheet {worksheet_no}: {titles}
+      <Typography variant="h6" gutterBottom>
+        Activity {worksheet_no}: {titles}
       </Typography>
       <Typography variant="body1" color="textSecondary" paragraph>
         From the information in the lessons, answer the questions about

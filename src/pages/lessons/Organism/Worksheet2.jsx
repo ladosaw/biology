@@ -270,7 +270,7 @@ const Worksheet2 = ({
   return (
     <Box sx={{ padding: { xs: 2, sm: 4 } }}>
       <Typography variant="h4" gutterBottom>
-        Food Chain Construction Worksheet
+        Activity 2: Food Chain Construction Worksheet
       </Typography>
 
       <Typography variant="body1" paragraph>

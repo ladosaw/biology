@@ -234,7 +234,7 @@ const Worksheet1 = ({
           marginBottom: "10px",
         }}
       >
-        Worksheet 1a.: iLearn
+        Activity 1a.: iLearn
       </h1>
       <p
         style={{
