@@ -83,8 +83,8 @@ const Evaluation = ({
         showConfirmButton: false,
         showCloseButton: true,
         html: `
-          <p><strong>Worksheet:</strong> ${worksheet.titles || titles}</p>
-          <p><strong>Worksheet No:</strong> Evaluation</p>
+          <p><strong>Activity:</strong> ${worksheet.titles || titles}</p>
+          <p>Evaluation</p>
           <p><strong>Score:</strong> ${score}</p>
           <div style="margin-top:20px; display:flex-direction:column; justify-content:center; gap:10px;">
             ${detailed_results

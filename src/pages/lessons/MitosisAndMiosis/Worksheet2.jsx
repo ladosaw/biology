@@ -93,8 +93,8 @@ const Worksheet2 = ({
         showConfirmButton: false,
         showCloseButton: true,
         html: `
-    <p><strong>Worksheet:</strong> ${worksheet.titles || titles}</p>
-    <p><strong>Worksheet No:</strong> ${
+    <p><strong>Activity:</strong> ${worksheet.titles || titles}</p>
+    <p><strong>Activity No:</strong> ${
       worksheet.worksheet_no || worksheet_no
     }</p>
     <p><strong>Score:</strong> ${score}</p>
