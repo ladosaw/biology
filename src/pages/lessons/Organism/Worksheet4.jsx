@@ -337,7 +337,7 @@ const Worksheet4 = ({
                   handleInputChange(
                     "guideQuestions",
                     "biomassChange",
-                    e.target.value?.toLowerCase().trim()
+                    e.target.value?.toLowerCase()
                   )
                 }
                 className="mt-2 w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
