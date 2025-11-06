@@ -487,7 +487,7 @@ const Organism = ({ hideFloating, hideAdditionalButtons = false }) => {
               <BtnNextPrev
                 name="Lesson 4: Mendelian Genetics"
                 handleNextPrevLesson={handlePreviousLesson}
-                isNext={true}
+                isNext={false}
                 className="w-full sm:w-auto"
               />
             </div>
