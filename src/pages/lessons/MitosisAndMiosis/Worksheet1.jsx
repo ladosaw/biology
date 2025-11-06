@@ -247,13 +247,12 @@ const Worksheet1 = ({
           boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <strong>Direction:</strong> Write the letter of the correct answer on
-        the box below the pictre.
+        <strong>Direction:</strong> Look at each cell diagram labeled 1 to 12
+        From the list of choices (A to L), choose the correct stage of meiosis
+        that matches each diagram. Type the letter of your answer in the box
+        below each image.
         <br />
-        <em>
-          (Hint: Notice the traces of synapsis and crossing over in the
-          chromosomes during meiosis.)
-        </em>
+        <em>(When you're done, click Submit to check your answers.)</em>
       </p>
 
       <div

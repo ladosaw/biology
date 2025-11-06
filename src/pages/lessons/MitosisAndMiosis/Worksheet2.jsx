@@ -186,21 +186,57 @@ const Worksheet2 = ({
   return (
     <div className="p-4 max-w-4xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">Activity 2: TELL ME MORE</h1>
-      <div className="mb-6 space-y-2">
-        <p className="text-gray-600">
-          Direction: Compare mitosis and meiosis by writing:
-        </p>
-        <ul className="list-disc pl-6">
-          <li>
-            <strong>M1</strong> for Mitosis
-          </li>
-          <li>
-            <strong>M2</strong> for Meiosis
-          </li>
-          <li>
-            <strong>B3</strong> for Both
-          </li>
-        </ul>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
+        {/* Pencil Icon */}
+
+        {/* Content */}
+        <div className="flex flex-col w-full">
+          {/* Directions Card */}
+          <div className="bg-white p-6 rounded-2xl shadow-md w-full text-gray-800">
+            <p className="text-sm font-bold mb-2 text-left text-gray-700">
+              Directions:
+            </p>
+
+            <p className="text-sm mb-2 text-left text-gray-800">
+              Compare{" "}
+              <span className="font-semibold text-green-600">mitosis</span> and{" "}
+              <span className="font-semibold text-purple-600">meiosis</span> by
+              writing:
+            </p>
+
+            <p className="text-sm mb-2 text-left text-gray-800">
+              Read each item under{" "}
+              <span className="italic text-gray-700">
+                “Basis for Comparison.”
+              </span>
+            </p>
+
+            <p className="text-sm mb-3 text-left text-gray-800">
+              Decide if the statement applies to{" "}
+              <span className="font-semibold text-green-600">Mitosis</span>,{" "}
+              <span className="font-semibold text-purple-600">Meiosis</span>, or{" "}
+              <span className="font-semibold text-blue-600">Both</span>. Type
+              the correct code in the answer box:
+            </p>
+
+            <ul className="list-disc pl-6 text-sm text-left text-gray-800 space-y-1 mb-4">
+              <li>
+                <strong className="text-green-600">M1</strong> for Mitosis
+              </li>
+              <li>
+                <strong className="text-purple-600">M2</strong> for Meiosis
+              </li>
+              <li>
+                <strong className="text-blue-600">B3</strong> for Both
+              </li>
+            </ul>
+            <p className="text-sm text-left text-gray-800">
+              When you're done, click{" "}
+              <span className="font-semibold text-blue-600">Submit</span> to
+              check your answers.
+            </p>
+          </div>
+        </div>
       </div>
 
       <div className="overflow-x-auto rounded-lg shadow-md">

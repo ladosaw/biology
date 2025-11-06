@@ -181,10 +181,44 @@ const Worksheet2 = ({
       <h1 className="font-bold text-2xl mb-4">
         Activity 2: Mendelian Genetics
       </h1>
-      <p className="mb-6">
-        Fill in the Genotypic and Phenotypic Ratios for each cross based on the
-        given table.
-      </p>
+
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
+        {/* Pencil Icon */}
+
+        {/* Content */}
+        <div className="flex flex-col w-full">
+          {/* Directions Card */}
+          <div className="bg-white p-6 rounded-2xl shadow-md w-full text-gray-800">
+            <p className="text-sm font-bold mb-2 text-left text-gray-700">
+              Directions:
+            </p>
+
+            <p className="text-sm mb-4 text-left">
+              Look at each genetic cross in the table (e.g.,{" "}
+              <span className="font-medium text-gray-800">DD × Dd</span>,{" "}
+              <span className="font-medium text-gray-800">Dd × dd</span>).
+            </p>
+
+            <p className="text-sm mb-4 text-left">
+              For each row, fill in the{" "}
+              <span className="font-semibold text-green-600">
+                Genotypic Percentage
+              </span>{" "}
+              and{" "}
+              <span className="font-semibold text-purple-600">
+                Phenotypic Percentage
+              </span>{" "}
+              based on the expected offspring.
+            </p>
+
+            <p className="text-sm text-left">
+              Once you’ve completed all rows, click{" "}
+              <span className="font-semibold text-blue-600">Submit</span> to
+              check your answers and review your work.
+            </p>
+          </div>
+        </div>
+      </div>
 
       {/* Table for larger screens */}
       <div className="overflow-x-auto">

@@ -195,15 +195,48 @@ const Worksheet1 = ({
       <Typography variant="h5" align="center" gutterBottom>
         Activity 1: Mendelian Genetics
       </Typography>
-      <Typography
-        variant="body2"
-        align="center"
-        color="textSecondary"
-        gutterBottom
-      >
-        Identify whether Genotype: Homozygous Dominant or Recessive, Genotype or
-        Phenotype the following items. Write your answer in the blank provided.
-      </Typography>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
+        {/* Pencil Icon */}
+
+        {/* Content */}
+        <div className="flex flex-col w-full">
+          {/* Directions Card */}
+          <div className="bg-white p-6 rounded-2xl shadow-md w-full text-gray-800">
+            <p className="text-sm font-bold mb-2 text-left text-gray-700">
+              Directions:
+            </p>
+
+            <p className="text-sm mb-4 text-gray-800">
+              Look at each genetic combination. Decide if it shows a{" "}
+              <span className="font-semibold text-green-600">Genotype</span> or{" "}
+              <span className="font-semibold text-purple-600">Phenotype</span>,
+              and whether it is{" "}
+              <span className="font-semibold text-blue-600">
+                Homozygous Dominant
+              </span>
+              ,{" "}
+              <span className="font-semibold text-red-600">
+                Homozygous Recessive
+              </span>
+              , or{" "}
+              <span className="font-semibold text-yellow-600">
+                Heterozygous
+              </span>
+              .
+            </p>
+
+            <p className="text-sm mb-4 text-gray-800">
+              Type your answer in the blank beside each item.
+            </p>
+
+            <p className="text-sm text-gray-800">
+              When you're done, click{" "}
+              <span className="font-semibold text-blue-600">Submit</span> to
+              check your answers.
+            </p>
+          </div>
+        </div>
+      </div>
 
       <Box>
         {/* Section A */}

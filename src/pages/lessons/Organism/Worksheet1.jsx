@@ -249,18 +249,43 @@ const Worksheet1 = ({
   return (
     <div className="p-4 max-w-4xl mx-auto">
       {/* Header Section */}
-      <div className="flex flex-col sm:flex-row items-center gap-4 mb-6">
-        <img src={Pencil} alt="Pencil" className="w-12" />
-        <div>
-          <h1 className="font-bold text-xl sm:text-2xl text-center sm:text-left">
-            Activity 1: Understanding Food Chain
-          </h1>
-          <p className="text-sm sm:text-base text-center sm:text-left">
-            Direction: Group the organisms according to their classification in
-            the feeding process. Complete the table below by indicating the name
-            of the organisms. Write your answer in the box.
-          </p>
-        </div>
+      <h1 className="font-bold text-xl sm:text-2xl text-center sm:text-left">
+        Activity 1: Understanding Food Chain
+      </h1>
+      <div className="bg-white p-6 rounded-2xl shadow-md w-full mx-auto text-gray-800 mb-6">
+        <p className="text-sm font-bold mb-2 text-left text-gray-700">
+          Directions:
+        </p>
+
+        <p className="text-sm mb-4 text-left">
+          Group the organisms based on their role in the
+          <span className="font-semibold text-green-600"> feeding process</span>
+          .
+        </p>
+
+        <p className="text-sm mb-3 text-left">
+          Complete the table by placing each organism under the correct
+          category:
+        </p>
+
+        <ul className="text-sm mb-4 ml-6 list-disc text-left">
+          <li>Producers</li>
+          <li>Primary Consumers</li>
+          <li>Secondary Consumers</li>
+          <li>Tertiary Consumers</li>
+        </ul>
+
+        <p className="text-sm mb-3 text-left">
+          You may{" "}
+          <span className="font-semibold text-blue-600">drag and drop</span> the
+          organism names into the correct column or type them in the boxes
+          provided.
+        </p>
+
+        <p className="text-sm text-left">
+          Click <span className="font-semibold text-blue-600">Submit</span> when
+          you're done.
+        </p>
       </div>
 
       {/* Images Section */}
