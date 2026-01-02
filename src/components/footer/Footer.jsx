@@ -186,7 +186,8 @@ const Footer = () => {
             order: { xs: 2, sm: 1 },
           }}
         >
-          © {new Date().getFullYear()} BioVerse. All rights reserved.
+          {/* © {new Date().getFullYear()} BioVerse. All rights reserved. */}©
+          2025 BioVerse. All rights reserved.
         </Typography>
 
         <Box
