@@ -26,6 +26,7 @@ import Worksheet4 from "./Worksheet4";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Evaluation from "./Evaluation";
+import BackgroundMusic from "../../../components/sound/BackgroundMusic";
 
 const MendelianGenetics = ({ hideFloating, hideAdditionalButtons = false }) => {
   const [isModalWorksheetOpen, setIsModalWorksheetModalOpen] = useState(false);
@@ -876,7 +877,7 @@ const MendelianGenetics = ({ hideFloating, hideAdditionalButtons = false }) => {
           />
         </DndProvider>
       </Modal>
-
+      <BackgroundMusic play={evaluationOpen} />
       <Modal
         open={evaluationOpen}
         onClose={toggleEvaluation}

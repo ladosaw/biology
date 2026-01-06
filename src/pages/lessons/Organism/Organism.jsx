@@ -23,6 +23,7 @@ import Worksheet3 from "./Worksheet3";
 import Evaluation from "./Evaluation";
 import Worksheet4 from "./Worksheet4.jsx";
 import BtnNextPrev from "../../../components/buttons/BtnNextPrev.jsx";
+import BackgroundMusic from "../../../components/sound/BackgroundMusic.jsx";
 
 const Organism = ({ hideFloating, hideAdditionalButtons = false }) => {
   const [isModalWorksheetOpen, setIsModalWorksheetModalOpen] = useState(false);
@@ -466,6 +467,7 @@ const Organism = ({ hideFloating, hideAdditionalButtons = false }) => {
         />
       </WorksheetModal>
 
+      <BackgroundMusic play={evaluationOpen} />
       <WorksheetModal
         open={evaluationOpen}
         onClose={toggleEvaluation}
