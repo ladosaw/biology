@@ -19,6 +19,7 @@ import Worksheets3 from "./Worksheet3.jsx";
 import Evaluation from "./Evaluation.jsx";
 import iamhealthy from "../../../../assets/iamhealthy.png";
 import BtnNextPrev from "../../../../components/buttons/BtnNextPrev.jsx";
+import BackgroundMusic from "../../../../components/sound/BackgroundMusic.jsx";
 
 const Module1 = ({ hideFloating, hideAdditionalButtons = false }) => {
   const [isModalWorksheetOpen, setIsModalWorksheetModalOpen] = useState(false);
@@ -500,6 +501,8 @@ const Module1 = ({ hideFloating, hideAdditionalButtons = false }) => {
           setEvaluationOpenNext={setEvaluationOpen}
         />
       </Modal>
+
+      <BackgroundMusic play={evaluationOpen} />
 
       <Modal
         open={evaluationOpen}

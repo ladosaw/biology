@@ -17,6 +17,7 @@ import Worksheet3 from "./Worksheet3.jsx";
 import Evaluation from "./Evaluation.jsx";
 import Modal from "../../../components/Modal/Modal.jsx";
 import BtnNextPrev from "../../../components/buttons/BtnNextPrev.jsx";
+import BackgroundMusic from "../../../components/sound/BackgroundMusic.jsx";
 
 const MiosisAndMitosis = ({ hideFloating, hideAdditionalButtons = false }) => {
   const [isModalWorksheetOpen, setIsModalWorksheetModalOpen] = useState(false);
@@ -609,7 +610,7 @@ const MiosisAndMitosis = ({ hideFloating, hideAdditionalButtons = false }) => {
       >
         <Worksheet3 />
       </Modal> */}
-
+      <BackgroundMusic play={evaluationOpen} />
       <Modal
         open={evaluationOpen}
         onClose={toggleEvaluation}
