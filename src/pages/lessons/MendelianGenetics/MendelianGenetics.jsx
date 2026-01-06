@@ -840,6 +840,8 @@ const MendelianGenetics = ({ hideFloating, hideAdditionalButtons = false }) => {
         />
       </Modal>
 
+      <BackgroundMusic play={isModalWorksheet3Open} />
+
       <Modal
         open={isModalWorksheet3Open}
         onClose={toggleModalWorksheet3}
@@ -860,6 +862,7 @@ const MendelianGenetics = ({ hideFloating, hideAdditionalButtons = false }) => {
         </DndProvider>
       </Modal>
 
+      <BackgroundMusic play={isModalWorksheet4Open} />
       <Modal
         open={isModalWorksheet4Open}
         onClose={toggleModalWorksheet4}
